@@ -320,6 +320,9 @@
     <ClInclude Include="Game Components\MushroomStates.h">
       <Filter>Source Files\Game Components\States</Filter>
     </ClInclude>
+    <ClInclude Include="Game Components\GameGrid.h">
+      <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt">

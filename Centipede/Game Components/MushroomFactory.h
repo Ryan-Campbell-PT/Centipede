@@ -12,8 +12,8 @@ public:
 	static MushroomFactory *getInstance();
 
 	//will confirm whether a mushroom can be placed in that area
-	//static so any class can attempt to spawn a mushroom
-	static void spawnMushroom(int posX, int posY);
+	//returns a bool to confirm whether the mushroom was placed
+	bool spawnMushroom(int posX, int posY);
 		
 private:
 	MushroomFactory();

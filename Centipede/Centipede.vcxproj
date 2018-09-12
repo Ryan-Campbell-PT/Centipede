@@ -132,6 +132,7 @@
     <ClInclude Include="Game Components\Factory.h" />
     <ClInclude Include="Game Components\FinalScore.h" />
     <ClInclude Include="Game Components\GameController.h" />
+    <ClInclude Include="Game Components\GameGrid.h" />
     <ClInclude Include="Game Components\HUD.h" />
     <ClInclude Include="Game Components\MushroomFactory.h" />
     <ClInclude Include="Game Components\MushroomStates.h" />
