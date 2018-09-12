@@ -7,8 +7,10 @@ class Mushroom;
 
 class MushroomState : public State
 {
-private:
-	MushroomState() {}; //shouldnt be able to make a generic MushroomState
+protected:
+	//shouldnt be able to make a generic MushroomState
+	//but a child can make a MushroomState
+	MushroomState() {}; 
 
 	Mushroom *mushroom; //each state should have access to its local mushroom
 };
@@ -30,7 +32,7 @@ public:
 class FullMushroom : public MushroomState
 {
 public:
-	DamagedMushroom(Mushroom *mushroom);
+	FullMushroom(Mushroom *mushroom);
 
 };
 
