@@ -7,8 +7,8 @@ Bullet::Bullet(sf::Vector2f p)
 {
 	SPEED = 800;
 
-	bitmap = ResourceManager::GetTextureBitmap("Shots");
-	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("Shots"), 1, 4, 120);
+	bitmap = ResourceManager::GetTextureBitmap("Bullet");
+	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("Bullet"), 1, 4, 120);
 	MainSprite.SetAnimation(0, 3);
 	MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 

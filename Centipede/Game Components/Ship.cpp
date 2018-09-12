@@ -17,8 +17,8 @@ Ship::Ship()
 	GunOffset_top = sf::Vector2f(10,-20);
 	GunOffset_bottom = sf::Vector2f(10,20);
 	
-	bitmap = ResourceManager::GetTextureBitmap("Spaceship"); 
-	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("Spaceship"), 1, 4);
+	bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
+	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("PlayerShip"), 1, 4);
 	MainSprite.SetAnimation(0,3); 
 
 	MainSprite.setOrigin( MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
@@ -32,7 +32,7 @@ Ship::Ship()
 	SetCollider(MainSprite, bitmap, true);
 	RegisterCollision<Ship>(*this);
 
-	FireSnd.setBuffer( ResourceManager::GetSound("Zap")  );
+	FireSnd.setBuffer( ResourceManager::GetSound("Fire1")  );
 	FireSnd.setPitch(2);
 	FireSnd.setVolume(25);
 	

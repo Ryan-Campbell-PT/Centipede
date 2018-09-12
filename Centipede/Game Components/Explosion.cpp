@@ -5,17 +5,17 @@
 
 Explosion::Explosion( sf::Vector2f pos, float speed ) : Speed(speed), Pos(pos)
 {
-	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("Explosion"), 5, 5, 30); 
+	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("Death"), 5, 5, 30); 
 	MainSprite.SetAnimation(0, 24); 
 	MainSprite.scale(2,2);
 	MainSprite.setColor(  sf::Color::Color(255,180,180) );
 	MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 	MainSprite.setPosition(Pos);
 
-	kaboom.setBuffer( ResourceManager::GetSound("Boom"));
-	kaboom.setVolume(25);
-	kaboom.setPitch(.5f);
-	kaboom.play();
+	//kaboom.setBuffer( ResourceManager::GetSound("Boom"));
+	//kaboom.setVolume(25);
+	//kaboom.setPitch(.5f);
+	//kaboom.play();
 }
 
 void Explosion::Update()

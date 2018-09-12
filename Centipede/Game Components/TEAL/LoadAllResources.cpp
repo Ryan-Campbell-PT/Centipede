@@ -12,10 +12,11 @@ void ResourceManager::LoadAllResources()
 {
 	SetStartScene( new Splash() );
 
-	AddTexture("Blaster", "blaster.png");
+	AddTexture("PlayerShip", "blaster.png");
 	AddTexture("Bullet", "bullet.png");
-	AddTexture("CentipedeBody", "centipede_body.png");
-	AddTexture("CentipedeHead", "centipede_head.png");
+	AddTexture("CentiBody", "centipede_body.png");
+	AddTexture("CentiHead", "centipede_head.png");
+	AddTexture("CentiSegment", "centipede_segment.png");
 	AddTexture("Death", "death.png");
 	AddTexture("Flea", "flea.png");
 	AddTexture("Mushroom", "mushroom.png");
@@ -25,18 +26,9 @@ void ResourceManager::LoadAllResources()
 
 	AddSound("Fire1", "fire1.wav");
 
-	//AddTexture("Spaceship", "SpaceShip2.png");
-	//AddTexture("Shots", "ColoredShots.png");
-	//AddTexture("Mine", "Mine.png");
-	//AddTexture("Asteroids", "asteroids.png");
-	//AddTexture("Explosion", "Explosion.png");
-
+	AddFont("PointFont", "MotorwerkOblique.ttf"); //keep this for now since we have no other fonts
+	
 	//AddTexture("Splashpage", "DemoSplash.jpg", false);
 
-	//AddSound("Boom", "bazooka3.wav");
-	//AddSound("Zap", "scifiblast.wav");
-	//AddSound("Ding", "glass.wav");
-
-	//AddFont("PointFont", "MotorwerkOblique.ttf");
 }
 

@@ -10,8 +10,8 @@ Asteroid::Asteroid( sf::Vector2f p ) : Pos(p)
 	SPEED = 200.0f + rand() % 100;	// Randomize the speed
 
 
-	bitmap = &ResourceManager::GetTextureBitmap("Asteroids");
-	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("Asteroids"), 8, 8, 30);
+	//bitmap = &ResourceManager::GetTextureBitmap("Asteroids");
+	//MainSprite = AnimatedSprite(  ResourceManager::GetTexture("Asteroids"), 8, 8, 30);
 
 	int selector = rand() % 2; // The selector allows to change which series to use for animation (see texture file)
 	MainSprite.SetAnimation(32 * selector, 32 * selector + 31); 
