@@ -13,6 +13,8 @@
 #include "HUD.h"
 #include "FinalScore.h"
 
+//commented out for now to have reference to code for later
+/*
 void Level1::Initialize()
 {
 	WindowManager::SetBackgroundColor( sf::Color(0,0,64,255) );
@@ -27,3 +29,15 @@ void Level1::Initialize()
 	CollisionTestPair<Ship,Asteroid>();
 
 };
+*/
+
+void Level1::Initialize()
+{
+	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
+	
+	
+	new Ship; //spawn the ship
+
+
+	//CollisionTestPair<Ship, Mushroom>();
+}

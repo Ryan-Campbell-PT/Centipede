@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClInclude Include="Game Components\Asteroid.h" />
     <ClInclude Include="Game Components\AsteroidField.h" />
+    <ClInclude Include="Game Components\BulletFactory.h" />
     <ClInclude Include="Game Components\Explosion.h" />
     <ClInclude Include="Game Components\Factory.h" />
     <ClInclude Include="Game Components\FinalScore.h" />

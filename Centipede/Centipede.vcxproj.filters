@@ -323,6 +323,9 @@
     <ClInclude Include="Game Components\GameGrid.h">
       <Filter>Source Files\Game Components</Filter>
     </ClInclude>
+    <ClInclude Include="Game Components\BulletFactory.h">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt">

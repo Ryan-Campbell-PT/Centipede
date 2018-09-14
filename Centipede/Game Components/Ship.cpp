@@ -10,12 +10,12 @@
 
 Ship::Ship()
 {
-	SPEED = 20;
+	SPEED = 7;
 	HBORDER = 15;
 	TBORDER = 600;
 
-	GunOffset_top = sf::Vector2f(10,-20);
-	GunOffset_bottom = sf::Vector2f(10,20);
+//	GunOffset_top = sf::Vector2f(10,-20);
+//	GunOffset_bottom = sf::Vector2f(10,20);
 	
 	//bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
 	MainSprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
@@ -28,7 +28,7 @@ Ship::Ship()
 	Pos = sf::Vector2f(2.0f * MainSprite.getTextureRect().width ,  WindowManager::MainWindow.getView().getSize().y / 2.0f);
 	Impulse = sf::Vector2f(0,0);
 	friction = .97f;
-
+	
 	SetCollider(MainSprite, bitmap, true);
 	RegisterCollision<Ship>(*this);
 
@@ -49,8 +49,8 @@ void Ship::Destroy()
 
 void Ship::Update()
 {
-	//not sure if this is needed
-	//MainSprite.Update();
+	
+	//MainSprite.Update(); //not sure if this is needed
 	
 	offset = SPEED * Game::FrameTime();
 	// Continuous key-down tests
@@ -63,6 +63,7 @@ void Ship::Update()
 	Tools::Clamp<float>(Pos.x, (float) 2*MainSprite.getTextureRect().width, WindowManager::MainWindow.getView().getSize().x );
 	Tools::Clamp<float>(Pos.y, 100, WindowManager::MainWindow.getView().getSize().y - MainSprite.getTextureRect().height);	
 	MainSprite.setPosition(Pos);
+	//+Pos{ x = 476.938354 y = 674.996277 }
 
 	Impulse *= friction;
 }
@@ -76,8 +77,8 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 		ConsoleMsg::WriteLine("Pew! Pew!");  
 
 		//these two creations are the two bullets created by the guns sprites. The bullet pointer isnt necessary
-		bullet = new Bullet(Pos + GunOffset_top); 
-		bullet = new Bullet(Pos + GunOffset_bottom); 
+		//bullet = new Bullet(Pos + GunOffset_top); 
+		//bullet = new Bullet(Pos + GunOffset_bottom); 
 
 		FireSnd.play();
 	}

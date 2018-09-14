@@ -8,12 +8,11 @@
 
 //Forward declarations
 class Asteroid;
+class BulletFactory;
 
 class Bullet : public GameObject
 {
 public:
-	Bullet(sf::Vector2f p);
-
 	void Initialize(sf::Vector2f p); 
 
 	virtual void Update();
@@ -24,9 +23,16 @@ public:
 	virtual void Collision( Asteroid *other );
 
 
-private:
-	float SPEED;
+	//this friend decision allows for the BulletFactory to access anything private in the bullet
+	friend class BulletFactory;
 
+private:
+	Bullet(sf::Vector2f p); //bullet factory handles bullet spawning
+	void removeBullet(); //instead of destroying the bullet, we will just remove from scene
+
+
+	float SPEED;
+	
 	sf::Vector2f Pos;
 	AnimatedSprite MainSprite;
 	CollisionTools::TextureBitmap bitmap;

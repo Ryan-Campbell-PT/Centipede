@@ -27,8 +27,9 @@ private:
 	float SPEED;
 	float HBORDER;
 	float TBORDER;
-	sf::Vector2f GunOffset_top;
-	sf::Vector2f GunOffset_bottom;
+	//sf::Vector2f GunOffset_top;
+	//sf::Vector2f GunOffset_bottom;
+	sf::Vector2f GunOffset;
 
 	float offset;
 

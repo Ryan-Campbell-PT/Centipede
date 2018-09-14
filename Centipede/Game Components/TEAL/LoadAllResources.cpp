@@ -41,6 +41,8 @@ struct CentiGame : public Scene
 	virtual void Initialize()
 	{
 		new Ship;
+		WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255));
+
 	}
 
 };
