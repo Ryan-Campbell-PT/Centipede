@@ -4,24 +4,32 @@
 #include "Bullet.h"
 #include "BulletFactory.h"
 
+/*
 Bullet::Bullet(sf::Vector2f p)
 {
-	SPEED = 800;
-
-	bitmap = ResourceManager::GetTextureBitmap("Bullet");
-	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("Bullet"), 1, 4, 120);
-	MainSprite.SetAnimation(0, 3);
-	MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 
 	SetCollider(MainSprite, bitmap);
 
 	Pos = p;
 	RegisterCollision<Bullet>( *this );
 }
+*/
+
+Bullet::Bullet()
+{
+	SPEED = 800;
+
+	bitmap = ResourceManager::GetTextureBitmap("Bullet");
+	MainSprite = sf::Sprite(ResourceManager::GetTexture("Bullet"));
+	//MainSprite.SetAnimation(0, 3);
+	MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
+
+}
 
 void Bullet::Update()
 {
-	MainSprite.Update();
+	//not sure if this is needed
+	//MainSprite.Update();
 
 	Pos.x += Game::FrameTime() * SPEED;
 
@@ -42,10 +50,18 @@ void Bullet::Destroy()
 
 }
 
+void Bullet::redrawBullet(sf::Vector2f pos)
+{
+	//todo: this probably doesnt work as easily as that, take a look
+	this->Pos = pos;
+}
+
 void Bullet::removeBullet()
 {
-	//todo: figure out how to remove from screen
 	BulletFactory::canSpawnBullet = true;
+	
+	//todo: figure out how to remove from screen
+	DeregisterCollision<Bullet>(*this);
 }
 
 void Bullet::Collision( Asteroid *other )

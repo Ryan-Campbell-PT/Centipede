@@ -27,14 +27,18 @@ public:
 	friend class BulletFactory;
 
 private:
-	Bullet(sf::Vector2f p); //bullet factory handles bullet spawning
+	//since only the bullet factory will handle the spawning of bullets,
+	//we have a default constructor to create a new bullet. Then, when the bullet is shot,
+	//the position is determined by that shot, handled in spawnBullet in BulletFactory
+	Bullet();
+	
 	void removeBullet(); //instead of destroying the bullet, we will just remove from scene
-
+	void redrawBullet(sf::Vector2f pos); //instead of creating a new bullet, just set the new position
 
 	float SPEED;
 	
 	sf::Vector2f Pos;
-	AnimatedSprite MainSprite;
+	sf::Sprite MainSprite;
 	CollisionTools::TextureBitmap bitmap;
 	
 };

@@ -7,6 +7,7 @@
 #include "ShipExplosion.h"
 #include "Widget.h"
 #include "Asteroid.h"
+#include "BulletFactory.h"
 
 Ship::Ship()
 {
@@ -72,13 +73,15 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 {
 	if ( k == sf::Keyboard::Return )
 	{
-		Bullet* bullet;
+		//Bullet* bullet;
 		
 		ConsoleMsg::WriteLine("Pew! Pew!");  
 
 		//these two creations are the two bullets created by the guns sprites. The bullet pointer isnt necessary
 		//bullet = new Bullet(Pos + GunOffset_top); 
 		//bullet = new Bullet(Pos + GunOffset_bottom); 
+
+		BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset);
 
 		FireSnd.play();
 	}

@@ -12,11 +12,11 @@ class Bullet;
 class BulletFactory
 {
 public:
-	static BulletFactory *getInstance();
+	static BulletFactory *GetInstance();
 
 	//boolean to confirm whether the bullet can spawn
-	static bool SpawnBullet(sf::Vector2 pos);
-	static bool SpawnBullet(float posX, float posY);
+	void SpawnBullet(sf::Vector2f pos);
+	//void SpawnBullet(float posX, float posY);
 
 	//this is used to allow the bullet to tell the factory its no longer around
 	friend class Bullet;
