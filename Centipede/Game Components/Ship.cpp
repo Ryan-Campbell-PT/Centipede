@@ -17,9 +17,9 @@ Ship::Ship()
 	GunOffset_top = sf::Vector2f(10,-20);
 	GunOffset_bottom = sf::Vector2f(10,20);
 	
-	bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
-	MainSprite = AnimatedSprite(  ResourceManager::GetTexture("PlayerShip"), 1, 4);
-	MainSprite.SetAnimation(0,3); 
+	//bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
+	MainSprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
+	//MainSprite.SetAnimation(0,3, false, false); 
 
 	MainSprite.setOrigin( MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 	MainSprite.setScale(2,2);
@@ -49,9 +49,9 @@ void Ship::Destroy()
 
 void Ship::Update()
 {
-
-	MainSprite.Update();
-
+	//not sure if this is needed
+	//MainSprite.Update();
+	
 	offset = SPEED * Game::FrameTime();
 	// Continuous key-down tests
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A)) Impulse += sf::Vector2f(-offset, 0);

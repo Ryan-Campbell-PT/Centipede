@@ -36,7 +36,7 @@ private:
 	sf::Vector2f Impulse;
 	float friction;
 
-	AnimatedSprite MainSprite;
+	sf::Sprite MainSprite; //changed from AnimatedSprite
 	CollisionTools::TextureBitmap bitmap;
 
 	sf::Sound FireSnd;

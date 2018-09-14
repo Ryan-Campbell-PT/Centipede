@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "../Splash.h"
 
+#include "../Ship.h"
 
 struct CentiScene : public Scene
 {
@@ -29,7 +30,7 @@ struct Centi : public GameObject
 
 	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
 	{
-		SceneManager::ChangeScene(new CentiScene);
+		//SceneManager::ChangeScene(new CentiScene);
 	}
 
 };
@@ -39,7 +40,7 @@ struct CentiGame : public Scene
 {
 	virtual void Initialize()
 	{
-		new Centi;
+		new Ship;
 	}
 
 };
