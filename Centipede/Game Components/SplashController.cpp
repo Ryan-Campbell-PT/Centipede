@@ -6,7 +6,7 @@
 
 SplashController::SplashController()
 {
-	//SplashSprite = sf::Sprite(ResourceManager::GetTexture("Splashpage"));
+	SplashSprite = sf::Sprite(ResourceManager::GetTexture("Splashpage"));
 
 	RegisterInput( InputFlags::KeyPressed );
 }

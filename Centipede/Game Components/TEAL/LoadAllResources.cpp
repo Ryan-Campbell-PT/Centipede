@@ -5,12 +5,48 @@
 
 #include "ResourceManager.h"
 #include "../Splash.h"
-//#include "../../reference/Asset/Sounds/"
-//#include "../../reference/Asset/Sprites/"
+
+
+struct CentiScene : public Scene
+{
+	virtual void Initialize()
+	{
+
+	}
+};
+
+struct Centi : public GameObject
+{
+	Centi()
+	{
+		RegisterInput(InputFlags::KeyPressed);
+	}
+
+	virtual void Draw()
+	{
+		WindowManager::MainWindow.draw(sf::Sprite(ResourceManager::GetTexture("PlayerShip")));
+	}
+
+	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
+	{
+		SceneManager::ChangeScene(new CentiScene);
+	}
+
+};
+
+
+struct CentiGame : public Scene
+{
+	virtual void Initialize()
+	{
+		new Centi;
+	}
+
+};
 
 void ResourceManager::LoadAllResources()
 {
-	SetStartScene( new Splash() );
+	SetStartScene( new CentiGame );
 
 	AddTexture("PlayerShip", "blaster.png");
 	AddTexture("Bullet", "bullet.png");
