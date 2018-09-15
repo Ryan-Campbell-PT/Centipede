@@ -12,6 +12,7 @@
 #include "Widget.h"
 #include "HUD.h"
 #include "FinalScore.h"
+#include "Mushroom.h"
 
 //commented out for now to have reference to code for later
 /*
@@ -37,7 +38,9 @@ void Level1::Initialize()
 	
 	
 	Ship::GetInstance(); //spawn the ship
+	new Mushroom(sf::Vector2f(300, 400));
 
+	CollisionTestPair<Ship, Mushroom>();
+	CollisionTestPair<Bullet, Mushroom>();
 
-	//CollisionTestPair<Ship, Mushroom>();
 }

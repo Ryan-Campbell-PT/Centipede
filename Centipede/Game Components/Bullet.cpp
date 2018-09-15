@@ -3,6 +3,7 @@
 
 #include "Bullet.h"
 #include "BulletFactory.h"
+#include "Mushroom.h"
 
 /*
 Bullet::Bullet(sf::Vector2f p)
@@ -66,8 +67,10 @@ void Bullet::removeBullet()
 	DeregisterCollision<Bullet>(*this);
 }
 
-void Bullet::Collision( Asteroid *other )
+void Bullet::Collision( Mushroom *other )
 {
 	//MarkForDestroy();
-	removeBullet();
+	//removeBullet();
+
+	ConsoleMsg::WriteLine("Bullet");
 }

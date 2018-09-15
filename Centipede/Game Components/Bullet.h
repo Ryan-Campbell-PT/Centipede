@@ -7,7 +7,7 @@
 #include "TEAL\CommonElements.h"
 
 //Forward declarations
-class Asteroid;
+class Mushroom;
 class BulletFactory;
 
 class Bullet : public GameObject
@@ -20,7 +20,7 @@ public:
 	virtual void Destroy();
 
 	virtual void Collision( GameObject *go){};
-	virtual void Collision( Asteroid *other );
+	virtual void Collision( Mushroom *other );
 
 
 	//this friend decision allows for the BulletFactory to access anything private in the bullet

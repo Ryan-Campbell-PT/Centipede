@@ -9,6 +9,7 @@
 // Forward declarations
 class Widget;
 class Asteroid;
+class Mushroom;
 
 class Ship : public GameObject
 {
@@ -22,7 +23,7 @@ public:
 	
 	virtual void Collision( GameObject *other ){};
 	void Collision(Widget *other);
-	void Collision(Asteroid *other);
+	void Collision(Mushroom* other);
 
 private:
 	Ship(); //singleton instance

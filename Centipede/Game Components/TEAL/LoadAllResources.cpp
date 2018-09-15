@@ -32,5 +32,6 @@ void ResourceManager::LoadAllResources()
 	
 	//AddTexture("Splashpage", "DemoSplash.jpg", false);
 
+
 }
 

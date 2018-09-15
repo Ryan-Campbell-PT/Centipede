@@ -8,6 +8,7 @@
 #include "Widget.h"
 #include "Asteroid.h"
 #include "BulletFactory.h"
+#include "Mushroom.h"
 
 Ship *Ship::instance = 0;
 
@@ -72,7 +73,7 @@ void Ship::Update()
 	//may not want this in update sequence, one extra if that isnt necessary
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		ConsoleMsg::WriteLine("Pew! Pew!");
+		//ConsoleMsg::WriteLine("Pew! Pew!");
 
 		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
 		if (BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset))
@@ -89,14 +90,15 @@ void Ship::Update()
 
 void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
 {
-	if (k == sf::Keyboard::Space)
+/*	if (k == sf::Keyboard::Space)
 	{
-		ConsoleMsg::WriteLine("Pew! Pew!");
+		//ConsoleMsg::WriteLine("Pew! Pew!");
 
 		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
 		if (BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset))
 			FireSnd.play(); //only play the sound if the bullet can be spawned
 	}
+*/
 }
 
 void Ship::Collision(Widget *other)
@@ -105,11 +107,12 @@ void Ship::Collision(Widget *other)
 	other->MarkForDestroy();
 }
 
-void Ship::Collision(Asteroid *other)
+void Ship::Collision(Mushroom* other)
 {
-	other->Explode();
-	new ShipExplosion(Pos);
-	MarkForDestroy();
+	//other->Explode();
+	//new ShipExplosion(Pos);
+	//MarkForDestroy();
+	ConsoleMsg::WriteLine("Ship[");
 }
 
 void Ship::Draw()
