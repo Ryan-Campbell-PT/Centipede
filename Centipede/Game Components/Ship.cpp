@@ -114,6 +114,11 @@ void Ship::Collision(Mushroom* other)
 	ConsoleMsg::WriteLine("Ship[");
 }
 
+sf::Vector2f Ship::GetPosition()
+{
+	return this->Pos;
+}
+
 void Ship::Draw()
 {
 	WindowManager::MainWindow.draw(MainSprite);

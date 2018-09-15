@@ -25,6 +25,8 @@ public:
 	virtual void Collision(Widget *other);
 	virtual void Collision(Mushroom* other);
 
+	sf::Vector2f GetPosition();
+
 private:
 	Ship(); //singleton instance
 

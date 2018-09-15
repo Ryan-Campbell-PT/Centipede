@@ -16,8 +16,7 @@ public:
 	virtual void Update();
 	virtual void Draw();
 
-	virtual void Collision(GameObject *g) {};
-	virtual void Collision(Bullet *b);
+	void TakeDamage();
 
 private:
 	~Mushroom();
@@ -28,6 +27,7 @@ private:
 	AnimatedSprite MainSprite;
 	CollisionTools::TextureBitmap bitmap;
 
+	int health;
 };
 
 #endif //MUSHROOM_H

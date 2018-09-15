@@ -1,5 +1,6 @@
 #include "Mushroom.h"
 #include "Bullet.h"
+#include "MushroomFactory.h"
 
 Mushroom::Mushroom(sf::Vector2f v)
 {
@@ -18,6 +19,8 @@ Mushroom::Mushroom(sf::Vector2f v)
 
 	SetCollider(MainSprite, bitmap, true);
 	RegisterCollision<Mushroom>(*this);
+
+	this->health = 0;
 }
 
 void Mushroom::Update()
@@ -29,9 +32,13 @@ void Mushroom::Draw()
 	WindowManager::MainWindow.draw(this->MainSprite);
 }
 
-void Mushroom::Collision(Bullet * b)
+void Mushroom::TakeDamage()
 {
-	ConsoleMsg::WriteLine("Bulelt");
+	//progress the health of the mushroom, while also moving the animation one forward
+	this->MainSprite.SetAnimation(health, ++health);
+	
+	if (health % 4 == 0) //modulous to compensate for poison or healthy
+		MushroomFactory::RecycleMushroom(this);
 }
 
 Mushroom::~Mushroom()

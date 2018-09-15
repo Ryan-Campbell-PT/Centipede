@@ -1,9 +1,15 @@
 #include "MushroomFactory.h"
+#include "Mushroom.h"
 
 
 MushroomFactory::MushroomFactory()
 	:mushroomCount(0)
 {
+}
+
+void MushroomFactory::RecycleMushroom(Mushroom * shroom)
+{
+	
 }
 
 MushroomFactory::~MushroomFactory()
