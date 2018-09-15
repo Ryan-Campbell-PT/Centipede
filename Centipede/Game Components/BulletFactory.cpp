@@ -1,6 +1,9 @@
 #include "BulletFactory.h"
 #include "Bullet.h"
 
+BulletFactory * BulletFactory::instance = 0;
+
+
 BulletFactory * BulletFactory::GetInstance()
 {
 	if (instance == 0)
@@ -14,13 +17,23 @@ BulletFactory::BulletFactory()
 	bullet = new Bullet;
 }
 
-void BulletFactory::SpawnBullet(sf::Vector2f pos)
+BulletFactory::~BulletFactory()
 {
-	if(canSpawnBullet)
-		bullet->redrawBullet(pos);
+	delete this->bullet;
 }
 
-//void BulletFactory::SpawnBullet(float posX, float posY)
-//{
-//	bullet->redrawBullet(posX, posY);
-//}
+bool BulletFactory::SpawnBullet(sf::Vector2f pos)
+{
+	if (BulletFactory::canSpawnBullet)
+	{
+		bullet->redrawBullet(pos);
+		return true;
+	}
+
+	return false;
+}
+
+void BulletFactory::ChangeBulletStatus(bool b)
+{
+	canSpawnBullet = b;
+}

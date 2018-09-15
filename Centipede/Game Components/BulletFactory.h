@@ -15,7 +15,7 @@ public:
 	static BulletFactory *GetInstance();
 
 	//boolean to confirm whether the bullet can spawn
-	void SpawnBullet(sf::Vector2f pos);
+	bool SpawnBullet(sf::Vector2f pos);
 	//void SpawnBullet(float posX, float posY);
 
 	//this is used to allow the bullet to tell the factory its no longer around
@@ -23,15 +23,17 @@ public:
 
 private:
 	static BulletFactory *instance;
-
-	static bool canSpawnBullet; //static so the bullet can change it
-
 	Bullet *bullet; //there should only ever be 1 bullet on screen, so we just leave it as a single pointer
+	bool canSpawnBullet; //static so the bullet can change it
+
+
 
 	BulletFactory();
 	~BulletFactory();
-	BulletFactory &operator=(const BulletFactory &c);
-	BulletFactory(const BulletFactory &c);
+	BulletFactory &operator=(const BulletFactory &c) = delete;
+	BulletFactory(const BulletFactory &c) = delete;
+
+	void ChangeBulletStatus(bool b); //keep it private so only bullet can access it
 
 };
 

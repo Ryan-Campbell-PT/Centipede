@@ -26,10 +26,12 @@ Ship::Ship()
 	MainSprite.setScale(2,2);
 	MainSprite.setPosition(Pos);
 	
-	Pos = sf::Vector2f(2.0f * MainSprite.getTextureRect().width ,  WindowManager::MainWindow.getView().getSize().y / 2.0f);
+	Pos = sf::Vector2f(WindowManager::MainWindow.getView().getSize().y / 1.5f, WindowManager::MainWindow.getView().getSize().x / 1.5f);
 	Impulse = sf::Vector2f(0,0);
 	friction = .97f;
 	
+	this->GunOffset = sf::Vector2f(0, 0);
+		
 	SetCollider(MainSprite, bitmap, true);
 	RegisterCollision<Ship>(*this);
 
@@ -64,7 +66,6 @@ void Ship::Update()
 	Tools::Clamp<float>(Pos.x, (float) 2*MainSprite.getTextureRect().width, WindowManager::MainWindow.getView().getSize().x );
 	Tools::Clamp<float>(Pos.y, 100, WindowManager::MainWindow.getView().getSize().y - MainSprite.getTextureRect().height);	
 	MainSprite.setPosition(Pos);
-	//+Pos{ x = 476.938354 y = 674.996277 }
 
 	Impulse *= friction;
 }
@@ -81,9 +82,8 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 		//bullet = new Bullet(Pos + GunOffset_top); 
 		//bullet = new Bullet(Pos + GunOffset_bottom); 
 
-		BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset);
-
-		FireSnd.play();
+		if(BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset))
+			FireSnd.play(); //only play the sound if the bullet can be spawned
 	}
 }
 
