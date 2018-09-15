@@ -15,6 +15,9 @@ Mushroom::Mushroom(sf::Vector2f v)
 	this->SetPosition(v);
 
 	this->MainSprite.setScale(1.5f, 1.5f);
+
+	SetCollider(MainSprite, bitmap, true);
+	RegisterCollision<Mushroom>(*this);
 }
 
 void Mushroom::Update()

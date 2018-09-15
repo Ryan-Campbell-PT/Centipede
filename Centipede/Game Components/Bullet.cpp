@@ -25,6 +25,8 @@ Bullet::Bullet()
 	//MainSprite.SetAnimation(0, 3);
 	MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 
+	SetCollider(MainSprite, bitmap, true);
+	RegisterCollision<Bullet>(*this);
 }
 
 void Bullet::Update()
@@ -57,6 +59,7 @@ void Bullet::redrawBullet(sf::Vector2f pos)
 	//todo: this probably doesnt work as easily as that, take a look
 	this->Pos = pos;
 	BulletFactory::GetInstance()->ChangeBulletStatus(false);
+	RegisterCollision<Bullet>(*this);
 }
 
 void Bullet::removeBullet()

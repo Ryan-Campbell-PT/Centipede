@@ -18,9 +18,8 @@ Ship::Ship()
 	this->HBORDER = 15;
 	this->TBORDER = 600;
 	
-	//bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
+	bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
 	this->MainSprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
-	//MainSprite.SetAnimation(0,3, false, false); 
 
 	this->MainSprite.setOrigin( MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 	this->MainSprite.setScale(2,2);

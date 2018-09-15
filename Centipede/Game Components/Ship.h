@@ -22,8 +22,8 @@ public:
 	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey);
 	
 	virtual void Collision( GameObject *other ){};
-	void Collision(Widget *other);
-	void Collision(Mushroom* other);
+	virtual void Collision(Widget *other);
+	virtual void Collision(Mushroom* other);
 
 private:
 	Ship(); //singleton instance
