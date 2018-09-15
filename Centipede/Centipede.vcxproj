@@ -93,6 +93,7 @@
     <ClCompile Include="Game Components\FinalScore.cpp" />
     <ClCompile Include="Game Components\GameController.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
+    <ClCompile Include="Game Components\Mushroom.cpp" />
     <ClCompile Include="Game Components\MushroomFactory.cpp" />
     <ClCompile Include="Game Components\Ship.cpp" />
     <ClCompile Include="Game Components\Level1.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Game Components\GameController.h" />
     <ClInclude Include="Game Components\GameGrid.h" />
     <ClInclude Include="Game Components\HUD.h" />
+    <ClInclude Include="Game Components\Mushroom.h" />
     <ClInclude Include="Game Components\MushroomFactory.h" />
     <ClInclude Include="Game Components\MushroomStates.h" />
     <ClInclude Include="Game Components\Ship.h" />

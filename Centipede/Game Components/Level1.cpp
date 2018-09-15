@@ -36,7 +36,7 @@ void Level1::Initialize()
 	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
 	
 	
-	new Ship; //spawn the ship
+	Ship::GetInstance(); //spawn the ship
 
 
 	//CollisionTestPair<Ship, Mushroom>();

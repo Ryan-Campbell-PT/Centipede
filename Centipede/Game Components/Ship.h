@@ -13,7 +13,8 @@ class Asteroid;
 class Ship : public GameObject
 {
 public:
-	Ship();
+	static Ship * GetInstance();
+
 	virtual void Update();
 	virtual void Draw();
 	virtual void Destroy();
@@ -24,11 +25,13 @@ public:
 	void Collision(Asteroid *other);
 
 private:
+	Ship(); //singleton instance
+
+	static Ship *instance;
+
 	float SPEED;
 	float HBORDER;
 	float TBORDER;
-	//sf::Vector2f GunOffset_top;
-	//sf::Vector2f GunOffset_bottom;
 	sf::Vector2f GunOffset;
 
 	float offset;

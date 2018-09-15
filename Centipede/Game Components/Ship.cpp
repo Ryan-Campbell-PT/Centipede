@@ -9,26 +9,25 @@
 #include "Asteroid.h"
 #include "BulletFactory.h"
 
+Ship *Ship::instance = 0;
+
 Ship::Ship()
 {
-	SPEED = 7;
-	HBORDER = 15;
-	TBORDER = 600;
-
-//	GunOffset_top = sf::Vector2f(10,-20);
-//	GunOffset_bottom = sf::Vector2f(10,20);
+	this->SPEED = 7;
+	this->HBORDER = 15;
+	this->TBORDER = 600;
 	
 	//bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
-	MainSprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
+	this->MainSprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
 	//MainSprite.SetAnimation(0,3, false, false); 
 
-	MainSprite.setOrigin( MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
-	MainSprite.setScale(2,2);
-	MainSprite.setPosition(Pos);
+	this->MainSprite.setOrigin( MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
+	this->MainSprite.setScale(2,2);
+	this->MainSprite.setPosition(Pos);
 	
-	Pos = sf::Vector2f(WindowManager::MainWindow.getView().getSize().y / 1.5f, WindowManager::MainWindow.getView().getSize().x / 1.5f);
-	Impulse = sf::Vector2f(0,0);
-	friction = .97f;
+	this->Pos = sf::Vector2f(WindowManager::MainWindow.getView().getSize().y / 1.5f, WindowManager::MainWindow.getView().getSize().x / 1.5f);
+	this->Impulse = sf::Vector2f(0,0);
+	this->friction = .97f;
 	
 	this->GunOffset = sf::Vector2f(0, 0);
 		
@@ -42,6 +41,14 @@ Ship::Ship()
 	SetDrawOrder(1000);
 
 	RegisterInput( InputFlags::KeyPressed ); // Recieve single-presses events
+}
+
+Ship * Ship::GetInstance()
+{
+	if (instance == 0)
+		instance = new Ship;
+
+	return instance;
 }
 
 void Ship::Destroy()
@@ -61,6 +68,16 @@ void Ship::Update()
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D)) Impulse += sf::Vector2f( offset, 0);
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W)) Impulse += sf::Vector2f(0, -offset);
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S)) Impulse += sf::Vector2f(0, offset);
+	
+	//may not want this in update sequence, one extra if that isnt necessary
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		ConsoleMsg::WriteLine("Pew! Pew!");
+
+		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
+		if (BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset))
+			FireSnd.play(); //only play the sound if the bullet can be spawned
+	}
 
 	Pos += Impulse;
 	Tools::Clamp<float>(Pos.x, (float) 2*MainSprite.getTextureRect().width, WindowManager::MainWindow.getView().getSize().x );
@@ -72,17 +89,12 @@ void Ship::Update()
 
 void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
 {
-	if ( k == sf::Keyboard::Return )
+	if (k == sf::Keyboard::Space)
 	{
-		//Bullet* bullet;
-		
-		ConsoleMsg::WriteLine("Pew! Pew!");  
+		ConsoleMsg::WriteLine("Pew! Pew!");
 
-		//these two creations are the two bullets created by the guns sprites. The bullet pointer isnt necessary
-		//bullet = new Bullet(Pos + GunOffset_top); 
-		//bullet = new Bullet(Pos + GunOffset_bottom); 
-
-		if(BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset))
+		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
+		if (BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset))
 			FireSnd.play(); //only play the sound if the bullet can be spawned
 	}
 }

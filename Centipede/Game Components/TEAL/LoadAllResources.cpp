@@ -8,48 +8,11 @@
 
 #include "../Ship.h"
 
-struct CentiScene : public Scene
-{
-	virtual void Initialize()
-	{
-
-	}
-};
-
-struct Centi : public GameObject
-{
-	Centi()
-	{
-		RegisterInput(InputFlags::KeyPressed);
-	}
-
-	virtual void Draw()
-	{
-		WindowManager::MainWindow.draw(sf::Sprite(ResourceManager::GetTexture("PlayerShip")));
-	}
-
-	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
-	{
-		//SceneManager::ChangeScene(new CentiScene);
-	}
-
-};
-
-
-struct CentiGame : public Scene
-{
-	virtual void Initialize()
-	{
-		new Ship;
-		WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255));
-
-	}
-
-};
+#include "../Level1.h"
 
 void ResourceManager::LoadAllResources()
 {
-	SetStartScene( new CentiGame );
+	SetStartScene( new Level1 );
 
 	AddTexture("PlayerShip", "blaster.png");
 	AddTexture("Bullet", "bullet.png");
