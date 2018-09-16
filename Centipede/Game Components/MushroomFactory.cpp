@@ -23,18 +23,22 @@ void MushroomFactory::RecycleMushroom(Mushroom * shroom)
 
 bool MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 {
+	Mushroom *m;
 
 	//todo: make sure to check if you can place it here
 	if (mushroomList.size() == 0)
-		new Mushroom(pos);
+		m = new Mushroom(pos);
 
 	else
 	{
-		Mushroom *m = mushroomList.back();
+		//recycle from the list, taking from the back and using that
+		m = mushroomList.back();
 		mushroomList.pop_back();
 
 		return m->SetPosition(pos);
 	}
+
+
 
 	return false;
 }
@@ -55,14 +59,16 @@ MushroomFactory * MushroomFactory::GetInstance(int numShrooms)
 {
 	if (instance == 0)
 		instance = new MushroomFactory;
+	
+	GetInstance()->mushroomList.reserve(numShrooms); //optimize for num shrooms being made
 
 	int x, y;
 	sf::Vector2f pos;
-
+	
 	for (int i = 0; i < numShrooms; ++i)
 	{
 		x = rand() % (int)WindowManager::MainWindow.getView().getSize().x;
-		y = rand() % (int)WindowManager::MainWindow.getView().getSize().x;
+		y = rand() % (int)WindowManager::MainWindow.getView().getSize().y;
 		
 		pos.x = (float)x; pos.y = (float)y;
 

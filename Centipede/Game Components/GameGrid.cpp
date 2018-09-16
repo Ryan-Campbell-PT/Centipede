@@ -28,12 +28,22 @@ bool GameGrid::SetGridStatus(sf::Vector2f v, GameGridEnum e)
 
 bool GameGrid::SetGridStatus(int x, int y, GameGridEnum e)
 {
-	//set the grid location to whatever is being asked
-	if (this->grid[x][y] == (int) GameGridEnum::Unoccupied)
+	//make sure not to get out of bounds
+	if (x >= 0 && x < 40 && y >= 0 && y < 32)
 	{
 		this->grid[x][y] = (int) e;
 		return true;
 	}
 
-	return false; //return false if the location already has something there
+	return false; //return false if the location is out of bounds
+}
+
+bool GameGrid::CheckThenSetGrid(sf::Vector2f v, GameGridEnum e)
+{
+	//if the grid location is untouched
+	if (GetInstance()->grid[(int)v.x / 24][(int)v.y / 24] == (int)GameGridEnum::Unoccupied)
+		return SetGridStatus(v, e);
+
+	else
+		return false;
 }

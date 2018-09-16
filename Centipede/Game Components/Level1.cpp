@@ -41,18 +41,23 @@ void Level1::Initialize()
 	
 	Ship::GetInstance(); //spawn the ship
 
-	/*std::vector<Mushroom*> d;
+#if false
+	std::vector<Mushroom*> d;
 	
-	d.push_back(new Mushroom(sf::Vector2f(300, 400)));
-	d.push_back(new Mushroom(sf::Vector2f(15 * 24, 36)));
-	d.push_back(new Mushroom(sf::Vector2f(15 * 24, 12)));
-	d.push_back(new Mushroom(sf::Vector2f(0 * 24, 12)));
+	d.push_back(new Mushroom(sf::Vector2f(0, 0)));
+	d.push_back(new Mushroom(sf::Vector2f(0, 330)));
+	d.push_back(new Mushroom(sf::Vector2f(330, 0)));
+	d.push_back(new Mushroom(sf::Vector2f(450, 450)));
 	
 	auto front = d.front();
 	auto back = d.back();
-	d.pop_back();*/
+	d.pop_back();
+
+#elif true
 
 	MushroomFactory::GetInstance(100);
+	
+#endif
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();

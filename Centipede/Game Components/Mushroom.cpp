@@ -19,10 +19,6 @@ Mushroom::Mushroom(sf::Vector2f v)
 	//4 and 2 show the first mushroom, undamaged
 	this->MainSprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); 
 
-	//this->MainSprite.SetAnimation(1, 2); //second mushroom state
-	//this->MainSprite.SetAnimation(2, 3); //third mushroom state
-	//this->MainSprite.SetAnimation(3, 4); //fourth mushroom state
-
 	this->SetPosition(v);
 
 	this->MainSprite.setScale(1.5f, 1.5f);
@@ -32,6 +28,7 @@ Mushroom::Mushroom(sf::Vector2f v)
 
 	this->health = 0;
 
+	GameGrid::GetInstance()->SetGridStatus(v, GameGridEnum::Mushroom);
 
 }
 
@@ -55,9 +52,13 @@ void Mushroom::TakeDamage()
 {
 	//progress the health of the mushroom, while also moving the animation one forward
 	this->MainSprite.SetAnimation(health, ++health);
-	
+
 	if (health % 4 == 0) //modulous to compensate for poison or healthy
 		MushroomFactory::RecycleMushroom(this);
+
+	//this->MainSprite.SetAnimation(1, 2); //second mushroom state
+	//this->MainSprite.SetAnimation(2, 3); //third mushroom state
+	//this->MainSprite.SetAnimation(3, 4); //fourth mushroom state
 }
 
 Mushroom::~Mushroom()
@@ -71,5 +72,5 @@ bool Mushroom::SetPosition(sf::Vector2f v)
 	Pos = v;
 
 	//return whether it can be placed there
-	return GameGrid::GetInstance()->SetGridStatus(v, GameGridEnum::Mushroom);
+	return GameGrid::GetInstance()->CheckThenSetGrid(v, GameGridEnum::Mushroom);
 }

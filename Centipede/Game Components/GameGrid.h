@@ -10,13 +10,17 @@
 
 enum class GameGridEnum;
 
+//TODO: figure out how to correcly do the math for locating where something goes in the grid
 class GameGrid
 {
 public:
 	static GameGrid *GetInstance();
 
+	//set the grid regardless of what is there
 	bool SetGridStatus(sf::Vector2f v, GameGridEnum e);
 	bool SetGridStatus(int x, int y, GameGridEnum e);
+	//this method will be different in that it will first check if anything is there, then set it if so
+	bool CheckThenSetGrid(sf::Vector2f v, GameGridEnum e);
 
 private:
 	GameGrid();
