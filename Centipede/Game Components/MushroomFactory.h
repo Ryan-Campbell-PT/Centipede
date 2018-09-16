@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Factory.h"
+#include "TEAL/CommonElements.h"
 
 class Mushroom;
 
@@ -15,12 +16,15 @@ public:
 
 	virtual ~MushroomFactory(); //be sure to delete all mushrooms on screen
 	
-	static MushroomFactory *getInstance();
+	static MushroomFactory *GetInstance();
+	static MushroomFactory *GetInstance(int numShrooms); //todo: may wanna take an alternateive approach to this
+
 	static void RecycleMushroom(Mushroom *shroom);
 
 	//will confirm whether a mushroom can be placed in that area
-	//returns a bool to confirm whether the mushroom was placed
-	bool spawnMushroom(int posX, int posY);
+	//returns a bool to confirm whether the mushroom was placed.
+	//the floats is the window position
+	bool SpawnMushroom(sf::Vector2f pos);
 		
 
 private:

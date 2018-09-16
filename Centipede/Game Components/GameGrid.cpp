@@ -19,12 +19,18 @@ GameGrid * GameGrid::GetInstance()
 	return instance;
 }
 
-bool GameGrid::SetGridOccupied(int gridX, int gridY, GameGridEnum e)
+bool GameGrid::SetGridOccupied(sf::Vector2f v, GameGridEnum e)
+{
+	//todo: the math here will likely be incorrect in edge cases, look over it
+	return this->SetGridOccupied(v.x / 24, v.y / 24, e); //24 because of scale factor
+}
+
+bool GameGrid::SetGridOccupied(int x, int y, GameGridEnum e)
 {
 	//set the grid location to whatever is being asked
-	if (this->grid[gridX][gridY] == (int) GameGridEnum::Unoccupied)
+	if (this->grid[x][y] == (int) GameGridEnum::Unoccupied)
 	{
-		this->grid[gridX][gridY] = (int) e;
+		this->grid[x][y] = (int) e;
 		return true;
 	}
 

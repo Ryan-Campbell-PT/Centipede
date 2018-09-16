@@ -13,6 +13,9 @@
 #include "HUD.h"
 #include "FinalScore.h"
 #include "Mushroom.h"
+#include "MushroomFactory.h"
+
+#include <vector>
 
 //commented out for now to have reference to code for later
 /*
@@ -36,12 +39,20 @@ void Level1::Initialize()
 {
 	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
 	
-	
 	Ship::GetInstance(); //spawn the ship
-	new Mushroom(sf::Vector2f(300, 400));
-	new Mushroom(sf::Vector2f(15 * 24, 36));
-	new Mushroom(sf::Vector2f(15 * 24, 12));
-	new Mushroom(sf::Vector2f(0 * 24, 12));
+
+	/*std::vector<Mushroom*> d;
+	
+	d.push_back(new Mushroom(sf::Vector2f(300, 400)));
+	d.push_back(new Mushroom(sf::Vector2f(15 * 24, 36)));
+	d.push_back(new Mushroom(sf::Vector2f(15 * 24, 12)));
+	d.push_back(new Mushroom(sf::Vector2f(0 * 24, 12)));
+	
+	auto front = d.front();
+	auto back = d.back();
+	d.pop_back();*/
+
+	MushroomFactory::GetInstance(100);
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();

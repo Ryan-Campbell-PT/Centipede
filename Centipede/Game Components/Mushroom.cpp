@@ -1,6 +1,7 @@
 #include "Mushroom.h"
 #include "Bullet.h"
 #include "MushroomFactory.h"
+#include "GameGrid.h"
 
 Mushroom::Mushroom(sf::Vector2f v)
 {
@@ -68,5 +69,7 @@ bool Mushroom::SetPosition(sf::Vector2f v)
 	this->MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 	this->MainSprite.setPosition(v);
 	Pos = v;
-	return true;
+
+	//return whether it can be placed there
+	return GameGrid::GetInstance()->SetGridOccupied(v, GameGridEnum::Mushroom);
 }

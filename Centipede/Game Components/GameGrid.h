@@ -1,6 +1,8 @@
 #ifndef GAMEGRID_H
 #define GAMEGRID_H
 
+#include "TEAL/CommonElements.h"
+
 //the concept of this will be in regards to a 40 x 32 grid that will store the mushrooms
 //each grid will be the size of a mushroom (16 pixels)
 
@@ -14,7 +16,8 @@ public:
 
 	static GameGrid *GetInstance();
 
-	bool SetGridOccupied(int gridX, int gridY, GameGridEnum e);
+	bool SetGridOccupied(sf::Vector2f v, GameGridEnum e);
+	bool SetGridOccupied(int x, int y, GameGridEnum e);
 
 private:
 	GameGrid();
