@@ -2,8 +2,6 @@
 #define MUSHROOMF_H
 
 #include <vector>
-#include <iostream>
-using namespace std;
 
 #include "Factory.h"
 
@@ -18,6 +16,7 @@ public:
 	virtual ~MushroomFactory(); //be sure to delete all mushrooms on screen
 	
 	static MushroomFactory *getInstance();
+	static void RecycleMushroom(Mushroom *shroom);
 
 	//will confirm whether a mushroom can be placed in that area
 	//returns a bool to confirm whether the mushroom was placed
@@ -26,16 +25,14 @@ public:
 
 private:
 	MushroomFactory();
-	static void RecycleMushroom(Mushroom *shroom);
 
 	static MushroomFactory* instance;
 	int mushroomCount; //this may be able to be replaced with getting whatever list.size()
 	//somewhere here will have to keep track of all the mushrooms on screen
 
-	std::vector<Mushroom> mushroomList;
+	std::vector<Mushroom*> mushroomList;
 
 };
 
-MushroomFactory * MushroomFactory::instance = 0; //necesary for linking
 
 #endif //MUSHROOMF_H

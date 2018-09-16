@@ -4,6 +4,7 @@
 #include "TEAL/CommonElements.h"
 
 class Bullet;
+class MushroomFactory;
 
 class Mushroom : public GameObject
 {
@@ -17,9 +18,10 @@ public:
 	virtual void Draw();
 
 	void TakeDamage();
+	
+	virtual ~Mushroom(); //this needs to be public at the moment for some reason. Not sure why
 
 private:
-	~Mushroom();
 	Mushroom &operator=(const Mushroom &c) = delete;
 	Mushroom(const Mushroom &c) = delete;
 
