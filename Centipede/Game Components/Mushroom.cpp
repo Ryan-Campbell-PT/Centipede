@@ -39,7 +39,7 @@ Mushroom::Mushroom(sf::Vector2i v)
 {
 
 	//24 because thats the hard coded scale size
-	Mushroom(sf::Vector2f(v.x * 24, v.y * 24));
+	Mushroom(sf::Vector2f((float)v.x * 24, (float)v.y * 24));
 }
 
 void Mushroom::Update()
@@ -71,5 +71,5 @@ bool Mushroom::SetPosition(sf::Vector2f v)
 	Pos = v;
 
 	//return whether it can be placed there
-	return GameGrid::GetInstance()->SetGridOccupied(v, GameGridEnum::Mushroom);
+	return GameGrid::GetInstance()->SetGridStatus(v, GameGridEnum::Mushroom);
 }

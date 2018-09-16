@@ -13,11 +13,10 @@ enum class GameGridEnum;
 class GameGrid
 {
 public:
-
 	static GameGrid *GetInstance();
 
-	bool SetGridOccupied(sf::Vector2f v, GameGridEnum e);
-	bool SetGridOccupied(int x, int y, GameGridEnum e);
+	bool SetGridStatus(sf::Vector2f v, GameGridEnum e);
+	bool SetGridStatus(int x, int y, GameGridEnum e);
 
 private:
 	GameGrid();

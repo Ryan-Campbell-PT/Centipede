@@ -18,7 +18,7 @@ void MushroomFactory::RecycleMushroom(Mushroom * shroom)
 	shroom->DeregisterCollision(*shroom);
 
 	//todo: when grid is implemented, remove from grid location as well
-	GameGrid::GetInstance()->SetGridOccupied(shroom->Pos, GameGridEnum::Unoccupied);
+	GameGrid::GetInstance()->SetGridStatus(shroom->Pos, GameGridEnum::Unoccupied);
 }
 
 bool MushroomFactory::SpawnMushroom(sf::Vector2f pos)
@@ -64,7 +64,7 @@ MushroomFactory * MushroomFactory::GetInstance(int numShrooms)
 		x = rand() % (int)WindowManager::MainWindow.getView().getSize().x;
 		y = rand() % (int)WindowManager::MainWindow.getView().getSize().x;
 		
-		pos.x = x; pos.y = y;
+		pos.x = (float)x; pos.y = (float)y;
 
 		GetInstance()->SpawnMushroom(pos);
 	}

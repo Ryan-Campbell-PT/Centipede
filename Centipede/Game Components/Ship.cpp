@@ -110,10 +110,19 @@ void Ship::Collision(Widget *other)
 
 void Ship::Collision(Mushroom* other)
 {
-	//other->Explode();
-	//new ShipExplosion(Pos);
-	//MarkForDestroy();
-	ConsoleMsg::WriteLine("Ship[");
+	offset = SPEED * Game::FrameTime();
+	// Continuous key-down tests
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) Impulse -= sf::Vector2f(-offset, 0);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) Impulse -= sf::Vector2f(offset, 0);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) Impulse -= sf::Vector2f(0, -offset);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) Impulse -= sf::Vector2f(0, offset);
+	
+	Pos -= Impulse;
+
+	MainSprite.setPosition(Pos);
+
+	Impulse *= friction;
+
 }
 
 sf::Vector2f Ship::GetPosition()
