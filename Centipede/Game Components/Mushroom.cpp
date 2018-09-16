@@ -4,11 +4,20 @@
 
 Mushroom::Mushroom(sf::Vector2f v)
 {
+	//this purpose is hard coded for now, 36 because the first level of the map shouldnt
+	//have any mushrooms, its avaliable for the centi only
+	if (v.y < 36)
+		v.y = 36;
+
+	//for sprite purposes, we set it to be 12 so the sprite doesnt go off the window
+	if (v.x < 13)
+		v.x = 13;
+
 	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
 	
 	//4 and 2 show the first mushroom, undamaged
 	this->MainSprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); 
-	
+
 	//this->MainSprite.SetAnimation(1, 2); //second mushroom state
 	//this->MainSprite.SetAnimation(2, 3); //third mushroom state
 	//this->MainSprite.SetAnimation(3, 4); //fourth mushroom state
@@ -16,11 +25,20 @@ Mushroom::Mushroom(sf::Vector2f v)
 	this->SetPosition(v);
 
 	this->MainSprite.setScale(1.5f, 1.5f);
-
+	
 	SetCollider(MainSprite, bitmap, true);
 	RegisterCollision<Mushroom>(*this);
 
 	this->health = 0;
+
+
+}
+
+Mushroom::Mushroom(sf::Vector2i v)
+{
+
+	//24 because thats the hard coded scale size
+	Mushroom(sf::Vector2f(v.x * 24, v.y * 24));
 }
 
 void Mushroom::Update()

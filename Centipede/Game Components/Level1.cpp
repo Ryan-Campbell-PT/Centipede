@@ -39,6 +39,9 @@ void Level1::Initialize()
 	
 	Ship::GetInstance(); //spawn the ship
 	new Mushroom(sf::Vector2f(300, 400));
+	new Mushroom(sf::Vector2f(15 * 24, 36));
+	new Mushroom(sf::Vector2f(15 * 24, 12));
+	new Mushroom(sf::Vector2f(0 * 24, 12));
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();

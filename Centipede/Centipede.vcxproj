@@ -92,6 +92,7 @@
     <ClCompile Include="Game Components\Explosion.cpp" />
     <ClCompile Include="Game Components\FinalScore.cpp" />
     <ClCompile Include="Game Components\GameController.cpp" />
+    <ClCompile Include="Game Components\GameGrid.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
     <ClCompile Include="Game Components\Mushroom.cpp" />
     <ClCompile Include="Game Components\MushroomFactory.cpp" />

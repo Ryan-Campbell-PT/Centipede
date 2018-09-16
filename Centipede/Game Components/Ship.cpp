@@ -80,6 +80,8 @@ void Ship::Update()
 	}
 
 	Pos += Impulse;
+	
+	//todo: these values will have to change now that we are in centipede, theyre all wrong
 	Tools::Clamp<float>(Pos.x, (float) 2*MainSprite.getTextureRect().width, WindowManager::MainWindow.getView().getSize().x );
 	Tools::Clamp<float>(Pos.y, 100, WindowManager::MainWindow.getView().getSize().y - MainSprite.getTextureRect().height);	
 	MainSprite.setPosition(Pos);
