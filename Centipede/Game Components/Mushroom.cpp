@@ -8,7 +8,7 @@ Mushroom::Mushroom(sf::Vector2f v)
 	//handle collision and sprite management first
 	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
 	this->MainSprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); //4 and 2 show the first mushroom, undamaged
-	this->MainSprite.setScale(1.5f, 1.5f);
+	this->MainSprite.setScale(1.4f, 1.4f); //changed this to 1.4 to compensate for mushroom sprite overlapping. Still using 24 pixel tho
 	SetCollider(MainSprite, bitmap, true);
 	RegisterCollision<Mushroom>(*this);
 	this->MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
@@ -32,7 +32,7 @@ Mushroom::Mushroom(float x, float y)
 	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
 	this->MainSprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); //4 and 2 show the first mushroom, undamaged
 	this->MainSprite.setScale(1.5f, 1.5f);
-#if true
+#if false
 	MushroomFactory::instance->GetNewMushroomPosition(sf::Vector2f(x, y));
 
 	
@@ -70,7 +70,7 @@ Mushroom::~Mushroom()
 
 void Mushroom::SetPosition(sf::Vector2f v)
 {
-	//MushroomFactory::instance->GetNewMushroomPosition(v);
+	MushroomFactory::instance->GetNewMushroomPosition(v);
 	this->MainSprite.setPosition(v);
 	Pos = v;
 

@@ -42,11 +42,13 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 
 void MushroomFactory::GetNewMushroomPosition(sf::Vector2f &pos)
 {
-	auto gridX = static_cast<int>(floor(pos.x / 24));
-	auto gridY = static_cast<int>(floor(pos.y / 24));
-
-	pos.x = gridX * 24 + 12;
-	pos.y = gridY * 24 + 12;
+	//the math behind this is so: you divide the vectors position by 24 (the sprite size) and the int conversion floor()'s it.
+	//once you have the grid location (the floor()'ing), you multiply it again by the sprite size (24) to get it back to
+	//its grids location in game. Then add 12 to x and y to get it centered in the grid, and have them sprite distance apart.
+	
+	//without this function, sprites very often overlap eachother
+	pos.x = static_cast<int>(pos.x / 24) * 24 + 12;
+	pos.y = static_cast<int>(pos.y / 24) * 24 + 12;
 }
 
 MushroomFactory::~MushroomFactory()
@@ -84,8 +86,10 @@ MushroomFactory * MushroomFactory::GetInstance(int numShrooms)
 		{
 			x = rand() % static_cast<int>(WindowManager::MainWindow.getView().getSize().x);
 			y = rand() % static_cast<int>(WindowManager::MainWindow.getView().getSize().y);
-		} while (GameGrid::GetInstance()->GetGridStatus(sf::Vector2f(x, y)) != GameGridEnum::Unoccupied); //make sure you can plant the shroom there
-		
+		} while ((int)GameGrid::GetInstance()->GetGridStatus(sf::Vector2f(x, y)) >= static_cast<int>(GameGridEnum::Unoccupied));
+		//the choice to use >= 0 is b/c when the array space is unused, its garbage data, typically -ABigNumber
+		//so this tests whether its unusued, or Unoccupied
+
 		pos.x = x;
 		pos.y = y;
 

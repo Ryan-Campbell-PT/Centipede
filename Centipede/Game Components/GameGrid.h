@@ -3,7 +3,10 @@
 
 #include "TEAL/CommonElements.h"
 
-//the concept of this will be in regards to a 30 x 30 grid that will store the mushrooms
+#define ROW 15
+#define COLUMN 15
+
+//the concept of this will be in regards to a 42 x 32 grid that will store the mushrooms
 //each grid will be the size of a mushroom (16 pixels)
 
 //each mushroom is 24 pixels in height (subject to change depending on scale size)
@@ -30,12 +33,13 @@ private:
 	GameGrid &operator=(const GameGrid &c) = delete;
 	GameGrid(const GameGrid &c) = delete;
 	
-	bool BoundsCheck(const int &x, const int &y);
+	///when using the vector, this function may be unneeded due to being unable to move beyond the bounds
+	bool BoundsCheck(const sf::Vector2f &v); 
 
 	static GameGrid *instance;
 
 	//row x column (rough estimate)
-	int grid[30][30];
+	int grid[ROW][COLUMN];
 };
 
 //enums to tell what is located at this grid
