@@ -24,23 +24,22 @@ public:
 
 	GameGridEnum GetGridStatus(sf::Vector2f v);
 
-	int grid[30][30];
-
 private:
 	GameGrid();
 	~GameGrid();
 	GameGrid &operator=(const GameGrid &c) = delete;
 	GameGrid(const GameGrid &c) = delete;
 	
-	bool BoundsCheck(int x, int y);
+	bool BoundsCheck(const int &x, const int &y);
 
 	static GameGrid *instance;
 
 	//row x column (rough estimate)
+	int grid[30][30];
 };
 
 //enums to tell what is located at this grid
-static enum class GameGridEnum
+enum class GameGridEnum
 {
 	Unoccupied = 0,
 	Mushroom = 1

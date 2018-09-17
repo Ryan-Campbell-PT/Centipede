@@ -65,8 +65,6 @@ void Level1::Initialize()
 		new Mushroom(sf::Vector2f(f * 24, f * 24));
 	}
 
-	auto g = GameGrid::GetInstance()->grid;
-
 #endif
 
 	CollisionTestPair<Ship, Mushroom>();

@@ -23,13 +23,13 @@ void GameGrid::SetGridStatus(sf::Vector2f v, GameGridEnum e)
 {
 	//todo: the math here will likely be incorrect in edge cases, look over it
 	if (BoundsCheck(v.x, v.y)) //make sure we arent out of bounds
-		this->grid[(int)v.x / 24][(int)v.y / 24] = (int)e; //24 b/c of scale factor
+		this->grid[static_cast<int>(v.x / 24)][static_cast<int>(v.y / 24)] = static_cast<int>(e); //24 b/c of scale factor
 }
 
 GameGridEnum GameGrid::GetGridStatus(sf::Vector2f v)
 {
 	if(this->BoundsCheck(v.x, v.y))
-		return (GameGridEnum)this->grid[(int)v.x][(int)v.y];
+		return static_cast<GameGridEnum>(this->grid[static_cast<int>(v.x)][static_cast<int>(v.y)]);
 }
 
 bool GameGrid::AttemptToSetGrid(sf::Vector2f v, GameGridEnum e)
@@ -43,7 +43,11 @@ bool GameGrid::AttemptToSetGrid(sf::Vector2f v, GameGridEnum e)
 			return false; //the grid wasnt unoccupied
 }
 
-bool GameGrid::BoundsCheck(int x, int y)
+bool GameGrid::BoundsCheck(const int &x, const int &y)
 {
-	return (x >= 0 && x < 30 && y < 30 && y >= 0);
+	return (
+		x >= 0 && 
+		x < 30 && 
+		y < 30 && 
+		y >= 0);
 }
