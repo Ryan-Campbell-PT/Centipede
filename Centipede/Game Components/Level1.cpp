@@ -14,6 +14,7 @@
 #include "FinalScore.h"
 #include "Mushroom.h"
 #include "MushroomFactory.h"
+#include "GameGrid.h"
 
 #include <vector>
 
@@ -38,25 +39,34 @@ void Level1::Initialize()
 void Level1::Initialize()
 {
 	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
-	
+
 	Ship::GetInstance(); //spawn the ship
 
 #if false
 	std::vector<Mushroom*> d;
-	
+
 	d.push_back(new Mushroom(sf::Vector2f(0, 0)));
 	d.push_back(new Mushroom(sf::Vector2f(0, 330)));
 	d.push_back(new Mushroom(sf::Vector2f(330, 0)));
 	d.push_back(new Mushroom(sf::Vector2f(450, 450)));
-	
+
 	auto front = d.front();
 	auto back = d.back();
 	d.pop_back();
 
-#elif true
+#elif false
 
 	MushroomFactory::GetInstance(100);
-	
+
+#elif true
+	for (int i = 0; i < 30; i++)
+	{
+		auto f = rand() % 30;
+		new Mushroom(sf::Vector2f(f * 24, f * 24));
+	}
+
+	auto g = GameGrid::GetInstance()->grid;
+
 #endif
 
 	CollisionTestPair<Ship, Mushroom>();

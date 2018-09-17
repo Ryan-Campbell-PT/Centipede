@@ -21,29 +21,29 @@ GameGrid * GameGrid::GetInstance()
 
 bool GameGrid::SetGridStatus(sf::Vector2f v, GameGridEnum e)
 {
-	
 	//todo: the math here will likely be incorrect in edge cases, look over it
-	return this->SetGridStatus(v.x / 24, v.y / 24, e); //24 because of scale factor
+	if (BoundsCheck(v.x, v.y)) //make sure we arent out of bounds
+		this->grid[(int)v.x / 24][(int)v.y / 24] = (int)e; //24 b/c of scale factor
 }
 
-bool GameGrid::SetGridStatus(int x, int y, GameGridEnum e)
+GameGridEnum GameGrid::GetGridStatus(sf::Vector2f v)
 {
-	//make sure not to get out of bounds
-	if (x >= 0 && x < 40 && y >= 0 && y < 32)
-	{
-		this->grid[x][y] = (int) e;
-		return true;
-	}
-
-	return false; //return false if the location is out of bounds
+	if(this->BoundsCheck(v.x, v.y))
+		return (GameGridEnum)this->grid[(int)v.x][(int)v.y];
 }
 
-bool GameGrid::CheckThenSetGrid(sf::Vector2f v, GameGridEnum e)
+bool GameGrid::AttemptToSetGrid(sf::Vector2f v, GameGridEnum e)
 {
-	//if the grid location is untouched
-	if (GetInstance()->grid[(int)v.x / 24][(int)v.y / 24] == (int)GameGridEnum::Unoccupied)
-		return SetGridStatus(v, e);
+		if (this->GetGridStatus(v) == GameGridEnum::Unoccupied) //can we place here
+		{
+			this->SetGridStatus(v, e); //if it isnt occupied, confirm can be placed
+			return true;
+		}
+		else
+			return false; //the grid wasnt unoccupied
+}
 
-	else
-		return false;
+bool GameGrid::BoundsCheck(int x, int y)
+{
+	return (x >= 0 && x < 30 && y < 30 && y >= 0);
 }

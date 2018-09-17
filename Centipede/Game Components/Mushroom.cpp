@@ -5,6 +5,16 @@
 
 Mushroom::Mushroom(sf::Vector2f v)
 {
+	
+	//handle collision and sprite management first
+	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
+	this->MainSprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); //4 and 2 show the first mushroom, undamaged
+	this->MainSprite.setScale(1.5f, 1.5f);
+	SetCollider(MainSprite, bitmap, true);
+	RegisterCollision<Mushroom>(*this);
+
+	//then handle positioning and housekeeping
+
 	//this purpose is hard coded for now, 36 because the first level of the map shouldnt
 	//have any mushrooms, its avaliable for the centi only
 	if (v.y < 36)
@@ -14,29 +24,7 @@ Mushroom::Mushroom(sf::Vector2f v)
 	if (v.x < 13)
 		v.x = 13;
 
-	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
-	
-	//4 and 2 show the first mushroom, undamaged
-	this->MainSprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); 
-
 	this->SetPosition(v);
-
-	this->MainSprite.setScale(1.5f, 1.5f);
-	
-	SetCollider(MainSprite, bitmap, true);
-	RegisterCollision<Mushroom>(*this);
-
-	this->health = 0;
-
-	GameGrid::GetInstance()->SetGridStatus(v, GameGridEnum::Mushroom);
-
-}
-
-Mushroom::Mushroom(sf::Vector2i v)
-{
-
-	//24 because thats the hard coded scale size
-	Mushroom(sf::Vector2f((float)v.x * 24, (float)v.y * 24));
 }
 
 void Mushroom::Update()
@@ -54,7 +42,7 @@ void Mushroom::TakeDamage()
 	this->MainSprite.SetAnimation(health, ++health);
 
 	if (health % 4 == 0) //modulous to compensate for poison or healthy
-		MushroomFactory::RecycleMushroom(this);
+		MushroomFactory::GetInstance()->RecycleMushroom(this);
 
 	//this->MainSprite.SetAnimation(1, 2); //second mushroom state
 	//this->MainSprite.SetAnimation(2, 3); //third mushroom state
@@ -71,6 +59,8 @@ bool Mushroom::SetPosition(sf::Vector2f v)
 	this->MainSprite.setPosition(v);
 	Pos = v;
 
+	this->health = 0; //setting the positions of a mushroom assumes its full health
+
 	//return whether it can be placed there
-	return GameGrid::GetInstance()->CheckThenSetGrid(v, GameGridEnum::Mushroom);
+	GameGrid::GetInstance()->SetGridStatus(v, GameGridEnum::Mushroom);
 }

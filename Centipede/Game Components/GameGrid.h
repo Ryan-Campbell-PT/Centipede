@@ -3,7 +3,7 @@
 
 #include "TEAL/CommonElements.h"
 
-//the concept of this will be in regards to a 40 x 32 grid that will store the mushrooms
+//the concept of this will be in regards to a 30 x 30 grid that will store the mushrooms
 //each grid will be the size of a mushroom (16 pixels)
 
 //each mushroom is 24 pixels in height (subject to change depending on scale size)
@@ -16,11 +16,15 @@ class GameGrid
 public:
 	static GameGrid *GetInstance();
 
-	//set the grid regardless of what is there
+	//set the grid regardless of what is there (typically when a critter gets destroyed)
 	bool SetGridStatus(sf::Vector2f v, GameGridEnum e);
-	bool SetGridStatus(int x, int y, GameGridEnum e);
-	//this method will be different in that it will first check if anything is there, then set it if so
-	bool CheckThenSetGrid(sf::Vector2f v, GameGridEnum e);
+
+	//this method will attempt to set the grid using a location on the map
+	bool AttemptToSetGrid(sf::Vector2f v, GameGridEnum e);
+
+	GameGridEnum GetGridStatus(sf::Vector2f v);
+
+	int grid[30][30];
 
 private:
 	GameGrid();
@@ -28,10 +32,11 @@ private:
 	GameGrid &operator=(const GameGrid &c) = delete;
 	GameGrid(const GameGrid &c) = delete;
 	
+	bool BoundsCheck(int x, int y);
+
 	static GameGrid *instance;
 
 	//row x column (rough estimate)
-	int grid[40][32];
 };
 
 //enums to tell what is located at this grid

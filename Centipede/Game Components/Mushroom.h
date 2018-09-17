@@ -14,8 +14,6 @@ public:
 	bool SetPosition(sf::Vector2f v);
 	//using the float version means youre going to specify where its being placed pixel wise
 	Mushroom(sf::Vector2f v); 
-	//using the int version means youre going to specify where in the grid you want the shroom
-	Mushroom(sf::Vector2i v);
 
 	virtual void Update();
 	virtual void Draw();
