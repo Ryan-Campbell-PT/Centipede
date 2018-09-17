@@ -54,7 +54,7 @@ void Level1::Initialize()
 	auto back = d.back();
 	d.pop_back();
 
-#elif false
+#elif true
 
 	MushroomFactory::GetInstance(100);
 
@@ -65,9 +65,16 @@ void Level1::Initialize()
 		new Mushroom(sf::Vector2f(f * 24, f * 24));
 	}
 
+#elif true
+	//auto f = (sf::Vector2f(66, 31));
+	//MushroomFactory::GetInstance()->GetNewMushroomPosition(f);
+	new Mushroom(66, 31);
+	new Mushroom(73, 31);
+	
 #endif
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();
 
 }
+

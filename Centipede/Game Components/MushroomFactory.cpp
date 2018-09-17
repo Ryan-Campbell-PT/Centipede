@@ -40,6 +40,15 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 	instance->activeMushroomList.push_back(m); //tell the game this mushroom is on the screen
 }
 
+void MushroomFactory::GetNewMushroomPosition(sf::Vector2f &pos)
+{
+	auto gridX = static_cast<int>(floor(pos.x / 24));
+	auto gridY = static_cast<int>(floor(pos.y / 24));
+
+	pos.x = gridX * 24 + 12;
+	pos.y = gridY * 24 + 12;
+}
+
 MushroomFactory::~MushroomFactory()
 {
 	for (auto shroom : instance->inactiveMushroomList)

@@ -14,6 +14,7 @@ public:
 	void SetPosition(sf::Vector2f v);
 	///using the float version means youre going to specify where its being placed pixel wise
 	Mushroom(sf::Vector2f v); 
+	Mushroom(float x, float y); ///this is strictly for testing purposes
 
 	virtual void Update();
 	virtual void Draw();
