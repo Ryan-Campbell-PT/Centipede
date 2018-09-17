@@ -1,5 +1,4 @@
 #include "Mushroom.h"
-#include "Bullet.h"
 #include "MushroomFactory.h"
 #include "GameGrid.h"
 
@@ -53,7 +52,7 @@ Mushroom::~Mushroom()
 {
 }
 
-bool Mushroom::SetPosition(sf::Vector2f v)
+void Mushroom::SetPosition(sf::Vector2f v)
 {
 	this->MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 	this->MainSprite.setPosition(v);

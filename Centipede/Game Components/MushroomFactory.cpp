@@ -7,7 +7,6 @@
 MushroomFactory * MushroomFactory::instance = 0; //necesary for linking
 
 MushroomFactory::MushroomFactory()
-	:mushroomCount(0)
 {
 }
 
@@ -45,6 +44,11 @@ MushroomFactory::~MushroomFactory()
 {
 	for (auto shroom : instance->inactiveMushroomList)
 		delete shroom;
+
+	for (auto shroom : instance->activeMushroomList)
+		delete shroom;
+
+	delete instance;
 }
 
 MushroomFactory * MushroomFactory::GetInstance()

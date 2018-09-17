@@ -19,7 +19,7 @@ GameGrid * GameGrid::GetInstance()
 	return instance;
 }
 
-bool GameGrid::SetGridStatus(sf::Vector2f v, GameGridEnum e)
+void GameGrid::SetGridStatus(sf::Vector2f v, GameGridEnum e)
 {
 	//todo: the math here will likely be incorrect in edge cases, look over it
 	if (BoundsCheck(v.x, v.y)) //make sure we arent out of bounds

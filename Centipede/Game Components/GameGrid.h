@@ -17,7 +17,7 @@ public:
 	static GameGrid *GetInstance();
 
 	//set the grid regardless of what is there (typically when a critter gets destroyed)
-	bool SetGridStatus(sf::Vector2f v, GameGridEnum e);
+	void SetGridStatus(sf::Vector2f v, GameGridEnum e);
 
 	//this method will attempt to set the grid using a location on the map
 	bool AttemptToSetGrid(sf::Vector2f v, GameGridEnum e);

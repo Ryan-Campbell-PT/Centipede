@@ -3,7 +3,6 @@
 
 #include "TEAL/CommonElements.h"
 
-class Bullet;
 class MushroomFactory;
 
 class Mushroom : public GameObject
@@ -11,8 +10,9 @@ class Mushroom : public GameObject
 public:
 	friend class MushroomFactory;
 
-	bool SetPosition(sf::Vector2f v);
-	//using the float version means youre going to specify where its being placed pixel wise
+	///since MushroomFactory spawns the mushrooms, and checks if they can go there, no need to return anything
+	void SetPosition(sf::Vector2f v);
+	///using the float version means youre going to specify where its being placed pixel wise
 	Mushroom(sf::Vector2f v); 
 
 	virtual void Update();
@@ -20,7 +20,7 @@ public:
 
 	void TakeDamage();
 	
-	virtual ~Mushroom(); //this needs to be public at the moment for some reason. Not sure why
+	virtual ~Mushroom(); //this needs to be public at the moment for linking reasons. Not sure why
 
 private:
 	Mushroom &operator=(const Mushroom &c) = delete;
