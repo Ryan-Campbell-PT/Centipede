@@ -13,10 +13,13 @@ MushroomFactory::MushroomFactory()
 void MushroomFactory::RecycleMushroom(Mushroom * shroom)
 {
 	instance->inactiveMushroomList.push_back(shroom); //recycle
+	instance->activeMushroomList.erase(
+		std::remove(
+			instance->activeMushroomList.begin(), instance->activeMushroomList.end(), shroom)
+	); //overly complicated way to remove from activeList
 	shroom->MainSprite.setScale(0, 0); //remove it from the screen
 	shroom->DeregisterCollision(*shroom);
 
-	//todo: when grid is implemented, remove from grid location as well
 	GameGrid::GetInstance()->SetGridStatus(shroom->Pos, GameGridEnum::Unoccupied);
 }
 
@@ -24,7 +27,6 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 {
 	Mushroom *m;
 
-	//todo: make sure to check if you can place it here
 	if (inactiveMushroomList.size() == 0)
 		m = new Mushroom(pos);
 

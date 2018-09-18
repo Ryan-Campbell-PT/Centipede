@@ -13,7 +13,6 @@
 
 enum class GameGridEnum;
 
-//TODO: figure out how to correcly do the math for locating where something goes in the grid
 class GameGrid
 {
 public:
