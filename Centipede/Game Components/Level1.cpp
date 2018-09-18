@@ -56,7 +56,7 @@ void Level1::Initialize()
 
 #elif true
 
-	MushroomFactory::GetInstance(100);
+	MushroomFactory::GetInstance(50);
 
 #elif false
 	for (int i = 0; i < 30; i++)
