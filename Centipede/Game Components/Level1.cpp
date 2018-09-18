@@ -58,7 +58,7 @@ void Level1::Initialize()
 
 	MushroomFactory::GetInstance(100);
 
-#elif true
+#elif false
 	for (int i = 0; i < 30; i++)
 	{
 		auto f = rand() % 30;
@@ -68,8 +68,8 @@ void Level1::Initialize()
 #elif true
 	//auto f = (sf::Vector2f(66, 31));
 	//MushroomFactory::GetInstance()->GetNewMushroomPosition(f);
-	new Mushroom(66, 31);
-	new Mushroom(73, 31);
+	new Mushroom(53, 31);
+	new Mushroom(53, 31);
 	
 #endif
 

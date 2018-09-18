@@ -3,8 +3,8 @@
 
 #include "TEAL/CommonElements.h"
 
-#define ROW 15
-#define COLUMN 15
+#define ROW 40
+#define COLUMN 30
 
 //the concept of this will be in regards to a 42 x 32 grid that will store the mushrooms
 //each grid will be the size of a mushroom (16 pixels)

@@ -80,6 +80,7 @@ MushroomFactory * MushroomFactory::GetInstance(int numShrooms)
 	int x, y;
 	sf::Vector2f pos;
 
+	//for now, mushroom spawning is randomized by the given grid set in GameGrid
 	for (int i = 0; i < numShrooms; ++i)
 	{
 		do

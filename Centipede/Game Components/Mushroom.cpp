@@ -17,13 +17,13 @@ Mushroom::Mushroom(sf::Vector2f v)
 
 	//this purpose is hard coded for now, 36 because the first level of the map shouldnt
 	//have any mushrooms, its avaliable for the centi only
-	if (v.y < 36)
-		v.y = 36;
+	if (v.y < 48)
+		v.y = 48;
 
 	//for sprite purposes, we set it to be 12 so the sprite doesnt go off the window
-	if (v.x < 13)
-		v.x = 13;
-
+	if (v.x < 36)
+		v.x = 36;
+	
 	this->SetPosition(v);
 }
 
