@@ -193,7 +193,7 @@
       <Filter>Source Files\Game Components\Critters</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\GameGrid.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -339,6 +339,15 @@
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\Mushroom.h">
+      <Filter>Source Files\Game Components\Critters</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentipedeDirectionState.h">
+      <Filter>Source Files\Game Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentipedeHead.h">
+      <Filter>Source Files\Game Components\Critters</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentipedeBody.h">
       <Filter>Source Files\Game Components\Critters</Filter>
     </ClInclude>
   </ItemGroup>
