@@ -5,16 +5,12 @@
 
 #include "Level1.h"
 #include "Ship.h"
-#include "AsteroidField.h"
-#include "Asteroid.h"
 #include "Bullet.h"
-#include "WidgetGenerator.h"
-#include "Widget.h"
 #include "HUD.h"
-#include "FinalScore.h"
 #include "Mushroom.h"
 #include "MushroomFactory.h"
 #include "GameGrid.h"
+#include "CentipedeHead.h"
 
 #include <vector>
 
@@ -42,36 +38,11 @@ void Level1::Initialize()
 
 	Ship::GetInstance(); //spawn the ship
 
-#if false
-	std::vector<Mushroom*> d;
 
-	d.push_back(new Mushroom(sf::Vector2f(0, 0)));
-	d.push_back(new Mushroom(sf::Vector2f(0, 330)));
-	d.push_back(new Mushroom(sf::Vector2f(330, 0)));
-	d.push_back(new Mushroom(sf::Vector2f(450, 450)));
-
-	auto front = d.front();
-	auto back = d.back();
-	d.pop_back();
-
-#elif true
 
 	MushroomFactory::GetInstance(50);
-
-#elif false
-	for (int i = 0; i < 30; i++)
-	{
-		auto f = rand() % 30;
-		new Mushroom(sf::Vector2f(f * 24, f * 24));
-	}
-
-#elif true
-	//auto f = (sf::Vector2f(66, 31));
-	//MushroomFactory::GetInstance()->GetNewMushroomPosition(f);
-	new Mushroom(53, 31);
-	new Mushroom(53, 31);
+	new CentipedeHead(sf::Vector2f(500, 30));
 	
-#endif
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();

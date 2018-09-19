@@ -1,11 +1,17 @@
 #include "CentipedeDirectionState.h"
+#include "CentipedeHead.h"
 
 CentiMoveLeft::CentiMoveLeft(const CentipedeHead * centi)
 {
+	this->centipede = const_cast<CentipedeHead *>(centi);
 }
 
-void CentiMoveLeft::MoveDirection()
+void CentiMoveLeft::MoveDirection(sf::Vector2f &pos)
 {
+	pos.x -= 3;
+
+	if (pos.x < 12)
+		this->centipede->currentDirectionState = new CentiMoveDown(this->centipede);
 }
 
 void CentiMoveLeft::NextState()
@@ -20,7 +26,7 @@ CentiMoveRight::CentiMoveRight(const CentipedeHead * centi)
 {
 }
 
-void CentiMoveRight::MoveDirection()
+void CentiMoveRight::MoveDirection(sf::Vector2f &pos)
 {
 }
 
@@ -34,10 +40,12 @@ void CentiMoveRight::NextState()
 
 CentiMoveDown::CentiMoveDown(const CentipedeHead * centi)
 {
+	this->centipede = const_cast<CentipedeHead *>(centi);
 }
 
-void CentiMoveDown::MoveDirection()
+void CentiMoveDown::MoveDirection(sf::Vector2f &pos)
 {
+	pos.y += 3;
 }
 
 void CentiMoveDown::NextState()
@@ -52,7 +60,7 @@ CentiMoveUp::CentiMoveUp(const CentipedeHead * centi)
 {
 }
 
-void CentiMoveUp::MoveDirection()
+void CentiMoveUp::MoveDirection(sf::Vector2f &pos)
 {
 }
 
