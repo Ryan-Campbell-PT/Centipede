@@ -9,8 +9,8 @@ class CentipedeBody;
 class CentipedeHead : public GameObject
 {
 public:
-	CentipedeHead();
-	virtual ~CentipedeHead();
+	CentipedeHead(const sf::Vector2f &pos);
+	virtual ~CentipedeHead() {};
 	CentipedeHead &operator=(const CentipedeHead &c);
 	CentipedeHead(const CentipedeHead &c);
 

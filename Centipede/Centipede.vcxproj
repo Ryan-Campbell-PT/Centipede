@@ -89,6 +89,8 @@
     <ClCompile Include="Game Components\Asteroid.cpp" />
     <ClCompile Include="Game Components\AsteroidField.cpp" />
     <ClCompile Include="Game Components\BulletFactory.cpp" />
+    <ClCompile Include="Game Components\CentipedeDirectionState.cpp" />
+    <ClCompile Include="Game Components\CentipedeHead.cpp" />
     <ClCompile Include="Game Components\Explosion.cpp" />
     <ClCompile Include="Game Components\FinalScore.cpp" />
     <ClCompile Include="Game Components\GameController.cpp" />
