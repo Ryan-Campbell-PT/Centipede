@@ -23,7 +23,7 @@ Bullet::Bullet()
 
 	this->bitmap = ResourceManager::GetTextureBitmap("Bullet");
 	this->MainSprite = sf::Sprite(ResourceManager::GetTexture("Bullet"));
-	//MainSprite.SetAnimation(0, 3);
+	
 	this->MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
 
 	SetCollider(MainSprite, bitmap);
@@ -52,7 +52,6 @@ void Bullet::Draw()
 void Bullet::Destroy()
 {
 	DeregisterCollision<Bullet>( *this );
-
 }
 
 void Bullet::redrawBullet(sf::Vector2f pos)
@@ -73,8 +72,6 @@ void Bullet::removeBullet()
 
 void Bullet::Collision( Mushroom *shroom )
 {
-	//MarkForDestroy();
-	//removeBullet();
 	shroom->TakeDamage();
 	
 	this->removeBullet();

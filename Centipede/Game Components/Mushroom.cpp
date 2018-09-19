@@ -42,10 +42,6 @@ Mushroom::Mushroom(float x, float y)
 #endif
 }
 
-void Mushroom::Update()
-{
-}
-
 void Mushroom::Draw()
 {
 	WindowManager::MainWindow.draw(this->MainSprite);

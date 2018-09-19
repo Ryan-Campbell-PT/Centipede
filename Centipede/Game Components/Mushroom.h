@@ -16,14 +16,12 @@ public:
 	Mushroom(sf::Vector2f v); 
 	Mushroom(float x, float y); ///this is strictly for testing purposes
 
-	virtual void Update();
 	virtual void Draw();
 
 	void TakeDamage();
-	
-	virtual ~Mushroom(); //this needs to be public at the moment for linking reasons. Not sure why
 
 private:
+	virtual ~Mushroom(); //this needs to be public at the moment for linking reasons. Not sure why
 	Mushroom &operator=(const Mushroom &c) = delete;
 	Mushroom(const Mushroom &c) = delete;
 

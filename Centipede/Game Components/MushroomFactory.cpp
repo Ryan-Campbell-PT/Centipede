@@ -49,8 +49,8 @@ void MushroomFactory::GetNewMushroomPosition(sf::Vector2f &pos)
 	//its grids location in game. Then add 12 to x and y to get it centered in the grid, and have them sprite distance apart.
 	
 	//without this function, sprites very often overlap eachother
-	pos.x = static_cast<int>(pos.x / 24) * 24 + 12;
-	pos.y = static_cast<int>(pos.y / 24) * 24 + 12;
+	pos.x = static_cast<int>(pos.x / 24.f) * 24 + 12;
+	pos.y = static_cast<int>(pos.y / 24.f) * 24 + 12;
 }
 
 MushroomFactory::~MushroomFactory()
@@ -93,8 +93,8 @@ MushroomFactory * MushroomFactory::GetInstance(int numShrooms)
 		//the choice to use >= 0 is b/c when the array space is unused, its garbage data, typically -ABigNumber
 		//so this tests whether its unusued, or Unoccupied
 
-		pos.x = x;
-		pos.y = y;
+		pos.x = x + .0f; // + instead of a static_cast
+		pos.y = y + .0f;
 
 		instance->SpawnMushroom(pos);
 	}

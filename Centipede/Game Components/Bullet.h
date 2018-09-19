@@ -13,8 +13,6 @@ class BulletFactory;
 class Bullet : public GameObject
 {
 public:
-	void Initialize(sf::Vector2f p); 
-
 	virtual void Update();
 	virtual void Draw();
 	virtual void Destroy();
