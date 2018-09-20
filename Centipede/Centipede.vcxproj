@@ -89,6 +89,10 @@
     <ClCompile Include="Game Components\Asteroid.cpp" />
     <ClCompile Include="Game Components\AsteroidField.cpp" />
     <ClCompile Include="Game Components\BulletFactory.cpp" />
+    <ClCompile Include="Game Components\CentiMoveDown.cpp" />
+    <ClCompile Include="Game Components\CentiMoveLeft.cpp" />
+    <ClCompile Include="Game Components\CentiMoveRight.cpp" />
+    <ClCompile Include="Game Components\CentiMoveUp.cpp" />
     <ClCompile Include="Game Components\CentipedeDirectionState.cpp" />
     <ClCompile Include="Game Components\CentipedeHead.cpp" />
     <ClCompile Include="Game Components\Explosion.cpp" />
@@ -134,6 +138,11 @@
     <ClInclude Include="Game Components\Asteroid.h" />
     <ClInclude Include="Game Components\AsteroidField.h" />
     <ClInclude Include="Game Components\BulletFactory.h" />
+    <ClInclude Include="Game Components\CentiMoveDown.h" />
+    <ClInclude Include="Game Components\CentiMoveLeft.h" />
+    <ClInclude Include="Game Components\CentiMovement.h" />
+    <ClInclude Include="Game Components\CentiMoveRight.h" />
+    <ClInclude Include="Game Components\CentiMoveUp.h" />
     <ClInclude Include="Game Components\CentipedeBody.h" />
     <ClInclude Include="Game Components\CentipedeDirectionState.h" />
     <ClInclude Include="Game Components\CentipedeHead.h" />

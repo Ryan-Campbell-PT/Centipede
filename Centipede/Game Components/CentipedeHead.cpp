@@ -1,5 +1,5 @@
 #include "CentipedeHead.h"
-#include "CentipedeDirectionState.h"
+#include "CentiMovement.h"
 
 CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	:position(pos)

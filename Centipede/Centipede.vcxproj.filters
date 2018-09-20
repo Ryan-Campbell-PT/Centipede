@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Game Components\Critters">
       <UniqueIdentifier>{f52bfb8f-2a26-4f04-9846-ce76b203421c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Centipede">
+      <UniqueIdentifier>{b2ac1081-0aad-4d98-8526-e5a5b32f0782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement">
+      <UniqueIdentifier>{eed511f2-3f15-45d0-8af3-737edb5cec66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -196,10 +202,22 @@
       <Filter>Source Files\Game Components</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\CentipedeHead.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components\Centipede</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\CentipedeDirectionState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMoveLeft.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMoveRight.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMoveUp.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMoveDown.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -350,11 +368,26 @@
     <ClInclude Include="Game Components\CentipedeDirectionState.h">
       <Filter>Source Files\Game Components\States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\CentipedeHead.h">
-      <Filter>Source Files\Game Components\Critters</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\CentipedeBody.h">
-      <Filter>Source Files\Game Components\Critters</Filter>
+      <Filter>Source Files\Game Components\Centipede</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentipedeHead.h">
+      <Filter>Source Files\Game Components\Centipede</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMoveLeft.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMoveRight.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMoveDown.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMoveUp.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMovement.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
