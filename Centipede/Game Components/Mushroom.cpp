@@ -8,21 +8,19 @@ Mushroom::Mushroom(sf::Vector2f v)
 	//handle collision and sprite management first
 	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
 	this->MainSprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); //4 and 2 show the first mushroom, undamaged
-	this->MainSprite.setScale(1.4f, 1.4f); //changed this to 1.4 to compensate for mushroom sprite overlapping. Still using 24 pixel tho
 	SetCollider(MainSprite, bitmap, true);
 	RegisterCollision<Mushroom>(*this);
 	this->MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
-
 	//then handle positioning and housekeeping
 
 	//this purpose is hard coded for now, 36 because the first level of the map shouldnt
 	//have any mushrooms, its avaliable for the centi only
-	if (v.y < 48)
-		v.y = 48;
+	//if (v.y < 48)
+	//	v.y = 48;
 
-	//for sprite purposes, we set it to be 12 so the sprite doesnt go off the window
-	if (v.x < 36)
-		v.x = 36;
+	////for sprite purposes, we set it to be 12 so the sprite doesnt go off the window
+	//if (v.x < 36)
+	//	v.x = 36;
 	
 	this->SetPosition(v);
 }
@@ -66,7 +64,7 @@ Mushroom::~Mushroom()
 
 void Mushroom::SetPosition(sf::Vector2f v)
 {
-	MushroomFactory::instance->GetNewMushroomPosition(v);
+	GameGrid::GetInstance()->GetCenterGridPosition(v);
 	this->MainSprite.setPosition(v);
 	Pos = v;
 

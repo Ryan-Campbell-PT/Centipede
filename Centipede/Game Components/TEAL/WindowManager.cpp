@@ -5,6 +5,7 @@
 // (Future versions will include View managements as well)
 
 #include "WindowManager.h"
+#include "../GameGrid.h"
 
 WindowManager* WindowManager::windowInstance = NULL;
 
@@ -12,8 +13,8 @@ sf::RenderWindow WindowManager::MainWindow;
 
 WindowManager::WindowManager()
 {
-	windowWidth = 1024;
-	windowHeight = 768;
+	windowWidth = COLUMN * SPRITE_SIZE;
+	windowHeight = ROW * SPRITE_SIZE;
 	windowCaption = "TEAL/SFML";
 	backgroundColor = sf::Color(0,64,64); 
 	captionMsg = "";
@@ -22,9 +23,9 @@ WindowManager::WindowManager()
 void WindowManager::Initialize()
 {
 	WindowManager::MainWindow.create( sf::VideoMode( Instance().windowWidth, Instance().windowHeight), Instance().windowCaption + ": " + Instance().captionMsg );
-	WindowManager::MainWindow.setKeyRepeatEnabled(false);
+	WindowManager::MainWindow.setKeyRepeatEnabled(true);
 	WindowManager::MainWindow.setFramerateLimit(60);
-	WindowManager::MainWindow.setMouseCursorVisible(false);
+	WindowManager::MainWindow.setMouseCursorVisible(true);
 }
 
 void WindowManager::Terminate()

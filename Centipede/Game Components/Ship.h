@@ -23,6 +23,7 @@ public:
 	virtual void Collision( GameObject *other ){};
 	virtual void Collision(Widget *other);
 	virtual void Collision(Mushroom* other);
+	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey);
 
 	sf::Vector2f GetPosition();
 

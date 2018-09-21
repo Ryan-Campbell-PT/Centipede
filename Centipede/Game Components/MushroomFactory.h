@@ -24,8 +24,6 @@ public:
 
 	///spawns a new mushroom, or recycles one from the inactiveList
 	void SpawnMushroom(sf::Vector2f pos);
-	///the purpose of this function is to set the mushroom in the middle of the grid, so minimal sprite collision occurs
-	void GetNewMushroomPosition(sf::Vector2f &pos);
 
 private:
 	MushroomFactory();

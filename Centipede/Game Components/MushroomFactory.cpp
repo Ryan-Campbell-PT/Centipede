@@ -42,17 +42,6 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 	instance->activeMushroomList.push_back(m); //tell the game this mushroom is on the screen
 }
 
-void MushroomFactory::GetNewMushroomPosition(sf::Vector2f &pos)
-{
-	//the math behind this is so: you divide the vectors position by 24 (the sprite size) and the int conversion floor()'s it.
-	//once you have the grid location (the floor()'ing), you multiply it again by the sprite size (24) to get it back to
-	//its grids location in game. Then add 12 to x and y to get it centered in the grid, and have them sprite distance apart.
-	
-	//without this function, sprites very often overlap eachother
-	pos.x = static_cast<int>(pos.x / 24.f) * 24 + 12;
-	pos.y = static_cast<int>(pos.y / 24.f) * 24 + 12;
-}
-
 MushroomFactory::~MushroomFactory()
 {
 	for (auto shroom : instance->inactiveMushroomList)

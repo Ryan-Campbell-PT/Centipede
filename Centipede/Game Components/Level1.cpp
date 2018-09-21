@@ -6,31 +6,12 @@
 #include "Level1.h"
 #include "Ship.h"
 #include "Bullet.h"
-#include "HUD.h"
 #include "Mushroom.h"
 #include "MushroomFactory.h"
 #include "GameGrid.h"
 #include "CentipedeHead.h"
 
 #include <vector>
-
-//commented out for now to have reference to code for later
-/*
-void Level1::Initialize()
-{
-	WindowManager::SetBackgroundColor( sf::Color(0,0,64,255) );
-
-	new WidgetGenerator;
-	new AsteroidField;
-	new Ship;
-	new HUD;
-
-	CollisionTestPair<Bullet,Asteroid>();
-	CollisionTestPair<Ship,Widget>();
-	CollisionTestPair<Ship,Asteroid>();
-
-};
-*/
 
 void Level1::Initialize()
 {
@@ -40,8 +21,8 @@ void Level1::Initialize()
 
 
 
-	MushroomFactory::GetInstance(50);
-	new CentipedeHead(sf::Vector2f(500, 30));
+	MushroomFactory::GetInstance(20);
+	//new CentipedeHead(sf::Vector2f(500, 30));
 	
 
 	CollisionTestPair<Ship, Mushroom>();
