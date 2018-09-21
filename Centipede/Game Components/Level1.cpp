@@ -10,6 +10,7 @@
 #include "MushroomFactory.h"
 #include "GameGrid.h"
 #include "CentipedeHead.h"
+#include "Flea.h"
 
 #include <vector>
 
@@ -21,9 +22,9 @@ void Level1::Initialize()
 
 
 
-	MushroomFactory::GetInstance(20);
+	MushroomFactory::GetInstance(30);
 	//new CentipedeHead(sf::Vector2f(500, 30));
-	
+	auto flea = new Flea();
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();

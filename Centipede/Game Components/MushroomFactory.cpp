@@ -21,7 +21,9 @@ void MushroomFactory::RecycleMushroom(Mushroom * shroom)
 	shroom->MainSprite.setScale(0.f, 0.f); //remove it from the screen
 	shroom->DeregisterCollision(*shroom);
 
+	//house keeping
 	GameGrid::GetInstance()->SetGridStatus(shroom->Pos, GameGridEnum::Unoccupied);
+	UpdateObservees();
 }
 
 void MushroomFactory::UpdateObservees()
@@ -34,7 +36,7 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 {
 	Mushroom *m;
 
-	if (inactiveMushroomList.size() == 0)
+     	if (inactiveMushroomList.size() == 0)
 		m = new Mushroom(pos);
 
 	else

@@ -51,5 +51,9 @@ enum class GameGridEnum
 	Mushroom = 1
 };
 
+//bool operator ==(GameGridEnum &g, GameGridEnum &r)
+//{
+//	return (static_cast<int>(g) == static_cast<int>(r));
+//};
 
 #endif //GAMEGRID_H
