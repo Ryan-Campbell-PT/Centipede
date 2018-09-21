@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement">
       <UniqueIdentifier>{eed511f2-3f15-45d0-8af3-737edb5cec66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Flea">
+      <UniqueIdentifier>{aef33ca7-e46c-4594-90bf-c39810454170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Mushroom">
+      <UniqueIdentifier>{f3461322-0bd5-4699-9f30-4b35a53e5792}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -195,17 +201,11 @@
     <ClCompile Include="Game Components\BulletFactory.cpp">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Mushroom.cpp">
-      <Filter>Source Files\Game Components\Critters</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\GameGrid.cpp">
       <Filter>Source Files\Game Components</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\CentipedeHead.cpp">
       <Filter>Source Files\Game Components\Centipede</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\CentipedeDirectionState.cpp">
-      <Filter>Source Files\Game Components\States</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\CentiMoveLeft.cpp">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
@@ -218,6 +218,12 @@
     </ClCompile>
     <ClCompile Include="Game Components\CentiMoveDown.cpp">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Mushroom.cpp">
+      <Filter>Source Files\Game Components\Critters\Mushroom</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Flea.cpp">
+      <Filter>Source Files\Game Components\Critters\Flea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +368,6 @@
     <ClInclude Include="Game Components\BulletFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Mushroom.h">
-      <Filter>Source Files\Game Components\Critters</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\CentipedeDirectionState.h">
       <Filter>Source Files\Game Components\States</Filter>
     </ClInclude>
@@ -388,6 +391,21 @@
     </ClInclude>
     <ClInclude Include="Game Components\CentiMovement.h">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\FleaState.h">
+      <Filter>Source Files\Game Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Mushroom.h">
+      <Filter>Source Files\Game Components\Critters\Mushroom</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Flea.h">
+      <Filter>Source Files\Game Components\Critters\Flea</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\FleaState1.h">
+      <Filter>Source Files\Game Components\Critters\Flea</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\FleaState2.h">
+      <Filter>Source Files\Game Components\Critters\Flea</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

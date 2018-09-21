@@ -3,7 +3,7 @@
 
 #include "TEAL/CommonElements.h"
 
-#define ROW 31 ///31 b/c top grid is unavaliable
+#define ROW 32 
 #define COLUMN 30 
 #define SPRITE_SIZE 16
 

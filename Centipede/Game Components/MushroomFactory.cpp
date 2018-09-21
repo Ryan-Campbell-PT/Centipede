@@ -17,7 +17,7 @@ void MushroomFactory::RecycleMushroom(Mushroom * shroom)
 		std::remove(
 			instance->activeMushroomList.begin(), instance->activeMushroomList.end(), shroom)
 	); //overly complicated way to remove from activeList
-	shroom->MainSprite.setScale(0, 0); //remove it from the screen
+	shroom->MainSprite.setScale(0.f, 0.f); //remove it from the screen
 	shroom->DeregisterCollision(*shroom);
 
 	GameGrid::GetInstance()->SetGridStatus(shroom->Pos, GameGridEnum::Unoccupied);
@@ -67,18 +67,23 @@ MushroomFactory * MushroomFactory::GetInstance(int numShrooms)
 		instance = new MushroomFactory;
 	
 	instance->inactiveMushroomList.reserve(numShrooms); //optimize for num shrooms being made
+	instance->activeMushroomList.reserve(numShrooms);
 
 	int x, y;
 	sf::Vector2f pos;
+
+	int windowX = static_cast<int>(WindowManager::MainWindow.getView().getSize().x);
+	int windowY = static_cast<int>(WindowManager::MainWindow.getView().getSize().y);
+	int gridUnoccupied = static_cast<int>(GameGridEnum::Unoccupied);
 
 	//for now, mushroom spawning is randomized by the given grid set in GameGrid
 	for (int i = 0; i < numShrooms; ++i)
 	{
 		do
 		{
-			x = rand() % static_cast<int>(WindowManager::MainWindow.getView().getSize().x);
-			y = rand() % static_cast<int>(WindowManager::MainWindow.getView().getSize().y);
-		} while ((int)GameGrid::GetInstance()->GetGridStatus(sf::Vector2f(x, y)) >= static_cast<int>(GameGridEnum::Unoccupied));
+			x = rand() % windowX;
+			y = rand() % windowY;
+		} while ((int)GameGrid::GetInstance()->GetGridStatus(sf::Vector2f(x, y)) >= gridUnoccupied);
 		//the choice to use >= 0 is b/c when the array space is unused, its garbage data, typically -ABigNumber
 		//so this tests whether its unusued, or Unoccupied
 

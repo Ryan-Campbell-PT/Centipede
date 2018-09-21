@@ -21,9 +21,8 @@ GameGrid * GameGrid::GetInstance()
 
 void GameGrid::SetGridStatus(sf::Vector2f v, GameGridEnum e)
 {
-	//todo: the math here will likely be incorrect in edge cases, look over it
 	if (BoundsCheck(v)) //make sure we arent out of bounds
-		this->grid[static_cast<int>(v.x / SPRITE_SIZE)][static_cast<int>(v.y / SPRITE_SIZE)] = static_cast<int>(e); //24 b/c of scale factor
+		this->grid[static_cast<int>(v.x / SPRITE_SIZE)][static_cast<int>(v.y / SPRITE_SIZE)] = static_cast<int>(e);
 }
 
 GameGridEnum GameGrid::GetGridStatus(sf::Vector2f v)

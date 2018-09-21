@@ -93,10 +93,10 @@
     <ClCompile Include="Game Components\CentiMoveLeft.cpp" />
     <ClCompile Include="Game Components\CentiMoveRight.cpp" />
     <ClCompile Include="Game Components\CentiMoveUp.cpp" />
-    <ClCompile Include="Game Components\CentipedeDirectionState.cpp" />
     <ClCompile Include="Game Components\CentipedeHead.cpp" />
     <ClCompile Include="Game Components\Explosion.cpp" />
     <ClCompile Include="Game Components\FinalScore.cpp" />
+    <ClCompile Include="Game Components\Flea.cpp" />
     <ClCompile Include="Game Components\GameController.cpp" />
     <ClCompile Include="Game Components\GameGrid.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
@@ -149,6 +149,10 @@
     <ClInclude Include="Game Components\Explosion.h" />
     <ClInclude Include="Game Components\Factory.h" />
     <ClInclude Include="Game Components\FinalScore.h" />
+    <ClInclude Include="Game Components\Flea.h" />
+    <ClInclude Include="Game Components\FleaState.h" />
+    <ClInclude Include="Game Components\FleaState1.h" />
+    <ClInclude Include="Game Components\FleaState2.h" />
     <ClInclude Include="Game Components\GameController.h" />
     <ClInclude Include="Game Components\GameGrid.h" />
     <ClInclude Include="Game Components\HUD.h" />
