@@ -1,6 +1,7 @@
 #include "MushroomFactory.h"
 #include "Mushroom.h"
 #include "GameGrid.h"
+#include "Observee.h"
 
 #include <random>
 
@@ -23,6 +24,12 @@ void MushroomFactory::RecycleMushroom(Mushroom * shroom)
 	GameGrid::GetInstance()->SetGridStatus(shroom->Pos, GameGridEnum::Unoccupied);
 }
 
+void MushroomFactory::UpdateObservees()
+{
+	for (auto o : this->obsereeList)
+		o->ObserverUpdate(this->activeMushroomList.size());
+}
+
 void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 {
 	Mushroom *m;
@@ -40,6 +47,16 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 	}
 
 	instance->activeMushroomList.push_back(m); //tell the game this mushroom is on the screen
+}
+
+void MushroomFactory::AddObservee(Observee * o)
+{
+	this->obsereeList.push_back(o);
+}
+
+void MushroomFactory::RemoveObservee(Observee * o)
+{
+	// ill deal with this later
 }
 
 MushroomFactory::~MushroomFactory()

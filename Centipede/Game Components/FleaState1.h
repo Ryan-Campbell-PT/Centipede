@@ -7,8 +7,8 @@
 class FleaState1 : public FleaState
 {
 public:
-	FleaState1();
-	virtual ~FleaState1();
+	FleaState1() {};
+	virtual ~FleaState1() {};
 	FleaState1 &operator=(const FleaState1 &c) = delete;
 	FleaState1(const FleaState1 &c) = delete;
 

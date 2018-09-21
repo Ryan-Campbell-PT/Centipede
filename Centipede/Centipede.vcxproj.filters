@@ -407,6 +407,12 @@
     <ClInclude Include="Game Components\FleaState2.h">
       <Filter>Source Files\Game Components\Critters\Flea</Filter>
     </ClInclude>
+    <ClInclude Include="Game Components\Observer.h">
+      <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Observee.h">
+      <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt">

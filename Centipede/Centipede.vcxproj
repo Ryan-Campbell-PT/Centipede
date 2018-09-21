@@ -159,6 +159,8 @@
     <ClInclude Include="Game Components\Mushroom.h" />
     <ClInclude Include="Game Components\MushroomFactory.h" />
     <ClInclude Include="Game Components\MushroomStates.h" />
+    <ClInclude Include="Game Components\Observee.h" />
+    <ClInclude Include="Game Components\Observer.h" />
     <ClInclude Include="Game Components\Ship.h" />
     <ClInclude Include="Game Components\Level1.h" />
     <ClInclude Include="Game Components\ShipExplosion.h" />

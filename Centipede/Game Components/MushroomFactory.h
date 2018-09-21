@@ -4,14 +4,16 @@
 #include <vector>
 
 #include "Factory.h"
+#include "Observer.h"
 #include "TEAL/CommonElements.h"
 
 class Mushroom;
+class Observee;
 
 ///this class will keep track of all mushrooms on screen and control whether they should be created
 
 ///the MushroomFactory handles whether a Mushroom can be placed in an area. The Mushroom itself handles actually setting the grid's data
-class MushroomFactory : public Factory
+class MushroomFactory : public Factory, public Observer
 {
 public:
 	friend class Mushroom;
@@ -25,14 +27,21 @@ public:
 	///spawns a new mushroom, or recycles one from the inactiveList
 	void SpawnMushroom(sf::Vector2f pos);
 
+	virtual void AddObservee(Observee *o) override;
+	virtual void RemoveObservee(Observee *o) override;
+
 private:
 	MushroomFactory();
 	void RecycleMushroom(Mushroom *shroom);
+
+	virtual void UpdateObservees() override;
+
 
 	static MushroomFactory* instance;
 
 	std::vector<Mushroom*> inactiveMushroomList; ///this list will be used for recycling purposes
 	std::vector<Mushroom*> activeMushroomList; ///this list will be used for purposes like healing broken mushrooms at new level
+	std::vector<Observee*> obsereeList; ///keep track of all the observee's paying attention to the factory
 };
 
 
