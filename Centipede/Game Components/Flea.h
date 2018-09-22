@@ -5,9 +5,8 @@
 #include "FleaState.h"
 #include "Observee.h"
 
-#define SPAWN_FLEA_NUM 29
 
-class Flea : public GameObject, public Observee
+class Flea : public GameObject
 {
 public:
 	Flea();
@@ -19,13 +18,11 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 
+	void SpawnFlea(sf::Vector2f pos);
 
-	virtual void ObserverUpdate(int numShrooms) override;
-
-private:
+//private:
 	///this method will simply take the flea's position and attempt to spawn a mushroom
 	void SpawnMushroom();
-	void SpawnFlea();
 	void RemoveFlea();
 
 	sf::Vector2f position;
@@ -35,6 +32,7 @@ private:
 	const int SPEED = 500;
 
 	FleaState *state;
+	bool active;
 };
 
 #endif //FLEA_H

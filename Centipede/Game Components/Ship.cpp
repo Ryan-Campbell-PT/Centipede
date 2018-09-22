@@ -72,12 +72,13 @@ void Ship::Update()
 		this->MainSprite.getTextureRect().width / 2.f,
 		WindowManager::MainWindow.getView().getSize().x - (this->MainSprite.getTextureRect().width / 2.f)
 		);
+#if false //for testing purposes
 	Tools::Clamp<float>(
 		Pos.y,
 		WindowManager::MainWindow.getView().getSize().y - (this->MainSprite.getTextureRect().height * 7.f),
 		WindowManager::MainWindow.getView().getSize().y - (this->MainSprite.getTextureRect().height / 2.f)
 		);
-
+#endif
 	MainSprite.setPosition(Pos);
 }
 

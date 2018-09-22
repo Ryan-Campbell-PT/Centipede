@@ -29,7 +29,7 @@ void MushroomFactory::RecycleMushroom(Mushroom * shroom)
 void MushroomFactory::UpdateObservees()
 {
 	for (auto o : this->obsereeList)
-		o->ObserverUpdate(this->activeMushroomList.size());
+ 		o->ObserverUpdate(this->activeMushroomList.size());
 }
 
 void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
