@@ -5,6 +5,10 @@
 #include "FleaState.h"
 #include "Observee.h"
 
+#define FLEASTATE1 300
+#define FLEASTATE2 500
+
+class Bullet;
 
 class Flea : public GameObject
 {
@@ -17,19 +21,23 @@ public:
 
 	virtual void Update() override;
 	virtual void Draw() override;
+	virtual void Collision(GameObject* o) {};
+	virtual void Collision(Bullet *b);
 
 	void SpawnFlea(sf::Vector2f pos);
-
-//private:
-	///this method will simply take the flea's position and attempt to spawn a mushroom
-	void SpawnMushroom();
+	void SetSpeed(const int &speed);
 	void RemoveFlea();
+	void SetState(FleaState *state);
+	///this method will simply take the flea's position and attempt to spawn a mushroom
+	void AttemptSpawnMushroom();
+
+private:
 
 	sf::Vector2f position;
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
-	const int SPEED = 500;
+	int speed;
 
 	FleaState *state;
 	bool active;

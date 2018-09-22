@@ -20,7 +20,6 @@ public:
 	virtual void Collision( GameObject *go){};
 	virtual void Collision( Mushroom *other );
 
-
 	//this friend decision allows for the BulletFactory to access anything private in the bullet
 	friend class BulletFactory;
 

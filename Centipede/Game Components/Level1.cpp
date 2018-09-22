@@ -11,6 +11,7 @@
 #include "GameGrid.h"
 #include "CentipedeHead.h"
 #include "FleaFactory.h"
+#include "Flea.h"
 
 #include <vector>
 
@@ -29,6 +30,6 @@ void Level1::Initialize()
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();
-
+	CollisionTestPair<Bullet, Flea>();
 }
 

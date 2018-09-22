@@ -3,6 +3,8 @@
 
 #include "State.h"
 
+class Flea;
+
 class FleaState : public State
 {
 public:
@@ -10,6 +12,9 @@ public:
 	virtual ~FleaState() {};
 	FleaState &operator=(const FleaState &c) = delete;
 	FleaState(const FleaState &c) = delete;
+
+	virtual void TakeDamage() = 0;
+	virtual void StateAction() = 0;
 
 private:
 

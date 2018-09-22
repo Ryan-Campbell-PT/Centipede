@@ -6,8 +6,10 @@
 #include "MushroomFactory.h"
 #include "GameGrid.h"
 
+//TODO: there is a lot of deleting of state in this. figure out a way to modify tht
+//so there isnt much allocation and deletion
 Flea::Flea()
-	:state(0), active(false)
+	:state(0), active(false), speed(FLEASTATE1)
 {
 	bitmap = ResourceManager::GetTextureBitmap("Flea");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Flea"), 4, 2);
@@ -24,23 +26,29 @@ Flea::~Flea()
 
 void Flea::Update()
 {
+	//this will have to be changed in the future. for now this will work
 	if (!active)
 		return;
 
-	this->position.y += Game::FrameTime() * SPEED;
+	this->position.y += Game::FrameTime() * speed;
 	this->sprite.setPosition(this->position);
 
-	//this spawning method is very ineffecient atm, will fix later
-	if (rand() % 3 == 0)
-		this->SpawnMushroom();
 
 	if (this->position.y > WindowManager::MainWindow.getView().getSize().y)
 		RemoveFlea();
+
+	else
+		this->state->StateAction();
 }
 
 void Flea::Draw()
 {
 	WindowManager::MainWindow.draw(this->sprite);
+}
+
+void Flea::Collision(Bullet * b)
+{
+	this->state->TakeDamage();
 }
 
 void Flea::SpawnFlea(sf::Vector2f pos)
@@ -54,10 +62,15 @@ void Flea::SpawnFlea(sf::Vector2f pos)
 	this->SetCollider(this->sprite, this->bitmap, true);
 	this->RegisterCollision<Flea>(*this);
 
-
+	this->state = new FleaState1(this);
 }
 
-void Flea::SpawnMushroom()
+void Flea::SetSpeed(const int & speed)
+{
+	this->speed = speed;
+}
+
+void Flea::AttemptSpawnMushroom()
 {
 	if(static_cast<int>(GameGrid::GetInstance()->GetGridStatus(this->position)) <= static_cast<int>(GameGridEnum::Unoccupied))
 		MushroomFactory::GetInstance()->SpawnMushroom(this->position);
@@ -69,4 +82,12 @@ void Flea::RemoveFlea()
 	this->active = false;
 	this->DeregisterCollision<Flea>(*this);
 	this->sprite.setScale(0.f, 0.f);
+
+	delete this->state;
+}
+
+void Flea::SetState(FleaState * state)
+{
+	delete this->state;
+	this->state = state;
 }

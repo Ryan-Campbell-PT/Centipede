@@ -27,7 +27,7 @@ public:
 
 	sf::Vector2f GetPosition();
 
-private:
+//private:
 	Ship(); //singleton instance
 
 	static Ship *instance;
