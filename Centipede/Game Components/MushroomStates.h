@@ -15,24 +15,17 @@ protected:
 	Mushroom *mushroom; //each state should have access to its local mushroom
 };
 
-class PoisonMushroom : public MushroomState
+class PoisonState : public MushroomState
 {
 public:
-	PoisonMushroom(Mushroom *mushroom);
+	PoisonState(Mushroom *mushroom) {};
 
 };
 
-class DamagedMushroom : public MushroomState
+class HealthyState : public MushroomState
 {
 public:
-	DamagedMushroom(Mushroom *mushroom);
-
-};
-
-class FullMushroom : public MushroomState
-{
-public:
-	FullMushroom(Mushroom *mushroom);
+	HealthyState(Mushroom *mushroom) {};
 
 };
 

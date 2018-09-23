@@ -12,6 +12,7 @@
 #include "CentipedeHead.h"
 #include "FleaFactory.h"
 #include "Flea.h"
+#include "Scorpion.h"
 
 #include <vector>
 
@@ -31,5 +32,7 @@ void Level1::Initialize()
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();
 	CollisionTestPair<Bullet, Flea>();
+	CollisionTestPair<Bullet, Scorpion>();
+	CollisionTestPair<Scorpion, Mushroom>();
 }
 

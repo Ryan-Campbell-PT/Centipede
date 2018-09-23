@@ -4,6 +4,7 @@
 #include "TEAL/CommonElements.h"
 
 class MushroomFactory;
+class MushroomState;
 
 class Mushroom : public GameObject
 {
@@ -19,17 +20,21 @@ public:
 	virtual void Draw();
 
 	void TakeDamage();
+	void ChangeState(MushroomState *state);
+	
+	MushroomState *GetState() { return this->state; } //this will be used for the centipede
 
 private:
-	virtual ~Mushroom(); //this needs to be public at the moment for linking reasons. Not sure why
+	virtual ~Mushroom();
 	Mushroom &operator=(const Mushroom &c) = delete;
 	Mushroom(const Mushroom &c) = delete;
 
-	sf::Vector2f Pos;
-	AnimatedSprite MainSprite;
+	sf::Vector2f position;
+	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
 	int health;
+	MushroomState *state;
 };
 
 #endif //MUSHROOM_H

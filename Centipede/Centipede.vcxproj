@@ -103,6 +103,8 @@
     <ClCompile Include="Game Components\HUD.cpp" />
     <ClCompile Include="Game Components\Mushroom.cpp" />
     <ClCompile Include="Game Components\MushroomFactory.cpp" />
+    <ClCompile Include="Game Components\Scorpion.cpp" />
+    <ClCompile Include="Game Components\ScorpionFactory.cpp" />
     <ClCompile Include="Game Components\Ship.cpp" />
     <ClCompile Include="Game Components\Level1.cpp" />
     <ClCompile Include="Game Components\ShipExplosion.cpp" />
@@ -163,6 +165,8 @@
     <ClInclude Include="Game Components\MushroomStates.h" />
     <ClInclude Include="Game Components\Observee.h" />
     <ClInclude Include="Game Components\Observer.h" />
+    <ClInclude Include="Game Components\Scorpion.h" />
+    <ClInclude Include="Game Components\ScorpionFactory.h" />
     <ClInclude Include="Game Components\Ship.h" />
     <ClInclude Include="Game Components\Level1.h" />
     <ClInclude Include="Game Components\ShipExplosion.h" />

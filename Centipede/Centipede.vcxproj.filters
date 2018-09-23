@@ -82,6 +82,9 @@
     <Filter Include="Source Files\Game Components\Critters\Mushroom">
       <UniqueIdentifier>{f3461322-0bd5-4699-9f30-4b35a53e5792}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Scorpion">
+      <UniqueIdentifier>{b6ea9760-2c64-4848-ad75-1381ed428553}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -226,6 +229,12 @@
       <Filter>Source Files\Game Components\Critters\Flea</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\FleaFactory.cpp">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\ScorpionFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Scorpion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -418,6 +427,12 @@
     </ClInclude>
     <ClInclude Include="Game Components\FleaFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScorpionFactory.h">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Scorpion.h">
+      <Filter>Source Files\Game Components\Critters\Scorpion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

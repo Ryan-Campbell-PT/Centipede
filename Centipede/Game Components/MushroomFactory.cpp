@@ -18,11 +18,11 @@ void MushroomFactory::RecycleMushroom(Mushroom * shroom)
 		std::remove(
 			instance->activeMushroomList.begin(), instance->activeMushroomList.end(), shroom)
 	); //overly complicated way to remove from activeList
-	shroom->MainSprite.setScale(0.f, 0.f); //remove it from the screen
+	shroom->sprite.setScale(0.f, 0.f); //remove it from the screen
 	shroom->DeregisterCollision(*shroom);
 
 	//house keeping
-	GameGrid::GetInstance()->SetGridStatus(shroom->Pos, GameGridEnum::Unoccupied);
+	GameGrid::GetInstance()->SetGridStatus(shroom->position, GameGridEnum::Unoccupied);
 	UpdateObservees();
 }
 

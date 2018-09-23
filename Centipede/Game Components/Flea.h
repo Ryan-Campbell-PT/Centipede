@@ -40,6 +40,7 @@ private:
 	int speed;
 
 	FleaState *state;
+	//this variable should be changed in the future when figuring out how to only call 
 	bool active;
 };
 
