@@ -13,6 +13,7 @@
 #include "FleaFactory.h"
 #include "Flea.h"
 #include "Scorpion.h"
+#include "ScorpionFactory.h"
 
 #include <vector>
 
@@ -27,7 +28,10 @@ void Level1::Initialize()
 	MushroomFactory::GetInstance(30);
 	//new CentipedeHead(sf::Vector2f(500, 30));
 //	auto flea = new Flea();
-	FleaFactory::GetInstance();
+	//FleaFactory::GetInstance();
+	ScorpionFactory::GetInstance();
+	auto f = new Scorpion();
+	f->SpawnScorpion(sf::Vector2f(WindowManager::MainWindow.getSize().x, 300));
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();

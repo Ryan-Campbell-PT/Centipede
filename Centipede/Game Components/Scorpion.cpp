@@ -6,7 +6,7 @@
 Scorpion::Scorpion()
 {
 	bitmap = ResourceManager::GetTextureBitmap("Scorpion");
-	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Scorpion"), 4, 2);
+	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Scorpion"), 4, 1); 
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
@@ -39,13 +39,15 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 	this->sprite.setPosition(pos);
 	this->sprite.setScale(1.f, 1.f);
 	this->active = true;
+
+	RegisterCollision<Scorpion>(*this);
 }
 
 void Scorpion::Collision(Bullet * bullet)
 {
 	RemoveScorpion();
 }
-
+//todo: make collision work. not working atm
 void Scorpion::Collision(Mushroom * shroom)
 {
 	shroom->ChangeState(new PoisonState(shroom));
@@ -56,4 +58,6 @@ void Scorpion::RemoveScorpion()
 	this->active = false;
 	this->DeregisterCollision<Scorpion>(*this);
 	this->sprite.setScale(0.f, 0.f);
+
+	DeregisterCollision<Scorpion>(*this);
 }

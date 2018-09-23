@@ -2,13 +2,18 @@
 #define SCORPIONFACTORY_H
 
 #include "TEAL/CommonElements.h"
+#include "Observee.h"
+
+#define SCORPIONSPAWN 25
 
 class Scorpion;
 
-class ScorpionFactory
+class ScorpionFactory : public Observee
 {
 public:
 	static ScorpionFactory* GetInstance();
+
+	virtual void ObserverUpdate(int numShrooms) override;
 
 private:
 	ScorpionFactory();
@@ -16,7 +21,7 @@ private:
 	ScorpionFactory &operator=(const ScorpionFactory &c) = delete;
 	ScorpionFactory(const ScorpionFactory &c) = delete;
 
-	void SpawnScorpion(sf::Vector2f &pos);
+	void SpawnScorpion();
 
 	static ScorpionFactory* instance;
 	Scorpion *scorpion;

@@ -24,6 +24,8 @@ Mushroom::Mushroom(sf::Vector2f v)
 	//	v.x = 36;
 	
 	this->SetPosition(v);
+	
+	this->state = new HealthyState(this);
 }
 
 Mushroom::Mushroom(float x, float y)
@@ -65,9 +67,11 @@ void Mushroom::ChangeState(MushroomState * state)
 	this->state = state;
 
 	if (typeid(state) == typeid(PoisonState))
-		health = 4;
+		this->health = 4;
 	else if (typeid(state) == typeid(HealthyState)) //will likely never be called, but just to be sure
-		health = 0;
+		this->health = 0;
+
+	this->sprite.SetAnimation(health, health);
 }
 
 Mushroom::~Mushroom()

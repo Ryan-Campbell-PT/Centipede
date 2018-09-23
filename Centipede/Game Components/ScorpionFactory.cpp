@@ -2,12 +2,14 @@
 
 #include "ScorpionFactory.h"
 #include "Scorpion.h"
+#include "MushroomFactory.h"
 
 ScorpionFactory * ScorpionFactory::instance = 0;
 
 ScorpionFactory::ScorpionFactory()
 {
 	this->scorpion = new Scorpion;
+	MushroomFactory::GetInstance()->AddObservee(this);
 }
 
 ScorpionFactory * ScorpionFactory::GetInstance()
@@ -18,13 +20,19 @@ ScorpionFactory * ScorpionFactory::GetInstance()
 	return instance;
 }
 
+void ScorpionFactory::ObserverUpdate(int numShrooms)
+{
+	if (numShrooms < SCORPIONSPAWN)
+		SpawnScorpion();
+}
+
 ScorpionFactory::~ScorpionFactory()
 {
 	delete this->scorpion;
 }
 
-void ScorpionFactory::SpawnScorpion(sf::Vector2f & pos)
+void ScorpionFactory::SpawnScorpion()
 {
 	auto sPosition = sf::Vector2f(WindowManager::MainWindow.getSize().x, rand() % WindowManager::MainWindow.getSize().y);
-
+	this->scorpion->SpawnScorpion(sPosition);
 }
