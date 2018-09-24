@@ -50,12 +50,21 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 {
 	this->position = pos;
 	this->sprite.setPosition(pos);
-	this->sprite.setScale(1.f, 1.f);
+	
 	this->active = true;
-	if (this->spawnOnLeft)
-		this->sprite.setRotation(180.f);
+	this->spawnOnLeft = pos.x;
+
+	//todo: the scale setting and rotation is silly for now. fix later
+	if (pos.x == 0) //spawn on left
+	{
+		this->sprite.setScale(-1.f, -1.f);
+		if (this->sprite.getRotation() == 0)
+			//ConsoleMsg::WriteLine("left incorrect");
+			this->sprite.setRotation(180.f);
+	}
+
 	else
-		this->sprite.setRotation(0.f);
+		this->sprite.setScale(-1.f, -1.f);
 
 	RegisterCollision<Scorpion>(*this);
 }

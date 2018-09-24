@@ -37,5 +37,5 @@ void ScorpionFactory::SpawnScorpion()
 		x = WindowManager::MainWindow.getSize().x; 
 
 	this->scorpion->SpawnScorpion(sf::Vector2f(x, rand() % WindowManager::MainWindow.getSize().y));
-	this->scorpion->SetSpawnSide(leftSide);
+	this->scorpion->SetSpawnSide(leftSide); //this is requried to spawn the scorp for whatever reason. todo: fix later
 }
