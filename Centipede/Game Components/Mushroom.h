@@ -4,7 +4,7 @@
 #include "TEAL/CommonElements.h"
 
 class MushroomFactory;
-class MushroomState;
+enum class MushroomState;
 
 class Mushroom : public GameObject
 {
@@ -20,9 +20,9 @@ public:
 	virtual void Draw();
 
 	void TakeDamage();
-	void ChangeState(MushroomState *state);
+	void ChangeState(MushroomState state);
 	
-	MushroomState *GetState() { return this->state; } //this will be used for the centipede
+	MushroomState GetState(); //this will be used for the centipede
 
 private:
 	virtual ~Mushroom();
@@ -34,7 +34,13 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	int health;
-	MushroomState *state;
+	MushroomState state;
+};
+
+enum class MushroomState
+{
+	Healthy = 0,
+	Poison = 1
 };
 
 #endif //MUSHROOM_H

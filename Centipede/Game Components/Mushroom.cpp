@@ -1,7 +1,6 @@
 #include "Mushroom.h"
 #include "MushroomFactory.h"
 #include "GameGrid.h"
-#include "MushroomStates.h"
 
 Mushroom::Mushroom(sf::Vector2f v)
 {
@@ -25,7 +24,7 @@ Mushroom::Mushroom(sf::Vector2f v)
 	
 	this->SetPosition(v);
 	
-	this->state = new HealthyState(this);
+	this->state = MushroomState::Healthy;
 }
 
 Mushroom::Mushroom(float x, float y)
@@ -61,17 +60,24 @@ void Mushroom::TakeDamage()
 	//this->MainSprite.SetAnimation(3, 4); //fourth mushroom state
 }
 
-void Mushroom::ChangeState(MushroomState * state)
+void Mushroom::ChangeState(MushroomState state)
 {
-	delete this->state;
 	this->state = state;
 
-	if (typeid(state) == typeid(PoisonState))
-		this->health = 4;
-	else if (typeid(state) == typeid(HealthyState)) //will likely never be called, but just to be sure
-		this->health = 0;
+	if (state == MushroomState::Poison)
+		this->health += 4; //+= incase the mushroom is damaged
+	else if (state == MushroomState::Healthy) //will likely never be called, but just to be sure
+		this->health -= 0; //-= incase the mushroom is damaged
 
 	this->sprite.SetAnimation(health, health);
+
+	
+	ConsoleMsg::WriteLine("Mushroom Pos: " + std::to_string(this->position.x) + " " + std::to_string(this->position.y));
+}
+
+MushroomState Mushroom::GetState()
+{
+	return this->state;
 }
 
 Mushroom::~Mushroom()

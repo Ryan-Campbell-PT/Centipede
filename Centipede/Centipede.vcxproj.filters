@@ -371,9 +371,6 @@
     <ClInclude Include="Game Components\MushroomFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\MushroomStates.h">
-      <Filter>Source Files\Game Components\States</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\GameGrid.h">
       <Filter>Source Files\Game Components</Filter>
     </ClInclude>

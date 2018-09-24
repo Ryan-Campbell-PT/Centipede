@@ -30,7 +30,7 @@ void ScorpionFactory::SpawnScorpion()
 	bool leftSide = rand() % 2; //either left or right side, determined by a random number
 	float x;
 
-	if (leftSide) //if it son the left side, then the x= 0
+	if (leftSide) //if its on the left side, then the x= 0
 		x = 0;
 
 	else //otherwise its on the right, and it goes to the max x distance

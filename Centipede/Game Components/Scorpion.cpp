@@ -1,7 +1,6 @@
 #include "Scorpion.h"
 #include "Bullet.h"
 #include "Mushroom.h"
-#include "MushroomStates.h"
 
 Scorpion::Scorpion()
 {
@@ -12,6 +11,7 @@ Scorpion::Scorpion()
 
 	this->sprite.setScale(0.f, 0.f);
 
+	SetCollider(sprite, bitmap, true);
 }
 
 void Scorpion::Update()
@@ -73,10 +73,11 @@ void Scorpion::Collision(Bullet * bullet)
 {
 	RemoveScorpion();
 }
-//todo: make collision work. not working atm
+//todo: the current collision will collide with every single posiiton change, making A TON of new PoisonState. change in future
 void Scorpion::Collision(Mushroom * shroom)
 {
-	shroom->ChangeState(new PoisonState(shroom));
+	if(shroom->GetState() == MushroomState::Healthy)
+		shroom->ChangeState(MushroomState::Poison);
 }
 
 void Scorpion::SetSpawnSide(bool b)
