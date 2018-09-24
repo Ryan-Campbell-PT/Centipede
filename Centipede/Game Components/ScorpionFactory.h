@@ -8,12 +8,12 @@
 
 class Scorpion;
 
-class ScorpionFactory : public Observee
+class ScorpionFactory 
 {
 public:
 	static ScorpionFactory* GetInstance();
 
-	virtual void ObserverUpdate(int numShrooms) override;
+	void SpawnScorpion();
 
 private:
 	ScorpionFactory();
@@ -21,7 +21,6 @@ private:
 	ScorpionFactory &operator=(const ScorpionFactory &c) = delete;
 	ScorpionFactory(const ScorpionFactory &c) = delete;
 
-	void SpawnScorpion();
 
 	static ScorpionFactory* instance;
 	Scorpion *scorpion;

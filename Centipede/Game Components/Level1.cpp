@@ -30,8 +30,8 @@ void Level1::Initialize()
 //	auto flea = new Flea();
 	//FleaFactory::GetInstance();
 	ScorpionFactory::GetInstance();
-	auto f = new Scorpion();
-	f->SpawnScorpion(sf::Vector2f(WindowManager::MainWindow.getSize().x, 300));
+	//auto f = new Scorpion();
+	//f->SpawnScorpion(sf::Vector2f(WindowManager::MainWindow.getSize().x, 300));
 
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();

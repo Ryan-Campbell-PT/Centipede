@@ -23,6 +23,8 @@ public:
 	virtual void Collision(Bullet *bullet);
 	virtual void Collision(Mushroom *shroom);
 
+	///this method will be changed in teh future, but will suffice for now
+	void SetSpawnSide(bool b);
 private:
 	void RemoveScorpion();
 
@@ -31,6 +33,8 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 	bool active;
 	const int SPEED = 200;
+
+	bool spawnOnLeft;
 };
 
 #endif //SCORPION_H
