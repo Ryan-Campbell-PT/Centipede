@@ -108,6 +108,8 @@
     <ClCompile Include="Game Components\Ship.cpp" />
     <ClCompile Include="Game Components\Level1.cpp" />
     <ClCompile Include="Game Components\ShipExplosion.cpp" />
+    <ClCompile Include="Game Components\Spider.cpp" />
+    <ClCompile Include="Game Components\SpiderFactory.cpp" />
     <ClCompile Include="Game Components\Splash.cpp" />
     <ClCompile Include="Game Components\SplashController.cpp" />
     <ClCompile Include="Game Components\TEAL\AlarmEventTimeline.cpp" />
@@ -169,6 +171,8 @@
     <ClInclude Include="Game Components\Ship.h" />
     <ClInclude Include="Game Components\Level1.h" />
     <ClInclude Include="Game Components\ShipExplosion.h" />
+    <ClInclude Include="Game Components\Spider.h" />
+    <ClInclude Include="Game Components\SpiderFactory.h" />
     <ClInclude Include="Game Components\Splash.h" />
     <ClInclude Include="Game Components\SplashController.h" />
     <ClInclude Include="Game Components\State.h" />

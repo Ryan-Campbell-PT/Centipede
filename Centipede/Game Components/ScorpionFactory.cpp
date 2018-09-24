@@ -3,13 +3,13 @@
 #include "ScorpionFactory.h"
 #include "Scorpion.h"
 #include "MushroomFactory.h"
+#include "GameGrid.h"
 
 ScorpionFactory * ScorpionFactory::instance = 0;
 
 ScorpionFactory::ScorpionFactory()
 {
 	this->scorpion = new Scorpion;
-	//MushroomFactory::GetInstance()->AddObservee(this);
 }
 
 ScorpionFactory * ScorpionFactory::GetInstance()
@@ -36,6 +36,9 @@ void ScorpionFactory::SpawnScorpion()
 	else //otherwise its on the right, and it goes to the max x distance
 		x = WindowManager::MainWindow.getSize().x; 
 
-	this->scorpion->SpawnScorpion(sf::Vector2f(x, rand() % WindowManager::MainWindow.getSize().y));
+	auto pos = sf::Vector2f(x, rand() % WindowManager::MainWindow.getSize().y);
+	GameGrid::GetInstance()->GetCenterGridPosition(pos);
+	
+	this->scorpion->SpawnScorpion(pos);
 	this->scorpion->SetSpawnSide(leftSide); //this is requried to spawn the scorp for whatever reason. todo: fix later
 }

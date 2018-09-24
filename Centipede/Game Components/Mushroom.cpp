@@ -70,9 +70,6 @@ void Mushroom::ChangeState(MushroomState state)
 		this->health -= 0; //-= incase the mushroom is damaged
 
 	this->sprite.SetAnimation(health, health);
-
-	
-	ConsoleMsg::WriteLine("Mushroom Pos: " + std::to_string(this->position.x) + " " + std::to_string(this->position.y));
 }
 
 MushroomState Mushroom::GetState()

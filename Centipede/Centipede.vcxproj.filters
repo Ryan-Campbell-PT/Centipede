@@ -85,6 +85,9 @@
     <Filter Include="Source Files\Game Components\Critters\Scorpion">
       <UniqueIdentifier>{b6ea9760-2c64-4848-ad75-1381ed428553}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Spider">
+      <UniqueIdentifier>{32e9fbf8-c348-4471-9dfc-3638a7b4e965}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -231,11 +234,17 @@
     <ClCompile Include="Game Components\FleaFactory.cpp">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\ScorpionFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\Scorpion.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components\Critters\Scorpion</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\ScorpionFactory.cpp">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\SpiderFactory.cpp">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Spider.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +439,12 @@
     </ClInclude>
     <ClInclude Include="Game Components\Scorpion.h">
       <Filter>Source Files\Game Components\Critters\Scorpion</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Spider.h">
+      <Filter>Source Files\Game Components\Critters\Spider</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SpiderFactory.h">
+      <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

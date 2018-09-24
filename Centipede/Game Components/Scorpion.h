@@ -6,6 +6,7 @@
 class Bullet;
 class Mushroom;
 
+//todo: fix sprite flipping and add a better animation system
 class Scorpion : public GameObject
 {
 public:
