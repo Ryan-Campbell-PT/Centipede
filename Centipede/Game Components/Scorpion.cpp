@@ -2,6 +2,7 @@
 #include "Bullet.h"
 #include "Mushroom.h"
 #include "GameGrid.h"
+#include "Ship.h"
 
 Scorpion::Scorpion()
 {
@@ -73,6 +74,11 @@ void Scorpion::Collision(Mushroom * shroom)
 {
 	if(shroom->GetState() == MushroomState::Healthy)
 		shroom->ChangeState(MushroomState::Poison);
+}
+
+void Scorpion::Collision(Ship * ship)
+{
+	ship->DestroyShip();
 }
 
 void Scorpion::SetSpawnSide(bool b)

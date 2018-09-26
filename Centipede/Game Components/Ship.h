@@ -27,7 +27,10 @@ public:
 
 	sf::Vector2f GetPosition();
 
-//private:
+	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
+	void DestroyShip(); 
+
+private:
 	Ship(); //singleton instance
 
 	static Ship *instance;

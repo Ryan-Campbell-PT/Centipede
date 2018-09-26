@@ -5,6 +5,7 @@
 #include "FleaState2.h"
 #include "MushroomFactory.h"
 #include "GameGrid.h"
+#include "Ship.h"
 
 //TODO: there is a lot of deleting of state in this. figure out a way to modify tht
 //so there isnt much allocation and deletion
@@ -49,6 +50,11 @@ void Flea::Draw()
 void Flea::Collision(Bullet * b)
 {
 	this->state->TakeDamage();
+}
+
+void Flea::Collision(Ship * ship)
+{
+	ship->DestroyShip();
 }
 
 void Flea::SpawnFlea(sf::Vector2f pos)

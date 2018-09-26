@@ -22,6 +22,9 @@ FleaFactory * FleaFactory::GetInstance()
 
 void FleaFactory::ObserverUpdate(int numShrooms)
 {
+#if TESTING
+	ConsoleMsg::WriteLine(Tools::ToString(numShrooms));
+#endif
 	if (numShrooms < SPAWN_FLEA_NUM)
 		SpawnFlea();
 }
@@ -31,13 +34,13 @@ void FleaFactory::SpawnFlea()
 	//this->state = new FleaState1;
 	
 	//find a random location on the screen to spawn the flea (x)
-#if false
+#if !TESTING
   	auto pos = sf::Vector2f(rand() % (int)WindowManager::MainWindow.getView().getSize().x, SPRITE_SIZE);
 	GameGrid::GetInstance()->GetCenterGridPosition(pos); //set it in the middle of the grid
 	this->flea->SpawnFlea(pos);
 
-#elif true
-	auto d = Ship::GetInstance()->Pos;
+#elif TESTING
+	auto d = Ship::GetInstance()->GetPosition();
 	d.y = 0;
 	flea->SpawnFlea(d);
 

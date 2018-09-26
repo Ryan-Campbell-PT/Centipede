@@ -115,6 +115,11 @@ sf::Vector2f Ship::GetPosition()
 	return this->Pos;
 }
 
+void Ship::DestroyShip()
+{
+	ConsoleMsg::WriteLine("BOOM");
+}
+
 void Ship::Draw()
 {
 	WindowManager::MainWindow.draw(MainSprite);

@@ -1,6 +1,7 @@
 #include "Spider.h"
 #include "Bullet.h"
 #include "MushroomFactory.h"
+#include "Ship.h"
 
 #include <random>
 
@@ -158,6 +159,11 @@ void Spider::Collision(Mushroom *shroom)
 		upOrDown = SpiderDirection::Down;
 
 	MushroomFactory::GetInstance()->RecycleMushroom(shroom);
+}
+
+void Spider::Collision(Ship * ship)
+{
+	ship->DestroyShip();
 }
 
 void Spider::RemoveSpider()

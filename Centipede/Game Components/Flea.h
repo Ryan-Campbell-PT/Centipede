@@ -9,6 +9,7 @@
 #define FLEASTATE2 500
 
 class Bullet;
+class Ship;
 
 class Flea : public GameObject
 {
@@ -23,6 +24,7 @@ public:
 	virtual void Draw() override;
 	virtual void Collision(GameObject* o) {};
 	virtual void Collision(Bullet *b);
+	virtual void Collision(Ship *ship);
 
 	void SpawnFlea(sf::Vector2f pos);
 	void SetSpeed(const int &speed);

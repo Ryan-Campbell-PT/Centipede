@@ -8,6 +8,7 @@
 
 class Bullet;
 class Mushroom;
+class Ship;
 enum class SpiderDirection;
 
 class Spider : public GameObject
@@ -21,11 +22,12 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 
+	virtual void Collision(GameObject *) {};
+	virtual void Collision(Bullet * bullet);
+	virtual void Collision(Mushroom * shroom);
+	virtual void Collision(Ship *ship);
+	
 	void SpawnSpider(sf::Vector2f pos);
-
-	void Collision(GameObject *) {};
-	void Collision(Bullet * bullet);
-	void Collision(Mushroom * shroom);
 
 private:
 	void RemoveSpider();

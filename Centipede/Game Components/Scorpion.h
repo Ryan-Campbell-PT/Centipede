@@ -7,6 +7,7 @@
 
 class Bullet;
 class Mushroom;
+class Ship;
 
 //todo: fix sprite flipping and add a better animation system
 class Scorpion : public GameObject
@@ -25,6 +26,7 @@ public:
 	virtual void Collision(GameObject *) {};
 	virtual void Collision(Bullet *bullet);
 	virtual void Collision(Mushroom *shroom);
+	virtual void Collision(Ship *ship);
 
 	///this method will be changed in teh future, but will suffice for now
 	void SetSpawnSide(bool b);

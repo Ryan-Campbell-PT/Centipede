@@ -30,18 +30,25 @@ void Level1::Initialize()
 	MushroomFactory::GetInstance(30);
 	//new CentipedeHead(sf::Vector2f(500, 30));
 //	auto flea = new Flea();
-	//FleaFactory::GetInstance();
+	FleaFactory::GetInstance();
 	ScorpionFactory::GetInstance();
 	//auto f = new Scorpion();
 	//f->SpawnScorpion(sf::Vector2f(WindowManager::MainWindow.getSize().x, 300));
 	SpiderFactory::GetInstance();
 	
 	CollisionTestPair<Ship, Mushroom>();
+
 	CollisionTestPair<Bullet, Mushroom>();
 	CollisionTestPair<Bullet, Flea>();
 	CollisionTestPair<Bullet, Scorpion>();
-	CollisionTestPair<Scorpion, Mushroom>();
 	CollisionTestPair<Bullet, Spider>();
+
+	CollisionTestPair<Scorpion, Mushroom>();
+	CollisionTestPair<Scorpion, Ship>();
+
 	CollisionTestPair<Spider, Mushroom>();
+	CollisionTestPair<Spider, Ship>();
+
+	CollisionTestPair<Flea, Ship>();
 }
 
