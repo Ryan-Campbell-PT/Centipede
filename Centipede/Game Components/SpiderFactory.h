@@ -9,6 +9,7 @@ class SpiderFactory
 {
 public:
 	static SpiderFactory *GetInstance();
+	void SpawnSpider();
 
 private:
 	SpiderFactory();
@@ -17,9 +18,9 @@ private:
 	SpiderFactory(const SpiderFactory &c) = delete;
 
 
-
 	static SpiderFactory *instance;
 	Spider* spider;
+
 };
 
 #endif //SPIDER_FACTORY_H

@@ -10,6 +10,7 @@
 #include "BulletFactory.h"
 #include "Mushroom.h"
 #include "ScorpionFactory.h"
+#include "SpiderFactory.h"
 
 Ship *Ship::instance = 0;
 
@@ -104,6 +105,9 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 	//todo: this will have to be changed in the future, for now will keep
 	if (k == sf::Keyboard::Key::C)
 		ScorpionFactory::GetInstance()->SpawnScorpion();
+
+	if (k == sf::Keyboard::Key::X)
+		SpiderFactory::GetInstance()->SpawnSpider();
 }
 
 sf::Vector2f Ship::GetPosition()

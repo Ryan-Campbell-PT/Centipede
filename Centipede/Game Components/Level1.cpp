@@ -14,6 +14,8 @@
 #include "Flea.h"
 #include "Scorpion.h"
 #include "ScorpionFactory.h"
+#include "Spider.h"
+#include "SpiderFactory.h"
 
 #include <vector>
 
@@ -32,11 +34,14 @@ void Level1::Initialize()
 	ScorpionFactory::GetInstance();
 	//auto f = new Scorpion();
 	//f->SpawnScorpion(sf::Vector2f(WindowManager::MainWindow.getSize().x, 300));
-
+	SpiderFactory::GetInstance();
+	
 	CollisionTestPair<Ship, Mushroom>();
 	CollisionTestPair<Bullet, Mushroom>();
 	CollisionTestPair<Bullet, Flea>();
 	CollisionTestPair<Bullet, Scorpion>();
 	CollisionTestPair<Scorpion, Mushroom>();
+	CollisionTestPair<Bullet, Spider>();
+	CollisionTestPair<Spider, Mushroom>();
 }
 

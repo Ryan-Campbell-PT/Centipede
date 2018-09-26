@@ -90,6 +90,4 @@ void Scorpion::RemoveScorpion()
 	this->active = false;
 	this->DeregisterCollision<Scorpion>(*this);
 	this->sprite.setScale(0.f, 0.f);
-
-	DeregisterCollision<Scorpion>(*this);
 }
