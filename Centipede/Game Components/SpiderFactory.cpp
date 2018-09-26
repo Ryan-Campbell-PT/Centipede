@@ -33,5 +33,10 @@ void SpiderFactory::SpawnSpider()
 
 	pos.y = rand() % WindowManager::MainWindow.getSize().y; //anywhere on the y axis
 	
-	this->spider->SpawnSpider(pos);
+	GetInstance()->spider->SpawnSpider(pos);
+}
+
+void SpiderFactory::InitializeSpider()
+{
+	GetInstance();
 }

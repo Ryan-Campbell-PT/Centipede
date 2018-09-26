@@ -16,13 +16,11 @@ class Observee;
 class MushroomFactory : public Factory, public Observer
 {
 public:
-	friend class Mushroom;
-
 	///remove all mushrooms created by the factory, and then delete itself
 	virtual ~MushroomFactory();
 	
 	static MushroomFactory *GetInstance();
-	static MushroomFactory *GetInstance(int numShrooms); //todo: may wanna take an alternateive approach to this
+	static void InitializeMushroomField(int numShrooms); //todo: may wanna take an alternateive approach to this
 
 	///spawns a new mushroom, or recycles one from the inactiveList
 	void SpawnMushroom(sf::Vector2f pos);

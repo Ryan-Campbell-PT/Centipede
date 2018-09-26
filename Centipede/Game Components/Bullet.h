@@ -13,6 +13,8 @@ class BulletFactory;
 class Bullet : public GameObject
 {
 public:
+	Bullet();
+
 	virtual void Update();
 	virtual void Draw();
 	virtual void Destroy();
@@ -20,23 +22,17 @@ public:
 	virtual void Collision( GameObject *go){};
 	virtual void Collision( Mushroom *other );
 
-	void RemoveBullet(); //instead of destroying the bullet, we will just remove from scene
-						 
-	//this friend decision allows for the BulletFactory to access anything private in the bullet
-	friend class BulletFactory;
+	///these both are not static because if someone if going to call them, they should have access to the object
+	void RemoveBullet(); ///instead of destroying the bullet, we will just remove from scene
+	void RedrawBullet(sf::Vector2f pos); ///instead of creating a new bullet, just set the new position
 
 private:
-	//since only the bullet factory will handle the spawning of bullets,
-	//we have a default constructor to create a new bullet. Then, when the bullet is shot,
-	//the position is determined by that shot, handled in spawnBullet in BulletFactory
-	Bullet();
 	
-	void RedrawBullet(sf::Vector2f pos); //instead of creating a new bullet, just set the new position
 
 	float SPEED;
 	
-	sf::Vector2f Pos;
-	sf::Sprite MainSprite;
+	sf::Vector2f position;
+	sf::Sprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 	
 };

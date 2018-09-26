@@ -80,13 +80,10 @@ MushroomFactory * MushroomFactory::GetInstance()
 	return MushroomFactory::instance;
 }
 
-MushroomFactory * MushroomFactory::GetInstance(int numShrooms)
-{
-	if (instance == 0)
-		instance = new MushroomFactory;
-	
-	instance->inactiveMushroomList.reserve(numShrooms); //optimize for num shrooms being made
-	instance->activeMushroomList.reserve(numShrooms);
+void MushroomFactory::InitializeMushroomField(int numShrooms)
+{	
+	GetInstance()->inactiveMushroomList.reserve(numShrooms); //optimize for num shrooms being made
+	GetInstance()->activeMushroomList.reserve(numShrooms);
 
 	int x, y;
 	sf::Vector2f pos;
@@ -109,8 +106,6 @@ MushroomFactory * MushroomFactory::GetInstance(int numShrooms)
 		pos.x = x + .0f; // + instead of a static_cast
 		pos.y = y + .0f;
 
-		instance->SpawnMushroom(pos);
+		GetInstance()->SpawnMushroom(pos);
 	}
-
-	return instance;
 }

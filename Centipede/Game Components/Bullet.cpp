@@ -22,11 +22,11 @@ Bullet::Bullet()
 	SPEED = 800;
 
 	this->bitmap = ResourceManager::GetTextureBitmap("Bullet");
-	this->MainSprite = sf::Sprite(ResourceManager::GetTexture("Bullet"));
+	this->sprite = sf::Sprite(ResourceManager::GetTexture("Bullet"));
 	
-	this->MainSprite.setOrigin(MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
+	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
-	SetCollider(MainSprite, bitmap);
+	SetCollider(sprite, bitmap);
 	RegisterCollision<Bullet>(*this);
 }
 
@@ -35,18 +35,18 @@ void Bullet::Update()
 	//not sure if this is needed
 	//MainSprite.Update();
 
-	Pos.y -= Game::FrameTime() * SPEED; //changed from x to y
+	position.y -= Game::FrameTime() * SPEED; //changed from x to y
 
 	//if we are out of the bounds of the screen
-	if (Pos.y < 0)
+	if (position.y < 0)
 		RemoveBullet();
 	
-	MainSprite.setPosition(Pos);
+	sprite.setPosition(position);
 }
 
 void Bullet::Draw()
 {
-	WindowManager::MainWindow.draw(MainSprite);
+	WindowManager::MainWindow.draw(sprite);
 }
 
 void Bullet::Destroy()
@@ -56,18 +56,18 @@ void Bullet::Destroy()
 
 void Bullet::RedrawBullet(sf::Vector2f pos)
 {
-	this->Pos = pos;
-	BulletFactory::GetInstance()->ChangeBulletStatus(false);
+	this->position = pos;
+	BulletFactory::ChangeBulletStatus(false);
 	RegisterCollision<Bullet>(*this);
-	this->MainSprite.setScale(1, 1); //reapply the regular scale for the bullet
+	this->sprite.setScale(1, 1); //reapply the regular scale for the bullet
 }
 
 void Bullet::RemoveBullet()
 {
-	BulletFactory::GetInstance()->ChangeBulletStatus(true);
+	BulletFactory::ChangeBulletStatus(true);
 	
 	DeregisterCollision<Bullet>(*this);
-	this->MainSprite.setScale(0, 0); //i set the scale to remove the image from the scene. May be changed later on
+	this->sprite.setScale(0, 0); //i set the scale to remove the image from the scene. May be changed later on
 }
 
 void Bullet::Collision( Mushroom *shroom )

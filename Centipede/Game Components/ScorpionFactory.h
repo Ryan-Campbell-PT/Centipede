@@ -11,11 +11,13 @@ class Scorpion;
 class ScorpionFactory 
 {
 public:
-	static ScorpionFactory* GetInstance();
 
-	void SpawnScorpion();
+	static void SpawnScorpion();
+	static void InititalizeScorpion();
 
 private:
+	static ScorpionFactory* GetInstance();
+	
 	ScorpionFactory();
 	virtual ~ScorpionFactory();
 	ScorpionFactory &operator=(const ScorpionFactory &c) = delete;

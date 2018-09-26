@@ -23,18 +23,18 @@ void Level1::Initialize()
 {
 	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
 
-	Ship::GetInstance(); //spawn the ship
+	Ship::InitalizeShip(); //spawn the ship
 
 
 
-	MushroomFactory::GetInstance(30);
+	MushroomFactory::InitializeMushroomField(30);
 	//new CentipedeHead(sf::Vector2f(500, 30));
 //	auto flea = new Flea();
-	FleaFactory::GetInstance();
-	ScorpionFactory::GetInstance();
+	FleaFactory::InitializeFlea();
+	ScorpionFactory::InititalizeScorpion();
 	//auto f = new Scorpion();
 	//f->SpawnScorpion(sf::Vector2f(WindowManager::MainWindow.getSize().x, 300));
-	SpiderFactory::GetInstance();
+	SpiderFactory::InitializeSpider();
 	
 	CollisionTestPair<Ship, Mushroom>();
 

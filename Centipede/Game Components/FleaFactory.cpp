@@ -9,7 +9,6 @@ FleaFactory * FleaFactory::instance = 0;
 FleaFactory::FleaFactory()
 {
 	MushroomFactory::GetInstance()->AddObservee(this);
-	this->flea = new Flea;
 }
 
 FleaFactory * FleaFactory::GetInstance()
@@ -29,6 +28,11 @@ void FleaFactory::ObserverUpdate(int numShrooms)
 		SpawnFlea();
 }
 
+void FleaFactory::InitializeFlea()
+{
+	GetInstance()->flea = new Flea;
+}
+
 void FleaFactory::SpawnFlea()
 {
 	//this->state = new FleaState1;
@@ -40,9 +44,9 @@ void FleaFactory::SpawnFlea()
 	this->flea->SpawnFlea(pos);
 
 #elif TESTING
-	auto d = Ship::GetInstance()->GetPosition();
+	auto d = Ship::GetPosition();
 	d.y = 0;
-	flea->SpawnFlea(d);
+	GetInstance()->flea->SpawnFlea(d);
 
 #endif
 }

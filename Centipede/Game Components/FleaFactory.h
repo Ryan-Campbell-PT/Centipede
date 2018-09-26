@@ -11,12 +11,14 @@ class Flea;
 class FleaFactory : public Observee
 {
 public:
-	static FleaFactory *GetInstance();
-	void SpawnFlea();
+	static void InitializeFlea();
+	static void SpawnFlea();
 
 	virtual void ObserverUpdate(int numShrooms) override;
 
 private:
+	static FleaFactory *GetInstance();
+	
 	FleaFactory();
 	virtual ~FleaFactory() {};
 	FleaFactory &operator=(const FleaFactory &c) = delete;

@@ -22,18 +22,23 @@ BulletFactory::~BulletFactory()
 	delete this->bullet;
 }
 
-bool BulletFactory::SpawnBullet(sf::Vector2f pos)
+bool BulletFactory::AttemptSpawnBullet(sf::Vector2f pos)
 {
-	if (BulletFactory::canSpawnBullet)
+	if (BulletFactory::CanSpawnBullet())
 	{
-		bullet->RedrawBullet(pos);
+		GetInstance()->bullet->RedrawBullet(pos);
 		return true;
 	}
 
 	return false;
 }
 
+bool BulletFactory::CanSpawnBullet()
+{
+	return GetInstance()->canSpawnBullet;
+}
+
 void BulletFactory::ChangeBulletStatus(bool b)
 {
-	canSpawnBullet = b;
+	GetInstance()->canSpawnBullet = b;
 }

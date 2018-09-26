@@ -17,16 +17,16 @@ Ship *Ship::instance = 0;
 Ship::Ship()
 {
 	bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
-	this->MainSprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
+	this->sprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
 
-	this->MainSprite.setOrigin( MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
-	this->MainSprite.setPosition(Pos);
+	this->sprite.setOrigin( sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
+	this->sprite.setPosition(position);
 	
-	this->Pos = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f, WindowManager::MainWindow.getView().getSize().y * .9f);
+	this->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f, WindowManager::MainWindow.getView().getSize().y * .9f);
 	
 	this->GunOffset = sf::Vector2f(0, 0);
 		
-	SetCollider(MainSprite, bitmap, true);
+	SetCollider(sprite, bitmap, true);
 	RegisterCollision<Ship>(*this);
 
 	FireSnd.setBuffer( ResourceManager::GetSound("Fire1")  );
@@ -52,36 +52,41 @@ void Ship::Destroy()
 	DeregisterCollision<Ship>(*this);
 }
 
+void Ship::InitalizeShip()
+{
+	GetInstance();
+}
+
 void Ship::Update()
 {
 	//offset = SPEED * Game::FrameTime();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) Pos.x -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) Pos.y -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) Pos.y += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) Pos.x += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) position.x -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) position.y -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) position.y += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) position.x += this->SPEED;
 	// Continuous key-down tests
 	
 	//may not want this in update sequence, one extra if that isnt necessary
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
-		if (BulletFactory::GetInstance()->SpawnBullet(Pos + GunOffset))
+		if (BulletFactory::AttemptSpawnBullet(position + GunOffset))
 			FireSnd.play(); //only play the sound if the bullet can be spawned
 	}
 
 	Tools::Clamp<float>(
-		Pos.x,
-		this->MainSprite.getTextureRect().width / 2.f,
-		WindowManager::MainWindow.getView().getSize().x - (this->MainSprite.getTextureRect().width / 2.f)
+		position.x,
+		this->sprite.getTextureRect().width / 2.f,
+		WindowManager::MainWindow.getView().getSize().x - (this->sprite.getTextureRect().width / 2.f)
 		);
-#if false //for testing purposes
+#if TESTING //for testing purposes
 	Tools::Clamp<float>(
-		Pos.y,
-		WindowManager::MainWindow.getView().getSize().y - (this->MainSprite.getTextureRect().height * 7.f),
-		WindowManager::MainWindow.getView().getSize().y - (this->MainSprite.getTextureRect().height / 2.f)
+		position.y,
+		WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height * 7.f),
+		WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height / 2.f)
 		);
 #endif
-	MainSprite.setPosition(Pos);
+	sprite.setPosition(position);
 }
 
 void Ship::Collision(Widget *other)
@@ -92,28 +97,29 @@ void Ship::Collision(Widget *other)
 
 void Ship::Collision(Mushroom* other)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) Pos.x += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) Pos.y += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) Pos.y -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) Pos.x -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) position.x += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) position.y += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) position.y -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) position.x -= this->SPEED;
 
-	MainSprite.setPosition(Pos);
+	sprite.setPosition(position);
 }
 
 void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
 {
 	//todo: this will have to be changed in the future, for now will keep
 	if (k == sf::Keyboard::Key::C)
-		ScorpionFactory::GetInstance()->SpawnScorpion();
+		ScorpionFactory::SpawnScorpion();
 
 	if (k == sf::Keyboard::Key::X)
-		SpiderFactory::GetInstance()->SpawnSpider();
+		SpiderFactory::SpawnSpider();
 }
 
 sf::Vector2f Ship::GetPosition()
 {
-	return this->Pos;
+	return GetInstance()->position;
 }
+//	static Ship * GetInstance();
 
 void Ship::DestroyShip()
 {
@@ -122,6 +128,6 @@ void Ship::DestroyShip()
 
 void Ship::Draw()
 {
-	WindowManager::MainWindow.draw(MainSprite);
+	WindowManager::MainWindow.draw(sprite);
 }
 

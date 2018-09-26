@@ -8,10 +8,12 @@ class Spider;
 class SpiderFactory
 {
 public:
-	static SpiderFactory *GetInstance();
-	void SpawnSpider();
+	static void SpawnSpider();
+	static void InitializeSpider();
 
 private:
+	static SpiderFactory *GetInstance();
+
 	SpiderFactory();
 	virtual ~SpiderFactory() { delete this->spider; };
 	SpiderFactory &operator=(const SpiderFactory &c) = delete;
