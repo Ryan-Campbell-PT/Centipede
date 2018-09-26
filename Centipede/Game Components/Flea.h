@@ -5,7 +5,7 @@
 #include "FleaState.h"
 #include "Observee.h"
 
-#define FLEASTATE1 300
+#define FLEASTATE1 100
 #define FLEASTATE2 500
 
 class Bullet;
