@@ -24,8 +24,8 @@ public:
 	void SpawnSpider(sf::Vector2f pos);
 
 	void Collision(GameObject *) {};
-	void Collision(Bullet * );
-	void Collision(Mushroom *);
+	void Collision(Bullet * bullet);
+	void Collision(Mushroom * shroom);
 
 private:
 	void RemoveSpider();

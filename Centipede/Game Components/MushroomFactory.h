@@ -29,10 +29,11 @@ public:
 
 	virtual void AddObservee(Observee *o) override;
 	virtual void RemoveObservee(Observee *o) override;
+	
+	void RecycleMushroom(Mushroom *shroom);
 
 private:
 	MushroomFactory();
-	void RecycleMushroom(Mushroom *shroom);
 
 	virtual void UpdateObservees() override;
 

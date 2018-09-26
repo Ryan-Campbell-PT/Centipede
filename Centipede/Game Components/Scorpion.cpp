@@ -1,6 +1,7 @@
 #include "Scorpion.h"
 #include "Bullet.h"
 #include "Mushroom.h"
+#include "GameGrid.h"
 
 Scorpion::Scorpion()
 {
@@ -52,19 +53,8 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 	this->sprite.setPosition(pos);
 	
 	this->active = true;
-	this->spawnOnLeft = pos.x;
-
-	//todo: the scale setting and rotation is silly for now. fix later
-	if (pos.x == 0) //spawn on left
-	{
-		this->sprite.setScale(-1.f, -1.f);
-		if (this->sprite.getRotation() == 0)
-			//ConsoleMsg::WriteLine("left incorrect");
-			this->sprite.setRotation(180.f);
-	}
-
-	else
-		this->sprite.setScale(-1.f, -1.f);
+	this->spawnOnLeft = pos.x < SPRITE_SIZE;
+	this->sprite.setScale(1, 1);
 
 	RegisterCollision<Scorpion>(*this);
 }
@@ -72,7 +62,9 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 void Scorpion::Collision(Bullet * bullet)
 {
 	RemoveScorpion();
+	bullet->RemoveBullet();
 }
+
 //todo: the current collision will collide with every single posiiton change, making A TON of new PoisonState. change in future
 void Scorpion::Collision(Mushroom * shroom)
 {

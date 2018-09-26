@@ -1,4 +1,7 @@
 #include "Spider.h"
+#include "Bullet.h"
+#include "MushroomFactory.h"
+
 #include <random>
 
 //TODO: turn gameobjects functions into the Destory() and Initalize() GO objects
@@ -138,18 +141,21 @@ void Spider::SpawnSpider(sf::Vector2f pos)
 
 }
 
-void Spider::Collision(Bullet *)
+void Spider::Collision(Bullet *bullet)
 {
+	bullet->RemoveBullet();
 	RemoveSpider();
 }
 
-void Spider::Collision(Mushroom *)
+void Spider::Collision(Mushroom *shroom)
 {
 	//have the spider change to opposite directions when it collides with a shroom
 	if (upOrDown == SpiderDirection::Down)
 		upOrDown = SpiderDirection::Up;
 	else
 		upOrDown = SpiderDirection::Down;
+
+	MushroomFactory::GetInstance()->RecycleMushroom(shroom);
 }
 
 void Spider::RemoveSpider()

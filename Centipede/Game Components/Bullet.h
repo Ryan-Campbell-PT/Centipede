@@ -20,6 +20,8 @@ public:
 	virtual void Collision( GameObject *go){};
 	virtual void Collision( Mushroom *other );
 
+	void RemoveBullet(); //instead of destroying the bullet, we will just remove from scene
+						 
 	//this friend decision allows for the BulletFactory to access anything private in the bullet
 	friend class BulletFactory;
 
@@ -29,8 +31,7 @@ private:
 	//the position is determined by that shot, handled in spawnBullet in BulletFactory
 	Bullet();
 	
-	void removeBullet(); //instead of destroying the bullet, we will just remove from scene
-	void redrawBullet(sf::Vector2f pos); //instead of creating a new bullet, just set the new position
+	void RedrawBullet(sf::Vector2f pos); //instead of creating a new bullet, just set the new position
 
 	float SPEED;
 	
