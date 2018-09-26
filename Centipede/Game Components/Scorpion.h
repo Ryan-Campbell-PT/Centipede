@@ -3,6 +3,8 @@
 
 #include "TEAL/CommonElements.h"
 
+#define SPRITE_REFRESH 20
+
 class Bullet;
 class Mushroom;
 
@@ -28,7 +30,7 @@ public:
 	void SetSpawnSide(bool b);
 private:
 	void RemoveScorpion();
-
+	int counter;
 	sf::Vector2f position;
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;

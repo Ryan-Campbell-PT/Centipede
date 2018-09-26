@@ -11,7 +11,7 @@ Spider::Spider()
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Spider"), 4, 2);
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
-
+	this->sprite.SetAnimation(0, 7);
 	this->sprite.setScale(0.f, 0.f);
 
 	SetCollider(sprite, bitmap, true);
@@ -32,6 +32,8 @@ void Spider::Update()
 
 	++counterNum;
 
+	if (counterNum % 20 == 0)
+		this->sprite.NextFrame();
 	//todo: terrible if statements ahead, im aware, will fix in future
 	if (this->counterNum > RANDOM_CHANGE_NUM) //this will add some randomness to the spider
 	{

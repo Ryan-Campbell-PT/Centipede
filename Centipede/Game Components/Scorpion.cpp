@@ -7,7 +7,7 @@ Scorpion::Scorpion()
 {
 	bitmap = ResourceManager::GetTextureBitmap("Scorpion");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Scorpion"), 4, 1);
-
+	this->sprite.SetAnimation(0, 3);
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
 	this->sprite.setScale(0.f, 0.f);
@@ -19,6 +19,9 @@ void Scorpion::Update()
 {
 	if (!active)
 		return;
+
+	if(++counter % SPRITE_REFRESH == 0)
+		this->sprite.NextFrame();
 
 	if (spawnOnLeft)
 	{
