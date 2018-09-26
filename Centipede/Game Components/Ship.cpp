@@ -9,6 +9,8 @@
 #include "Asteroid.h"
 #include "BulletFactory.h"
 #include "Mushroom.h"
+#include "ScorpionFactory.h"
+#include "SpiderFactory.h"
 
 Ship *Ship::instance = 0;
 
@@ -18,10 +20,9 @@ Ship::Ship()
 	this->MainSprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
 
 	this->MainSprite.setOrigin( MainSprite.getTextureRect().width / 2.0f, MainSprite.getTextureRect().height / 2.0f);
-	this->MainSprite.setScale(2,2);
 	this->MainSprite.setPosition(Pos);
 	
-	this->Pos = sf::Vector2f(WindowManager::MainWindow.getView().getSize().y / 1.5f, WindowManager::MainWindow.getView().getSize().x / 1.5f);
+	this->Pos = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f, WindowManager::MainWindow.getView().getSize().y * .9f);
 	
 	this->GunOffset = sf::Vector2f(0, 0);
 		
@@ -68,9 +69,18 @@ void Ship::Update()
 			FireSnd.play(); //only play the sound if the bullet can be spawned
 	}
 
-	//todo: these values will have to change now that we are in centipede, theyre all wrong
-	Tools::Clamp<float>(Pos.x, (float) 2*MainSprite.getTextureRect().width, WindowManager::MainWindow.getView().getSize().x );
-	Tools::Clamp<float>(Pos.y, 550, WindowManager::MainWindow.getView().getSize().y - MainSprite.getTextureRect().height); //moved from 100 to 550 so ship cant go too far
+	Tools::Clamp<float>(
+		Pos.x,
+		this->MainSprite.getTextureRect().width / 2.f,
+		WindowManager::MainWindow.getView().getSize().x - (this->MainSprite.getTextureRect().width / 2.f)
+		);
+#if false //for testing purposes
+	Tools::Clamp<float>(
+		Pos.y,
+		WindowManager::MainWindow.getView().getSize().y - (this->MainSprite.getTextureRect().height * 7.f),
+		WindowManager::MainWindow.getView().getSize().y - (this->MainSprite.getTextureRect().height / 2.f)
+		);
+#endif
 	MainSprite.setPosition(Pos);
 }
 
@@ -90,9 +100,24 @@ void Ship::Collision(Mushroom* other)
 	MainSprite.setPosition(Pos);
 }
 
+void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
+{
+	//todo: this will have to be changed in the future, for now will keep
+	if (k == sf::Keyboard::Key::C)
+		ScorpionFactory::GetInstance()->SpawnScorpion();
+
+	if (k == sf::Keyboard::Key::X)
+		SpiderFactory::GetInstance()->SpawnSpider();
+}
+
 sf::Vector2f Ship::GetPosition()
 {
 	return this->Pos;
+}
+
+void Ship::DestroyShip()
+{
+	ConsoleMsg::WriteLine("BOOM");
 }
 
 void Ship::Draw()

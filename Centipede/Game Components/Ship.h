@@ -23,8 +23,12 @@ public:
 	virtual void Collision( GameObject *other ){};
 	virtual void Collision(Widget *other);
 	virtual void Collision(Mushroom* other);
+	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey);
 
 	sf::Vector2f GetPosition();
+
+	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
+	void DestroyShip(); 
 
 private:
 	Ship(); //singleton instance

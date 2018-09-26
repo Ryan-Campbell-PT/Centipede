@@ -70,6 +70,24 @@
     <Filter Include="Source Files\Game Components\Critters">
       <UniqueIdentifier>{f52bfb8f-2a26-4f04-9846-ce76b203421c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Centipede">
+      <UniqueIdentifier>{b2ac1081-0aad-4d98-8526-e5a5b32f0782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement">
+      <UniqueIdentifier>{eed511f2-3f15-45d0-8af3-737edb5cec66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Flea">
+      <UniqueIdentifier>{aef33ca7-e46c-4594-90bf-c39810454170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Mushroom">
+      <UniqueIdentifier>{f3461322-0bd5-4699-9f30-4b35a53e5792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Scorpion">
+      <UniqueIdentifier>{b6ea9760-2c64-4848-ad75-1381ed428553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Spider">
+      <UniqueIdentifier>{32e9fbf8-c348-4471-9dfc-3638a7b4e965}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -189,11 +207,44 @@
     <ClCompile Include="Game Components\BulletFactory.cpp">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Mushroom.cpp">
-      <Filter>Source Files\Game Components\Critters</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\GameGrid.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentipedeHead.cpp">
+      <Filter>Source Files\Game Components\Centipede</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMoveLeft.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMoveRight.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMoveUp.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMoveDown.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Mushroom.cpp">
+      <Filter>Source Files\Game Components\Critters\Mushroom</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Flea.cpp">
+      <Filter>Source Files\Game Components\Critters\Flea</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\FleaFactory.cpp">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Scorpion.cpp">
+      <Filter>Source Files\Game Components\Critters\Scorpion</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\ScorpionFactory.cpp">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\SpiderFactory.cpp">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Spider.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,17 +380,71 @@
     <ClInclude Include="Game Components\MushroomFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\MushroomStates.h">
-      <Filter>Source Files\Game Components\States</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\GameGrid.h">
       <Filter>Source Files\Game Components</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\BulletFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
+    <ClInclude Include="Game Components\CentipedeDirectionState.h">
+      <Filter>Source Files\Game Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentipedeBody.h">
+      <Filter>Source Files\Game Components\Centipede</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentipedeHead.h">
+      <Filter>Source Files\Game Components\Centipede</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMoveLeft.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMoveRight.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMoveDown.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMoveUp.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiMovement.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\FleaState.h">
+      <Filter>Source Files\Game Components\States</Filter>
+    </ClInclude>
     <ClInclude Include="Game Components\Mushroom.h">
-      <Filter>Source Files\Game Components\Critters</Filter>
+      <Filter>Source Files\Game Components\Critters\Mushroom</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Flea.h">
+      <Filter>Source Files\Game Components\Critters\Flea</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\FleaState1.h">
+      <Filter>Source Files\Game Components\Critters\Flea</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\FleaState2.h">
+      <Filter>Source Files\Game Components\Critters\Flea</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Observer.h">
+      <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Observee.h">
+      <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\FleaFactory.h">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScorpionFactory.h">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Scorpion.h">
+      <Filter>Source Files\Game Components\Critters\Scorpion</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Spider.h">
+      <Filter>Source Files\Game Components\Critters\Spider</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SpiderFactory.h">
+      <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

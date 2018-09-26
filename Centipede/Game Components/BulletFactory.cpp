@@ -26,7 +26,7 @@ bool BulletFactory::SpawnBullet(sf::Vector2f pos)
 {
 	if (BulletFactory::canSpawnBullet)
 	{
-		bullet->redrawBullet(pos);
+		bullet->RedrawBullet(pos);
 		return true;
 	}
 

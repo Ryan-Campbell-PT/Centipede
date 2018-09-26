@@ -39,7 +39,7 @@ void Bullet::Update()
 
 	//if we are out of the bounds of the screen
 	if (Pos.y < 0)
-		removeBullet();
+		RemoveBullet();
 	
 	MainSprite.setPosition(Pos);
 }
@@ -54,7 +54,7 @@ void Bullet::Destroy()
 	DeregisterCollision<Bullet>( *this );
 }
 
-void Bullet::redrawBullet(sf::Vector2f pos)
+void Bullet::RedrawBullet(sf::Vector2f pos)
 {
 	this->Pos = pos;
 	BulletFactory::GetInstance()->ChangeBulletStatus(false);
@@ -62,7 +62,7 @@ void Bullet::redrawBullet(sf::Vector2f pos)
 	this->MainSprite.setScale(1, 1); //reapply the regular scale for the bullet
 }
 
-void Bullet::removeBullet()
+void Bullet::RemoveBullet()
 {
 	BulletFactory::GetInstance()->ChangeBulletStatus(true);
 	
@@ -74,5 +74,5 @@ void Bullet::Collision( Mushroom *shroom )
 {
 	shroom->TakeDamage();
 	
-	this->removeBullet();
+	this->RemoveBullet();
 }
