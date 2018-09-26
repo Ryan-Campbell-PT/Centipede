@@ -25,18 +25,29 @@ void Spider::Update()
 	if (!active)
 		return;
 
-#if false
+#if true
 
-	++randomNum;
+	++counterNum;
 
 	//todo: terrible if statements ahead, im aware, will fix in future
-	if(this->randomNum > RANDOM_CHANGE_NUM) //this will add some randomness to the spider
-		if (this->upOrDown == SpiderDirection::Up)
-			this->upOrDown = SpiderDirection::Down;
+	if (this->counterNum > RANDOM_CHANGE_NUM) //this will add some randomness to the spider
+	{
+		this->prevLeftOrRight = this->leftOrRight;
+		this->leftOrRight = SpiderDirection::Vertical;
+		this->verticalRandomNum = rand() % RANDOM_CHANGE_NUM;
+		counterNum = 0;
+	}
+		//if (this->upOrDown == SpiderDirection::Up)
+		//	this->upOrDown = SpiderDirection::Down;
 
-		else
-			this->upOrDown = SpiderDirection::Up;
+		//else
+		//	this->upOrDown = SpiderDirection::Up;
 
+	//this math is wrong
+	if (this->position.y <= this->boundsTopY)
+		this->upOrDown = SpiderDirection::Down;
+	else if (this->position.y >= this->boundsBottomY)
+		this->upOrDown = SpiderDirection::Up;
 
 	if (this->leftOrRight == SpiderDirection::Left)
 	{
@@ -48,19 +59,29 @@ void Spider::Update()
 
 	else if (this->leftOrRight == SpiderDirection::Right)
 	{
-		this->position.x -= Game::FrameTime() * SPEED;
+		this->position.x += Game::FrameTime() * SPEED;
 
 		if (this->position.x > WindowManager::MainWindow.getSize().x)
 			RemoveSpider();
 	}
 
-	else {} //this is if its vertical, where it wont be changing the x axis at all
+	else  //as long as the state is in vertical, we will count the frames its in there and compare to vertRandNum
+	{
+		
+
+		if (verticalRandomNum < counterNum)
+		{
+			this->leftOrRight = this->prevLeftOrRight;
+			verticalRandomNum = 0;
+			counterNum = 0;
+		}
+	} 
 
 	if (this->upOrDown == SpiderDirection::Up)
-		this->position.y += Game::FrameTime() * SPEED;
+		this->position.y -= Game::FrameTime() * SPEED;
 
 	else 
-		this->position.y -= Game::FrameTime() * SPEED;
+		this->position.y += Game::FrameTime() * SPEED;
 #endif
 
 	this->sprite.setPosition(this->position);
@@ -76,17 +97,20 @@ void Spider::SpawnSpider(sf::Vector2f pos)
 {
 
 	
-#if false
+#if true
 	this->position = pos;
 	this->sprite.setPosition(pos);
 
 	this->active = true;
-	this->randomNum = rand() % RANDOM_CHANGE_NUM;
+	this->counterNum = rand() % RANDOM_CHANGE_NUM;
+	this->boundsTopY = pos.y - Y_BOUNDS;
+	this->boundsBottomY = pos.y + Y_BOUNDS;
+	this->verticalRandomNum = rand() % RANDOM_CHANGE_NUM;
 
-	if (pos.x == 0) //spawning on left
-		this->leftOrRight = SpiderDirection::Left;
-	else
+	if (pos.x == 0) //spawning on left, so we are moving right
 		this->leftOrRight = SpiderDirection::Right;
+	else
+		this->leftOrRight = SpiderDirection::Left;
 #elif true
 	this->position.x = 200;// = WindowManager::MainWindow.getSize().x / 2;
 	this->position.y = 200;// WindowManager::MainWindow.getSize().y / 2;
@@ -109,7 +133,7 @@ void Spider::SpawnSpider(sf::Vector2f pos)
 
 #endif
 
-	this->sprite.setScale(1.3f, 1.3f);
+	this->sprite.setScale(1.4f, 1.4f);
 	RegisterCollision<Spider>(*this);
 
 }

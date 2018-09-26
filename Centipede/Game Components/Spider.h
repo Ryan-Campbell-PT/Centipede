@@ -3,7 +3,8 @@
 
 #include "TEAL/CommonElements.h"
 
-#define RANDOM_CHANGE_NUM 300
+#define RANDOM_CHANGE_NUM 100
+#define Y_BOUNDS 50
 
 class Bullet;
 class Mushroom;
@@ -35,13 +36,14 @@ private:
 
 	bool active;
 	int SPEED = 100;
-
-	int randomNum;
+	int boundsTopY, boundsBottomY;
+	int counterNum;
+	int verticalRandomNum;
 
 	//these two variabels will change in the future, will keep for simplicity for now
 	SpiderDirection leftOrRight;
 	SpiderDirection upOrDown;
-
+	SpiderDirection prevLeftOrRight;
 
 };
 enum class SpiderDirection
