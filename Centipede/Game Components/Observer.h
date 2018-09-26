@@ -3,13 +3,13 @@
 
 #include "TEAL/CommonElements.h"
 
-class Observee;
+class Observer;
 
-class Observer
+class Observee
 {
 public:
-	virtual void AddObservee(Observee *o) = 0;
-	virtual void RemoveObservee(Observee *o) = 0;
+	virtual void AddObservee(Observer *o) = 0;
+	virtual void RemoveObservee(Observer *o) = 0;
 
 protected:
 	virtual void UpdateObservees() = 0;

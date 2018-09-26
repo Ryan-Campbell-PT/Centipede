@@ -51,12 +51,12 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 	instance->activeMushroomList.push_back(m); //tell the game this mushroom is on the screen
 }
 
-void MushroomFactory::AddObservee(Observee * o)
+void MushroomFactory::AddObservee(Observer * o)
 {
 	this->obsereeList.push_back(o);
 }
 
-void MushroomFactory::RemoveObservee(Observee * o)
+void MushroomFactory::RemoveObservee(Observer * o)
 {
 	// ill deal with this later
 }

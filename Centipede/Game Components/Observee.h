@@ -3,7 +3,7 @@
 
 #include "TEAL/CommonElements.h"
 
-class Observee
+class Observer
 {
 public:
 	virtual void ObserverUpdate(int numShrooms) = 0;

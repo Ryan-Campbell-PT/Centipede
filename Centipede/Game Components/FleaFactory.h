@@ -8,7 +8,7 @@
 
 class Flea;
 
-class FleaFactory : public Observee
+class FleaFactory : public Observer
 {
 public:
 	static void InitializeFlea();
