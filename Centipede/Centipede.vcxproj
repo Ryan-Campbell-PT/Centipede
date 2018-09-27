@@ -94,6 +94,7 @@
     <ClCompile Include="Game Components\CentiMoveRight.cpp" />
     <ClCompile Include="Game Components\CentiMoveUp.cpp" />
     <ClCompile Include="Game Components\CentipedeHead.cpp" />
+    <ClCompile Include="Game Components\DownSpiderState.cpp" />
     <ClCompile Include="Game Components\Explosion.cpp" />
     <ClCompile Include="Game Components\FinalScore.cpp" />
     <ClCompile Include="Game Components\Flea.cpp" />
@@ -101,8 +102,10 @@
     <ClCompile Include="Game Components\GameController.cpp" />
     <ClCompile Include="Game Components\GameGrid.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
+    <ClCompile Include="Game Components\LeftSpiderState.cpp" />
     <ClCompile Include="Game Components\Mushroom.cpp" />
     <ClCompile Include="Game Components\MushroomFactory.cpp" />
+    <ClCompile Include="Game Components\RightSpiderState.cpp" />
     <ClCompile Include="Game Components\Scorpion.cpp" />
     <ClCompile Include="Game Components\ScorpionFactory.cpp" />
     <ClCompile Include="Game Components\Ship.cpp" />
@@ -134,6 +137,8 @@
     <ClCompile Include="Game Components\TEAL\TEALShow.cpp" />
     <ClCompile Include="Game Components\TEAL\Tools.cpp" />
     <ClCompile Include="Game Components\TEAL\WindowManager.cpp" />
+    <ClCompile Include="Game Components\UpSpiderState.cpp" />
+    <ClCompile Include="Game Components\BouncingSpiderState.cpp" />
     <ClCompile Include="Game Components\Widget.cpp" />
     <ClCompile Include="Game Components\WidgetGenerator.cpp" />
     <ClCompile Include="Game Components\Bullet.cpp" />
@@ -151,6 +156,7 @@
     <ClInclude Include="Game Components\CentipedeBody.h" />
     <ClInclude Include="Game Components\CentipedeDirectionState.h" />
     <ClInclude Include="Game Components\CentipedeHead.h" />
+    <ClInclude Include="Game Components\DownSpiderState.h" />
     <ClInclude Include="Game Components\Explosion.h" />
     <ClInclude Include="Game Components\Factory.h" />
     <ClInclude Include="Game Components\FinalScore.h" />
@@ -162,10 +168,12 @@
     <ClInclude Include="Game Components\GameController.h" />
     <ClInclude Include="Game Components\GameGrid.h" />
     <ClInclude Include="Game Components\HUD.h" />
+    <ClInclude Include="Game Components\LeftSpiderState.h" />
     <ClInclude Include="Game Components\Mushroom.h" />
     <ClInclude Include="Game Components\MushroomFactory.h" />
     <ClInclude Include="Game Components\Observee.h" />
     <ClInclude Include="Game Components\Observer.h" />
+    <ClInclude Include="Game Components\RightSpiderState.h" />
     <ClInclude Include="Game Components\Scorpion.h" />
     <ClInclude Include="Game Components\ScorpionFactory.h" />
     <ClInclude Include="Game Components\Ship.h" />
@@ -173,6 +181,8 @@
     <ClInclude Include="Game Components\ShipExplosion.h" />
     <ClInclude Include="Game Components\Spider.h" />
     <ClInclude Include="Game Components\SpiderFactory.h" />
+    <ClInclude Include="Game Components\SpiderMovementState.h" />
+    <ClInclude Include="Game Components\SpiderStates.h" />
     <ClInclude Include="Game Components\Splash.h" />
     <ClInclude Include="Game Components\SplashController.h" />
     <ClInclude Include="Game Components\State.h" />
@@ -203,6 +213,8 @@
     <ClInclude Include="Game Components\TEAL\TEALShow.h" />
     <ClInclude Include="Game Components\TEAL\Tools.h" />
     <ClInclude Include="Game Components\TEAL\WindowManager.h" />
+    <ClInclude Include="Game Components\UpSpiderState.h" />
+    <ClInclude Include="Game Components\BouncingSpiderState.h" />
     <ClInclude Include="Game Components\Widget.h" />
     <ClInclude Include="Game Components\WidgetGenerator.h" />
     <ClInclude Include="Game Components\Bullet.h" />

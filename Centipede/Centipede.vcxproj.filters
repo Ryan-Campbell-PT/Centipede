@@ -88,6 +88,9 @@
     <Filter Include="Source Files\Game Components\Critters\Spider">
       <UniqueIdentifier>{32e9fbf8-c348-4471-9dfc-3638a7b4e965}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Spider\SpiderMovement">
+      <UniqueIdentifier>{279bca42-22b1-4ad1-a9ad-a5c606df680c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -245,6 +248,21 @@
     </ClCompile>
     <ClCompile Include="Game Components\Spider.cpp">
       <Filter>Source Files\Game Components\Critters\Spider</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\DownSpiderState.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\RightSpiderState.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\UpSpiderState.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\BouncingSpiderState.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\LeftSpiderState.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -445,6 +463,27 @@
     </ClInclude>
     <ClInclude Include="Game Components\SpiderFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\DownSpiderState.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\LeftSpiderState.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\RightSpiderState.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\UpSpiderState.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SpiderMovementState.h">
+      <Filter>Source Files\Game Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SpiderStates.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\BouncingSpiderState.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
