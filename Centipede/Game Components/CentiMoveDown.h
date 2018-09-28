@@ -14,6 +14,7 @@ public:
 	//virtual ~CentiMoveDown() override;
 private:
 	CentipedeHead * centipede;
+	CentiMovementDirectionEnum prevState;
 };
 
 

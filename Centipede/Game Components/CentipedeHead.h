@@ -18,7 +18,8 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 
-	CentipedeDirectionState * currentDirectionState;
+	CentiMovementDirectionEnum GetCurrentMovementDirection();
+	void CheckGridAhead(sf::Vector2f pos);
 	//void SetDirection(CentipedeDirectionState *direction);
 private:
 	///the state will determine what direction the centipede is going when spawned
@@ -30,11 +31,11 @@ private:
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
-	//CentipedeDirectionState *directionArray;
+	CentipedeDirectionState * currentDirectionState;
 };
 
 ///this enum will be used so there is no need to delete movements throuhgout the game loop
-enum class MovementDirection
+enum class CentiMovementDirectionEnum
 {
 	Left,
 	Right,

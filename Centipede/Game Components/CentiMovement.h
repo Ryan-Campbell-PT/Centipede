@@ -9,4 +9,5 @@
 #include "CentipedeDirectionState.h"
 #include "CentipedeHead.h"
 
+#define CENTI_MOVEMENT 2
 #endif // !CENTIMOVEMENT_H

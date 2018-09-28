@@ -13,7 +13,8 @@ public:
 	virtual void MoveDirection(sf::Vector2f &pos) = 0;
 	///this method will have the class itself determine what direction the centipede should be going after it no longer can go in that direction
 	virtual void NextState() = 0;
-
+	///because we arent able to return the actual instance of the CentiDirection, we return an enum instead
+	virtual CentiMovementDirectionEnum GetDirectionEnum() = 0;
 protected:
 	///removing destructor because linker doesnt like it
 	//virtual ~CentipedeDirectionState() = 0; 

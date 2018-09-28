@@ -38,8 +38,8 @@ void GameGrid::GetCenterGridPosition(sf::Vector2f & pos)
 	//its grids location in game. Then add half a sprite to x and y to get it centered in the grid, and have them sprite distance apart.
 
 	//without this function, sprites very often overlap eachother
-	pos.x = static_cast<int>(pos.x / SPRITE_SIZE) * SPRITE_SIZE + (SPRITE_SIZE / 2);
-	pos.y = static_cast<int>(pos.y / SPRITE_SIZE) * SPRITE_SIZE + (SPRITE_SIZE / 2);
+	pos.x = static_cast<float>(static_cast<int>(pos.x / SPRITE_SIZE) * SPRITE_SIZE + (SPRITE_SIZE / 2));
+	pos.y = static_cast<float>(static_cast<int>(pos.y / SPRITE_SIZE) * SPRITE_SIZE + (SPRITE_SIZE / 2));
 
 }
 
@@ -56,12 +56,12 @@ bool GameGrid::AttemptToSetGrid(sf::Vector2f v, GameGridEnum e)
 
 bool GameGrid::BoundsCheck(const sf::Vector2f & v)
 {
-	int tmpX = (v.x / SPRITE_SIZE);
-	int tmpY = (v.y / SPRITE_SIZE);
+	auto tmpX = (v.x / SPRITE_SIZE);
+	auto tmpY = (v.y / SPRITE_SIZE);
 
 	return (
-		tmpX >= 0 && 
+		tmpX >= 0.f && 
 		tmpX < ROW && 
 		tmpY < COLUMN && 
-		tmpY >= 0);
+		tmpY >= 0.f);
 }

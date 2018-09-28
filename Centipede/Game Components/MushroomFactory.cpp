@@ -85,7 +85,7 @@ void MushroomFactory::InitializeMushroomField(int numShrooms)
 	GetInstance()->inactiveMushroomList.reserve(numShrooms); //optimize for num shrooms being made
 	GetInstance()->activeMushroomList.reserve(numShrooms);
 
-	int x, y;
+	float x, y;
 	sf::Vector2f pos;
 
 	int windowX = static_cast<int>(WindowManager::MainWindow.getView().getSize().x);
@@ -103,8 +103,8 @@ void MushroomFactory::InitializeMushroomField(int numShrooms)
 		//the choice to use >= 0 is b/c when the array space is unused, its garbage data, typically -ABigNumber
 		//so this tests whether its unusued, or Unoccupied
 
-		pos.x = x + .0f; // + instead of a static_cast
-		pos.y = y + .0f;
+		pos.x = static_cast<float>(x); // + instead of a static_cast
+		pos.y = static_cast<float>(y);
 
 		GetInstance()->SpawnMushroom(pos);
 	}
