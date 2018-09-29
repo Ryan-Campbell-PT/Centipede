@@ -168,6 +168,8 @@
     <ClInclude Include="Game Components\GameController.h" />
     <ClInclude Include="Game Components\GameGrid.h" />
     <ClInclude Include="Game Components\HUD.h" />
+    <ClInclude Include="Game Components\KeyboardCommand.h" />
+    <ClInclude Include="Game Components\KeyboardIncludes.h" />
     <ClInclude Include="Game Components\LeftSpiderState.h" />
     <ClInclude Include="Game Components\Mushroom.h" />
     <ClInclude Include="Game Components\MushroomFactory.h" />
@@ -179,6 +181,11 @@
     <ClInclude Include="Game Components\Ship.h" />
     <ClInclude Include="Game Components\Level1.h" />
     <ClInclude Include="Game Components\ShipExplosion.h" />
+    <ClInclude Include="Game Components\Ship_Down.h" />
+    <ClInclude Include="Game Components\Ship_Fire.h" />
+    <ClInclude Include="Game Components\Ship_Left.h" />
+    <ClInclude Include="Game Components\Ship_Right.h" />
+    <ClInclude Include="Game Components\Ship_Up.h" />
     <ClInclude Include="Game Components\Spider.h" />
     <ClInclude Include="Game Components\SpiderFactory.h" />
     <ClInclude Include="Game Components\SpiderMovementState.h" />

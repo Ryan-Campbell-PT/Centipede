@@ -10,6 +10,7 @@
 class Widget;
 class Asteroid;
 class Mushroom;
+class KeyboardCommand;
 
 class Ship : public GameObject
 {
@@ -32,20 +33,21 @@ public:
 
 private:
 	Ship(); //singleton instance
+	void SetKeyboardCommands();
 
 	static Ship *instance;
 
 	const float SPEED = 3;
 	sf::Vector2f GunOffset;
-
 	sf::Vector2f position;
-	
 	sf::Sprite sprite; //changed from AnimatedSprite
 	CollisionTools::TextureBitmap bitmap;
 
 	sf::Sound FireSnd;
 	
 	static Ship * GetInstance();
+
+	KeyboardCommand *keyDown, *keyUp, *keyRight, *keyLeft, *keyFire;
 };
 
 #endif _Ship

@@ -11,6 +11,7 @@
 #include "Mushroom.h"
 #include "ScorpionFactory.h"
 #include "SpiderFactory.h"
+#include "KeyboardIncludes.h"
 
 Ship *Ship::instance = 0;
 
@@ -38,6 +39,15 @@ Ship::Ship()
 	RegisterInput( InputFlags::KeyPressed ); // Recieve single-presses events
 }
 
+void Ship::SetKeyboardCommands()
+{
+	this->keyDown = new	Ship_Right(sf::Keyboard::S);
+	this->keyUp = new Ship_Left(sf::Keyboard::W);
+	this->keyRight = new Ship_Right(sf::Keyboard::D);
+	this->keyLeft = new Ship_Left(sf::Keyboard::A);
+	this->keyFire = new Ship_Fire(sf::Keyboard::Space);
+}
+
 Ship * Ship::GetInstance()
 {
 	if (instance == 0)
@@ -59,11 +69,10 @@ void Ship::InitalizeShip()
 
 void Ship::Update()
 {
-	//offset = SPEED * Game::FrameTime();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) position.x -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) position.y -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) position.y += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) position.x += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyLeft->GetCommand())) position.x += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyUp->GetCommand())) position.y += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyDown->GetCommand())) position.y -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyRight->GetCommand())) position.x -= this->SPEED;
 	// Continuous key-down tests
 	
 	//may not want this in update sequence, one extra if that isnt necessary
@@ -97,10 +106,10 @@ void Ship::Collision(Widget *other)
 
 void Ship::Collision(Mushroom* other)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) position.x += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) position.y += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) position.y -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) position.x -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyLeft->GetCommand())) position.x += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyUp->GetCommand())) position.y += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyDown->GetCommand())) position.y -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyRight->GetCommand())) position.x -= this->SPEED;
 
 	sprite.setPosition(position);
 }
@@ -119,7 +128,6 @@ sf::Vector2f Ship::GetPosition()
 {
 	return GetInstance()->position;
 }
-//	static Ship * GetInstance();
 
 void Ship::DestroyShip()
 {
