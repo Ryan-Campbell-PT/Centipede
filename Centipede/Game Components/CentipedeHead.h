@@ -3,6 +3,11 @@
 
 #include "TEAL/CommonElements.h"
 
+#define SPRITE_BEGIN 0
+#define SPRITE_END 7
+#define SPRITE_TURN_BEGIN 8
+#define SPRITE_TURN_END 15
+
 class CentipedeDirectionState;
 class CentipedeBody;
 enum class CentiMovementDirectionEnum;
@@ -20,6 +25,7 @@ public:
 	virtual void Draw() override;
 
 	sf::Vector2f GetPosition();
+	void SetAnimationFrames(const int & startFrame, const int & endFrame);
 
 	CentiMovementDirectionEnum GetCurrentMovementDirection();
 	void CheckGridAhead(sf::Vector2f pos);
@@ -35,6 +41,8 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	CentipedeDirectionState * currentDirectionState;
+
+	unsigned int animationCounter;
 };
 
 ///this enum will be used so there is no need to delete movements throuhgout the game loop
