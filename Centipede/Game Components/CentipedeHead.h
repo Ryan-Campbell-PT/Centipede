@@ -5,6 +5,7 @@
 
 class CentipedeDirectionState;
 class CentipedeBody;
+enum class CentiMovementDirectionEnum;
 
 class CentipedeHead : public GameObject
 {
@@ -20,7 +21,7 @@ public:
 
 	CentiMovementDirectionEnum GetCurrentMovementDirection();
 	void CheckGridAhead(sf::Vector2f pos);
-	//void SetDirection(CentipedeDirectionState *direction);
+	void SetDirection(CentipedeDirectionState *direction);
 private:
 	///the state will determine what direction the centipede is going when spawned
 	///this state is to reduce the number of if statements being checked, and just

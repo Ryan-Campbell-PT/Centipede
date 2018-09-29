@@ -8,6 +8,7 @@
 #include "CentiMoveUp.h"
 #include "CentipedeDirectionState.h"
 #include "CentipedeHead.h"
+#include "GameGrid.h"
 
 #define CENTI_MOVEMENT 2
 #endif // !CENTIMOVEMENT_H

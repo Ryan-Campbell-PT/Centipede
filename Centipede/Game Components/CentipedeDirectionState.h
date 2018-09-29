@@ -6,6 +6,8 @@
 
 class CentipedeHead;
 
+enum class CentiMovementDirectionEnum;
+
 class CentipedeDirectionState : public State
 {
 public:

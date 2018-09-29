@@ -3,6 +3,8 @@
 
 #include "CentipedeDirectionState.h"
 
+enum class CentiMovementDirectionEnum;
+
 class CentiMoveRight : public CentipedeDirectionState
 {
 public:
@@ -11,6 +13,7 @@ public:
 	virtual void MoveDirection(sf::Vector2f &pos) override;
 	virtual void NextState() override;
 
+	virtual CentiMovementDirectionEnum GetDirectionEnum() override;
 	//virtual ~CentiMoveRight() override;
 private:
 	CentipedeHead * centipede;

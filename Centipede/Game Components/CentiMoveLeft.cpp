@@ -7,14 +7,19 @@ CentiMoveLeft::CentiMoveLeft(CentipedeHead * centi)
 
 void CentiMoveLeft::MoveDirection(sf::Vector2f &pos)
 {
-	pos.x -= 3;
+	pos.x -= CENTI_MOVEMENT;
 
-	if (pos.x < 12)
-		this->centipede->currentDirectionState = new CentiMoveDown(this->centipede);
+	this->centipede->CheckGridAhead(sf::Vector2f(pos.x - SPRITE_SIZE, pos.y));
 }
 
 void CentiMoveLeft::NextState()
 {
+	this->centipede->SetDirection(new CentiMoveDown(this->centipede));
+}
+
+CentiMovementDirectionEnum CentiMoveLeft::GetDirectionEnum()
+{
+	return CentiMovementDirectionEnum::Left;
 }
 
 //CentiMoveLeft::~CentiMoveLeft()

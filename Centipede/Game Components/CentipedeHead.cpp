@@ -46,3 +46,8 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 	if (gridStatus == GameGridEnum::Mushroom)
 		this->currentDirectionState->NextState();
 }
+
+void CentipedeHead::SetDirection(CentipedeDirectionState * direction)
+{
+	this->currentDirectionState = direction;
+}
