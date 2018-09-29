@@ -29,9 +29,9 @@ void SpiderFactory::SpawnSpider()
 		pos.x = 0;
 
 	else //otherwise its on the right, and it goes to the max x distance
-		pos.x = WindowManager::MainWindow.getSize().x;
+		pos.x = static_cast<float>(WindowManager::MainWindow.getSize().x);
 
-	pos.y = rand() % WindowManager::MainWindow.getSize().y; //anywhere on the y axis
+	pos.y = static_cast<float>(rand() % WindowManager::MainWindow.getSize().y); //anywhere on the y axis
 	
 	GetInstance()->spider->SpawnSpider(pos);
 }

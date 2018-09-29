@@ -36,7 +36,7 @@ void ScorpionFactory::SpawnScorpion()
 	else //otherwise its on the right, and it goes to the max x distance
 		x = WindowManager::MainWindow.getSize().x; 
 
-	auto pos = sf::Vector2f(static_cast<float>(x), rand() % WindowManager::MainWindow.getSize().y);
+	auto pos = sf::Vector2f(static_cast<float>(x), static_cast<float>(rand() % WindowManager::MainWindow.getSize().y));
 	GameGrid::GetInstance()->GetCenterGridPosition(pos);
 	
 	GetInstance()->scorpion->SpawnScorpion(pos);

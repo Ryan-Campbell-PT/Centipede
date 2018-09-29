@@ -109,8 +109,8 @@ void Spider::SpawnSpider(sf::Vector2f pos)
 
 	this->active = true;
 	this->counterNum = rand() % RANDOM_CHANGE_NUM;
-	this->boundsTopY = pos.y - Y_BOUNDS;
-	this->boundsBottomY = pos.y + Y_BOUNDS;
+	this->boundsTopY = static_cast<int>(pos.y - Y_BOUNDS);
+	this->boundsBottomY = static_cast<int>(pos.y + Y_BOUNDS);
 	this->verticalRandomNum = rand() % RANDOM_CHANGE_NUM;
 
 	if (pos.x == 0) //spawning on left, so we are moving right

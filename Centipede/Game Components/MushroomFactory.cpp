@@ -90,8 +90,9 @@ void MushroomFactory::InitializeMushroomField(int numShrooms)
 	{
 		do
 		{
-			x = rand() % windowX;
-			y = rand() % windowY;
+			
+			x = static_cast<float>(rand() % windowX);
+			y = static_cast<float>(rand() % windowY);
 		} while ((int)GameGrid::GetInstance()->GetGridStatus(sf::Vector2f(x, y)) >= gridUnoccupied);
 		//the choice to use >= 0 is b/c when the array space is unused, its garbage data, typically -ABigNumber
 		//so this tests whether its unusued, or Unoccupied

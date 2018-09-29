@@ -39,7 +39,7 @@ void FleaFactory::SpawnFlea()
 	
 	//find a random location on the screen to spawn the flea (x)
 #if !TESTING
-  	auto pos = sf::Vector2f(rand() % (int)WindowManager::MainWindow.getView().getSize().x, SPRITE_SIZE);
+  	auto pos = sf::Vector2f(static_cast<float>(rand() % static_cast<int>(WindowManager::MainWindow.getView().getSize().x)), SPRITE_SIZE);
 	GameGrid::GetInstance()->GetCenterGridPosition(pos); //set it in the middle of the grid
 	GetInstance()->flea->SpawnFlea(pos);
 
