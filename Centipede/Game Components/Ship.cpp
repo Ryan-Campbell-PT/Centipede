@@ -36,6 +36,7 @@ Ship::Ship()
 	
 	SetDrawOrder(1000);
 
+	SetKeyboardCommands();
 	RegisterInput( InputFlags::KeyPressed ); // Recieve single-presses events
 }
 
@@ -69,10 +70,10 @@ void Ship::InitalizeShip()
 
 void Ship::Update()
 {
-	if (sf::Keyboard::isKeyPressed(this->keyLeft->GetCommand())) position.x += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyUp->GetCommand())) position.y += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyDown->GetCommand())) position.y -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyRight->GetCommand())) position.x -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyLeft->GetCommand())) position.x -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyUp->GetCommand())) position.y -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyDown->GetCommand())) position.y += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(this->keyRight->GetCommand())) position.x += this->SPEED;
 	// Continuous key-down tests
 	
 	//may not want this in update sequence, one extra if that isnt necessary

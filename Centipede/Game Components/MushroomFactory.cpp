@@ -11,19 +11,22 @@ MushroomFactory::MushroomFactory()
 {
 }
 
-void MushroomFactory::RecycleMushroom(Mushroom * shroom)
+void MushroomFactory::RemoveMushroom(Mushroom * shroom)
 {
-	instance->inactiveMushroomList.push_back(shroom); //recycle
-	instance->activeMushroomList.erase(
-		std::remove(
-			instance->activeMushroomList.begin(), instance->activeMushroomList.end(), shroom)
-	); //overly complicated way to remove from activeList
-	shroom->sprite.setScale(0.f, 0.f); //remove it from the screen
-	shroom->DeregisterCollision(*shroom);
+	GetInstance()->activeMushroomList.remove(shroom);
+	GetInstance()->inactiveMushroomList.push_back(shroom);
 
-	//house keeping
-	GameGrid::GetInstance()->SetGridStatus(shroom->position, GameGridEnum::Unoccupied);
-	UpdateObservees();
+	GetInstance()->UpdateObservees();
+}
+
+void MushroomFactory::AddNewObserver(Observer * o)
+{
+	GetInstance()->AddObservee(o);
+}
+
+void MushroomFactory::RemoveCurrentObserver(Observer * o)
+{
+	GetInstance()->RemoveObservee(o);
 }
 
 void MushroomFactory::UpdateObservees()
@@ -36,19 +39,19 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 {
 	Mushroom *m;
 
-     	if (inactiveMushroomList.size() == 0)
+     	if (GetInstance()->inactiveMushroomList.size() == 0)
 		m = new Mushroom(pos);
 
 	else
 	{
 		//recycle from the list, taking from the back and using that
-		m = inactiveMushroomList.back();
-		inactiveMushroomList.pop_back();
+		m = GetInstance()->inactiveMushroomList.back();
+		GetInstance()->inactiveMushroomList.pop_back();
 
 		m->SetPosition(pos);
 	}
 
-	instance->activeMushroomList.push_back(m); //tell the game this mushroom is on the screen
+		GetInstance()->activeMushroomList.push_back(m); //tell the game this mushroom is on the screen
 }
 
 void MushroomFactory::AddObservee(Observer * o)
@@ -63,13 +66,6 @@ void MushroomFactory::RemoveObservee(Observer * o)
 
 MushroomFactory::~MushroomFactory()
 {
-	for (auto shroom : instance->inactiveMushroomList)
-		delete shroom;
-
-	for (auto shroom : instance->activeMushroomList)
-		delete shroom;
-
-	delete instance;
 }
 
 MushroomFactory * MushroomFactory::GetInstance()
@@ -82,9 +78,6 @@ MushroomFactory * MushroomFactory::GetInstance()
 
 void MushroomFactory::InitializeMushroomField(int numShrooms)
 {	
-	GetInstance()->inactiveMushroomList.reserve(numShrooms); //optimize for num shrooms being made
-	GetInstance()->activeMushroomList.reserve(numShrooms);
-
 	float x, y;
 	sf::Vector2f pos;
 

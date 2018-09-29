@@ -82,7 +82,7 @@ void Flea::SetSpeed(const int & speed)
 void Flea::AttemptSpawnMushroom()
 {
 	if(static_cast<int>(GameGrid::GetInstance()->GetGridStatus(this->position)) <= static_cast<int>(GameGridEnum::Unoccupied))
-		MushroomFactory::GetInstance()->SpawnMushroom(this->position);
+		MushroomFactory::SpawnMushroom(this->position);
 }
 
 

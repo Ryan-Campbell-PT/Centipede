@@ -2,6 +2,10 @@
 #include "MushroomFactory.h"
 #include "GameGrid.h"
 
+#if TESTING
+int Mushroom::mushroomNum = 0;
+#endif
+
 Mushroom::Mushroom(sf::Vector2f v)
 {
 
@@ -25,20 +29,9 @@ Mushroom::Mushroom(sf::Vector2f v)
 	this->SetPosition(v);
 	
 	this->state = MushroomState::Healthy;
-}
 
-Mushroom::Mushroom(float x, float y)
-{
-	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
-	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); //4 and 2 show the first mushroom, undamaged
-	this->sprite.setScale(1.5f, 1.5f);
-#if false
-	MushroomFactory::instance->GetNewMushroomPosition(sf::Vector2f(x, y));
-
-	
-
-#elif true
-	SetPosition(sf::Vector2f(x, y));
+#if TESTING
+	this->thisMushroomNum = mushroomNum++;
 #endif
 }
 
@@ -53,7 +46,7 @@ void Mushroom::TakeDamage()
 	this->sprite.SetAnimation(health, ++health);
 
 	if (health % 4 == 0) //modulous to compensate for poison or healthy
-		MushroomFactory::GetInstance()->RecycleMushroom(this);
+		MushroomFactory::RemoveMushroom(this);
 
 	//this->MainSprite.SetAnimation(1, 2); //second mushroom state
 	//this->MainSprite.SetAnimation(2, 3); //third mushroom state
@@ -67,9 +60,19 @@ void Mushroom::ChangeState(MushroomState state)
 	if (state == MushroomState::Poison)
 		this->health += 4; //+= incase the mushroom is damaged
 	else if (state == MushroomState::Healthy) //will likely never be called, but just to be sure
-		this->health -= 0; //-= incase the mushroom is damaged
+		this->health -= 4; //-= incase the mushroom is damaged
 
 	this->sprite.SetAnimation(health, health);
+}
+
+void Mushroom::RemoveMushroom()
+{
+	this->sprite.setScale(0.f, 0.f); //remove it from the screen
+	this->DeregisterCollision(*this);
+
+	GameGrid::GetInstance()->SetGridStatus(this->position, GameGridEnum::Unoccupied);
+
+	MushroomFactory::RemoveMushroom(this);
 }
 
 MushroomState Mushroom::GetState()
@@ -89,6 +92,9 @@ void Mushroom::SetPosition(sf::Vector2f v)
 
 	this->health = 0; //setting the positions of a mushroom assumes its full health
 
-	//return whether it can be placed there
 	GameGrid::GetInstance()->SetGridStatus(v, GameGridEnum::Mushroom);
+
+#if TESTING
+	ConsoleMsg::WriteLine("This mushroom number: " + Tools::ToString(this->thisMushroomNum));
+#endif
 }

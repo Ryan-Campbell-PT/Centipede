@@ -8,7 +8,7 @@ FleaFactory * FleaFactory::instance = 0;
 
 FleaFactory::FleaFactory()
 {
-	MushroomFactory::GetInstance()->AddObservee(this);
+	MushroomFactory::AddNewObserver(this);
 }
 
 FleaFactory * FleaFactory::GetInstance()
@@ -41,7 +41,7 @@ void FleaFactory::SpawnFlea()
 #if !TESTING
   	auto pos = sf::Vector2f(rand() % (int)WindowManager::MainWindow.getView().getSize().x, SPRITE_SIZE);
 	GameGrid::GetInstance()->GetCenterGridPosition(pos); //set it in the middle of the grid
-	this->flea->SpawnFlea(pos);
+	GetInstance()->flea->SpawnFlea(pos);
 
 #elif TESTING
 	auto d = Ship::GetPosition();

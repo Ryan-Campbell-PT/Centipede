@@ -1,7 +1,7 @@
 #ifndef MUSHROOMF_H
 #define MUSHROOMF_H
 
-#include <vector>
+#include <list>
 
 #include "Factory.h"
 #include "Observer.h"
@@ -19,28 +19,33 @@ public:
 	///remove all mushrooms created by the factory, and then delete itself
 	virtual ~MushroomFactory();
 	
-	static MushroomFactory *GetInstance();
-	static void InitializeMushroomField(int numShrooms); //todo: may wanna take an alternateive approach to this
+	static void InitializeMushroomField(int numShrooms);
 
 	///spawns a new mushroom, or recycles one from the inactiveList
-	void SpawnMushroom(sf::Vector2f pos);
-
-	virtual void AddObservee(Observer *o) override;
-	virtual void RemoveObservee(Observer *o) override;
+	static void SpawnMushroom(sf::Vector2f pos);
 	
-	void RecycleMushroom(Mushroom *shroom);
+	///takes the mushroom off the screen, and adds to a recycle list
+	static void RemoveMushroom(Mushroom *shroom);
+
+	static void AddNewObserver(Observer *o);
+	static void RemoveCurrentObserver(Observer * o);
 
 private:
 	MushroomFactory();
 
 	virtual void UpdateObservees() override;
 
+	virtual void AddObservee(Observer *o) override;
+	virtual void RemoveObservee(Observer *o) override;
 
 	static MushroomFactory* instance;
 
-	std::vector<Mushroom*> inactiveMushroomList; ///this list will be used for recycling purposes
-	std::vector<Mushroom*> activeMushroomList; ///this list will be used for purposes like healing broken mushrooms at new level
-	std::vector<Observer*> obsereeList; ///keep track of all the observee's paying attention to the factory
+	std::list<Mushroom*> inactiveMushroomList; ///this list will be used for recycling purposes
+	std::list<Mushroom*> activeMushroomList; ///this list will be used for purposes like healing broken mushrooms at new level
+	std::list<Observer*> obsereeList; ///keep track of all the observee's paying attention to the factory
+
+	static MushroomFactory *GetInstance();
+
 };
 
 

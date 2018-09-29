@@ -10,8 +10,9 @@ CentiMoveRight::CentiMoveRight(CentipedeHead * centi)
 void CentiMoveRight::MoveDirection(sf::Vector2f &pos)
 {
 	pos.x += CENTI_MOVEMENT;
-
-	this->centipede->CheckGridAhead(sf::Vector2f(pos.x + SPRITE_SIZE, pos.y));
+	
+	if (static_cast<int>(pos.x) % (SPRITE_SIZE  / 2) == 0)
+		this->centipede->CheckGridAhead(sf::Vector2f(pos.x + SPRITE_SIZE, pos.y));
 }
 
 void CentiMoveRight::NextState()
