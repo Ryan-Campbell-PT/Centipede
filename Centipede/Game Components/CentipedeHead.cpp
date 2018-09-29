@@ -3,7 +3,7 @@
 #include "GameGrid.h"
 
 CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
-	:position(pos)
+	:bodys(0), position(pos), currentDirectionState(0)
 {
 	this->currentDirectionState = new CentiMoveLeft(this);
 	
@@ -15,7 +15,6 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	this->sprite.setPosition(pos);
 
 	//todo: clamp position to edges of screen
-
 	SetCollider(this->sprite, this->bitmap, true);
 	//RegisterCollision<CentipedeHead>(*this);
 
@@ -34,17 +33,36 @@ void CentipedeHead::Draw()
 	WindowManager::MainWindow.draw(this->sprite);
 }
 
+sf::Vector2f CentipedeHead::GetPosition()
+{
+	return this->position;
+}
+
 CentiMovementDirectionEnum CentipedeHead::GetCurrentMovementDirection()
 {
-	return this->currentDirectionState->GetDirectionEnum();
+	if(this->currentDirectionState)
+		 this->currentDirectionState->GetDirectionEnum();
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 {
 	auto gridStatus = GameGrid::GetInstance()->GetGridStatus(pos);
 
+	//a lot of if statements, can fix in the future
 	if (gridStatus == GameGridEnum::Mushroom)
+	{
+		ConsoleMsg::WriteLine("Mushroom");
 		this->currentDirectionState->NextState();
+	}
+	if (//gridStatus == GameGridEnum::Mushroom ||
+		pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
+		pos.y > static_cast<float>(WindowManager::MainWindow.getView().getSize().y) ||
+		pos.x < 0.f ||
+		pos.y < 0.f)
+	{
+		ConsoleMsg::WriteLine("Bounds");
+		this->currentDirectionState->NextState();
+	}
 }
 
 void CentipedeHead::SetDirection(CentipedeDirectionState * direction)

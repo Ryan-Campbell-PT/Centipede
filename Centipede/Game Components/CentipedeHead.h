@@ -19,6 +19,8 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 
+	sf::Vector2f GetPosition();
+
 	CentiMovementDirectionEnum GetCurrentMovementDirection();
 	void CheckGridAhead(sf::Vector2f pos);
 	void SetDirection(CentipedeDirectionState *direction);

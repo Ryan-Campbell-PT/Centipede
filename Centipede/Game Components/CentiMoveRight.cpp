@@ -3,6 +3,7 @@
 CentiMoveRight::CentiMoveRight(CentipedeHead * centi)
 	:centipede(centi) 
 {
+	this->prevState = this->centipede->GetCurrentMovementDirection();
 }
 
 void CentiMoveRight::MoveDirection(sf::Vector2f &pos)
@@ -14,7 +15,10 @@ void CentiMoveRight::MoveDirection(sf::Vector2f &pos)
 
 void CentiMoveRight::NextState()
 {
-	this->centipede->SetDirection(new CentiMoveDown(this->centipede));
+	if (prevState == CentiMovementDirectionEnum::Down) //go right
+		this->centipede->SetDirection(new CentiMoveDown(this->centipede));
+	else
+		this->centipede->SetDirection(new CentiMoveUp(this->centipede));
 }
 
 CentiMovementDirectionEnum CentiMoveRight::GetDirectionEnum()

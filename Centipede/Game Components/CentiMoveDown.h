@@ -17,6 +17,7 @@ public:
 private:
 	CentipedeHead * centipede;
 	CentiMovementDirectionEnum prevState;
+	int counter;
 };
 
 
