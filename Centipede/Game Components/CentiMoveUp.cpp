@@ -19,10 +19,10 @@ void CentiMoveUp::MoveDirection(sf::Vector2f &pos)
 void CentiMoveUp::NextState()
 {
 	if (prevState == CentiMovementDirectionEnum::Left) //go right
-		this->centipede->SetDirection(CentiMovementDirectionEnum::Left);
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Right);
 
 	else
-		this->centipede->SetDirection(CentiMovementDirectionEnum::Right);
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Left);
 }
 
 void CentiMoveUp::Initialize(CentipedeHead * centi)

@@ -13,7 +13,6 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(pos);
 
-	//todo: clamp position to edges of screen
 	SetCollider(this->sprite, this->bitmap, true);
 	RegisterCollision<CentipedeHead>(*this);
 

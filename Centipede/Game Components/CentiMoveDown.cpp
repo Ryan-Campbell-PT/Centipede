@@ -24,10 +24,10 @@ void CentiMoveDown::NextState()
 	}
 
 	else if (prevState == CentiMovementDirectionEnum::Left) //go right
-		this->centipede->SetDirection(CentiMovementDirectionEnum::Left);
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Right);
 
 	else
-		this->centipede->SetDirection(CentiMovementDirectionEnum::Right);
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Left);
 }
 
 void CentiMoveDown::Initialize(CentipedeHead * centi)
