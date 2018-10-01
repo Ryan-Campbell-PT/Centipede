@@ -6,6 +6,7 @@ CentiMoveDown::CentiMoveDown(CentipedeHead * centi)
 	//when we start moving down, we store where we were moving last,
 	//then when we move states, we can move the opposite of where we were last moving
 	this->prevState = this->centipede->GetCurrentMovementDirection();
+	this->centipede->SetSpriteRotation(270.f);
 }
 
 void CentiMoveDown::MoveDirection(sf::Vector2f &pos)

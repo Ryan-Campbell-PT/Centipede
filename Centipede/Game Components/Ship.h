@@ -6,6 +6,8 @@
 
 #include "TEAL\CommonElements.h"
 
+#define SHIP_BOUNDS 7.f
+
 // Forward declarations
 class Widget;
 class Asteroid;

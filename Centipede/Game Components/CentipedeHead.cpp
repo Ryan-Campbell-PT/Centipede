@@ -54,7 +54,7 @@ CentiMovementDirectionEnum CentipedeHead::GetCurrentMovementDirection()
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 {
 	//a lot of if statements, can fix in the future
-	if (GameGrid::GetInstance()->GetGridStatus(pos) == GameGridEnum::Mushroom ||
+	if (GameGrid::GetGridStatus(pos) == GameGridEnum::Mushroom ||
 		pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
 		pos.y > static_cast<float>(WindowManager::MainWindow.getView().getSize().y) ||
 		pos.x < 0.f ||
@@ -66,4 +66,9 @@ void CentipedeHead::SetDirection(CentipedeDirectionState * direction)
 {
 	//delete this->currentDirectionState;
 	this->currentDirectionState = direction;
+}
+
+void CentipedeHead::SetSpriteRotation(const float & rotation)
+{
+	this->sprite.setRotation(rotation);
 }

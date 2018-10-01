@@ -33,7 +33,8 @@ void Level1::Initialize()
 	ScorpionFactory::InititalizeScorpion();
 	
 	SpiderFactory::InitializeSpider();
-	new CentipedeHead(sf::Vector2f(200, 200));
+	auto f = new CentipedeHead(sf::Vector2f(200, 200));
+	f->SetSpriteRotation(-90); //(270: down) (180 right) (up 90)
 
 	CollisionTestPair<Ship, Mushroom>();
 

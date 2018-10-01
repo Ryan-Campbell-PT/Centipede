@@ -81,7 +81,8 @@ void Ship::Update()
 	{
 		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
 		if (BulletFactory::AttemptSpawnBullet(position + GunOffset))
-			FireSnd.play(); //only play the sound if the bullet can be spawned
+		{
+		}//FireSnd.play(); //only play the sound if the bullet can be spawned
 	}
 
 	Tools::Clamp<float>(
@@ -92,7 +93,7 @@ void Ship::Update()
 #if TESTING //for testing purposes
 	Tools::Clamp<float>(
 		position.y,
-		WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height * 7.f),
+		WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height * SHIP_BOUNDS),
 		WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height / 2.f)
 		);
 #endif

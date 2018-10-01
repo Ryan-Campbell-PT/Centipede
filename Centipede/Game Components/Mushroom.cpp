@@ -46,7 +46,7 @@ void Mushroom::TakeDamage()
 	this->sprite.SetAnimation(health, ++health);
 
 	if (health % 4 == 0) //modulous to compensate for poison or healthy
-		MushroomFactory::RemoveMushroom(this);
+		this->RemoveMushroom();
 
 	//this->MainSprite.SetAnimation(1, 2); //second mushroom state
 	//this->MainSprite.SetAnimation(2, 3); //third mushroom state
@@ -70,7 +70,7 @@ void Mushroom::RemoveMushroom()
 	this->sprite.setScale(0.f, 0.f); //remove it from the screen
 	this->DeregisterCollision(*this);
 
-	GameGrid::GetInstance()->SetGridStatus(this->position, GameGridEnum::Unoccupied);
+	GameGrid::SetGridStatus(this->position, GameGridEnum::Unoccupied);
 
 	MushroomFactory::RemoveMushroom(this);
 }
@@ -86,13 +86,13 @@ Mushroom::~Mushroom()
 
 void Mushroom::SetPosition(sf::Vector2f v)
 {
-	GameGrid::GetInstance()->GetCenterGridPosition(v);
+	GameGrid::GetCenterGridPosition(v);
 	this->sprite.setPosition(v);
 	position = v;
 
 	this->health = 0; //setting the positions of a mushroom assumes its full health
 
-	GameGrid::GetInstance()->SetGridStatus(v, GameGridEnum::Mushroom);
+	GameGrid::SetGridStatus(v, GameGridEnum::Mushroom);
 
 #if TESTING
 	ConsoleMsg::WriteLine("This mushroom number: " + Tools::ToString(this->thisMushroomNum));

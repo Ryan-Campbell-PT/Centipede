@@ -5,6 +5,7 @@ CentiMoveRight::CentiMoveRight(CentipedeHead * centi)
 {
 	this->centipede->SetAnimationFrames(SPRITE_BEGIN, SPRITE_END);
 	this->prevState = this->centipede->GetCurrentMovementDirection();
+	this->centipede->SetSpriteRotation(180.f);
 }
 
 void CentiMoveRight::MoveDirection(sf::Vector2f &pos)

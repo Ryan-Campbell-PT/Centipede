@@ -21,14 +21,14 @@ GameGrid * GameGrid::GetInstance()
 
 void GameGrid::SetGridStatus(sf::Vector2f v, GameGridEnum e)
 {
-	if (BoundsCheck(v)) //make sure we arent out of bounds
-		this->grid[static_cast<int>(v.x / SPRITE_SIZE)][static_cast<int>(v.y / SPRITE_SIZE)] = static_cast<int>(e);
+	if (GetInstance()->BoundsCheck(v)) //make sure we arent out of bounds
+		GetInstance()->grid[static_cast<int>(v.x / SPRITE_SIZE)][static_cast<int>(v.y / SPRITE_SIZE)] = static_cast<int>(e);
 }
 
 GameGridEnum GameGrid::GetGridStatus(sf::Vector2f v)
 {
-	if(this->BoundsCheck(v))
-		return static_cast<GameGridEnum>(this->grid[static_cast<int>(v.x / SPRITE_SIZE)][static_cast<int>(v.y / SPRITE_SIZE)]);
+	if(GetInstance()->BoundsCheck(v))
+		return static_cast<GameGridEnum>(GetInstance()->grid[static_cast<int>(v.x / SPRITE_SIZE)][static_cast<int>(v.y / SPRITE_SIZE)]);
 }
 
 void GameGrid::GetCenterGridPosition(sf::Vector2f & pos)
@@ -40,14 +40,18 @@ void GameGrid::GetCenterGridPosition(sf::Vector2f & pos)
 	//without this function, sprites very often overlap eachother
 	pos.x = static_cast<float>(static_cast<int>(pos.x / SPRITE_SIZE) * SPRITE_SIZE + (SPRITE_SIZE / 2));
 	pos.y = static_cast<float>(static_cast<int>(pos.y / SPRITE_SIZE) * SPRITE_SIZE + (SPRITE_SIZE / 2));
+}
 
+void GameGrid::GetCenterYPosition(sf::Vector2f & pos)
+{
+	pos.y = static_cast<float>(static_cast<int>(pos.y / SPRITE_SIZE) * SPRITE_SIZE + (SPRITE_SIZE / 2));
 }
 
 bool GameGrid::AttemptToSetGrid(sf::Vector2f v, GameGridEnum e)
 {
-		if (this->GetGridStatus(v) == GameGridEnum::Unoccupied) //can we place here
+		if (GetInstance()->GetGridStatus(v) == GameGridEnum::Unoccupied) //can we place here
 		{
-			this->SetGridStatus(v, e); //if it isnt occupied, confirm can be placed
+			GetInstance()->SetGridStatus(v, e); //if it isnt occupied, confirm can be placed
 			return true;
 		}
 		else

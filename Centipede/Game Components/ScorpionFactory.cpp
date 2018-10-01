@@ -37,7 +37,7 @@ void ScorpionFactory::SpawnScorpion()
 		x = WindowManager::MainWindow.getSize().x; 
 
 	auto pos = sf::Vector2f(static_cast<float>(x), static_cast<float>(rand() % WindowManager::MainWindow.getSize().y));
-	GameGrid::GetInstance()->GetCenterGridPosition(pos);
+	GameGrid::GetCenterYPosition(pos);
 	
 	GetInstance()->scorpion->SpawnScorpion(pos);
 	GetInstance()->scorpion->SetSpawnSide(leftSide); //this is requried to spawn the scorp for whatever reason. todo: fix later

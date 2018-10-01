@@ -7,7 +7,7 @@
 #define COLUMN 30 
 #define SPRITE_SIZE 16
 
-///the concept of this will be in regards to a 30 x 31 grid that will store the mushrooms
+///the concept of this will be in regards to a 30 x 32 grid that will store the mushrooms
 ///each grid will be the size of a mushroom (16 pixels)
 
 ///each mushroom is 16x16 pixels in height (subject to change depending on scale size)
@@ -17,19 +17,22 @@ enum class GameGridEnum;
 class GameGrid
 {
 public:
-	static GameGrid *GetInstance();
-
 	///set the grid regardless of what is there (typically when a critter gets destroyed)
-	void SetGridStatus(sf::Vector2f v, GameGridEnum e);
+	static void SetGridStatus(sf::Vector2f v, GameGridEnum e);
 
 	///this method will attempt to set the grid using a location on the map
-	bool AttemptToSetGrid(sf::Vector2f v, GameGridEnum e);
+	static bool AttemptToSetGrid(sf::Vector2f v, GameGridEnum e);
 
-	GameGridEnum GetGridStatus(sf::Vector2f v);
+	static GameGridEnum GetGridStatus(sf::Vector2f v);
 	///the purpose of this function is to set the sprite in the middle of the grid, so minimal sprite collision occurs
-	void GetCenterGridPosition(sf::Vector2f & pos);
+	static void GetCenterGridPosition(sf::Vector2f & pos);
+
+	///this functions purpose is centered around critters, who dont care about their X pos, but need to be centered in the Y without altering X
+	static void GetCenterYPosition(sf::Vector2f &pos);
 
 private:
+	static GameGrid *GetInstance();
+	
 	GameGrid();
 	~GameGrid();
 	GameGrid &operator=(const GameGrid &c) = delete;
