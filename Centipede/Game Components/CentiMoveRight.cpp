@@ -1,11 +1,12 @@
 #include "CentiMovement.h"
 
-CentiMoveRight::CentiMoveRight(CentipedeHead * centi)
+CentiMoveRight::CentiMoveRight(CentipedeHead * centi, sf::Vector2f &pos)
 	:centipede(centi) 
 {
 	this->centipede->SetAnimationFrames(SPRITE_BEGIN, SPRITE_END);
 	this->prevState = this->centipede->GetCurrentMovementDirection();
 	this->centipede->SetSpriteRotation(180.f);
+	GameGrid::GetCenterYPosition(pos);
 }
 
 void CentiMoveRight::MoveDirection(sf::Vector2f &pos)

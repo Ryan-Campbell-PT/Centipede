@@ -50,6 +50,7 @@ private:
 ///this enum will be used so there is no need to delete movements throuhgout the game loop
 enum class CentiMovementDirectionEnum
 {
+	Error = -1,
 	Left,
 	Right,
 	Down,

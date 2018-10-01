@@ -29,10 +29,10 @@ void CentiMoveDown::NextState()
 	}
 
 	else if (prevState == CentiMovementDirectionEnum::Left) //go right
-		this->centipede->SetDirection(new CentiMoveRight(this->centipede));
+		this->centipede->SetDirection(new CentiMoveRight(this->centipede, this->centipede->GetPosition()));
 
 	else
-		this->centipede->SetDirection(new CentiMoveLeft(this->centipede));
+		this->centipede->SetDirection(new CentiMoveLeft(this->centipede, this->centipede->GetPosition()));
 }
 
 CentiMovementDirectionEnum CentiMoveDown::GetDirectionEnum()

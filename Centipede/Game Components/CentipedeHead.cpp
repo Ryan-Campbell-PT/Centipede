@@ -17,7 +17,7 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	SetCollider(this->sprite, this->bitmap, true);
 	RegisterCollision<CentipedeHead>(*this);
 
-	this->currentDirectionState = new CentiMoveLeft(this);
+	this->currentDirectionState = new CentiMoveLeft(this, this->position);
 }
 
 void CentipedeHead::Update()
@@ -49,6 +49,7 @@ CentiMovementDirectionEnum CentipedeHead::GetCurrentMovementDirection()
 {
 	if(this->currentDirectionState)
 		 return this->currentDirectionState->GetDirectionEnum();
+	return CentiMovementDirectionEnum::Error;
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)

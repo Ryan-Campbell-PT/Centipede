@@ -44,7 +44,9 @@ void GameGrid::GetCenterGridPosition(sf::Vector2f & pos)
 
 void GameGrid::GetCenterYPosition(sf::Vector2f & pos)
 {
+	ConsoleMsg::WriteLine("Before change: " + Tools::ToString(pos.y));
 	pos.y = static_cast<float>(static_cast<int>(pos.y / SPRITE_SIZE) * SPRITE_SIZE + (SPRITE_SIZE / 2));
+	ConsoleMsg::WriteLine("After change: " + Tools::ToString(pos.y));
 }
 
 bool GameGrid::AttemptToSetGrid(sf::Vector2f v, GameGridEnum e)

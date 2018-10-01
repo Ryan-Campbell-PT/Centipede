@@ -8,7 +8,8 @@ enum class CentiMovementDirectionEnum;
 class CentiMoveRight : public CentipedeDirectionState
 {
 public:
-	CentiMoveRight(CentipedeHead *centi);
+	///my choice to add the position to the constructor is to center it in the grid as the centipede starts moving
+	CentiMoveRight(CentipedeHead *centi, sf::Vector2f &pos);
 
 	virtual void MoveDirection(sf::Vector2f &pos) override;
 	virtual void NextState() override;
