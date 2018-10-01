@@ -2,11 +2,13 @@
 #define CENTIHEAD_H
 
 #include "TEAL/CommonElements.h"
+#include <vector>
 
 #define SPRITE_BEGIN 0
 #define SPRITE_END 7
 #define SPRITE_TURN_BEGIN 8
 #define SPRITE_TURN_END 15
+#define DIRECTION_SIZE sizeof(CentiMovementDirectionEnum)
 
 class CentipedeDirectionState;
 class CentipedeBody;
@@ -29,10 +31,12 @@ public:
 
 	CentiMovementDirectionEnum GetCurrentMovementDirection();
 	void CheckGridAhead(sf::Vector2f pos);
-	void SetDirection(CentipedeDirectionState *direction);
+	void SetDirection(CentiMovementDirectionEnum direction);
 	void SetSpriteRotation(const float &rotation);
 
 private:
+	void SetupStates();
+
 	///the state will determine what direction the centipede is going when spawned
 	///this state is to reduce the number of if statements being checked, and just
 	///going in the direction it needs to unless something happens
@@ -42,7 +46,8 @@ private:
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
-	CentipedeDirectionState * currentDirectionState;
+	CentipedeDirectionState *currentDirectionState;
+	std::vector<CentipedeDirectionState*> directionArray;
 
 	unsigned int animationCounter;
 };
@@ -51,9 +56,9 @@ private:
 enum class CentiMovementDirectionEnum
 {
 	Error = -1,
-	Left,
-	Right,
-	Down,
-	Up
+	Left = 0,
+	Right = 1,
+	Down = 2,
+	Up = 3
 };
 #endif //CENTIHEAD_H

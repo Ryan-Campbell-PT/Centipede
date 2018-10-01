@@ -1,7 +1,7 @@
 #include "CentipedeHead.h"
 #include "CentiMovement.h"
 #include "GameGrid.h"
-
+#include <list>
 CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	:bodys(0), position(pos), currentDirectionState(0), animationCounter(0)
 {
@@ -17,7 +17,8 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	SetCollider(this->sprite, this->bitmap, true);
 	RegisterCollision<CentipedeHead>(*this);
 
-	this->currentDirectionState = new CentiMoveLeft(this, this->position);
+	this->SetupStates();
+	this->SetDirection(CentiMovementDirectionEnum::Left);
 }
 
 void CentipedeHead::Update()
@@ -26,7 +27,7 @@ void CentipedeHead::Update()
 	this->currentDirectionState->MoveDirection(this->position);
 	this->sprite.setPosition(this->position);
 
-	if(this->animationCounter % 3 == 0)
+	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
 }
 
@@ -47,8 +48,8 @@ void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFr
 
 CentiMovementDirectionEnum CentipedeHead::GetCurrentMovementDirection()
 {
-	if(this->currentDirectionState)
-		 return this->currentDirectionState->GetDirectionEnum();
+	if (this->currentDirectionState)
+		return this->currentDirectionState->GetDirectionEnum();
 	return CentiMovementDirectionEnum::Error;
 }
 
@@ -63,13 +64,46 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 		this->currentDirectionState->NextState();
 }
 
-void CentipedeHead::SetDirection(CentipedeDirectionState * direction)
+void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
 {
-	//delete this->currentDirectionState;
-	this->currentDirectionState = direction;
+	CentipedeDirectionState *f;
+	switch (direction)
+	{
+	case CentiMovementDirectionEnum::Up:
+		f = directionArray[static_cast<int>(CentiMovementDirectionEnum::Up)];
+		f->Initialize(this);
+		break;
+
+	case CentiMovementDirectionEnum::Down:
+		f = directionArray[static_cast<int>(CentiMovementDirectionEnum::Down)];
+		f->Initialize(this);
+		break;
+
+	case CentiMovementDirectionEnum::Left:
+		f = directionArray[static_cast<int>(CentiMovementDirectionEnum::Left)];
+		static_cast<CentiMoveLeft*>(f)->Initialize(this, this->position);
+		break;
+
+	case CentiMovementDirectionEnum::Right:
+		f = directionArray[static_cast<int>(CentiMovementDirectionEnum::Right)];
+		static_cast<CentiMoveRight*>(f)->Initialize(this, this->position);
+		break;
+	}
+
+	this->currentDirectionState = f;
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
 {
 	this->sprite.setRotation(rotation);
+}
+
+void CentipedeHead::SetupStates()
+{
+	directionArray.reserve(DIRECTION_SIZE);
+	
+	directionArray.push_back(new CentiMoveLeft);
+	directionArray.push_back(new CentiMoveRight);
+	directionArray.push_back(new CentiMoveDown);
+	directionArray.push_back(new CentiMoveUp);
 }

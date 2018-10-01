@@ -1,12 +1,7 @@
 #include "CentiMovement.h"
 
-CentiMoveLeft::CentiMoveLeft(CentipedeHead * centi, sf::Vector2f &pos)
-	:centipede(centi)
+CentiMoveLeft::CentiMoveLeft()
 {
-	this->centipede->SetAnimationFrames(SPRITE_BEGIN, SPRITE_END);
-	this->prevState = this->centipede->GetCurrentMovementDirection();
-	this->centipede->SetSpriteRotation(0.f);
-	GameGrid::GetCenterYPosition(pos);
 }
 
 void CentiMoveLeft::MoveDirection(sf::Vector2f &pos)
@@ -20,16 +15,31 @@ void CentiMoveLeft::MoveDirection(sf::Vector2f &pos)
 void CentiMoveLeft::NextState()
 {
 	if (prevState == CentiMovementDirectionEnum::Up)
-		this->centipede->SetDirection(new CentiMoveUp(this->centipede));
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Up);
 	else
-		this->centipede->SetDirection(new CentiMoveDown(this->centipede));
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Down);
 
 	this->centipede->SetAnimationFrames(SPRITE_TURN_BEGIN, SPRITE_TURN_END);
+}
+
+void CentiMoveLeft::Initialize(CentipedeHead * centi, sf::Vector2f & pos)
+{
+	this->Initialize(centi);
+
+	GameGrid::GetCenterYPosition(pos);
 }
 
 CentiMovementDirectionEnum CentiMoveLeft::GetDirectionEnum()
 {
 	return CentiMovementDirectionEnum::Left;
+}
+
+void CentiMoveLeft::Initialize(CentipedeHead * centi)
+{
+	this->centipede = centi;
+	this->centipede->SetAnimationFrames(SPRITE_BEGIN, SPRITE_END);
+	this->prevState = this->centipede->GetCurrentMovementDirection();
+	this->centipede->SetSpriteRotation(0.f);
 }
 
 //CentiMoveLeft::~CentiMoveLeft()

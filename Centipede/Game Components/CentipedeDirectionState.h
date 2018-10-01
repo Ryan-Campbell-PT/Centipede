@@ -17,6 +17,10 @@ public:
 	virtual void NextState() = 0;
 	///because we arent able to return the actual instance of the CentiDirection, we return an enum instead
 	virtual CentiMovementDirectionEnum GetDirectionEnum() = 0;
+
+	virtual void Initialize(CentipedeHead *centi) {};
+	//virtual void Initialize(CentipedeHead *centi, sf::Vector2f &pos) {};
+
 protected:
 	///removing destructor because linker doesnt like it
 	//virtual ~CentipedeDirectionState() = 0; 

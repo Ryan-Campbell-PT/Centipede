@@ -1,12 +1,7 @@
 #include "CentiMovement.h"
 
-CentiMoveDown::CentiMoveDown(CentipedeHead * centi)
-	:centipede(centi), counter(0)
+CentiMoveDown::CentiMoveDown()
 {
-	//when we start moving down, we store where we were moving last,
-	//then when we move states, we can move the opposite of where we were last moving
-	this->prevState = this->centipede->GetCurrentMovementDirection();
-	this->centipede->SetSpriteRotation(270.f);
 }
 
 void CentiMoveDown::MoveDirection(sf::Vector2f &pos)
@@ -25,14 +20,24 @@ void CentiMoveDown::NextState()
 	if (this->centipede->GetPosition().y > static_cast<float>(WindowManager::MainWindow.getSize().y - SPRITE_SIZE))
 	{
 		ConsoleMsg::WriteLine("Max bottom");
-		this->centipede->SetDirection(new CentiMoveUp(this->centipede));
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Up);
 	}
 
 	else if (prevState == CentiMovementDirectionEnum::Left) //go right
-		this->centipede->SetDirection(new CentiMoveRight(this->centipede, this->centipede->GetPosition()));
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Left);
 
 	else
-		this->centipede->SetDirection(new CentiMoveLeft(this->centipede, this->centipede->GetPosition()));
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Right);
+}
+
+void CentiMoveDown::Initialize(CentipedeHead * centi)
+{
+	//when we start moving down, we store where we were moving last,
+	//then when we move states, we can move the opposite of where we were last moving
+	this->centipede = centi;
+	this->counter = 0;
+	this->prevState = this->centipede->GetCurrentMovementDirection();
+	this->centipede->SetSpriteRotation(270.f);
 }
 
 CentiMovementDirectionEnum CentiMoveDown::GetDirectionEnum()

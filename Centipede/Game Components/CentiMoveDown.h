@@ -8,10 +8,11 @@ enum class CentiMovementDirectionEnum;
 class CentiMoveDown : public CentipedeDirectionState
 {
 public:
-	CentiMoveDown(CentipedeHead *centi);
+	CentiMoveDown();
 
 	virtual void MoveDirection(sf::Vector2f &pos) override;
 	virtual void NextState() override;
+	virtual void Initialize(CentipedeHead *centi) override;
 
 	virtual CentiMovementDirectionEnum GetDirectionEnum() override;
 private:
