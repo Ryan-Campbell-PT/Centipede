@@ -17,7 +17,10 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	RegisterCollision<CentipedeHead>(*this);
 
 	this->SetupStates();
-	this->SetDirection(CentiMovementDirectionEnum::Left);
+
+	auto f = static_cast<CentiMoveLeft*>(this->GetDirection(CentiMovementDirectionEnum::Left));
+	this->SetDirection(f);
+	f->Initialize(this, this->position);
 }
 
 void CentipedeHead::Update()
@@ -65,6 +68,7 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 
 void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
 {
+#if WORKING
 	CentipedeDirectionState *f;
 	switch (direction)
 	{
@@ -90,6 +94,7 @@ void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
 	}
 
 	this->currentDirectionState = f;
+#endif
 }
 
 void CentipedeHead::SetDirection(CentipedeDirectionState * direction)

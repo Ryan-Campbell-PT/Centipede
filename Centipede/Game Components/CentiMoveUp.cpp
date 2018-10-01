@@ -7,8 +7,8 @@ CentiMoveUp::CentiMoveUp()
 
 void CentiMoveUp::MoveDirection(sf::Vector2f &pos)
 {
-	pos.y -= CENTI_MOVEMENT;
-	counter += CENTI_MOVEMENT;
+	pos.y -= CENTI_SPEED;
+	counter += CENTI_SPEED;
 
 	if (this->counter >= SPRITE_SIZE)
 		this->NextState();
@@ -18,11 +18,35 @@ void CentiMoveUp::MoveDirection(sf::Vector2f &pos)
 
 void CentiMoveUp::NextState()
 {
+#if WORKING
 	if (prevState == CentiMovementDirectionEnum::Left) //go right
 		this->centipede->SetDirection(CentiMovementDirectionEnum::Right);
 
 	else
 		this->centipede->SetDirection(CentiMovementDirectionEnum::Left);
+
+#else
+	if (this->centipede->GetPosition().y > static_cast<float>(WindowManager::MainWindow.getSize().y - SPRITE_SIZE))
+	{
+		ConsoleMsg::WriteLine("Max bottom");
+		this->centipede->SetDirection(CentiMovementDirectionEnum::Up);
+	}
+
+	else if (prevState == CentiMovementDirectionEnum::Left) //if you were prev travelling left, you wanna go right after
+	{
+		auto *direction = static_cast<CentiMoveRight*>(this->centipede->GetDirection(CentiMovementDirectionEnum::Right));
+		direction->Initialize(this->centipede, this->centipede->GetPosition());
+		this->centipede->SetDirection(direction);
+	}
+
+	else
+	{
+		auto *direction = static_cast<CentiMoveLeft*>(this->centipede->GetDirection(CentiMovementDirectionEnum::Left));
+		direction->Initialize(this->centipede, this->centipede->GetPosition());
+		this->centipede->SetDirection(direction);
+	}
+
+#endif
 }
 
 void CentiMoveUp::Initialize(CentipedeHead * centi)

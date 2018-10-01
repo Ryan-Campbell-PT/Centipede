@@ -10,5 +10,6 @@
 #include "CentipedeHead.h"
 #include "GameGrid.h"
 
-#define CENTI_MOVEMENT 2
+#define CENTI_SPEED 2
+#define WORKING false
 #endif // !CENTIMOVEMENT_H
