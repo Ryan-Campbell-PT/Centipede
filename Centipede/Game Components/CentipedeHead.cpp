@@ -92,15 +92,28 @@ void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
 	this->currentDirectionState = f;
 }
 
+void CentipedeHead::SetDirection(CentipedeDirectionState * direction)
+{
+	this->currentDirectionState = direction;
+}
+
 void CentipedeHead::SetSpriteRotation(const float & rotation)
 {
 	this->sprite.setRotation(rotation);
 }
 
+CentipedeDirectionState * CentipedeHead::GetDirection(CentiMovementDirectionEnum direction)
+{
+	if (static_cast<int>(direction) >= 0 && static_cast<int>(direction) < DIRECTION_SIZE)
+		return this->directionArray[static_cast<int>(direction)];
+	else
+		return nullptr;
+}
+
 void CentipedeHead::SetupStates()
 {
 	directionArray.reserve(DIRECTION_SIZE);
-	
+
 	directionArray.push_back(new CentiMoveLeft);
 	directionArray.push_back(new CentiMoveRight);
 	directionArray.push_back(new CentiMoveDown);

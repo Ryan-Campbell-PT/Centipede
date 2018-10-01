@@ -13,7 +13,7 @@ void CentiMoveUp::MoveDirection(sf::Vector2f &pos)
 	if (this->counter >= SPRITE_SIZE)
 		this->NextState();
 
-	this->centipede->CheckGridAhead(sf::Vector2f(pos.x, pos.y + SPRITE_SIZE));
+	//this->centipede->CheckGridAhead(sf::Vector2f(pos.x, pos.y + SPRITE_SIZE));
 }
 
 void CentiMoveUp::NextState()
