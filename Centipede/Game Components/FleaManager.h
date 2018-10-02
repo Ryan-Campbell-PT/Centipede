@@ -1,7 +1,7 @@
 #ifndef FLEA_MANAGER
 #define FLEA_MANAGER
 
-#include "Observee.h"
+#include "Observer.h"
 
 class Flea;
 

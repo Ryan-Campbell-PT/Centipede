@@ -177,8 +177,8 @@
     <ClInclude Include="Game Components\LeftSpiderState.h" />
     <ClInclude Include="Game Components\Mushroom.h" />
     <ClInclude Include="Game Components\MushroomFactory.h" />
-    <ClInclude Include="Game Components\Observee.h" />
     <ClInclude Include="Game Components\Observer.h" />
+    <ClInclude Include="Game Components\Observee.h" />
     <ClInclude Include="Game Components\RightSpiderState.h" />
     <ClInclude Include="Game Components\Scorpion.h" />
     <ClInclude Include="Game Components\ScorpionFactory.h" />
