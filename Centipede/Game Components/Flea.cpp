@@ -86,6 +86,11 @@ void Flea::AttemptSpawnMushroom()
 		MushroomFactory::SpawnMushroom(this->position);
 }
 
+sf::Vector2f Flea::GetPosition()
+{
+	return position;
+}
+
 
 void Flea::RemoveFlea()
 {

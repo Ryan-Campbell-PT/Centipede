@@ -107,6 +107,8 @@
     <ClCompile Include="Game Components\LeftSpiderState.cpp" />
     <ClCompile Include="Game Components\Mushroom.cpp" />
     <ClCompile Include="Game Components\MushroomFactory.cpp" />
+    <ClCompile Include="Game Components\MushroomManager.cpp" />
+    <ClCompile Include="Game Components\MushroomPool.cpp" />
     <ClCompile Include="Game Components\RightSpiderState.cpp" />
     <ClCompile Include="Game Components\Scorpion.cpp" />
     <ClCompile Include="Game Components\ScorpionFactory.cpp" />
@@ -177,6 +179,8 @@
     <ClInclude Include="Game Components\LeftSpiderState.h" />
     <ClInclude Include="Game Components\Mushroom.h" />
     <ClInclude Include="Game Components\MushroomFactory.h" />
+    <ClInclude Include="Game Components\MushroomManager.h" />
+    <ClInclude Include="Game Components\MushroomPool.h" />
     <ClInclude Include="Game Components\Observer.h" />
     <ClInclude Include="Game Components\Observee.h" />
     <ClInclude Include="Game Components\RightSpiderState.h" />

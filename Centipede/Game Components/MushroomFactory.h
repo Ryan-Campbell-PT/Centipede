@@ -40,8 +40,6 @@ private:
 
 	static MushroomFactory* instance;
 
-	std::list<Mushroom*> inactiveMushroomList; ///this list will be used for recycling purposes
-	std::list<Mushroom*> activeMushroomList; ///this list will be used for purposes like healing broken mushrooms at new level
 	std::list<Observer*> obsererList; ///keep track of all the observee's paying attention to the factory
 
 	static MushroomFactory *GetInstance();

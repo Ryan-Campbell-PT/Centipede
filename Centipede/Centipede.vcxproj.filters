@@ -279,6 +279,12 @@
     <ClCompile Include="Game Components\FleaManager.cpp">
       <Filter>Source Files\Game Components\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\MushroomManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\MushroomPool.cpp">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -526,6 +532,12 @@
     </ClInclude>
     <ClInclude Include="Game Components\Observer.h">
       <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\MushroomManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\MushroomPool.h">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include "TEAL/CommonElements.h"
 #include "FleaState.h"
 #include "FleaState2.h"
+#include "GameGrid.h"
 
 class FleaState1 : public FleaState
 {
@@ -23,10 +24,12 @@ public:
 
 	virtual void StateAction() override
 	{
-		//this spawning method is very ineffecient atm, will fix later
-		if (rand() % 3 == 0)
-			flea->AttemptSpawnMushroom();
-
+		if (static_cast<int>(flea->GetPosition().y) % SPRITE_SIZE == 0)
+		{
+			//this spawning method is very ineffecient atm, will fix later
+			if (rand() % 3 == 0)
+				flea->AttemptSpawnMushroom();
+		}
 	}
 
 private:
