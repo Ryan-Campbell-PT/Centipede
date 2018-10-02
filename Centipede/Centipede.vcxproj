@@ -99,6 +99,8 @@
     <ClCompile Include="Game Components\FinalScore.cpp" />
     <ClCompile Include="Game Components\Flea.cpp" />
     <ClCompile Include="Game Components\FleaFactory.cpp" />
+    <ClCompile Include="Game Components\FleaManager.cpp" />
+    <ClCompile Include="Game Components\FleaPool.cpp" />
     <ClCompile Include="Game Components\GameController.cpp" />
     <ClCompile Include="Game Components\GameGrid.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
@@ -162,6 +164,8 @@
     <ClInclude Include="Game Components\FinalScore.h" />
     <ClInclude Include="Game Components\Flea.h" />
     <ClInclude Include="Game Components\FleaFactory.h" />
+    <ClInclude Include="Game Components\FleaManager.h" />
+    <ClInclude Include="Game Components\FleaPool.h" />
     <ClInclude Include="Game Components\FleaState.h" />
     <ClInclude Include="Game Components\FleaState1.h" />
     <ClInclude Include="Game Components\FleaState2.h" />
