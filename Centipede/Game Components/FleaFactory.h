@@ -4,17 +4,16 @@
 #include "TEAL/CommonElements.h"
 #include "Observee.h"
 
-#define SPAWN_FLEA_NUM 29
-
 class Flea;
+class FleaManager;
 
-class FleaFactory : public Observer
+class FleaFactory
 {
 public:
-	static void InitializeFlea();
-	static void SpawnFlea();
-
-	virtual void ObserverUpdate(int numShrooms) override;
+	///will talk with the FleaPool to get a flea that can be spawned
+	///and will spawn a flea in that location
+	///the manager is just to confirm only the manager is spawning the flea
+	static void SpawnFlea(const FleaManager * const manager, sf::Vector2f const &pos);
 
 private:
 	static FleaFactory *GetInstance();
@@ -24,7 +23,6 @@ private:
 	FleaFactory &operator=(const FleaFactory &c) = delete;
 	FleaFactory(const FleaFactory &c) = delete;
 	
-	Flea *flea; //for now it is a single pointer, not sure if multiple flea can be on screen
 	static FleaFactory * instance;
 };
 

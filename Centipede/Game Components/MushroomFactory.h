@@ -4,7 +4,7 @@
 #include <list>
 
 #include "Factory.h"
-#include "Observer.h"
+#include "Observee.h"
 #include "TEAL/CommonElements.h"
 
 class Mushroom;
@@ -42,7 +42,7 @@ private:
 
 	std::list<Mushroom*> inactiveMushroomList; ///this list will be used for recycling purposes
 	std::list<Mushroom*> activeMushroomList; ///this list will be used for purposes like healing broken mushrooms at new level
-	std::list<Observer*> obsereeList; ///keep track of all the observee's paying attention to the factory
+	std::list<Observer*> obsererList; ///keep track of all the observee's paying attention to the factory
 
 	static MushroomFactory *GetInstance();
 

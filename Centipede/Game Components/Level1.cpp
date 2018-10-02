@@ -10,7 +10,7 @@
 #include "MushroomFactory.h"
 #include "GameGrid.h"
 #include "CentipedeHead.h"
-#include "FleaFactory.h"
+#include "FleaManager.h"
 #include "Flea.h"
 #include "Scorpion.h"
 #include "ScorpionFactory.h"
@@ -29,7 +29,7 @@ void Level1::Initialize()
 
 	MushroomFactory::InitializeMushroomField(30);
 	
-	FleaFactory::InitializeFlea();
+	FleaManager::InitializeFlea();
 	ScorpionFactory::InititalizeScorpion();
 	
 	SpiderFactory::InitializeSpider();

@@ -8,15 +8,20 @@ FleaPool::FleaPool()
 
 }
 
-Flea * FleaPool::GetRecycledFlea()
+Flea * FleaPool::GetFlea()
 {
-	//acquire a flea from the lisit
-	auto flea = GetInstance()->fleaList.back();
+	Flea* flea;
 
-	if (flea != 0)
-		GetInstance()->fleaList.pop_back(); //remove from list, dont want to pop nothing
+	if (GetInstance()->fleaList.size() == 0)
+		flea = new Flea;
 
-	return flea; //return the flea or the nullptr
+	else
+	{
+		flea = GetInstance()->fleaList.front();
+		GetInstance()->fleaList.pop_front();
+	}
+
+	return flea;
 }
 
 void FleaPool::RecycleFlea(Flea * flea)

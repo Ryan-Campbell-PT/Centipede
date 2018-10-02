@@ -2,7 +2,7 @@
 #include "MushroomFactory.h"
 #include "Mushroom.h"
 #include "GameGrid.h"
-#include "Observee.h"
+#include "Observer.h"
 
 #include <random>
 
@@ -32,7 +32,7 @@ void MushroomFactory::RemoveCurrentObserver(Observer * o)
 
 void MushroomFactory::UpdateObservees()
 {
-	for (auto o : this->obsereeList)
+	for (auto o : this->obsererList)
  		o->ObserverUpdate(this->activeMushroomList.size());
 }
 
@@ -57,7 +57,7 @@ void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
 
 void MushroomFactory::AddObservee(Observer * o)
 {
-	this->obsereeList.push_back(o);
+	this->obsererList.push_back(o);
 }
 
 void MushroomFactory::RemoveObservee(Observer * o)
