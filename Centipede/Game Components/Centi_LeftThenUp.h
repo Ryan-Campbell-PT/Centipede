@@ -8,8 +8,8 @@ class Centipede;
 class Centi_LeftThenUp : public CentipedeDirectionState
 {
 public:
-	virtual void MoveDirection(sf::Vector2f &pos) = 0;
-	virtual void NextState() = 0;
+	virtual void MoveDirection(sf::Vector2f &pos);
+	virtual const CentipedeDirectionState* NextState();
 	virtual void Initialize(CentipedeHead *centi) {};
 
 private:

@@ -91,6 +91,7 @@
     <ClCompile Include="Game Components\BulletFactory.cpp" />
     <ClCompile Include="Game Components\CentiMoveDown.cpp" />
     <ClCompile Include="Game Components\CentiMoveLeft.cpp" />
+    <ClCompile Include="Game Components\CentiMovement.cpp" />
     <ClCompile Include="Game Components\CentiMoveRight.cpp" />
     <ClCompile Include="Game Components\CentiMoveUp.cpp" />
     <ClCompile Include="Game Components\CentipedeHead.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Game Components\KeyboardCommand.h" />
     <ClInclude Include="Game Components\KeyboardIncludes.h" />
     <ClInclude Include="Game Components\LeftSpiderState.h" />
+    <ClInclude Include="Game Components\MoveFSM.h" />
     <ClInclude Include="Game Components\Mushroom.h" />
     <ClInclude Include="Game Components\MushroomFactory.h" />
     <ClInclude Include="Game Components\Observee.h" />
