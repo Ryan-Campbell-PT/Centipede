@@ -1,10 +1,21 @@
 #include "Centi_RightThenDown.h"
+#include "CentipedeHead.h"
+
+Centi_RightThenDown::Centi_RightThenDown()
+	:centi(0)
+{
+}
 
 void Centi_RightThenDown::MoveDirection(sf::Vector2f & pos)
 {
+	pos.x += CENTI_SPEED;
+
+	if (static_cast<int>(pos.x) % (SPRITE_SIZE / 2) == 0)
+		this->centi->CheckGridAhead(sf::Vector2f(pos.x + SPRITE_SIZE, pos.y));
 }
 
 const CentipedeDirectionState * Centi_RightThenDown::NextState()
 {
-	return nullptr;
+	this->centi->SetSpriteRotation(270.f);
+	return &MoveSFM::downThenLeft;
 }

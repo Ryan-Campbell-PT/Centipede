@@ -1,4 +1,5 @@
 #include "Centi_UpThenRight.h"
+#include "CentipedeHead.h"
 
 void Centi_UpThenRight::MoveDirection(sf::Vector2f & pos)
 {
@@ -6,10 +7,6 @@ void Centi_UpThenRight::MoveDirection(sf::Vector2f & pos)
 
 const CentipedeDirectionState * Centi_UpThenRight::NextState()
 {
-	auto f = new Centi_DownThenLeft;
-	auto r = &MoveSFM::downThenLeft;
-	
-	
-	return r;
-
+	this->centi->SetSpriteRotation(180.f);
+	return &MoveSFM::rightThenUp;
 }

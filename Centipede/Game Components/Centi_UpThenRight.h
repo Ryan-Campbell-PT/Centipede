@@ -3,7 +3,7 @@
 
 #include "CentiMovement.h"
 
-class Centipede;
+class CentipedeHead;
 
 class Centi_UpThenRight : public CentipedeDirectionState
 {
@@ -13,7 +13,7 @@ public:
 	virtual void Initialize(CentipedeHead *centi) {};
 
 private:
-	Centipede * centi;
+	CentipedeHead * centi;
 };
 
 #endif // !CENTI_UP_THEN_RIGHT

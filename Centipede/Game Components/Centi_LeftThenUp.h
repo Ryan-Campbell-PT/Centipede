@@ -3,17 +3,18 @@
 
 #include "CentiMovement.h"
 
-class Centipede;
+class CentipedeHead;
 
 class Centi_LeftThenUp : public CentipedeDirectionState
 {
 public:
+	Centi_LeftThenUp();
 	virtual void MoveDirection(sf::Vector2f &pos);
 	virtual const CentipedeDirectionState* NextState();
 	virtual void Initialize(CentipedeHead *centi) {};
 
 private:
-	Centipede * centi;
+	CentipedeHead * centi;
 };
 
 #endif // !CENTI_LEFT_THEN_UP
