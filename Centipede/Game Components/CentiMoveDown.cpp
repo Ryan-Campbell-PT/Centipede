@@ -14,7 +14,7 @@ void CentiMoveDown::MoveDirection(sf::Vector2f &pos)
 
 	//this->centipede->CheckGridAhead(sf::Vector2f(pos.x, pos.y + SPRITE_SIZE));
 }
-
+/*
 void CentiMoveDown::NextState()
 {
 #if WORKING
@@ -69,7 +69,7 @@ CentiMovementDirectionEnum CentiMoveDown::GetDirectionEnum()
 {
 	return CentiMovementDirectionEnum::Down;
 }
-
+*/
 //CentiMoveDown::~CentiMoveDown()
 //{
 //}

@@ -11,10 +11,10 @@ public:
 	CentiMoveDown();
 
 	virtual void MoveDirection(sf::Vector2f &pos) override;
-	virtual void NextState() override;
-	virtual void Initialize(CentipedeHead *centi) override;
+	//virtual void NextState() override;
+	//virtual void Initialize(CentipedeHead *centi) override;
 
-	virtual CentiMovementDirectionEnum GetDirectionEnum() override;
+	//virtual CentiMovementDirectionEnum GetDirectionEnum() override;
 private:
 	CentipedeHead * centipede;
 	CentiMovementDirectionEnum prevState;

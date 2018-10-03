@@ -16,11 +16,13 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	SetCollider(this->sprite, this->bitmap, true);
 	RegisterCollision<CentipedeHead>(*this);
 
-	this->SetupStates();
+	//this->SetupStates();
 
-	auto f = static_cast<CentiMoveLeft*>(this->GetDirection(CentiMovementDirectionEnum::Left));
-	this->SetDirection(f);
-	f->Initialize(this, this->position);
+	//auto f = static_cast<CentiMoveLeft*>(this->GetDirection(CentiMovementDirectionEnum::Left));
+	//this->SetDirection(f);
+	//f->Initialize(this, this->position);
+
+
 }
 
 void CentipedeHead::Update()
@@ -50,8 +52,8 @@ void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFr
 
 CentiMovementDirectionEnum CentipedeHead::GetCurrentMovementDirection()
 {
-	if (this->currentDirectionState)
-		return this->currentDirectionState->GetDirectionEnum();
+//	if (this->currentDirectionState)
+//		return this->currentDirectionState->GetDirectionEnum();
 	return CentiMovementDirectionEnum::Error;
 }
 
@@ -117,10 +119,10 @@ CentipedeDirectionState * CentipedeHead::GetDirection(CentiMovementDirectionEnum
 
 void CentipedeHead::SetupStates()
 {
-	directionArray.reserve(DIRECTION_SIZE);
+/*	directionArray.reserve(DIRECTION_SIZE);
 
 	directionArray.push_back(new CentiMoveLeft);
 	directionArray.push_back(new CentiMoveRight);
 	directionArray.push_back(new CentiMoveDown);
-	directionArray.push_back(new CentiMoveUp);
+	directionArray.push_back(new CentiMoveUp);*/
 }

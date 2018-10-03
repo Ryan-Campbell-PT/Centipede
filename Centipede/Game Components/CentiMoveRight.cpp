@@ -11,7 +11,7 @@ void CentiMoveRight::MoveDirection(sf::Vector2f &pos)
 	if (static_cast<int>(pos.x) % (SPRITE_SIZE / 2) == 0)
 		this->centipede->CheckGridAhead(sf::Vector2f(pos.x + SPRITE_SIZE, pos.y));
 }
-
+/*
 void CentiMoveRight::NextState()
 {
 #if WORKING
@@ -59,7 +59,7 @@ void CentiMoveRight::Initialize(CentipedeHead * centi)
 	this->prevState = this->centipede->GetCurrentMovementDirection();
 	this->centipede->SetSpriteRotation(180.f);
 }
-
+*/
 //CentiMoveRight::~CentiMoveRight()
 //{
 //}
