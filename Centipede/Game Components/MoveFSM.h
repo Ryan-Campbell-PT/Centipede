@@ -1,3 +1,7 @@
+#ifndef MOVE_FSM
+#define MOVE_FSM
+
+
 #include "CentiMovement.h"
 #include "CentipedeDirectionState.h"
 
@@ -21,3 +25,5 @@ struct MoveSFM
 	static const Centi_LeftThenDown	 leftThenDown;
 	static const Centi_LeftThenUp	 leftThenUp;
 };
+
+#endif // !MOVE_FSM

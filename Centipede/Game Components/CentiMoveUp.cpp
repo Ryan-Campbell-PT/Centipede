@@ -1,4 +1,4 @@
-#include "CentiMovement.h"
+/*#include "CentiMovement.h"
 
 
 CentiMoveUp::CentiMoveUp()
@@ -15,7 +15,7 @@ void CentiMoveUp::MoveDirection(sf::Vector2f &pos)
 
 	//this->centipede->CheckGridAhead(sf::Vector2f(pos.x, pos.y + SPRITE_SIZE));
 }
-/*
+
 void CentiMoveUp::NextState()
 {
 #if WORKING

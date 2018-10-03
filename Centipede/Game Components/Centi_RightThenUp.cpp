@@ -6,7 +6,7 @@ Centi_RightThenUp::Centi_RightThenUp()
 {
 }
 
-void Centi_RightThenUp::MoveDirection(sf::Vector2f & pos)
+void Centi_RightThenUp::MoveDirection(sf::Vector2f & pos) const
 {
 	pos.x += CENTI_SPEED;
 
@@ -14,7 +14,7 @@ void Centi_RightThenUp::MoveDirection(sf::Vector2f & pos)
 		this->centi->CheckGridAhead(sf::Vector2f(pos.x + SPRITE_SIZE, pos.y));
 }
 
-const CentipedeDirectionState* Centi_RightThenUp::NextState()
+const CentipedeDirectionState* Centi_RightThenUp::NextState() const
 {
 	this->centi->SetSpriteRotation(90.f);
 	return &MoveSFM::upThenLeft;

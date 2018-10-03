@@ -1,4 +1,4 @@
-#ifndef CENTIRIGHT_H
+/*#ifndef CENTIRIGHT_H
 #define CENTIRIGHT_H
 
 #include "CentipedeDirectionState.h"
@@ -25,4 +25,4 @@ private:
 };
 
 
-#endif //CENTIRIGHT_H
+#endif //CENTIRIGHT_H*/

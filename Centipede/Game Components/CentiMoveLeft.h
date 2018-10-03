@@ -1,4 +1,4 @@
-#ifndef CENTILEFT_H
+/*#ifndef CENTILEFT_H
 #define CENTILEFT_H
 
 #include "CentipedeDirectionState.h"
@@ -24,4 +24,4 @@ private:
 	CentiMovementDirectionEnum prevState;
 };
 
-#endif //CENTILEFT_H
+#endif //CENTILEFT_H*/

@@ -32,7 +32,7 @@ public:
 	CentiMovementDirectionEnum GetCurrentMovementDirection();
 	void CheckGridAhead(sf::Vector2f pos);
 	void SetDirection(CentiMovementDirectionEnum direction);
-	void SetDirection(CentipedeDirectionState * direction);
+	void SetDirection(const CentipedeDirectionState * direction);
 	void SetSpriteRotation(const float &rotation);
 
 	CentipedeDirectionState *GetDirection(CentiMovementDirectionEnum direction);
@@ -49,7 +49,7 @@ private:
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
-	CentipedeDirectionState *currentDirectionState;
+	const CentipedeDirectionState *currentDirectionState;
 	std::vector<CentipedeDirectionState*> directionArray;
 
 	unsigned int animationCounter;

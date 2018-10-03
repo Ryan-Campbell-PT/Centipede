@@ -9,8 +9,8 @@ class Centi_LeftThenDown : public CentipedeDirectionState
 {
 public:
 	Centi_LeftThenDown();
-	virtual void MoveDirection(sf::Vector2f &pos);
-	virtual const CentipedeDirectionState* NextState();
+	virtual void MoveDirection(sf::Vector2f &pos) const override;
+	virtual const CentipedeDirectionState* NextState() const override;
 	virtual void Initialize(CentipedeHead *centi) {};
 
 private:

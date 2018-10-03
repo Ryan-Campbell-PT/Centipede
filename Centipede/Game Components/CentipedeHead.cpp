@@ -2,6 +2,8 @@
 #include "CentiMovement.h"
 #include "GameGrid.h"
 #include <list>
+#include "MoveFSM.h"
+
 CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	:bodys(0), position(pos), currentDirectionState(0), animationCounter(0)
 {
@@ -22,7 +24,7 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	//this->SetDirection(f);
 	//f->Initialize(this, this->position);
 
-
+	SetDirection(&MoveSFM::leftThenDown);
 }
 
 void CentipedeHead::Update()
@@ -65,7 +67,7 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 		pos.y > static_cast<float>(WindowManager::MainWindow.getView().getSize().y) ||
 		pos.x < 0.f ||
 		pos.y < 0.f)
-		this->currentDirectionState->NextState();
+		this->SetDirection(this->currentDirectionState->NextState());
 }
 
 void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
@@ -99,8 +101,9 @@ void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
 #endif
 }
 
-void CentipedeHead::SetDirection(CentipedeDirectionState * direction)
+void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)
 {
+	direction->Initialize(this);
 	this->currentDirectionState = direction;
 }
 

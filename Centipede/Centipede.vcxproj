@@ -120,6 +120,7 @@
     <ClCompile Include="Game Components\GameGrid.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
     <ClCompile Include="Game Components\LeftSpiderState.cpp" />
+    <ClCompile Include="Game Components\MoveFSM.cpp" />
     <ClCompile Include="Game Components\Mushroom.cpp" />
     <ClCompile Include="Game Components\MushroomFactory.cpp" />
     <ClCompile Include="Game Components\RightSpiderState.cpp" />

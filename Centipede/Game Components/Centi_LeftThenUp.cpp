@@ -6,7 +6,7 @@ Centi_LeftThenUp::Centi_LeftThenUp()
 {
 }
 
-void Centi_LeftThenUp::MoveDirection(sf::Vector2f & pos)
+void Centi_LeftThenUp::MoveDirection(sf::Vector2f & pos) const
 {
 	pos.x -= CENTI_SPEED;
 
@@ -15,7 +15,7 @@ void Centi_LeftThenUp::MoveDirection(sf::Vector2f & pos)
 
 }
 
-const CentipedeDirectionState * Centi_LeftThenUp::NextState()
+const CentipedeDirectionState * Centi_LeftThenUp::NextState() const
 {
 	this->centi->SetSpriteRotation(90.f);
 	return &MoveSFM::upThenRight;
