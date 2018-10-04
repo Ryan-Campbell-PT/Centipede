@@ -1,4 +1,5 @@
 #include "MushroomPool.h"
+#include "Mushroom.h"
 
 MushroomPool * MushroomPool::GetInstance()
 {
@@ -28,4 +29,9 @@ void MushroomPool::RecycleMushroom(Mushroom * shroom)
 {
 	GetInstance()->activeMushroomList.remove(shroom);
 	GetInstance()->inactiveMushroomList.push_front(shroom);
+}
+
+size_t MushroomPool::GetNumActiveShrooms()
+{
+	return GetInstance()->activeMushroomList.size();
 }

@@ -18,12 +18,10 @@ class MushroomFactory : public Factory, public Observee
 public:
 	///remove all mushrooms created by the factory, and then delete itself
 	virtual ~MushroomFactory();
-	
-	static void InitializeMushroomField(int numShrooms);
 
 	///spawns a new mushroom, or recycles one from the inactiveList
 	static void SpawnMushroom(sf::Vector2f pos);
-	
+
 	///takes the mushroom off the screen, and adds to a recycle list
 	static void RemoveMushroom(Mushroom *shroom);
 

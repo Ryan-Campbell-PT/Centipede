@@ -12,7 +12,8 @@ public:
 
 	static Mushroom *GetMushroom();
 	static void RecycleMushroom(Mushroom *shroom);
-
+	
+	static size_t GetNumActiveShrooms();
 private:
 	static MushroomPool *instance;
 

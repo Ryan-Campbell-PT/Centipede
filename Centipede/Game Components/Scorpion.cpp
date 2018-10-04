@@ -73,7 +73,7 @@ void Scorpion::Collision(Bullet * bullet)
 void Scorpion::Collision(Mushroom * shroom)
 {
 	if(shroom->GetState() == MushroomState::Healthy)
-		shroom->ChangeState(MushroomState::Poison);
+		shroom->SetState(MushroomState::Poison);
 }
 
 void Scorpion::Collision(Ship * ship)

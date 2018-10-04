@@ -4,23 +4,29 @@
 #include "TEAL/CommonElements.h"
 
 class MushroomFactory;
-enum class MushroomState;
+enum class MushroomState
+{
+	Healthy = 0,
+	Poison = 1
+};
 
 class Mushroom : public GameObject
 {
 public:
-	///since MushroomFactory spawns the mushrooms, and checks if they can go there, no need to return anything
-	void SetPosition(sf::Vector2f v);
 	///using the float version means youre going to specify where its being placed pixel wise
 	Mushroom(sf::Vector2f v); 
+	Mushroom();
 
 	virtual void Draw();
 
+	///this will handle necessary code to put the mushroom on screen
+	void InitializeMushroom(sf::Vector2f const & pos, MushroomState state = MushroomState::Healthy);
 	void TakeDamage();
-	void ChangeState(MushroomState state);
 	void RemoveMushroom();
 
+	sf::Vector2f GetPosition();
 	MushroomState GetState(); //this will be used for the centipede
+	void SetState(MushroomState state);
 
 private:
 	virtual ~Mushroom();
@@ -40,10 +46,5 @@ private:
 #endif
 };
 
-enum class MushroomState
-{
-	Healthy = 0,
-	Poison = 1
-};
 
 #endif //MUSHROOM_H

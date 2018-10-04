@@ -10,6 +10,14 @@ class MushroomManager
 public:
 	static void InitializeMushroomField(int numShrooms);
 
-	static bool AttemptSpawnShroom(sf::Vector2f const &pos);
+	static bool AttemptSpawnShroom(sf::Vector2f &pos);
+
+	static void RemoveMushroom(Mushroom * const shroom);
+
+private:
+	static MushroomManager * GetInstance();
+	void SpawnMushroom(sf::Vector2f &pos);
+
+	static MushroomManager* instance;
 };
 #endif // !MUSHROOM_MANAGER
