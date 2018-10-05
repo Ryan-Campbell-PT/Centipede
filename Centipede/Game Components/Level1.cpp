@@ -16,6 +16,7 @@
 #include "ScorpionFactory.h"
 #include "Spider.h"
 #include "SpiderFactory.h"
+#include "MushroomManager.h"
 
 #include <vector>
 
@@ -27,8 +28,9 @@ void Level1::Initialize()
 
 
 
-	MushroomFactory::InitializeMushroomField(30);
-	
+	MushroomManager::InitializeMushroomField(30);
+	//auto shroom = new Mushroom();
+//	shroom->InitializeMushroom(sf::Vector2f(200, 200));
 	FleaManager::InitializeFlea();
 	ScorpionFactory::InititalizeScorpion();
 	

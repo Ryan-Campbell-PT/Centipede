@@ -67,7 +67,7 @@ void Mushroom::SetState(MushroomState state)
 	if (state == MushroomState::Poison)
 		this->health += 4; //+= incase the mushroom is damaged
 	else if (state == MushroomState::Healthy) //will likely never be called, but just to be sure
-		this->health -= 4; //-= incase the mushroom is damaged
+		this->health = 0; //-= incase the mushroom is damaged
 
 	this->sprite.SetAnimation(health, health);
 }

@@ -1,6 +1,8 @@
 #include "MushroomPool.h"
 #include "Mushroom.h"
 
+MushroomPool * MushroomPool::instance = 0;
+
 MushroomPool * MushroomPool::GetInstance()
 {
 	if (instance == 0)
