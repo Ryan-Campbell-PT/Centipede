@@ -11,9 +11,8 @@ class Scorpion;
 class ScorpionFactory 
 {
 public:
-
-	static void SpawnScorpion();
-	static void InititalizeScorpion();
+	static void SpawnScorpion(sf::Vector2f pos);
+	static void RemoveScorpion(Scorpion * const scorpion);
 
 private:
 	static ScorpionFactory* GetInstance();
@@ -25,7 +24,6 @@ private:
 
 
 	static ScorpionFactory* instance;
-	Scorpion *scorpion;
 };
 
 #endif //SCORPIONFACTORY_H

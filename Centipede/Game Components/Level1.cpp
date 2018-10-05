@@ -32,7 +32,6 @@ void Level1::Initialize()
 	//auto shroom = new Mushroom();
 //	shroom->InitializeMushroom(sf::Vector2f(200, 200));
 	FleaManager::InitializeFlea();
-	ScorpionFactory::InititalizeScorpion();
 	
 	
 	new CentipedeHead(sf::Vector2f(200,200));

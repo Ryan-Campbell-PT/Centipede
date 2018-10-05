@@ -291,6 +291,12 @@
     <ClCompile Include="Game Components\SpiderPool.cpp">
       <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\ScorpionPool.cpp">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\ScorpionManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -550,6 +556,12 @@
     </ClInclude>
     <ClInclude Include="Game Components\SpiderPool.h">
       <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScorpionPool.h">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScorpionManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -112,6 +112,8 @@
     <ClCompile Include="Game Components\RightSpiderState.cpp" />
     <ClCompile Include="Game Components\Scorpion.cpp" />
     <ClCompile Include="Game Components\ScorpionFactory.cpp" />
+    <ClCompile Include="Game Components\ScorpionManager.cpp" />
+    <ClCompile Include="Game Components\ScorpionPool.cpp" />
     <ClCompile Include="Game Components\Ship.cpp" />
     <ClCompile Include="Game Components\Level1.cpp" />
     <ClCompile Include="Game Components\ShipExplosion.cpp" />
@@ -188,6 +190,8 @@
     <ClInclude Include="Game Components\RightSpiderState.h" />
     <ClInclude Include="Game Components\Scorpion.h" />
     <ClInclude Include="Game Components\ScorpionFactory.h" />
+    <ClInclude Include="Game Components\ScorpionManager.h" />
+    <ClInclude Include="Game Components\ScorpionPool.h" />
     <ClInclude Include="Game Components\Ship.h" />
     <ClInclude Include="Game Components\Level1.h" />
     <ClInclude Include="Game Components\ShipExplosion.h" />
