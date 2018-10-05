@@ -7,6 +7,7 @@
 #include "GameGrid.h"
 #include "Ship.h"
 #include "Bullet.h"
+#include "FleaPool.h"
 
 //TODO: there is a lot of deleting of state in this. figure out a way to modify tht
 //so there isnt much allocation and deletion
@@ -85,12 +86,19 @@ void Flea::AttemptSpawnMushroom()
 		MushroomFactory::SpawnMushroom(this->position);
 }
 
+sf::Vector2f Flea::GetPosition()
+{
+	return position;
+}
+
 
 void Flea::RemoveFlea()
 {
 	this->active = false;
 	this->DeregisterCollision<Flea>(*this);
 	this->sprite.setScale(0.f, 0.f);
+	
+	FleaPool::RecycleFlea(this);
 
 	delete this->state;
 }

@@ -94,11 +94,11 @@
     <Filter Include="Source Files\Game Components\Ship\ShipButtons">
       <UniqueIdentifier>{333a42bd-04ba-461d-97f5-30b53afe342f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement">
-      <UniqueIdentifier>{50181bda-702f-43b2-b1c9-7c0d62129d91}</UniqueIdentifier>
+    <Filter Include="Source Files\Game Components\Managers">
+      <UniqueIdentifier>{5a2534b2-25aa-481b-9933-c15edf140c1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement\VertMovement">
-      <UniqueIdentifier>{47cfce5f-29d7-4caa-8392-a9f46eff1b3d}</UniqueIdentifier>
+    <Filter Include="Source Files\Game Components\ObjPools">
+      <UniqueIdentifier>{71e500a6-8f2f-457c-9d45-5e7fe6914195}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -273,35 +273,29 @@
     <ClCompile Include="Game Components\LeftSpiderState.cpp">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_DownThenLeft.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    <ClCompile Include="Game Components\FleaPool.cpp">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_DownThenRight.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    <ClCompile Include="Game Components\FleaManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_LeftThenDown.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    <ClCompile Include="Game Components\MushroomManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_LeftThenUp.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    <ClCompile Include="Game Components\MushroomPool.cpp">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_RightThenDown.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    <ClCompile Include="Game Components\SpiderManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_RightThenUp.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    <ClCompile Include="Game Components\SpiderPool.cpp">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_UpThenLeft.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    <ClCompile Include="Game Components\ScorpionPool.cpp">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_UpThenRight.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\CentiMovement.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\MoveFSM.cpp">
-      <Filter>Source Files\Game Components\Centipede</Filter>
+    <ClCompile Include="Game Components\ScorpionManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -482,12 +476,6 @@
     <ClInclude Include="Game Components\FleaState2.h">
       <Filter>Source Files\Game Components\Critters\Flea</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Observer.h">
-      <Filter>Source Files\Game Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\Observee.h">
-      <Filter>Source Files\Game Components</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\FleaFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
@@ -545,32 +533,35 @@
     <ClInclude Include="Game Components\KeyboardIncludes.h">
       <Filter>Source Files\Game Components\Ship\ShipButtons</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_LeftThenDown.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    <ClInclude Include="Game Components\FleaPool.h">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_RightThenDown.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    <ClInclude Include="Game Components\FleaManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_LeftThenUp.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    <ClInclude Include="Game Components\Observee.h">
+      <Filter>Source Files\Game Components</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_RightThenUp.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    <ClInclude Include="Game Components\Observer.h">
+      <Filter>Source Files\Game Components</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_DownThenLeft.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    <ClInclude Include="Game Components\MushroomManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_DownThenRight.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    <ClInclude Include="Game Components\MushroomPool.h">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_UpThenLeft.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    <ClInclude Include="Game Components\SpiderManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_UpThenRight.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    <ClInclude Include="Game Components\SpiderPool.h">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\MoveFSM.h">
-      <Filter>Source Files\Game Components\Centipede</Filter>
+    <ClInclude Include="Game Components\ScorpionPool.h">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScorpionManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

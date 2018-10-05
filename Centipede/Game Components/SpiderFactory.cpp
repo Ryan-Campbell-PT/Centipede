@@ -1,7 +1,7 @@
 #include "SpiderFactory.h"
 #include "Spider.h"
+#include "SpiderPool.h"
 
-#include <random>
 
 SpiderFactory *SpiderFactory::instance = 0;
 
@@ -19,24 +19,13 @@ SpiderFactory * SpiderFactory::GetInstance()
 	return instance;
 }
 
-void SpiderFactory::SpawnSpider()
+void SpiderFactory::SpawnSpider(sf::Vector2f &pos)
 {
-	sf::Vector2f pos;
-	
-	bool leftSide = rand() % 2; //either left or right side, determined by a random number
-
-	if (leftSide) //if its on the left side, then the x= 0
-		pos.x = 0;
-
-	else //otherwise its on the right, and it goes to the max x distance
-		pos.x = static_cast<float>(WindowManager::MainWindow.getSize().x);
-
-	pos.y = static_cast<float>(rand() % WindowManager::MainWindow.getSize().y); //anywhere on the y axis
-	
-	GetInstance()->spider->SpawnSpider(pos);
+	auto spider = SpiderPool::GetSpider();
+	spider->SpawnSpider(pos);
 }
 
-void SpiderFactory::InitializeSpider()
+void SpiderFactory::RemoveSpider(Spider * const spider)
 {
-	GetInstance();
+	SpiderPool::RecycleSpider(spider);
 }

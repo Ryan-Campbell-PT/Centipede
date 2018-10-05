@@ -3,6 +3,7 @@
 #include "Mushroom.h"
 #include "GameGrid.h"
 #include "Ship.h"
+#include "ScorpionManager.h"
 
 Scorpion::Scorpion()
 {
@@ -41,14 +42,11 @@ void Scorpion::Update()
 	}
 
 	this->sprite.setPosition(this->position);
-
-
 }
 
 void Scorpion::Draw()
 {
 	WindowManager::MainWindow.draw(this->sprite);
-
 }
 
 void Scorpion::SpawnScorpion(sf::Vector2f & pos)
@@ -58,7 +56,7 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 	
 	this->active = true;
 	this->spawnOnLeft = pos.x < SPRITE_SIZE;
-	this->sprite.setScale(1, 1);
+	this->sprite.setScale(1.f, 1.f);
 
 	RegisterCollision<Scorpion>(*this);
 }
@@ -69,11 +67,10 @@ void Scorpion::Collision(Bullet * bullet)
 	bullet->RemoveBullet();
 }
 
-//todo: the current collision will collide with every single posiiton change, making A TON of new PoisonState. change in future
 void Scorpion::Collision(Mushroom * shroom)
 {
 	if(shroom->GetState() == MushroomState::Healthy)
-		shroom->ChangeState(MushroomState::Poison);
+		shroom->SetState(MushroomState::Poison);
 }
 
 void Scorpion::Collision(Ship * ship)
@@ -91,4 +88,6 @@ void Scorpion::RemoveScorpion()
 	this->active = false;
 	this->DeregisterCollision<Scorpion>(*this);
 	this->sprite.setScale(0.f, 0.f);
+
+	ScorpionManager::RemoveScorpion(this);
 }

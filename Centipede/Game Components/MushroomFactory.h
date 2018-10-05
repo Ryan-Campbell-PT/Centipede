@@ -4,7 +4,7 @@
 #include <list>
 
 #include "Factory.h"
-#include "Observer.h"
+#include "Observee.h"
 #include "TEAL/CommonElements.h"
 
 class Mushroom;
@@ -18,12 +18,10 @@ class MushroomFactory : public Factory, public Observee
 public:
 	///remove all mushrooms created by the factory, and then delete itself
 	virtual ~MushroomFactory();
-	
-	static void InitializeMushroomField(int numShrooms);
 
 	///spawns a new mushroom, or recycles one from the inactiveList
 	static void SpawnMushroom(sf::Vector2f pos);
-	
+
 	///takes the mushroom off the screen, and adds to a recycle list
 	static void RemoveMushroom(Mushroom *shroom);
 
@@ -40,9 +38,7 @@ private:
 
 	static MushroomFactory* instance;
 
-	std::list<Mushroom*> inactiveMushroomList; ///this list will be used for recycling purposes
-	std::list<Mushroom*> activeMushroomList; ///this list will be used for purposes like healing broken mushrooms at new level
-	std::list<Observer*> obsereeList; ///keep track of all the observee's paying attention to the factory
+	std::list<Observer*> obsererList; ///keep track of all the observee's paying attention to the factory
 
 	static MushroomFactory *GetInstance();
 

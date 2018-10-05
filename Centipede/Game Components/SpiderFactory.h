@@ -8,8 +8,8 @@ class Spider;
 class SpiderFactory
 {
 public:
-	static void SpawnSpider();
-	static void InitializeSpider();
+	static void SpawnSpider(sf::Vector2f &pos);
+	static void RemoveSpider(Spider * const spider);
 
 private:
 	static SpiderFactory *GetInstance();

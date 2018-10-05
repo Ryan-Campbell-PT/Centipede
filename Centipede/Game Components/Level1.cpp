@@ -10,12 +10,13 @@
 #include "MushroomFactory.h"
 #include "GameGrid.h"
 #include "CentipedeHead.h"
-#include "FleaFactory.h"
+#include "FleaManager.h"
 #include "Flea.h"
 #include "Scorpion.h"
 #include "ScorpionFactory.h"
 #include "Spider.h"
-#include "SpiderFactory.h"
+#include "SpiderManager.h"
+#include "MushroomManager.h"
 
 #include <vector>
 
@@ -27,13 +28,13 @@ void Level1::Initialize()
 
 
 
-	MushroomFactory::InitializeMushroomField(30);
+	MushroomManager::InitializeMushroomField(30);
+	//auto shroom = new Mushroom();
+//	shroom->InitializeMushroom(sf::Vector2f(200, 200));
+	FleaManager::InitializeFlea();
 	
-	FleaFactory::InitializeFlea();
-	ScorpionFactory::InititalizeScorpion();
 	
-	SpiderFactory::InitializeSpider();
-	new CentipedeHead(sf::Vector2f(400,400));
+	new CentipedeHead(sf::Vector2f(200,200));
 
 	CollisionTestPair<Ship, Mushroom>();
 

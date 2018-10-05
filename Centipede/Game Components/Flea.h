@@ -32,6 +32,7 @@ public:
 	void SetState(FleaState *state);
 	///this method will simply take the flea's position and attempt to spawn a mushroom
 	void AttemptSpawnMushroom();
+	sf::Vector2f GetPosition();
 
 private:
 

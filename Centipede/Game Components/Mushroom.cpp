@@ -1,6 +1,7 @@
 #include "Mushroom.h"
 #include "MushroomFactory.h"
 #include "GameGrid.h"
+#include "MushroomManager.h"
 
 #if TESTING
 int Mushroom::mushroomNum = 0;
@@ -8,7 +9,13 @@ int Mushroom::mushroomNum = 0;
 
 Mushroom::Mushroom(sf::Vector2f v)
 {
+	Mushroom();
 
+	this->InitializeMushroom(v, MushroomState::Healthy);
+}
+
+Mushroom::Mushroom()
+{
 	//handle collision and sprite management first
 	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); //4 and 2 show the first mushroom, undamaged
@@ -16,19 +23,6 @@ Mushroom::Mushroom(sf::Vector2f v)
 	RegisterCollision<Mushroom>(*this);
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	//then handle positioning and housekeeping
-
-	//this purpose is hard coded for now, 36 because the first level of the map shouldnt
-	//have any mushrooms, its avaliable for the centi only
-	//if (v.y < 48)
-	//	v.y = 48;
-
-	////for sprite purposes, we set it to be 12 so the sprite doesnt go off the window
-	//if (v.x < 36)
-	//	v.x = 36;
-	
-	this->SetPosition(v);
-	
-	this->state = MushroomState::Healthy;
 
 #if TESTING
 	this->thisMushroomNum = mushroomNum++;
@@ -38,6 +32,19 @@ Mushroom::Mushroom(sf::Vector2f v)
 void Mushroom::Draw()
 {
 	WindowManager::MainWindow.draw(this->sprite);
+}
+
+void Mushroom::InitializeMushroom(sf::Vector2f const & pos, MushroomState state)
+{
+	this->sprite.setPosition(pos);
+	position = pos;
+
+	this->health = 0; //setting the positions of a mushroom assumes its full health
+	this->SetState(state);
+
+#if TESTING
+	ConsoleMsg::WriteLine("Mushroom number:" + Tools::ToString(this->mushroomNum));
+#endif
 }
 
 void Mushroom::TakeDamage()
@@ -53,14 +60,14 @@ void Mushroom::TakeDamage()
 	//this->MainSprite.SetAnimation(3, 4); //fourth mushroom state
 }
 
-void Mushroom::ChangeState(MushroomState state)
+void Mushroom::SetState(MushroomState state)
 {
 	this->state = state;
 
 	if (state == MushroomState::Poison)
 		this->health += 4; //+= incase the mushroom is damaged
 	else if (state == MushroomState::Healthy) //will likely never be called, but just to be sure
-		this->health -= 4; //-= incase the mushroom is damaged
+		this->health = 0; //-= incase the mushroom is damaged
 
 	this->sprite.SetAnimation(health, health);
 }
@@ -70,9 +77,12 @@ void Mushroom::RemoveMushroom()
 	this->sprite.setScale(0.f, 0.f); //remove it from the screen
 	this->DeregisterCollision(*this);
 
-	GameGrid::SetGridStatus(this->position, GameGridEnum::Unoccupied);
+	MushroomManager::RemoveMushroom(this);
+}
 
-	MushroomFactory::RemoveMushroom(this);
+sf::Vector2f Mushroom::GetPosition()
+{
+	return this->position;
 }
 
 MushroomState Mushroom::GetState()
@@ -82,19 +92,4 @@ MushroomState Mushroom::GetState()
 
 Mushroom::~Mushroom()
 {
-}
-
-void Mushroom::SetPosition(sf::Vector2f v)
-{
-	GameGrid::GetCenterGridPosition(v);
-	this->sprite.setPosition(v);
-	position = v;
-
-	this->health = 0; //setting the positions of a mushroom assumes its full health
-
-	GameGrid::SetGridStatus(v, GameGridEnum::Mushroom);
-
-#if TESTING
-	ConsoleMsg::WriteLine("This mushroom number: " + Tools::ToString(this->thisMushroomNum));
-#endif
 }

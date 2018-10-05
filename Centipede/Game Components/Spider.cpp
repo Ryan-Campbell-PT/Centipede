@@ -2,6 +2,7 @@
 #include "Bullet.h"
 #include "Mushroom.h"
 #include "Ship.h"
+#include "SpiderManager.h"
 
 #include <random>
 
@@ -171,4 +172,6 @@ void Spider::RemoveSpider()
 	this->active = false;
 	this->DeregisterCollision<Spider>(*this);
 	this->sprite.setScale(0.f, 0.f);
+
+	SpiderManager::RemoveSpider(this);
 }

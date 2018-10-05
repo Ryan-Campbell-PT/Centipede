@@ -1,21 +1,15 @@
-#ifndef OBSERVER_H
-#define OBSERVER_H
+#ifndef OBSERVEE_H
+#define OBSERVEE_H
 
 #include "TEAL/CommonElements.h"
 
-class Observer;
-
-class Observee
+class Observer
 {
 public:
-	virtual void AddObservee(Observer *o) = 0;
-	virtual void RemoveObservee(Observer *o) = 0;
-
-protected:
-	virtual void UpdateObservees() = 0;
+	virtual void ObserverUpdate(int numShrooms) = 0;
 
 private:
 
 };
 
-#endif //OBSERVER_H
+#endif //OBSERVEE_H
