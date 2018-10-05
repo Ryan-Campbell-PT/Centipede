@@ -1,12 +1,17 @@
 #include "Centi_UpThenLeft.h"
 #include "CentipedeHead.h"
 
-void Centi_UpThenLeft::MoveDirection(sf::Vector2f & pos) const
+void Centi_UpThenLeft::MoveDirection(CentipedeHead *centi, sf::Vector2f & pos) const
 {
+	pos.y -= CENTI_SPEED;
+
+	if (static_cast<int>(pos.y) % SPRITE_SIZE == 0)
+		centi->SetDirection(this->NextState(centi), true);
+
 }
 
-const CentipedeDirectionState * Centi_UpThenLeft::NextState() const
+const CentipedeDirectionState * Centi_UpThenLeft::NextState(CentipedeHead *centi) const
 {
-	this->centi->SetSpriteRotation(0.f);
+	centi->SetSpriteRotation(0.f);
 	return &MoveSFM::leftThenUp;
 }

@@ -33,7 +33,7 @@ void Level1::Initialize()
 	ScorpionFactory::InititalizeScorpion();
 	
 	SpiderFactory::InitializeSpider();
-	new CentipedeHead(sf::Vector2f(200,200));
+	new CentipedeHead(sf::Vector2f(400,400));
 
 	CollisionTestPair<Ship, Mushroom>();
 

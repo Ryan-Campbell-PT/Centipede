@@ -24,13 +24,13 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	//this->SetDirection(f);
 	//f->Initialize(this, this->position);
 
-	SetDirection(&MoveSFM::leftThenDown);
+	SetDirection(&MoveSFM::leftThenDown, false);
 }
 
 void CentipedeHead::Update()
 {
 	++animationCounter;
-	this->currentDirectionState->MoveDirection(this->position);
+	this->currentDirectionState->MoveDirection(this, this->position);
 	this->sprite.setPosition(this->position);
 
 	if (this->animationCounter % 3 == 0)
@@ -61,13 +61,19 @@ CentiMovementDirectionEnum CentipedeHead::GetCurrentMovementDirection()
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 {
-	//a lot of if statements, can fix in the future
+	//if we are reaching the end of the window,or see a shroom, switch to next state
 	if (GameGrid::GetGridStatus(pos) == GameGridEnum::Mushroom ||
 		pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
-		pos.y > static_cast<float>(WindowManager::MainWindow.getView().getSize().y) ||
-		pos.x < 0.f ||
-		pos.y < 0.f)
-		this->SetDirection(this->currentDirectionState->NextState());
+		pos.x < 0.f)
+		this->SetDirection(this->currentDirectionState->NextState(this), false);
+
+	//if we are at the tops of the window, swap to up or down
+	else if (pos.y > static_cast<float>(WindowManager::MainWindow.getView().getSize().y))
+		this->SetDirection(&MoveSFM::upThenLeft, true);
+
+	else if (pos.y < 0.f)
+		this->SetDirection(&MoveSFM::downThenLeft, true);
+
 }
 
 void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
@@ -101,10 +107,12 @@ void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
 #endif
 }
 
-void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)
+void CentipedeHead::SetDirection(const CentipedeDirectionState * direction, bool centerToYPos)
 {
 	direction->Initialize(this);
 	this->currentDirectionState = direction;
+	if(centerToYPos)
+		GameGrid::GetCenterYPosition(this->position);
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)

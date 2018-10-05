@@ -32,7 +32,7 @@ public:
 	CentiMovementDirectionEnum GetCurrentMovementDirection();
 	void CheckGridAhead(sf::Vector2f pos);
 	void SetDirection(CentiMovementDirectionEnum direction);
-	void SetDirection(const CentipedeDirectionState * direction);
+	void SetDirection(const CentipedeDirectionState * direction, bool centerToYPos);
 	void SetSpriteRotation(const float &rotation);
 
 	CentipedeDirectionState *GetDirection(CentiMovementDirectionEnum direction);
