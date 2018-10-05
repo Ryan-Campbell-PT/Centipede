@@ -8,13 +8,13 @@ class Mushroom;
 class MushroomPool
 {
 public:
-	static MushroomPool * GetInstance();
-
 	static Mushroom *GetMushroom();
 	static void RecycleMushroom(Mushroom *shroom);
 	
 	static size_t GetNumActiveShrooms();
 private:
+	static MushroomPool * GetInstance();
+	
 	static MushroomPool *instance;
 
 	std::list<Mushroom*> inactiveMushroomList; ///this list will be used for recycling purposes

@@ -15,7 +15,7 @@
 #include "Scorpion.h"
 #include "ScorpionFactory.h"
 #include "Spider.h"
-#include "SpiderFactory.h"
+#include "SpiderManager.h"
 #include "MushroomManager.h"
 
 #include <vector>
@@ -34,7 +34,7 @@ void Level1::Initialize()
 	FleaManager::InitializeFlea();
 	ScorpionFactory::InititalizeScorpion();
 	
-	SpiderFactory::InitializeSpider();
+	
 	new CentipedeHead(sf::Vector2f(200,200));
 
 	CollisionTestPair<Ship, Mushroom>();

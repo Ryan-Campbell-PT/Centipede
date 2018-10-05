@@ -10,7 +10,7 @@
 #include "BulletFactory.h"
 #include "Mushroom.h"
 #include "ScorpionFactory.h"
-#include "SpiderFactory.h"
+#include "SpiderManager.h"
 #include "KeyboardIncludes.h"
 
 Ship *Ship::instance = 0;
@@ -123,7 +123,7 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 		ScorpionFactory::SpawnScorpion();
 
 	if (k == sf::Keyboard::Key::X)
-		SpiderFactory::SpawnSpider();
+		SpiderManager::SpawnSpider();
 }
 
 sf::Vector2f Ship::GetPosition()
