@@ -23,3 +23,8 @@ const CentipedeDirectionState * Centi_LeftThenUp::NextState(CentipedeHead *centi
 void Centi_LeftThenUp::Initialize(CentipedeHead * centi) const
 {
 }
+
+CentiMovementDirectionEnum Centi_LeftThenUp::GetDirectionEnum() const
+{
+	return CentiMovementDirectionEnum::Left;
+}

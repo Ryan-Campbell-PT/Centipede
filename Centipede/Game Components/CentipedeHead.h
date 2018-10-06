@@ -13,7 +13,6 @@
 class CentipedeDirectionState;
 class CentipedeBody;
 enum class CentiMovementDirectionEnum;
-enum class BodyDir;
 
 class CentipedeHead : public GameObject
 {
@@ -41,7 +40,6 @@ public:
 private:
 	void SetupStates();
 	void SetupBodies();
-	BodyDir GetOffsetConvert(const CentipedeDirectionState * const offset);
 
 	///the state will determine what direction the centipede is going when spawned
 	///this state is to reduce the number of if statements being checked, and just

@@ -40,7 +40,7 @@ void Level1::Initialize()
 	FleaManager::InitializeFlea();
 	
 	
-	new CentipedeHead(sf::Vector2f(200,200));
+	new CentipedeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2, 0));
 
 	CollisionTestPair<Ship, Mushroom>();
 

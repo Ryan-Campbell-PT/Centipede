@@ -25,21 +25,18 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	//auto f = static_cast<CentiMoveLeft*>(this->GetDirection(CentiMovementDirectionEnum::Left));
 	//this->SetDirection(f);
 	//f->Initialize(this, this->position);
-	SetupBodies();
+	//SetupBodies();
 
-	SetDirection(&MoveSFM::leftThenDown, false);
+	SetDirection(&MoveSFM::downThenLeft, false);
 	
 }
 
 void CentipedeHead::Update()
 {
 	++animationCounter;
-	auto tmpPos = this->position;
 
 	this->currentDirectionState->MoveDirection(this, this->position);
 	this->sprite.setPosition(this->position);
-	//++this->BSCounter;
-	//this->bodies->UpdateBody(this->position.x - tmpPos.x, this->position.y - tmpPos.y);
 
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
@@ -117,18 +114,15 @@ void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
 
 void CentipedeHead::SetDirection(const CentipedeDirectionState * direction, bool centerToYPos)
 {
-	if (annoying == 1)
-		this->bodies->currentOffset = this->position;
-	annoying++;
 	direction->Initialize(this);
 	this->currentDirectionState = direction;
 	if(centerToYPos)
 		GameGrid::GetCenterYPosition(this->position);
-	if (annoying != 1)
-	{
-		BSCounter++;
-		this->bodies->AddOffset(this->position, this->GetOffsetConvert(this->currentDirectionState));
-	}
+
+	if (this->bodies == 0) //never created bodies, so once we add an offset, itll give them something to do
+		SetupBodies();
+	else
+		this->bodies->AddOffset(this->position, this->currentDirectionState->GetDirectionEnum());
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
@@ -156,32 +150,6 @@ void CentipedeHead::SetupStates()
 
 void CentipedeHead::SetupBodies()
 {
-	this->bodies = new CentipedeBody(this);
+	this->bodies = new CentipedeBody(this, this->position, this->currentDirectionState->GetDirectionEnum());
 }
 
-BodyDir CentipedeHead::GetOffsetConvert(const CentipedeDirectionState * const offset)
-{
-	BodyDir d;
-
-	switch (BSCounter % 3)
-	{
-	case 0:
-		d = BodyDir::left;
-		break;
-
-	case 1:
-		d = BodyDir::down;
-		break;
-
-	case 2:
-		d = BodyDir::right;
-		break;
-
-	//case 3:
-	//	d = BodyDir::left;
-	//	break;
-
-	}
-
-	return d;
-}

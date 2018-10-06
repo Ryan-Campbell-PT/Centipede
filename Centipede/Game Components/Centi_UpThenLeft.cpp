@@ -15,3 +15,8 @@ const CentipedeDirectionState * Centi_UpThenLeft::NextState(CentipedeHead *centi
 	centi->SetSpriteRotation(0.f);
 	return &MoveSFM::leftThenUp;
 }
+
+CentiMovementDirectionEnum Centi_UpThenLeft::GetDirectionEnum() const
+{
+	return CentiMovementDirectionEnum::Up;
+}

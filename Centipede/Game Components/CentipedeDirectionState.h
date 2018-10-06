@@ -3,6 +3,7 @@
 
 #include "State.h"
 #include "TEAL/CommonElements.h"
+#include "CentipedeHead.h"
 
 class CentipedeHead;
 
@@ -16,7 +17,7 @@ public:
 	///this method will have the class itself determine what direction the centipede should be going after it no longer can go in that direction
 	virtual const CentipedeDirectionState* NextState(CentipedeHead * centi) const { return 0; }
 	///because we arent able to return the actual instance of the CentiDirection, we return an enum instead
-	//virtual CentiMovementDirectionEnum GetDirectionEnum() {};
+	virtual CentiMovementDirectionEnum GetDirectionEnum() const { return CentiMovementDirectionEnum::Error; };
 
 	virtual void Initialize(CentipedeHead *centi) const  {};
 	//virtual void Initialize(CentipedeHead *centi, sf::Vector2f &pos) {};

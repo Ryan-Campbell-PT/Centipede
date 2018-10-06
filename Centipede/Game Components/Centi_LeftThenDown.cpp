@@ -24,3 +24,8 @@ void Centi_LeftThenDown::Initialize(CentipedeHead * centi) const
 {
 	
 }
+
+CentiMovementDirectionEnum Centi_LeftThenDown::GetDirectionEnum() const
+{
+	return CentiMovementDirectionEnum::Left;
+}
