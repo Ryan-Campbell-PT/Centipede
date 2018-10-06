@@ -100,6 +100,12 @@
     <Filter Include="Source Files\Game Components\ObjPools">
       <UniqueIdentifier>{71e500a6-8f2f-457c-9d45-5e7fe6914195}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement">
+      <UniqueIdentifier>{afbd26ea-7fbc-4ed6-a269-7b3c3edf3c3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement\VertMovement">
+      <UniqueIdentifier>{b8ad90c8-1989-45a3-a512-93f98ae5aa4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -296,6 +302,36 @@
     </ClCompile>
     <ClCompile Include="Game Components\ScorpionManager.cpp">
       <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_UpThenLeft.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_UpThenRight.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_DownThenRight.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_DownThenLeft.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_LeftThenDown.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_LeftThenUp.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_RightThenDown.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_RightThenUp.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiMovement.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\MoveFSM.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -562,6 +598,33 @@
     </ClInclude>
     <ClInclude Include="Game Components\ScorpionManager.h">
       <Filter>Source Files\Game Components\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_DownThenLeft.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_DownThenRight.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_UpThenLeft.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_UpThenRight.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_LeftThenDown.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_LeftThenUp.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_RightThenDown.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_RightThenUp.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\MoveFSM.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
