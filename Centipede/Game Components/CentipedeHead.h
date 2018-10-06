@@ -13,6 +13,7 @@
 class CentipedeDirectionState;
 class CentipedeBody;
 enum class CentiMovementDirectionEnum;
+enum class BodyDir;
 
 class CentipedeHead : public GameObject
 {
@@ -39,11 +40,13 @@ public:
 
 private:
 	void SetupStates();
+	void SetupBodies();
+	BodyDir GetOffsetConvert(const CentipedeDirectionState * const offset);
 
 	///the state will determine what direction the centipede is going when spawned
 	///this state is to reduce the number of if statements being checked, and just
 	///going in the direction it needs to unless something happens
-	CentipedeBody *bodys; ///linkedlist of all the bodys connected to it
+	CentipedeBody *bodies; ///linkedlist of all the bodys connected to it
 
 	sf::Vector2f position;
 	AnimatedSprite sprite;
@@ -53,6 +56,10 @@ private:
 	std::vector<CentipedeDirectionState*> directionArray;
 
 	unsigned int animationCounter;
+
+	unsigned int BSCounter;
+
+	int annoying = 0;
 };
 
 ///this enum will be used so there is no need to delete movements throuhgout the game loop

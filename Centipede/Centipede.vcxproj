@@ -102,6 +102,7 @@
     <ClCompile Include="Game Components\CentiMoveUp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Game Components\CentipedeBody.cpp" />
     <ClCompile Include="Game Components\CentipedeHead.cpp" />
     <ClCompile Include="Game Components\Centi_DownThenLeft.cpp" />
     <ClCompile Include="Game Components\Centi_DownThenRight.cpp" />

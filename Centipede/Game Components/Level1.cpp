@@ -26,6 +26,12 @@ void Level1::Initialize()
 
 	Ship::InitalizeShip(); //spawn the ship
 
+	auto a = 0 % 3;
+	auto f = 1 % 3;
+	auto g = 2 % 3;
+	auto r = 3 % 3;
+	auto t = 4 % 3;
+
 
 
 	MushroomManager::InitializeMushroomField(30);

@@ -1,11 +1,13 @@
 #include "CentipedeHead.h"
 #include "CentiMovement.h"
 #include "GameGrid.h"
-#include <list>
 #include "MoveFSM.h"
+#include "CentipedeBody.h"
+
+#include <list>
 
 CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
-	:bodys(0), position(pos), currentDirectionState(0), animationCounter(0)
+	:bodies(0), position(pos), currentDirectionState(0), animationCounter(0), BSCounter(0)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
@@ -23,15 +25,21 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	//auto f = static_cast<CentiMoveLeft*>(this->GetDirection(CentiMovementDirectionEnum::Left));
 	//this->SetDirection(f);
 	//f->Initialize(this, this->position);
+	SetupBodies();
 
 	SetDirection(&MoveSFM::leftThenDown, false);
+	
 }
 
 void CentipedeHead::Update()
 {
 	++animationCounter;
+	auto tmpPos = this->position;
+
 	this->currentDirectionState->MoveDirection(this, this->position);
 	this->sprite.setPosition(this->position);
+	//++this->BSCounter;
+	//this->bodies->UpdateBody(this->position.x - tmpPos.x, this->position.y - tmpPos.y);
 
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
@@ -109,10 +117,18 @@ void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
 
 void CentipedeHead::SetDirection(const CentipedeDirectionState * direction, bool centerToYPos)
 {
+	if (annoying == 1)
+		this->bodies->currentOffset = this->position;
+	annoying++;
 	direction->Initialize(this);
 	this->currentDirectionState = direction;
 	if(centerToYPos)
 		GameGrid::GetCenterYPosition(this->position);
+	if (annoying != 1)
+	{
+		BSCounter++;
+		this->bodies->AddOffset(this->position, this->GetOffsetConvert(this->currentDirectionState));
+	}
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
@@ -136,4 +152,36 @@ void CentipedeHead::SetupStates()
 	directionArray.push_back(new CentiMoveRight);
 	directionArray.push_back(new CentiMoveDown);
 	directionArray.push_back(new CentiMoveUp);*/
+}
+
+void CentipedeHead::SetupBodies()
+{
+	this->bodies = new CentipedeBody(this);
+}
+
+BodyDir CentipedeHead::GetOffsetConvert(const CentipedeDirectionState * const offset)
+{
+	BodyDir d;
+
+	switch (BSCounter % 3)
+	{
+	case 0:
+		d = BodyDir::left;
+		break;
+
+	case 1:
+		d = BodyDir::down;
+		break;
+
+	case 2:
+		d = BodyDir::right;
+		break;
+
+	//case 3:
+	//	d = BodyDir::left;
+	//	break;
+
+	}
+
+	return d;
 }
