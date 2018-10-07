@@ -20,15 +20,7 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	SetCollider(this->sprite, this->bitmap, true);
 	RegisterCollision<CentipedeHead>(*this);
 
-	//this->SetupStates();
-
-	//auto f = static_cast<CentiMoveLeft*>(this->GetDirection(CentiMovementDirectionEnum::Left));
-	//this->SetDirection(f);
-	//f->Initialize(this, this->position);
-	//SetupBodies();
-
 	SetDirection(&MoveSFM::downThenLeft, false);
-	
 }
 
 void CentipedeHead::Update()
@@ -57,10 +49,13 @@ void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFr
 	this->sprite.SetAnimation(startFrame, endFrame);
 }
 
+void CentipedeHead::CorrectXDirection()
+{	
+	GameGrid::GetCenterYPosition(this->position);
+}
+
 CentiMovementDirectionEnum CentipedeHead::GetCurrentMovementDirection()
 {
-//	if (this->currentDirectionState)
-//		return this->currentDirectionState->GetDirectionEnum();
 	return CentiMovementDirectionEnum::Error;
 }
 
@@ -81,43 +76,10 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 
 }
 
-void CentipedeHead::SetDirection(CentiMovementDirectionEnum direction)
-{
-#if WORKING
-	CentipedeDirectionState *f;
-	switch (direction)
-	{
-	case CentiMovementDirectionEnum::Up:
-		f = directionArray[static_cast<int>(CentiMovementDirectionEnum::Up)];
-		f->Initialize(this);
-		break;
-
-	case CentiMovementDirectionEnum::Down:
-		f = directionArray[static_cast<int>(CentiMovementDirectionEnum::Down)];
-		f->Initialize(this);
-		break;
-
-	case CentiMovementDirectionEnum::Left:
-		f = directionArray[static_cast<int>(CentiMovementDirectionEnum::Left)];
-		static_cast<CentiMoveLeft*>(f)->Initialize(this, this->position);
-		break;
-
-	case CentiMovementDirectionEnum::Right:
-		f = directionArray[static_cast<int>(CentiMovementDirectionEnum::Right)];
-		static_cast<CentiMoveRight*>(f)->Initialize(this, this->position);
-		break;
-	}
-
-	this->currentDirectionState = f;
-#endif
-}
-
 void CentipedeHead::SetDirection(const CentipedeDirectionState * direction, bool centerToYPos)
 {
 	direction->Initialize(this);
 	this->currentDirectionState = direction;
-	if(centerToYPos)
-		GameGrid::GetCenterYPosition(this->position);
 
 	if (this->bodies == 0) //never created bodies, so once we add an offset, itll give them something to do
 		SetupBodies();
@@ -136,16 +98,6 @@ CentipedeDirectionState * CentipedeHead::GetDirection(CentiMovementDirectionEnum
 		return this->directionArray[static_cast<int>(direction)];
 	else
 		return nullptr;
-}
-
-void CentipedeHead::SetupStates()
-{
-/*	directionArray.reserve(DIRECTION_SIZE);
-
-	directionArray.push_back(new CentiMoveLeft);
-	directionArray.push_back(new CentiMoveRight);
-	directionArray.push_back(new CentiMoveDown);
-	directionArray.push_back(new CentiMoveUp);*/
 }
 
 void CentipedeHead::SetupBodies()

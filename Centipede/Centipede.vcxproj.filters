@@ -231,18 +231,6 @@
     <ClCompile Include="Game Components\CentipedeHead.cpp">
       <Filter>Source Files\Game Components\Centipede</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\CentiMoveLeft.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\CentiMoveRight.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\CentiMoveUp.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\CentiMoveDown.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\Mushroom.cpp">
       <Filter>Source Files\Game Components\Critters\Mushroom</Filter>
     </ClCompile>
@@ -485,18 +473,6 @@
     <ClInclude Include="Game Components\CentipedeHead.h">
       <Filter>Source Files\Game Components\Centipede</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\CentiMoveLeft.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\CentiMoveRight.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\CentiMoveDown.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\CentiMoveUp.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\CentiMovement.h">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClInclude>
@@ -628,6 +604,9 @@
     </ClInclude>
     <ClInclude Include="Game Components\MoveFSM.h">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\AheadInformation.h">
+      <Filter>Source Files\Game Components\Centipede</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

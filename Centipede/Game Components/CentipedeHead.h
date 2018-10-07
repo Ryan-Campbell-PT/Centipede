@@ -28,17 +28,16 @@ public:
 
 	sf::Vector2f GetPosition();
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
+	void CorrectXDirection();
 
 	CentiMovementDirectionEnum GetCurrentMovementDirection();
 	void CheckGridAhead(sf::Vector2f pos);
-	void SetDirection(CentiMovementDirectionEnum direction);
 	void SetDirection(const CentipedeDirectionState * direction, bool centerToYPos);
 	void SetSpriteRotation(const float &rotation);
 
 	CentipedeDirectionState *GetDirection(CentiMovementDirectionEnum direction);
 
 private:
-	void SetupStates();
 	void SetupBodies();
 
 	///the state will determine what direction the centipede is going when spawned

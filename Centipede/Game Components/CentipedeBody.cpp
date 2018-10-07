@@ -24,7 +24,7 @@ CentipedeBody::CentipedeBody(CentipedeHead * const head)
 
 }
 
-CentipedeBody::CentipedeBody(CentipedeHead * const head, sf::Vector2f & const spawn, CentiMovementDirectionEnum direction)
+CentipedeBody::CentipedeBody(CentipedeHead * const head, sf::Vector2f const &spawn, CentiMovementDirectionEnum direction)
 	:head(head), prev(0), next(0)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
@@ -78,9 +78,7 @@ void CentipedeBody::Update()
 		break;
 	}
 
-	ConsoleMsg::WriteLine("Body pos: " + Tools::ToString(this->position) + "   ");
-	ConsoleMsg::WriteLine("OFfset: " + Tools::ToString(this->desired.offset));
-	if (this->position == desired.offset)
+	if (this->position == aheadTurningInformation.turningPoint)
 		this->ChangePos();
 
 	this->sprite.setPosition(this->position);
@@ -90,10 +88,10 @@ void CentipedeBody::ChangePos()
 {
 	this->offsetQueue.pop(); //pop the one youre currently using, off
 
-	this->currentDirection = this->desired.direction;
+	this->currentDirection = this->aheadTurningInformation.direction;
 
 	if (this->offsetQueue.size() > 0) //but if the centi added more, continue onto that one
-		this->desired = this->offsetQueue.front();
+		this->aheadTurningInformation = this->offsetQueue.front();
 }
 
 void CentipedeBody::UpdateBody(const float & x, const float & y)
@@ -105,12 +103,10 @@ void CentipedeBody::UpdateBody(const float & x, const float & y)
 
 void CentipedeBody::AddOffset(sf::Vector2f const & offset, CentiMovementDirectionEnum direction)
 {
-	BS f;
-	f.direction = direction;
-	f.offset = offset;
+	AheadInformation f(offset, direction);
 	
 	if (this->offsetQueue.size() == 0)
-		this->desired = f;
+		this->aheadTurningInformation = f;
 	
 	this->offsetQueue.push(f);
 }

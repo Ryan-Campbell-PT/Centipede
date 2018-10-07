@@ -89,19 +89,7 @@
     <ClCompile Include="Game Components\Asteroid.cpp" />
     <ClCompile Include="Game Components\AsteroidField.cpp" />
     <ClCompile Include="Game Components\BulletFactory.cpp" />
-    <ClCompile Include="Game Components\CentiMoveDown.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Game Components\CentiMoveLeft.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Game Components\CentiMovement.cpp" />
-    <ClCompile Include="Game Components\CentiMoveRight.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Game Components\CentiMoveUp.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Game Components\CentipedeBody.cpp" />
     <ClCompile Include="Game Components\CentipedeHead.cpp" />
     <ClCompile Include="Game Components\Centi_DownThenLeft.cpp" />
@@ -172,22 +160,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game Components\AheadInformation.h" />
     <ClInclude Include="Game Components\Asteroid.h" />
     <ClInclude Include="Game Components\AsteroidField.h" />
     <ClInclude Include="Game Components\BulletFactory.h" />
-    <ClInclude Include="Game Components\CentiMoveDown.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Game Components\CentiMoveLeft.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Game Components\CentiMovement.h" />
-    <ClInclude Include="Game Components\CentiMoveRight.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Game Components\CentiMoveUp.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Game Components\CentipedeBody.h" />
     <ClInclude Include="Game Components\CentipedeDirectionState.h" />
     <ClInclude Include="Game Components\CentipedeHead.h" />
