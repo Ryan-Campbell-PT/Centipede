@@ -3,6 +3,7 @@
 
 #include "TEAL/CommonElements.h"
 #include "AheadInformation.h"
+#include "CentipedePart.h"
 
 #include <queue>
 using std::queue;
@@ -10,12 +11,14 @@ using std::queue;
 class CentipedeHead;
 enum class CentiMovementDirectionEnum;
 
-class CentipedeBody : public GameObject
+class CentipedeBody : public GameObject, public CentipedePart
 {
 public:
 	///each bodypart should have a pointer to the head they will be following
+	CentipedeBody() {};
 	CentipedeBody(CentipedeHead * const head);
-	CentipedeBody(CentipedeHead *const head, sf::Vector2f const &spawn, CentiMovementDirectionEnum direction);
+	CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEnum direction);
+	void InitializeBody(sf::Vector2f const& pos, CentiMovementDirectionEnum direction);
 
 	virtual ~CentipedeBody();
 	CentipedeBody &operator=(const CentipedeBody &c) = delete;
@@ -34,9 +37,6 @@ private:
 	CentiMovementDirectionEnum currentDirection;
 	AheadInformation aheadTurningInformation;
 	std::queue<AheadInformation> offsetQueue;
-
-	CentipedeHead * head;
-	CentipedeBody *next, *prev; ///linked list of all the connected centiBodys
 
 	sf::Vector2f position;
 	AnimatedSprite sprite;

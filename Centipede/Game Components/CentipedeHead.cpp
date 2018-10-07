@@ -3,10 +3,11 @@
 #include "GameGrid.h"
 #include "MoveFSM.h"
 #include "CentipedeBody.h"
+#include "CentipedePart.h"
 
 #include <list>
 
-CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
+CentipedeHead::CentipedeHead(const sf::Vector2f & pos, const int &numBodies)
 	:bodies(0), position(pos), currentDirectionState(0), animationCounter(0), BSCounter(0)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
@@ -20,6 +21,7 @@ CentipedeHead::CentipedeHead(const sf::Vector2f & pos)
 	SetCollider(this->sprite, this->bitmap, true);
 	RegisterCollision<CentipedeHead>(*this);
 
+	SetupBodies(MoveSFM::downThenLeft.GetDirectionEnum(), numBodies);
 	SetDirection(&MoveSFM::downThenLeft, false);
 }
 
@@ -50,7 +52,7 @@ void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFr
 }
 
 void CentipedeHead::CorrectXDirection()
-{	
+{
 	GameGrid::GetCenterYPosition(this->position);
 }
 
@@ -81,10 +83,7 @@ void CentipedeHead::SetDirection(const CentipedeDirectionState * direction, bool
 	direction->Initialize(this);
 	this->currentDirectionState = direction;
 
-	if (this->bodies == 0) //never created bodies, so once we add an offset, itll give them something to do
-		SetupBodies();
-	else
-		this->bodies->AddOffset(this->position, this->currentDirectionState->GetDirectionEnum());
+	static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(this->position, this->currentDirectionState->GetDirectionEnum());
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
@@ -100,8 +99,22 @@ CentipedeDirectionState * CentipedeHead::GetDirection(CentiMovementDirectionEnum
 		return nullptr;
 }
 
-void CentipedeHead::SetupBodies()
+void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies)
 {
-	this->bodies = new CentipedeBody(this, this->position, this->currentDirectionState->GetDirectionEnum());
+	if (numBodies > 0)
+	{
+		//this->bodies = new CentipedeBody(this, this->position, this->currentDirectionState->GetDirectionEnum());
+		CentipedePart *prev (this), *curr(0);
+		
+		for (int i = 0; i < numBodies; ++i)
+		{
+			curr = new CentipedeBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
+
+			curr->SetWhoYoureFollowing(prev);
+			prev->SetWhosFollowingYou(curr);
+
+			prev = prev->GetWhosFollowingYou();
+		}
+	}
 }
 

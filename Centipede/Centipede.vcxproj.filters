@@ -608,6 +608,9 @@
     <ClInclude Include="Game Components\AheadInformation.h">
       <Filter>Source Files\Game Components\Centipede</Filter>
     </ClInclude>
+    <ClInclude Include="Game Components\CentipedePart.h">
+      <Filter>Source Files\Game Components\Centipede</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt">

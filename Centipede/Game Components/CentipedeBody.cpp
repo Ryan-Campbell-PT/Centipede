@@ -4,7 +4,7 @@
 #include "CentiMovement.h"
 
 CentipedeBody::CentipedeBody(CentipedeHead * const head)
-	:head(head), next(0), prev(0), currentDirection(CentiMovementDirectionEnum::Error), currentOffset(sf::Vector2f(-1, -1))
+	: currentDirection(CentiMovementDirectionEnum::Error), currentOffset(sf::Vector2f(-1, -1))
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
@@ -24,15 +24,11 @@ CentipedeBody::CentipedeBody(CentipedeHead * const head)
 
 }
 
-CentipedeBody::CentipedeBody(CentipedeHead * const head, sf::Vector2f const &spawn, CentiMovementDirectionEnum direction)
-	:head(head), prev(0), next(0)
+CentipedeBody::CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEnum direction)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
 	this->sprite.SetAnimation(0, 4);
-
-	this->position.x = head->GetPosition().x + SPRITE_SIZE;
-	this->position.y = head->GetPosition().y;
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	this->sprite.setScale(2.f, 2.f);
@@ -40,8 +36,6 @@ CentipedeBody::CentipedeBody(CentipedeHead * const head, sf::Vector2f const &spa
 
 	SetCollider(this->sprite, this->bitmap, true);
 	RegisterCollision<CentipedeBody>(*this);
-
-	
 
 	this->position = spawn;
 	this->currentDirection = direction;
@@ -86,6 +80,8 @@ void CentipedeBody::Update()
 
 void CentipedeBody::ChangePos()
 {
+	static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(this->aheadTurningInformation.turningPoint, this->aheadTurningInformation.direction);
+
 	this->offsetQueue.pop(); //pop the one youre currently using, off
 
 	this->currentDirection = this->aheadTurningInformation.direction;

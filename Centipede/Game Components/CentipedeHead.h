@@ -2,7 +2,7 @@
 #define CENTIHEAD_H
 
 #include "TEAL/CommonElements.h"
-#include <vector>
+#include "CentipedePart.h"
 
 #define SPRITE_BEGIN 0
 #define SPRITE_END 7
@@ -14,10 +14,10 @@ class CentipedeDirectionState;
 class CentipedeBody;
 enum class CentiMovementDirectionEnum;
 
-class CentipedeHead : public GameObject
+class CentipedeHead : public GameObject, public CentipedePart
 {
 public:
-	CentipedeHead(const sf::Vector2f &pos);
+	CentipedeHead(const sf::Vector2f &pos, const int &numBodies);
 	virtual ~CentipedeHead() {};
 	CentipedeHead &operator=(const CentipedeHead &c) = delete;
 	CentipedeHead(const CentipedeHead &c) = delete;
@@ -38,7 +38,7 @@ public:
 	CentipedeDirectionState *GetDirection(CentiMovementDirectionEnum direction);
 
 private:
-	void SetupBodies();
+	void SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies);
 
 	///the state will determine what direction the centipede is going when spawned
 	///this state is to reduce the number of if statements being checked, and just

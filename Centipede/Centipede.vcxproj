@@ -168,6 +168,7 @@
     <ClInclude Include="Game Components\CentipedeBody.h" />
     <ClInclude Include="Game Components\CentipedeDirectionState.h" />
     <ClInclude Include="Game Components\CentipedeHead.h" />
+    <ClInclude Include="Game Components\CentipedePart.h" />
     <ClInclude Include="Game Components\Centi_DownThenLeft.h" />
     <ClInclude Include="Game Components\Centi_DownThenRight.h" />
     <ClInclude Include="Game Components\Centi_LeftThenDown.h" />
