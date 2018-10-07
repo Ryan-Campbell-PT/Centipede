@@ -78,7 +78,8 @@ void CentipedeBody::Update()
 		break;
 	}
 
-
+	ConsoleMsg::WriteLine("Body pos: " + Tools::ToString(this->position) + "   ");
+	ConsoleMsg::WriteLine("OFfset: " + Tools::ToString(this->desired.offset));
 	if (this->position == desired.offset)
 		this->ChangePos();
 
@@ -87,13 +88,12 @@ void CentipedeBody::Update()
 
 void CentipedeBody::ChangePos()
 {
+	this->offsetQueue.pop(); //pop the one youre currently using, off
+
 	this->currentDirection = this->desired.direction;
 
-	if (this->offsetQueue.size() > 0)
-	{
+	if (this->offsetQueue.size() > 0) //but if the centi added more, continue onto that one
 		this->desired = this->offsetQueue.front();
-		this->offsetQueue.pop();
-	}
 }
 
 void CentipedeBody::UpdateBody(const float & x, const float & y)
@@ -111,8 +111,6 @@ void CentipedeBody::AddOffset(sf::Vector2f const & offset, CentiMovementDirectio
 	
 	if (this->offsetQueue.size() == 0)
 		this->desired = f;
-	else
-		this->offsetQueue.push(f);
-
 	
+	this->offsetQueue.push(f);
 }
