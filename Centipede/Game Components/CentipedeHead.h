@@ -18,11 +18,9 @@ class CentipedeHead : public GameObject, public CentipedePart
 {
 public:
 	CentipedeHead();
-	CentipedeHead(const sf::Vector2f &pos, const int &numBodies);
-	virtual ~CentipedeHead() {};
-	CentipedeHead &operator=(const CentipedeHead &c) = delete;
-	CentipedeHead(const CentipedeHead &c) = delete;
+	//CentipedeHead(const sf::Vector2f &pos, const int &numBodies);
 
+	void InitializeHead(const sf::Vector2f & pos, const int &numBodies, CentipedeDirectionState const & direction);
 
 	virtual void Update() override;
 	virtual void Draw() override;
@@ -39,6 +37,10 @@ public:
 	CentipedeDirectionState *GetDirection(CentiMovementDirectionEnum direction);
 
 private:
+	virtual ~CentipedeHead() {};
+	CentipedeHead &operator=(const CentipedeHead &c) = delete;
+	CentipedeHead(const CentipedeHead &c) = delete;
+	///this function will apply the number of bodies connected to the head, at the creation of the head
 	void SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies);
 
 	///the state will determine what direction the centipede is going when spawned
@@ -55,9 +57,7 @@ private:
 
 	unsigned int animationCounter;
 
-	unsigned int BSCounter;
-
-	int annoying = 0;
+	bool active;
 };
 
 ///this enum will be used so there is no need to delete movements throuhgout the game loop

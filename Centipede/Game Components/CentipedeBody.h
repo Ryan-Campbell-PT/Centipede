@@ -9,14 +9,13 @@
 using std::queue;
 
 class CentipedeHead;
+class Bullet;
 enum class CentiMovementDirectionEnum;
 
 class CentipedeBody : public GameObject, public CentipedePart
 {
 public:
-	///each bodypart should have a pointer to the head they will be following
-	CentipedeBody() {};
-	CentipedeBody(CentipedeHead * const head);
+	CentipedeBody();
 	CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEnum direction);
 	void InitializeBody(sf::Vector2f const& pos, CentiMovementDirectionEnum direction);
 
@@ -28,11 +27,15 @@ public:
 	void AddOffset(sf::Vector2f const &offset, CentiMovementDirectionEnum direction);
 	sf::Vector2f currentOffset;
 
+	virtual void Collision(GameObject *g) override {};
+	virtual void Collision(Bullet * bullet);
+
 private:
 	virtual void Draw() override;
 	virtual void Update() override;
-
+	
 	void ChangePos();
+	void RemoveBody();
 
 	CentiMovementDirectionEnum currentDirection;
 	AheadInformation aheadTurningInformation;

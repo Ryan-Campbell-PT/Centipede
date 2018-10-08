@@ -9,8 +9,8 @@ class CentipedeBody;
 class CentiBodyPool
 {
 public:
-	CentipedeBody * GetCentiBody() const;
-	void RecycleCentiBody(CentipedeBody * const body) const;
+	static CentipedeBody * GetCentiBody();
+	static void RecycleCentiBody(CentipedeBody * const body);
 
 private:
 	CentiBodyPool() {};

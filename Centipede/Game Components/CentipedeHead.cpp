@@ -4,29 +4,41 @@
 #include "MoveFSM.h"
 #include "CentipedeBody.h"
 #include "CentipedePart.h"
+#include "CentiBodyManager.h"
 
 #include <list>
 
 CentipedeHead::CentipedeHead()
-{
-}
-
-CentipedeHead::CentipedeHead(const sf::Vector2f & pos, const int &numBodies)
-	:bodies(0), position(pos), currentDirectionState(0), animationCounter(0), BSCounter(0)
+	:active(false), bodies(0), currentDirectionState(0)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
 	this->sprite.SetAnimation(SPRITE_BEGIN, SPRITE_END);
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
+	this->sprite.setScale(0.f, 0.f);
+
+	SetCollider(this->sprite, this->bitmap, true);
+
+	this->SetWhosFollowingYou(0);
+	this->SetWhoYoureFollowing(0);
+}
+
+//CentipedeHead::CentipedeHead(const sf::Vector2f & pos, const int &numBodies)
+//	:bodies(0), position(pos), currentDirectionState(0), animationCounter(0), BSCounter(0)
+//{
+//}
+
+void CentipedeHead::InitializeHead(const sf::Vector2f & pos, const int & numBodies, CentipedeDirectionState const & direction)
+{
 	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(pos);
 
-	SetCollider(this->sprite, this->bitmap, true);
 	RegisterCollision<CentipedeHead>(*this);
+	
+	SetupBodies(direction.GetDirectionEnum(), numBodies);
+	SetDirection(&direction, false);
 
-	SetupBodies(MoveSFM::downThenLeft.GetDirectionEnum(), numBodies);
-	SetDirection(&MoveSFM::downThenLeft, false);
 }
 
 void CentipedeHead::Update()
@@ -111,8 +123,9 @@ void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int 
 		CentipedePart *prev (this), *curr(0);
 		
 		for (int i = 0; i < numBodies; ++i)
-		{
-			curr = new CentipedeBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
+		{//create number of bodies needed, and connect all the links at the creation of them
+			//curr = new CentipedeBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
+			curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
 
 			curr->SetWhoYoureFollowing(prev);
 			prev->SetWhosFollowingYou(curr);

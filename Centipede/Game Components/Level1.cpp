@@ -17,6 +17,7 @@
 #include "Spider.h"
 #include "SpiderManager.h"
 #include "MushroomManager.h"
+#include "CentiHeadManager.h"
 
 #include <vector>
 
@@ -39,8 +40,8 @@ void Level1::Initialize()
 //	shroom->InitializeMushroom(sf::Vector2f(200, 200));
 	FleaManager::InitializeFlea();
 	
-	
-	new CentipedeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2, 0), 9);
+	//CentiHeadManager::InitializeCentipede();
+	//new CentipedeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2, 0), 9);
 
 	CollisionTestPair<Ship, Mushroom>();
 
