@@ -80,7 +80,8 @@ void CentipedeBody::Update()
 
 void CentipedeBody::ChangePos()
 {
-	static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(this->aheadTurningInformation.turningPoint, this->aheadTurningInformation.direction);
+	if(this->GetWhosFollowingYou()) //make sure it has a follower
+		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(this->aheadTurningInformation.turningPoint, this->aheadTurningInformation.direction);
 
 	this->offsetQueue.pop(); //pop the one youre currently using, off
 

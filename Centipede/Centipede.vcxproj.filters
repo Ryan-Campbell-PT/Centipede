@@ -324,6 +324,24 @@
     <ClCompile Include="Game Components\CentipedeBody.cpp">
       <Filter>Source Files\Game Components\Centipede</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\CentiBodyPool.cpp">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiHeadPool.cpp">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiHeadManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiBodyManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiBodyFactory.cpp">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\CentiHeadFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -610,6 +628,24 @@
     </ClInclude>
     <ClInclude Include="Game Components\CentipedePart.h">
       <Filter>Source Files\Game Components\Centipede</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiBodyPool.h">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiHeadPool.h">
+      <Filter>Source Files\Game Components\ObjPools</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiHeadManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiBodyManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiBodyFactory.h">
+      <Filter>Source Files\Game Components\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiHeadFactory.h">
+      <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

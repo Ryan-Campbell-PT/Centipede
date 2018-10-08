@@ -17,6 +17,7 @@ enum class CentiMovementDirectionEnum;
 class CentipedeHead : public GameObject, public CentipedePart
 {
 public:
+	CentipedeHead();
 	CentipedeHead(const sf::Vector2f &pos, const int &numBodies);
 	virtual ~CentipedeHead() {};
 	CentipedeHead &operator=(const CentipedeHead &c) = delete;

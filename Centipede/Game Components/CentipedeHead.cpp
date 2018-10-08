@@ -7,6 +7,10 @@
 
 #include <list>
 
+CentipedeHead::CentipedeHead()
+{
+}
+
 CentipedeHead::CentipedeHead(const sf::Vector2f & pos, const int &numBodies)
 	:bodies(0), position(pos), currentDirectionState(0), animationCounter(0), BSCounter(0)
 {
