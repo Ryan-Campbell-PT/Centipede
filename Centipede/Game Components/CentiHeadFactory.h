@@ -9,6 +9,8 @@ class CentipedeHead;
 class CentiHeadFactory
 {
 public:
+	static CentipedeHead* GetCentiHead();
+	static void RemoveCentiHead(CentipedeHead *const head);
 
 private:
 	CentiHeadFactory() {};

@@ -44,6 +44,9 @@ private:
 	sf::Vector2f position;
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
+
+	bool active;
+	unsigned int animationCounter;
 };
 
 

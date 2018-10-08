@@ -5,10 +5,12 @@
 #include "Bullet.h"
 
 CentipedeBody::CentipedeBody()
+	:active(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
 	this->sprite.SetAnimation(0, 4);
+	this->sprite.SetAnimation(SPRITE_BEGIN, SPRITE_END);
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
@@ -19,6 +21,7 @@ CentipedeBody::CentipedeBody()
 }
 
 CentipedeBody::CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEnum direction)
+	:active(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
@@ -39,6 +42,8 @@ CentipedeBody::CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEn
 void CentipedeBody::InitializeBody(sf::Vector2f const & pos, CentiMovementDirectionEnum direction)
 {
 	this->position = pos;
+	this->active = true; 
+	this->animationCounter = 0;
 
 	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(this->position);
@@ -58,6 +63,11 @@ void CentipedeBody::Draw()
 
 void CentipedeBody::Update()
 {
+	if (!active)
+		return;
+	++animationCounter;
+
+	//todo: turn this into a more effective state machine
 	switch (this->currentDirection)
 	{
 	case CentiMovementDirectionEnum::Left:
@@ -79,6 +89,9 @@ void CentipedeBody::Update()
 
 	if (this->position == aheadTurningInformation.turningPoint)
 		this->ChangePos();
+	
+	if (this->animationCounter % 3 == 0)
+		sprite.NextFrame();
 
 	this->sprite.setPosition(this->position);
 }

@@ -3,7 +3,7 @@
 
 CentiHeadPool * CentiHeadPool::instance = 0;
 
-CentipedeHead * CentiHeadPool::GetCentiHead() const
+CentipedeHead * CentiHeadPool::GetCentiHead()
 {
 	CentipedeHead* head;
 
@@ -19,7 +19,7 @@ CentipedeHead * CentiHeadPool::GetCentiHead() const
 	return head;
 }
 
-void CentiHeadPool::RecycleCentiBody(CentipedeHead * const body) const
+void CentiHeadPool::RecycleCentiBody(CentipedeHead * const body)
 {
 	GetInstance()->bodyList.push_front(body);
 }

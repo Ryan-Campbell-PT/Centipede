@@ -16,7 +16,7 @@ void ResourceManager::LoadAllResources()
 
 	AddTexture("PlayerShip", "blaster.png");
 	AddTexture("Bullet", "bullet.png");
-	AddTexture("CentiBody", "centipede_body.png");
+	AddTexture("CentiBody", "centipede_segment.png");
 	AddTexture("CentiHead", "centipede_head.png");
 	AddTexture("CentiSegment", "centipede_segment.png");
 	AddTexture("Death", "death.png");

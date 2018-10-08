@@ -3,12 +3,14 @@
 
 //#include <list>
 //using std::list;
+#define MAX_CENTI_BODY 6
 
 class CentipedeHead;
 
 class CentiHeadManager
 {
 public:
+	static void InitializeCentipede();
 
 private:
 	CentiHeadManager() {};

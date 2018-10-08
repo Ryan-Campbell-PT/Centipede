@@ -31,6 +31,9 @@ CentipedeHead::CentipedeHead()
 
 void CentipedeHead::InitializeHead(const sf::Vector2f & pos, const int & numBodies, CentipedeDirectionState const & direction)
 {
+	this->active = true;
+	this->position = pos;
+	
 	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(pos);
 
@@ -43,6 +46,9 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, const int & numBodi
 
 void CentipedeHead::Update()
 {
+	if (!active)
+		return;
+
 	++animationCounter;
 
 	this->currentDirectionState->MoveDirection(this, this->position);
