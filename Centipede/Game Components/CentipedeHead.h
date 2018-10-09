@@ -13,6 +13,8 @@
 class CentipedeDirectionState;
 class CentipedeBody;
 enum class CentiMovementDirectionEnum;
+class GameObject;
+class Bullet;
 
 class CentipedeHead : public GameObject, public CentipedePart
 {
@@ -21,9 +23,12 @@ public:
 	//CentipedeHead(const sf::Vector2f &pos, const int &numBodies);
 
 	void InitializeHead(const sf::Vector2f & pos, const int &numBodies, CentipedeDirectionState const & direction);
+	void InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction);
 
 	virtual void Update() override;
 	virtual void Draw() override;
+	virtual void Collide(GameObject * const go) {};
+	virtual void Collide(Bullet * const bullet);
 
 	sf::Vector2f GetPosition();
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
@@ -42,6 +47,8 @@ private:
 	CentipedeHead(const CentipedeHead &c) = delete;
 	///this function will apply the number of bodies connected to the head, at the creation of the head
 	void SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies);
+	
+	void RemoveHead();
 
 	///the state will determine what direction the centipede is going when spawned
 	///this state is to reduce the number of if statements being checked, and just

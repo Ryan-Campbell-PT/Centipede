@@ -12,6 +12,9 @@ class CentiHeadManager
 public:
 	static void InitializeCentipede();
 
+	static CentipedeHead* GetCentiHead();
+	static void RemoveCentiHead(CentipedeHead * const head);
+
 private:
 	CentiHeadManager() {};
 

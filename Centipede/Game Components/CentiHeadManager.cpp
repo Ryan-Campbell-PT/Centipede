@@ -15,6 +15,16 @@ void CentiHeadManager::InitializeCentipede()
 	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), rand() % MAX_CENTI_BODY, MoveSFM::downThenLeft);
 }
 
+CentipedeHead* CentiHeadManager::GetCentiHead()
+{
+	return CentiHeadFactory::GetCentiHead();
+}
+
+void CentiHeadManager::RemoveCentiHead(CentipedeHead * const head)
+{
+	CentiHeadFactory::RemoveCentiHead(head);
+}
+
 CentiHeadManager * CentiHeadManager::GetInstance()
 {
 	if (instance == 0)

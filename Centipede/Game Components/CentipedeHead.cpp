@@ -5,6 +5,9 @@
 #include "CentipedeBody.h"
 #include "CentipedePart.h"
 #include "CentiBodyManager.h"
+#include "Bullet.h"
+#include "CentiHeadManager.h"
+#include "MushroomManager.h"
 
 #include <list>
 
@@ -31,17 +34,21 @@ CentipedeHead::CentipedeHead()
 
 void CentipedeHead::InitializeHead(const sf::Vector2f & pos, const int & numBodies, CentipedeDirectionState const & direction)
 {
+	this->InitializeHead(pos, direction);
+	SetupBodies(direction.GetDirectionEnum(), numBodies);
+}
+
+void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction)
+{
 	this->active = true;
 	this->position = pos;
-	
+
 	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(pos);
 
 	RegisterCollision<CentipedeHead>(*this);
-	
-	SetupBodies(direction.GetDirectionEnum(), numBodies);
-	SetDirection(&direction, false);
 
+	SetDirection(&direction, false);
 }
 
 void CentipedeHead::Update()
@@ -61,6 +68,15 @@ void CentipedeHead::Update()
 void CentipedeHead::Draw()
 {
 	WindowManager::MainWindow.draw(this->sprite);
+}
+
+void CentipedeHead::Collide(Bullet * const bullet)
+{
+	bullet->RemoveBullet(); //remove the bullet
+
+	this->RemoveHead();
+
+	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)
 }
 
 sf::Vector2f CentipedeHead::GetPosition()
@@ -141,3 +157,15 @@ void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int 
 	}
 }
 
+void CentipedeHead::RemoveHead()
+{
+	//remove from screen
+	this->sprite.setScale(0.f, 0.f);
+	DeregisterCollision<CentipedeHead>(*this);
+	this->active = false;
+
+	CentiHeadManager::RemoveCentiHead(this); //recycle
+
+	//handle the complexities of the linking
+	CentiBodyManager::MakeBodyHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
+}
