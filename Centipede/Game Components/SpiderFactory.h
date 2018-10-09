@@ -15,7 +15,7 @@ private:
 	static SpiderFactory *GetInstance();
 
 	SpiderFactory();
-	virtual ~SpiderFactory() { delete this->spider; };
+	virtual ~SpiderFactory() {};
 	SpiderFactory &operator=(const SpiderFactory &c) = delete;
 	SpiderFactory(const SpiderFactory &c) = delete;
 

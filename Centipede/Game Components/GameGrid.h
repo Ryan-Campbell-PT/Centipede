@@ -50,6 +50,7 @@ private:
 //enums to tell what is located at this grid
 enum class GameGridEnum
 {
+	Error = -1,
 	Unoccupied = 0,
 	Mushroom = 1
 };

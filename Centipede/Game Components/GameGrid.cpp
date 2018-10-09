@@ -29,6 +29,8 @@ GameGridEnum GameGrid::GetGridStatus(sf::Vector2f v)
 {
 	if (GetInstance()->BoundsCheck(v))
 		return static_cast<GameGridEnum>(GetInstance()->grid[static_cast<int>(v.x / SPRITE_SIZE)][static_cast<int>(v.y / SPRITE_SIZE)]);
+
+	return GameGridEnum::Error;
 }
 
 void GameGrid::GetCenterGridPosition(sf::Vector2f & pos)
