@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "CentiBodyManager.h"
 #include "CentiBodyFactory.h"
+#include "MushroomManager.h"
 
 CentipedeBody::CentipedeBody()
 	:active(false)
@@ -97,8 +98,10 @@ void CentipedeBody::Update()
 
 void CentipedeBody::Collision(Bullet * const bullet)
 {
-	this->RemoveBodyFromScreen(true, true);
+	MushroomManager::AttemptSpawnShroom(this->position);
 	bullet->RemoveBullet();
+	this->RemoveBodyFromScreen();
+	CentiBodyManager::SetBehindBodyToHead(this);
 }
 
 sf::Vector2f CentipedeBody::GetPosition()
@@ -111,6 +114,8 @@ void CentipedeBody::RemoveBodyFromScreen()
 	DeregisterCollision <CentipedeBody>(*this);
 	this->sprite.setScale(0.f, 0.f);
 	this->active = false;
+
+	CentiBodyFactory::RemoveCentiBody(this);
 }
 
 void CentipedeBody::ChangePos()
@@ -126,18 +131,21 @@ void CentipedeBody::ChangePos()
 		this->aheadTurningInformation = this->offsetQueue.front();
 }
 
-void CentipedeBody::RemoveBodyFromScreen(const bool& setBehindHead, const bool &spawnShroom)
+#if false
+  void CentipedeBody::RemoveBodyFromScreen(const bool& setBehindHead, const bool &spawnShroom)
 {
 	this->RemoveBodyFromScreen();
 
 	CentiBodyManager::RemoveCentiBody(this, setBehindHead, spawnShroom);
 }
+#endif
 
+#if TESTER
 void CentipedeBody::SetBodyToHead()
 {
 	CentiBodyManager::MakeBodyHead(this);
 }
-
+#endif 
 void CentipedeBody::UpdateBody(const float & x, const float & y)
 {
 	this->position.x += x;

@@ -26,15 +26,15 @@ public:
 	void UpdateBody(const float & x, const float & y);
 	void AddOffset(sf::Vector2f const &offset, CentiMovementDirectionEnum direction);
 	sf::Vector2f currentOffset;
+	sf::Vector2f GetPosition();
 
 	virtual void Collision(GameObject *g) override {};
 	virtual void Collision(Bullet * bullet);
-	
+#if TESTER
 	void SetBodyToHead();
-
-	sf::Vector2f GetPosition();
-	void RemoveBodyFromScreen();
-	void RemoveBodyFromScreen(const bool& setBehindHead, const bool &spawnShroom);
+#endif
+	void RemoveBodyFromScreen(); ///this will handle sprite, active, and recycling
+	//void RemoveBodyFromScreen(const bool& setBehindHead, const bool &spawnShroom);
 
 private:
 	virtual void Draw() override;

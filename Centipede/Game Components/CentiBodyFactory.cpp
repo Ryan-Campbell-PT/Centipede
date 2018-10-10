@@ -8,7 +8,7 @@ CentipedeBody * CentiBodyFactory::GetCentiBody(const CentiBodyManager * const d)
 	return CentiBodyPool::GetCentiBody();
 }
 
-void CentiBodyFactory::RemoveCentiBody(const CentiBodyManager * const d, CentipedeBody * const body)
+void CentiBodyFactory::RemoveCentiBody(CentipedeBody * const body)
 {
 	CentiBodyPool::RecycleCentiBody(body);
 }

@@ -5,6 +5,7 @@
 
 #ifndef _CommonElements
 #define _CommonElements
+#define TESTER false
 
 #include "Game.h"
 #include "ResourceManager.h"

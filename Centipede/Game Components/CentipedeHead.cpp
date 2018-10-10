@@ -104,6 +104,7 @@ void CentipedeHead::Collision(Bullet * bullet)
 {
 	bullet->RemoveBullet();
 	this->RemoveHead();
+	MushroomManager::AttemptSpawnShroom(this->GetPosition());
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
@@ -179,7 +180,10 @@ void CentipedeHead::RemoveHead()
 	this->active = false;
 
 	CentiHeadManager::RemoveCentiHead(this); //recycle
-	
+
+	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
+#if TESTING
 	//handle the complexities of the linking
 	CentiBodyManager::MakeBodyHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()), this->currentDirectionState);
+#endif
 }

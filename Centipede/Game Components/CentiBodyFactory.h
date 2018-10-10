@@ -12,7 +12,7 @@ class CentiBodyFactory
 public:
 	///the manager is only there to confirm the manager is the one requesting the objects
 	static CentipedeBody* GetCentiBody(const CentiBodyManager * const d);
-	static void RemoveCentiBody(const CentiBodyManager * const d, CentipedeBody *const body);
+	static void RemoveCentiBody(CentipedeBody *const body);
 
 private:
 	CentiBodyFactory() {};

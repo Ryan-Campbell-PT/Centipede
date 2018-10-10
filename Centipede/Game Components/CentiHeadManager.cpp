@@ -25,7 +25,6 @@ CentipedeHead* CentiHeadManager::GetCentiHead()
 void CentiHeadManager::RemoveCentiHead(CentipedeHead * const head)
 {
 	CentiHeadFactory::RemoveCentiHead(head);
-	MushroomManager::AttemptSpawnShroom(head->GetPosition());
 }
 
 CentiHeadManager * CentiHeadManager::GetInstance()
