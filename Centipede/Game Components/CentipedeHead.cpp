@@ -59,8 +59,8 @@ void CentipedeHead::Update()
 
 	++animationCounter;
 
-	this->currentDirectionState->MoveDirection(this, this->position);
-	this->sprite.setPosition(this->position);
+	//this->currentDirectionState->MoveDirection(this, this->position);
+	//this->sprite.setPosition(this->position);
 
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
@@ -98,6 +98,12 @@ void CentipedeHead::CorrectXDirection()
 CentiMovementDirectionEnum CentipedeHead::GetDirectionEnum()
 {
 	return CentiMovementDirectionEnum::Error;
+}
+
+void CentipedeHead::Collision(Bullet * bullet)
+{
+	bullet->RemoveBullet();
+	this->RemoveHead();
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
@@ -148,7 +154,7 @@ const CentipedeDirectionState * CentipedeHead::GetDirection()
 void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies)
 {
 
-	auto tester = 9;
+	auto tester = 2;
 	if (tester > 0)
 	{
 		//this->bodies = new CentipedeBody(this, this->position, this->currentDirectionState->GetDirectionEnum());
@@ -157,7 +163,8 @@ void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int 
 		for (int i = 0; i < tester; ++i)
 		{//create number of bodies needed, and connect all the links at the creation of them
 			//curr = new CentipedeBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
-			curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
+			//curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
+			curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x - (SPRITE_SIZE * (i + 1)), this->position.y ), direction);
 
 			curr->SetWhoYoureFollowing(prev);
 			prev->SetWhosFollowingYou(curr);
@@ -177,9 +184,8 @@ void CentipedeHead::RemoveHead()
 	DeregisterCollision<CentipedeHead>(*this);
 	this->active = false;
 
+	CentiHeadManager::RemoveCentiHead(this); //recycle
+	
 	//handle the complexities of the linking
 	CentiBodyManager::MakeBodyHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()), this->currentDirectionState);
-
-	CentiHeadManager::RemoveCentiHead(this); //recycle
-
 }

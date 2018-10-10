@@ -4,6 +4,7 @@
 #include "CentiMovement.h"
 #include "Bullet.h"
 #include "CentiBodyManager.h"
+#include "CentiBodyFactory.h"
 
 CentipedeBody::CentipedeBody()
 	:active(false)
@@ -17,8 +18,8 @@ CentipedeBody::CentipedeBody()
 
 	SetCollider(this->sprite, this->bitmap, true);
 
-	this->SetWhosFollowingYou(0);
-	this->SetWhoYoureFollowing(0);
+	this->SetWhosFollowingYou(nullptr);
+	this->SetWhoYoureFollowing(nullptr);
 }
 
 CentipedeBody::CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEnum direction)
@@ -63,7 +64,7 @@ void CentipedeBody::Update()
 	if (!active)
 		return;
 	++animationCounter;
-
+	/*
 	//todo: turn this into a more effective state machine
 	switch (this->currentDirection)
 	{
@@ -90,19 +91,26 @@ void CentipedeBody::Update()
 	
 	if (this->animationCounter % 3 == 0)
 		sprite.NextFrame();
-
+		*/
 	this->sprite.setPosition(this->position);
 }
 
 void CentipedeBody::Collision(Bullet * const bullet)
 {
-	this->RemoveBody();
+	this->RemoveBodyFromScreen(true, true);
 	bullet->RemoveBullet();
 }
 
 sf::Vector2f CentipedeBody::GetPosition()
 {
 	return this->position;
+}
+
+void CentipedeBody::RemoveBodyFromScreen()
+{
+	DeregisterCollision <CentipedeBody>(*this);
+	this->sprite.setScale(0.f, 0.f);
+	this->active = false;
 }
 
 void CentipedeBody::ChangePos()
@@ -118,14 +126,16 @@ void CentipedeBody::ChangePos()
 		this->aheadTurningInformation = this->offsetQueue.front();
 }
 
-void CentipedeBody::RemoveBody()
+void CentipedeBody::RemoveBodyFromScreen(const bool& setBehindHead, const bool &spawnShroom)
 {
-	//todo: spawn mushroom, deregister collison, and more
-	DeregisterCollision <CentipedeBody>(*this);
-	this->sprite.setScale(0.f, 0.f);
-	this->active = false;
+	this->RemoveBodyFromScreen();
 
-	CentiBodyManager::RemoveCentiBody(this);
+	CentiBodyManager::RemoveCentiBody(this, setBehindHead, spawnShroom);
+}
+
+void CentipedeBody::SetBodyToHead()
+{
+	CentiBodyManager::MakeBodyHead(this);
 }
 
 void CentipedeBody::UpdateBody(const float & x, const float & y)

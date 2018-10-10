@@ -36,7 +36,7 @@ void Level1::Initialize()
 
 
 
-	MushroomManager::InitializeMushroomField(30);
+	//MushroomManager::InitializeMushroomField(30);
 	//auto shroom = new Mushroom();
 //	shroom->InitializeMushroom(sf::Vector2f(200, 200));
 	FleaManager::InitializeFlea();

@@ -29,14 +29,18 @@ public:
 
 	virtual void Collision(GameObject *g) override {};
 	virtual void Collision(Bullet * bullet);
+	
+	void SetBodyToHead();
 
 	sf::Vector2f GetPosition();
+	void RemoveBodyFromScreen();
+	void RemoveBodyFromScreen(const bool& setBehindHead, const bool &spawnShroom);
+
 private:
 	virtual void Draw() override;
 	virtual void Update() override;
 	
 	void ChangePos();
-	void RemoveBody();
 
 	CentiMovementDirectionEnum currentDirection;
 	AheadInformation aheadTurningInformation;

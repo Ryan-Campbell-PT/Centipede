@@ -45,6 +45,9 @@ public:
 	const CentipedeDirectionState *GetDirection(); ///this simply get the current direction
 	CentiMovementDirectionEnum GetDirectionEnum(); ///this is the direction, but tranfered to enum
 
+	virtual void Collision(GameObject *go) override {};
+	virtual void Collision(Bullet * bullet);
+
 private:
 	virtual ~CentipedeHead() = default;
 	CentipedeHead &operator=(const CentipedeHead &c) = delete;

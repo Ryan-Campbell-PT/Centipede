@@ -23,7 +23,7 @@ CentipedeBody * CentiBodyManager::GetInitializedCentiBody(sf::Vector2f const & p
 
 void CentiBodyManager::MakeBodyHead(CentipedeBody * body)
 {
-	if (body->GetWhosFollowingYou() == nullptr)
+	if (body == nullptr)
 		return;
 
 	auto direction = GetInstance()->GetBodysHeadDirection(body);
@@ -32,34 +32,36 @@ void CentiBodyManager::MakeBodyHead(CentipedeBody * body)
 
 void CentiBodyManager::MakeBodyHead(CentipedeBody * body, const CentipedeDirectionState * direction)
 {
-	if (body->GetWhosFollowingYou() == nullptr)
-		return;
-
+	if (body == nullptr)
+		return; //destroyed the current tail, no need to do anything
+	
 	CentiBodyFactory::RemoveCentiBody(GetInstance(), body); //recycle that body part
 	auto head = CentiHeadManager::GetCentiHead(); //get a head to be used
+	body->RemoveBodyFromScreen(false, false);
 
 	//setup the links
-	//body->SetWhoYoureFollowing(nullptr); //head, so wont be following anyone
-	body->GetWhoYoureFollowing()->SetWhosFollowingYou(nullptr); //set the person infront to the tail
-	
-	body->GetWhosFollowingYou()->SetWhoYoureFollowing(head); //set the person behind (if anyone) to follow the newly created head
+	if(body->GetWhoYoureFollowing())
+		body->GetWhoYoureFollowing()->SetWhosFollowingYou(nullptr); //set the person infront to the tail
+
+	if(body->GetWhosFollowingYou())
+		body->GetWhosFollowingYou()->SetWhoYoureFollowing(head); //set the person behind (if anyone) to follow the newly created head
+
 	head->SetWhosFollowingYou(body->GetWhosFollowingYou()); //set the heads follower
 	head->SetWhoYoureFollowing(nullptr);
 
+	body->SetWhosFollowingYou(nullptr); //remove any links
+	body->SetWhoYoureFollowing(nullptr);
+
 	head->InitializeHead(body->GetPosition(), *direction, false);
 	head->SetDirection(direction->NextState(head), false);
-
-
-
-	//todo: make function that has it so the body has access to how many followers, and the head theyre following
-		//todo: or make it so you can initialize, without the number of heads, so you just can link the linkss
 }
 
-void CentiBodyManager::RemoveCentiBody(CentipedeBody * body)
+void CentiBodyManager::RemoveCentiBody(CentipedeBody * body, const bool &makeBehindHead, const bool &spawnShroom)
 {
-	MushroomManager::AttemptSpawnShroom(body->GetPosition()); //spawn the shroom where the body died
+	if(spawnShroom)
+		MushroomManager::AttemptSpawnShroom(body->GetPosition()); //spawn the shroom where the body died
 
-	if(body->GetWhosFollowingYou())
+	if(makeBehindHead)
 		MakeBodyHead(static_cast<CentipedeBody*>(body->GetWhosFollowingYou()));
 
 	CentiBodyFactory::RemoveCentiBody(GetInstance(), body); //recycle
