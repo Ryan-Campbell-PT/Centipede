@@ -5,6 +5,7 @@
 #include "GameGrid.h"
 #include "FleaFactory.h"
 #include "MushroomFactory.h"
+#include "Spider.h"
 
 FleaManager *FleaManager::instance = 0;
 
@@ -28,21 +29,12 @@ void FleaManager::ObserverUpdate(int numShrooms)
 }
 
 void FleaManager::SpawnFlea()
-{
-#if !TESTING
-	
+{	
 	//randomly somewhere on x, always at the top y
 	auto pos = sf::Vector2f(static_cast<float>(rand() % WindowManager::MainWindow.getSize().x), 0.f);
 	GameGrid::GetCenterGridPosition(pos); //center on the grid
 
 	FleaFactory::SpawnFlea(this, pos);
-
-#elif TESTING
-	auto d = Ship::GetPosition();
-	d.y = 0;
-	GetInstance()->flea->SpawnFlea(d);
-
-#endif
 }
 
 FleaManager * FleaManager::GetInstance()

@@ -6,7 +6,7 @@ void Centi_UpThenLeft::MoveDirection(CentipedeHead *centi, sf::Vector2f & pos) c
 	pos.y -= CENTI_SPEED;
 
 	if (static_cast<int>(pos.y) % SPRITE_SIZE == 0)
-		centi->SetDirection(this->NextState(centi), true);
+		centi->SetDirection(this->NextState(centi));
 
 }
 

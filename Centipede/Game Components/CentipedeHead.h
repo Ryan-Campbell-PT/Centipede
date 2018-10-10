@@ -37,7 +37,7 @@ public:
 	void CorrectXDirection();
 
 	void CheckGridAhead(sf::Vector2f pos);
-	void SetDirection(const CentipedeDirectionState * direction, bool centerToYPos);
+	void SetDirection(const CentipedeDirectionState * direction);
 	void SetSpriteRotation(const float &rotation);
 
 	///this function translates from an enum to pointer
@@ -56,11 +56,6 @@ private:
 	void SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies);
 	
 	void RemoveHead();
-
-	///the state will determine what direction the centipede is going when spawned
-	///this state is to reduce the number of if statements being checked, and just
-	///going in the direction it needs to unless something happens
-	CentipedeBody *bodies; ///linkedlist of all the bodys connected to it
 
 	sf::Vector2f position;
 	AnimatedSprite sprite;

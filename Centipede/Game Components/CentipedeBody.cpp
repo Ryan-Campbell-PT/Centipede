@@ -23,25 +23,6 @@ CentipedeBody::CentipedeBody()
 	this->SetWhoYoureFollowing(nullptr);
 }
 
-CentipedeBody::CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEnum direction)
-	:active(false)
-{
-	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
-	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
-	this->sprite.SetAnimation(0, 4);
-
-	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
-	this->sprite.setScale(2.f, 2.f);
-	this->sprite.setPosition(this->position);
-
-	SetCollider(this->sprite, this->bitmap, true);
-	RegisterCollision<CentipedeBody>(*this);
-
-	this->position = spawn;
-	this->currentDirection = direction;
-
-}
-
 void CentipedeBody::InitializeBody(sf::Vector2f const & pos, CentiMovementDirectionEnum direction)
 {
 	this->position = pos;
@@ -130,22 +111,7 @@ void CentipedeBody::ChangePos()
 	if (!this->offsetQueue.empty()) //but if the centi added more, continue onto that one
 		this->aheadTurningInformation = this->offsetQueue.front();
 }
-
-#if false
-  void CentipedeBody::RemoveBodyFromScreen(const bool& setBehindHead, const bool &spawnShroom)
-{
-	this->RemoveBodyFromScreen();
-
-	CentiBodyManager::RemoveCentiBody(this, setBehindHead, spawnShroom);
-}
-#endif
-
-#if TESTER
-void CentipedeBody::SetBodyToHead()
-{
-	CentiBodyManager::MakeBodyHead(this);
-}
-#endif 
+ 
 void CentipedeBody::UpdateBody(const float & x, const float & y)
 {
 	this->position.x += x;

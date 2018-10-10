@@ -90,7 +90,7 @@ void Ship::Update()
 		this->sprite.getTextureRect().width / 2.f,
 		WindowManager::MainWindow.getView().getSize().x - (this->sprite.getTextureRect().width / 2.f)
 		);
-#if TESTING //for testing purposes
+#if !TESTING //for testing purposes
 	Tools::Clamp<float>(
 		position.y,
 		WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height * SHIP_BOUNDS),

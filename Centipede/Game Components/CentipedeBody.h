@@ -16,7 +16,6 @@ class CentipedeBody : public GameObject, public CentipedePart
 {
 public:
 	CentipedeBody();
-	CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEnum direction);
 	void InitializeBody(sf::Vector2f const& pos, CentiMovementDirectionEnum direction);
 
 	virtual ~CentipedeBody() = default;
@@ -25,16 +24,12 @@ public:
 	
 	void UpdateBody(const float & x, const float & y);
 	void AddOffset(sf::Vector2f const &offset, CentiMovementDirectionEnum direction);
-	sf::Vector2f currentOffset;
 	sf::Vector2f GetPosition();
 
 	virtual void Collision(GameObject *g) override {};
 	virtual void Collision(Bullet * bullet);
-#if TESTER
-	void SetBodyToHead();
-#endif
+
 	void RemoveBodyFromScreen(); ///this will handle sprite, active, and recycling
-	//void RemoveBodyFromScreen(const bool& setBehindHead, const bool &spawnShroom);
 
 private:
 	virtual void Draw() override;
@@ -49,6 +44,8 @@ private:
 	sf::Vector2f position;
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
+
+	sf::Vector2f currentOffset;
 
 	bool active;
 	unsigned int animationCounter;
