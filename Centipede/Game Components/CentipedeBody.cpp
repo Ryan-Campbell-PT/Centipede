@@ -3,6 +3,7 @@
 #include "GameGrid.h"
 #include "CentiMovement.h"
 #include "Bullet.h"
+#include "CentiBodyManager.h"
 
 CentipedeBody::CentipedeBody()
 	:active(false)
@@ -52,10 +53,6 @@ void CentipedeBody::InitializeBody(sf::Vector2f const & pos, CentiMovementDirect
 	RegisterCollision<CentipedeBody>(*this);
 }
 
-CentipedeBody::~CentipedeBody()
-{
-}
-
 void CentipedeBody::Draw()
 {
 	WindowManager::MainWindow.draw(this->sprite);
@@ -85,6 +82,7 @@ void CentipedeBody::Update()
 	case CentiMovementDirectionEnum::Down:
 		this->position.y += CENTI_SPEED;
 		break;
+
 	}
 
 	if (this->position == aheadTurningInformation.turningPoint)
@@ -100,8 +98,11 @@ void CentipedeBody::Collision(Bullet * const bullet)
 {
 	this->RemoveBody();
 	bullet->RemoveBullet();
+}
 
-	//todo: spawn mushroom, deregister collison, and more
+sf::Vector2f CentipedeBody::GetPosition()
+{
+	return this->position;
 }
 
 void CentipedeBody::ChangePos()
@@ -113,12 +114,18 @@ void CentipedeBody::ChangePos()
 
 	this->currentDirection = this->aheadTurningInformation.direction;
 
-	if (this->offsetQueue.size() > 0) //but if the centi added more, continue onto that one
+	if (!this->offsetQueue.empty()) //but if the centi added more, continue onto that one
 		this->aheadTurningInformation = this->offsetQueue.front();
 }
 
 void CentipedeBody::RemoveBody()
 {
+	//todo: spawn mushroom, deregister collison, and more
+	DeregisterCollision <CentipedeBody>(*this);
+	this->sprite.setScale(0.f, 0.f);
+	this->active = false;
+
+	CentiBodyManager::RemoveCentiBody(this);
 }
 
 void CentipedeBody::UpdateBody(const float & x, const float & y)
@@ -130,9 +137,10 @@ void CentipedeBody::UpdateBody(const float & x, const float & y)
 
 void CentipedeBody::AddOffset(sf::Vector2f const & offset, CentiMovementDirectionEnum direction)
 {
-	AheadInformation f(offset, direction);
+	const AheadInformation f(offset, direction);
 	
-	if (this->offsetQueue.size() == 0)
+	//if (this->offsetQueue.empty())
+	if (this->offsetQueue.empty())
 		this->aheadTurningInformation = f;
 	
 	this->offsetQueue.push(f);

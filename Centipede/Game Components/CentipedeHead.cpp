@@ -94,7 +94,7 @@ void CentipedeHead::CorrectXDirection()
 	GameGrid::GetCenterYPosition(this->position);
 }
 
-CentiMovementDirectionEnum CentipedeHead::GetCurrentMovementDirection()
+CentiMovementDirectionEnum CentipedeHead::GetDirectionEnum()
 {
 	return CentiMovementDirectionEnum::Error;
 }
@@ -121,7 +121,9 @@ void CentipedeHead::SetDirection(const CentipedeDirectionState * direction, bool
 	direction->Initialize(this);
 	this->currentDirectionState = direction;
 
-	static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(this->position, this->currentDirectionState->GetDirectionEnum());
+	if(this->GetWhosFollowingYou())
+		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(
+			this->position, this->currentDirectionState->GetDirectionEnum());
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
@@ -135,6 +137,11 @@ CentipedeDirectionState * CentipedeHead::GetDirection(CentiMovementDirectionEnum
 		return this->directionArray[static_cast<int>(direction)];
 	else
 		return nullptr;
+}
+
+const CentipedeDirectionState * CentipedeHead::GetDirection()
+{
+	return this->currentDirectionState;
 }
 
 void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies)
@@ -164,8 +171,9 @@ void CentipedeHead::RemoveHead()
 	DeregisterCollision<CentipedeHead>(*this);
 	this->active = false;
 
+	//handle the complexities of the linking
+	CentiBodyManager::MakeBodyHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()), this->currentDirectionState);
+
 	CentiHeadManager::RemoveCentiHead(this); //recycle
 
-	//handle the complexities of the linking
-	CentiBodyManager::MakeBodyHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
 }

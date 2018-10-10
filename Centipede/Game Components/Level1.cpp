@@ -18,6 +18,7 @@
 #include "SpiderManager.h"
 #include "MushroomManager.h"
 #include "CentiHeadManager.h"
+#include "CentipedeBody.h"
 
 #include <vector>
 
@@ -57,5 +58,10 @@ void Level1::Initialize()
 	CollisionTestPair<Spider, Ship>();
 
 	CollisionTestPair<Flea, Ship>();
+
+	CollisionTestPair<CentipedeBody, Bullet>();
+	CollisionTestPair<CentipedeHead, Bullet>();
+	//CollisionTestPair<CentipedeBody, Bullet>();
+	//CollisionTestPair<CentipedeBody, Bullet>();
 }
 

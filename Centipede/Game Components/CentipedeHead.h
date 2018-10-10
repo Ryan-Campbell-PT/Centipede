@@ -20,9 +20,10 @@ class CentipedeHead : public GameObject, public CentipedePart
 {
 public:
 	CentipedeHead();
-	//CentipedeHead(const sf::Vector2f &pos, const int &numBodies);
-
+	///this initilization will be used for completely new heads
 	void InitializeHead(const sf::Vector2f & pos, const int &numBodies, CentipedeDirectionState const & direction);
+	///while this will be used when turning a body into a head
+	///all the links are already defined, we just need to get the right direction to go, and where to start
 	void InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction);
 
 	virtual void Update() override;
@@ -34,15 +35,17 @@ public:
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
 	void CorrectXDirection();
 
-	CentiMovementDirectionEnum GetCurrentMovementDirection();
 	void CheckGridAhead(sf::Vector2f pos);
 	void SetDirection(const CentipedeDirectionState * direction, bool centerToYPos);
 	void SetSpriteRotation(const float &rotation);
 
+	///this function translates from an enum to pointer
 	CentipedeDirectionState *GetDirection(CentiMovementDirectionEnum direction);
+	const CentipedeDirectionState *GetDirection(); ///this simply get the current direction
+	CentiMovementDirectionEnum GetDirectionEnum(); ///this is the direction, but tranfered to enum
 
 private:
-	virtual ~CentipedeHead() {};
+	virtual ~CentipedeHead() = default;
 	CentipedeHead &operator=(const CentipedeHead &c) = delete;
 	CentipedeHead(const CentipedeHead &c) = delete;
 	///this function will apply the number of bodies connected to the head, at the creation of the head

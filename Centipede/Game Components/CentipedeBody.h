@@ -19,7 +19,7 @@ public:
 	CentipedeBody(sf::Vector2f const &spawn, CentiMovementDirectionEnum direction);
 	void InitializeBody(sf::Vector2f const& pos, CentiMovementDirectionEnum direction);
 
-	virtual ~CentipedeBody();
+	virtual ~CentipedeBody() = default;
 	CentipedeBody &operator=(const CentipedeBody &c) = delete;
 	CentipedeBody(const CentipedeBody &c) = delete;
 	
@@ -30,6 +30,7 @@ public:
 	virtual void Collision(GameObject *g) override {};
 	virtual void Collision(Bullet * bullet);
 
+	sf::Vector2f GetPosition();
 private:
 	virtual void Draw() override;
 	virtual void Update() override;
@@ -50,4 +51,4 @@ private:
 };
 
 
-#endif //CLASSNAME
+#endif //CENTIPEDEBODY_H
