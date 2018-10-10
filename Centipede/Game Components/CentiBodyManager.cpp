@@ -46,8 +46,8 @@ void CentiBodyManager::MakeBodyHead(CentipedeBody * body, const CentipedeDirecti
 	head->SetWhosFollowingYou(body->GetWhosFollowingYou()); //set the heads follower
 	head->SetWhoYoureFollowing(nullptr);
 
-	head->InitializeHead(body->GetPosition(), *direction);
-
+	head->InitializeHead(body->GetPosition(), *direction, false);
+	head->SetDirection(direction->NextState(head), false);
 
 
 
@@ -59,7 +59,8 @@ void CentiBodyManager::RemoveCentiBody(CentipedeBody * body)
 {
 	MushroomManager::AttemptSpawnShroom(body->GetPosition()); //spawn the shroom where the body died
 
-	MakeBodyHead(static_cast<CentipedeBody*>(body->GetWhosFollowingYou()));
+	if(body->GetWhosFollowingYou())
+		MakeBodyHead(static_cast<CentipedeBody*>(body->GetWhosFollowingYou()));
 
 	CentiBodyFactory::RemoveCentiBody(GetInstance(), body); //recycle
 }

@@ -38,7 +38,7 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, const int & numBodi
 	SetupBodies(direction.GetDirectionEnum(), numBodies);
 }
 
-void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction)
+void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction, const bool &setDirection)
 {
 	this->active = true;
 	this->position = pos;
@@ -47,8 +47,9 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 	this->sprite.setPosition(pos);
 
 	RegisterCollision<CentipedeHead>(*this);
-
-	SetDirection(&direction, false);
+	
+	if(setDirection)
+		SetDirection(&direction, false);
 }
 
 void CentipedeHead::Update()
