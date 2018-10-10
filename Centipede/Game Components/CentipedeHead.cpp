@@ -23,8 +23,8 @@ CentipedeHead::CentipedeHead()
 
 	SetCollider(this->sprite, this->bitmap, true);
 
-	this->SetWhosFollowingYou(0);
-	this->SetWhoYoureFollowing(0);
+	this->SetWhosFollowingYou(nullptr);
+	this->SetWhoYoureFollowing(nullptr);
 }
 
 //CentipedeHead::CentipedeHead(const sf::Vector2f & pos, const int &numBodies)
@@ -59,8 +59,8 @@ void CentipedeHead::Update()
 
 	++animationCounter;
 
-	//this->currentDirectionState->MoveDirection(this, this->position);
-	//this->sprite.setPosition(this->position);
+	this->currentDirectionState->MoveDirection(this, this->position);
+	this->sprite.setPosition(this->position);
 
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
@@ -154,26 +154,20 @@ const CentipedeDirectionState * CentipedeHead::GetDirection()
 void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies)
 {
 
-	auto tester = 2;
+	auto tester = 5;
 	if (tester > 0)
 	{
-		//this->bodies = new CentipedeBody(this, this->position, this->currentDirectionState->GetDirectionEnum());
-		CentipedePart *prev (this), *curr(0);
+		CentipedePart *prev (this), *curr(nullptr);
 		
 		for (int i = 0; i < tester; ++i)
 		{//create number of bodies needed, and connect all the links at the creation of them
-			//curr = new CentipedeBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
-			//curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
-			curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x - (SPRITE_SIZE * (i + 1)), this->position.y ), direction);
+			curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
 
 			curr->SetWhoYoureFollowing(prev);
 			prev->SetWhosFollowingYou(curr);
 
 			prev = prev->GetWhosFollowingYou();
 		}
-		//todo: figure out what could be wrong with body casting/getting
-		//auto follower = static_cast<CentipedeBody*>(this->GetWhosFollowingYou());
-		//auto fin = 0;
 	}
 }
 

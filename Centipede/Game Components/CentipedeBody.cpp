@@ -64,7 +64,7 @@ void CentipedeBody::Update()
 	if (!active)
 		return;
 	++animationCounter;
-	/*
+	
 	//todo: turn this into a more effective state machine
 	switch (this->currentDirection)
 	{
@@ -91,7 +91,7 @@ void CentipedeBody::Update()
 	
 	if (this->animationCounter % 3 == 0)
 		sprite.NextFrame();
-		*/
+		
 	this->sprite.setPosition(this->position);
 }
 
