@@ -4,6 +4,7 @@
 #include "CentiHeadManager.h"
 #include "CentipedeHead.h"
 #include "MushroomManager.h"
+#include "CentipedeDirectionState.h"
 
 CentiBodyManager * CentiBodyManager::instance = 0;
 
@@ -22,17 +23,30 @@ CentipedeBody * CentiBodyManager::GetInitializedCentiBody(sf::Vector2f const & p
 
 void CentiBodyManager::MakeBodyHead(CentipedeBody * body)
 {
+	if (body->GetWhosFollowingYou() == nullptr)
+		return;
+
 	auto direction = GetInstance()->GetBodysHeadDirection(body);
 	GetInstance()->MakeBodyHead(body, direction);
 }
 
 void CentiBodyManager::MakeBodyHead(CentipedeBody * body, const CentipedeDirectionState * direction)
 {
-	body->SetWhoYoureFollowing(0); //head, so wont be following anyone
+	if (body->GetWhosFollowingYou() == nullptr)
+		return;
+
+	CentiBodyFactory::RemoveCentiBody(GetInstance(), body); //recycle that body part
+	auto head = CentiHeadManager::GetCentiHead(); //get a head to be used
+
+	//setup the links
+	//body->SetWhoYoureFollowing(nullptr); //head, so wont be following anyone
+	body->GetWhoYoureFollowing()->SetWhosFollowingYou(nullptr); //set the person infront to the tail
 	
-	CentiBodyFactory::RemoveCentiBody(GetInstance(), body);
-	auto head = CentiHeadManager::GetCentiHead();
-	head->InitializeHead(head->GetPosition(), *direction);
+	body->GetWhosFollowingYou()->SetWhoYoureFollowing(head); //set the person behind (if anyone) to follow the newly created head
+	head->SetWhosFollowingYou(body->GetWhosFollowingYou()); //set the heads follower
+	head->SetWhoYoureFollowing(nullptr);
+
+	head->InitializeHead(body->GetPosition(), *direction);
 
 
 
@@ -44,6 +58,8 @@ void CentiBodyManager::MakeBodyHead(CentipedeBody * body, const CentipedeDirecti
 void CentiBodyManager::RemoveCentiBody(CentipedeBody * body)
 {
 	MushroomManager::AttemptSpawnShroom(body->GetPosition()); //spawn the shroom where the body died
+
+	MakeBodyHead(static_cast<CentipedeBody*>(body->GetWhosFollowingYou()));
 
 	CentiBodyFactory::RemoveCentiBody(GetInstance(), body); //recycle
 }

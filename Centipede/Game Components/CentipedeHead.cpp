@@ -74,7 +74,7 @@ void CentipedeHead::Collide(Bullet * const bullet)
 {
 	bullet->RemoveBullet(); //remove the bullet
 
-	this->RemoveHead();
+	this->RemoveHead(); //remove the head from screen, and recycle
 
 	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)
 }
@@ -146,12 +146,14 @@ const CentipedeDirectionState * CentipedeHead::GetDirection()
 
 void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies)
 {
-	if (numBodies > 0)
+
+	auto tester = 9;
+	if (tester > 0)
 	{
 		//this->bodies = new CentipedeBody(this, this->position, this->currentDirectionState->GetDirectionEnum());
 		CentipedePart *prev (this), *curr(0);
 		
-		for (int i = 0; i < numBodies; ++i)
+		for (int i = 0; i < tester; ++i)
 		{//create number of bodies needed, and connect all the links at the creation of them
 			//curr = new CentipedeBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
 			curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
@@ -161,6 +163,9 @@ void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int 
 
 			prev = prev->GetWhosFollowingYou();
 		}
+		//todo: figure out what could be wrong with body casting/getting
+		//auto follower = static_cast<CentipedeBody*>(this->GetWhosFollowingYou());
+		//auto fin = 0;
 	}
 }
 

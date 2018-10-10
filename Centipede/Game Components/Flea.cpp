@@ -8,6 +8,7 @@
 #include "Ship.h"
 #include "Bullet.h"
 #include "FleaPool.h"
+#include "MushroomManager.h"
 
 //TODO: there is a lot of deleting of state in this. figure out a way to modify tht
 //so there isnt much allocation and deletion
@@ -82,8 +83,7 @@ void Flea::SetSpeed(const int & speed)
 
 void Flea::AttemptSpawnMushroom()
 {
-	if(static_cast<int>(GameGrid::GetGridStatus(this->position)) <= static_cast<int>(GameGridEnum::Unoccupied))
-		MushroomFactory::SpawnMushroom(this->position);
+	MushroomManager::AttemptSpawnShroom(this->position);
 }
 
 sf::Vector2f Flea::GetPosition()
