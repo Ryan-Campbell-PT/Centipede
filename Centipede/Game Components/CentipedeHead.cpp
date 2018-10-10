@@ -87,11 +87,6 @@ void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFr
 	this->sprite.SetAnimation(startFrame, endFrame);
 }
 
-void CentipedeHead::CorrectXDirection()
-{
-	GameGrid::GetCenterYPosition(this->position);
-}
-
 CentiMovementDirectionEnum CentipedeHead::GetDirectionEnum()
 {
 	return CentiMovementDirectionEnum::Error;
@@ -102,6 +97,16 @@ void CentipedeHead::Collision(Bullet * bullet)
 	bullet->RemoveBullet();
 	this->RemoveHead();
 	MushroomManager::AttemptSpawnShroom(this->GetPosition());
+}
+
+void CentipedeHead::CenterOnX()
+{
+	GameGrid::GetCenterXPosition(this->position);
+}
+
+void CentipedeHead::CenterOnY()
+{
+	GameGrid::GetCenterYPosition(this->position);
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
@@ -149,8 +154,9 @@ const CentipedeDirectionState * CentipedeHead::GetDirection()
 	return this->currentDirectionState;
 }
 
-void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies)
+void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, int numBodies)
 {
+	numBodies = 7;
 	if (numBodies > 0)
 	{
 		CentipedePart *prev(this), *curr(nullptr);

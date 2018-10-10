@@ -16,7 +16,7 @@ void Centi_DownThenRight::MoveDirection(CentipedeHead *centi, sf::Vector2f & pos
 const CentipedeDirectionState * Centi_DownThenRight::NextState(CentipedeHead *centi) const
 {
 	centi->SetSpriteRotation(180.f);
-	centi->CorrectXDirection();
+	centi->CenterOnY();
 	return &MoveSFM::rightThenDown;
 }
 

@@ -29,6 +29,7 @@ public:
 
 	///this functions purpose is centered around critters, who dont care about their X pos, but need to be centered in the Y without altering X
 	static void GetCenterYPosition(sf::Vector2f &pos);
+	static void GetCenterXPosition(sf::Vector2f &pos);
 
 private:
 	static GameGrid *GetInstance();

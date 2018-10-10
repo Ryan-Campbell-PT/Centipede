@@ -34,7 +34,6 @@ public:
 
 	sf::Vector2f GetPosition();
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
-	void CorrectXDirection();
 
 	void CheckGridAhead(sf::Vector2f pos);
 	void SetDirection(const CentipedeDirectionState * direction);
@@ -48,12 +47,15 @@ public:
 	virtual void Collision(GameObject *go) override {};
 	virtual void Collision(Bullet * bullet);
 
+	void CenterOnX();
+	void CenterOnY();
+
 private:
 	virtual ~CentipedeHead() = default;
 	CentipedeHead &operator=(const CentipedeHead &c) = delete;
 	CentipedeHead(const CentipedeHead &c) = delete;
 	///this function will apply the number of bodies connected to the head, at the creation of the head
-	void SetupBodies(CentiMovementDirectionEnum direction, const int &numBodies);
+	void SetupBodies(CentiMovementDirectionEnum direction, int numBodies);
 	
 	void RemoveHead();
 
