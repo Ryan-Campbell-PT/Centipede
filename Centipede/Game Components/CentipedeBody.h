@@ -38,6 +38,7 @@ private:
 	virtual void Update() override;
 	
 	void ChangePos();
+	///this method will convert head directions into the simplified states the body's use
 	const CentiBodyDirection *GetDirectionState(CentiMovementDirectionEnum e);
 
 	const CentiBodyDirection *bodyDirection;

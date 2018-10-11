@@ -29,6 +29,7 @@ struct MoveSFM
 	static const Centi_DownThenLeft	 downThenLeft;
 	static const Centi_LeftThenDown	 leftThenDown;
 	static const Centi_LeftThenUp	 leftThenUp;
+	static const Centi_Poisoned		 poisoned;
 
 	static const Body_Down	bodyDown;
 	static const Body_Up	bodyUp;

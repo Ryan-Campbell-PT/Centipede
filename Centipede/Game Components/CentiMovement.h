@@ -16,6 +16,7 @@
 #include "Centi_LeftThenUp.h"
 #include "Centi_RightThenUp.h"
 #include "Centi_RightThenDown.h"
+#include "Centi_Poisoned.h"
 
 #include "Body_Left.h"
 #include "Body_Down.h"
