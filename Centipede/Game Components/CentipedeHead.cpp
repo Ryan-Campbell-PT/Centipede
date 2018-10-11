@@ -27,8 +27,9 @@ CentipedeHead::CentipedeHead()
 	this->SetWhoYoureFollowing(nullptr);
 }
 
-void CentipedeHead::InitializeHead(const sf::Vector2f & pos, const int & numBodies, CentipedeDirectionState const & direction)
+void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, CentipedeDirectionState const & direction)
 {
+	GameGrid::GetCenterGridPosition(pos);
 	this->InitializeHead(pos, direction);
 	SetupBodies(direction.GetDirectionEnum(), numBodies);
 }
@@ -45,6 +46,7 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 
 	this->currentDirectionState = &direction;
 	this->CheckGridAhead(pos);
+	yCounter = 0;
 	//if(setDirection)
 	//	SetDirection(&direction, false);
 }
@@ -56,11 +58,27 @@ void CentipedeHead::Update()
 
 	++animationCounter;
 
-	this->currentDirectionState->MoveDirection(this, this->position);
-	this->sprite.setPosition(this->position);
+	//this->currentDirectionState->MoveDirection(this, this->position);
+	this->position.x += (this->currentDirectionState->GetOffsetArray()).coloffset * CENTI_SPEED;
+	this->position.y += (this->currentDirectionState->GetOffsetArray()).rowoffset * CENTI_SPEED;
 
+	if (this->currentDirectionState->GetOffsetArray().rowoffset != 0) //we are moving in the Y
+	{
+		yCounter += (this->currentDirectionState->GetOffsetArray()).rowoffset * CENTI_SPEED;
+	
+		if (yCounter % SPRITE_SIZE == 0)
+			this->SetDirection(this->currentDirectionState->NextState(this));
+	}
+
+	this->sprite.setPosition(this->position);
+	//this->sprite.Update();
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
+
+	if (this->animationCounter % SPRITE_SIZE == 0)
+		this->CheckGridAhead(sf::Vector2f(
+			this->position.x + (this->currentDirectionState->GetOffsetArray()).coloffset * SPRITE_SIZE,
+			this->position.y + (this->currentDirectionState->GetOffsetArray()).rowoffset * SPRITE_SIZE));
 }
 
 void CentipedeHead::Draw()
@@ -112,8 +130,10 @@ void CentipedeHead::CenterOnY()
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 {
 	//if we are reaching the end of the window,or see a shroom, switch to next state
-	if (GameGrid::GetGridStatus(pos) == GameGridEnum::Mushroom ||
-		pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
+	if (GameGrid::GetGridStatus(pos) == GameGridEnum::Mushroom)// ||
+		this->SetDirection(this->currentDirectionState->NextState(this));
+
+	else if (pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
 		pos.x < 0.f)
 		this->SetDirection(this->currentDirectionState->NextState(this));
 
@@ -145,7 +165,7 @@ CentipedeDirectionState * CentipedeHead::GetDirection(CentiMovementDirectionEnum
 {
 	if (static_cast<int>(direction) >= 0 && static_cast<int>(direction) < DIRECTION_SIZE)
 		return this->directionArray[static_cast<int>(direction)];
-	
+
 	return nullptr;
 }
 

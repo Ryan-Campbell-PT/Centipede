@@ -12,8 +12,9 @@ public:
 	virtual const CentipedeDirectionState* NextState(CentipedeHead *centi) const override;
 	virtual void Initialize(CentipedeHead *centi) const override {};
 	virtual CentiMovementDirectionEnum GetDirectionEnum() const override;
+	virtual OffsetArray GetOffsetArray() const override { return MovementCollection::OffsetsTurnUpEndLeft; }
 
-private:
+	private:
 };
 
 #endif // !CENTI_UP_THEN_LEFT
