@@ -8,3 +8,8 @@ const Centi_DownThenRight	 MoveSFM::downThenRight;
 const Centi_DownThenLeft	 MoveSFM::downThenLeft;
 const Centi_LeftThenDown	 MoveSFM::leftThenDown;
 const Centi_LeftThenUp		 MoveSFM::leftThenUp;
+
+const Body_Down	 MoveSFM::bodyDown;
+const Body_Up	 MoveSFM::bodyUp;
+const Body_Left	 MoveSFM::bodyLeft;
+const Body_Right MoveSFM::bodyRight;

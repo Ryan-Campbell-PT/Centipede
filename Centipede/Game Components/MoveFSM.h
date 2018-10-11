@@ -14,6 +14,11 @@ class Centi_DownThenLeft;
 class Centi_LeftThenDown;
 class Centi_LeftThenUp;
 
+class Body_Left;
+class Body_Right;
+class Body_Up;
+class Body_Down;
+
 struct MoveSFM
 {
 	static const Centi_RightThenUp	 rightThenUp;
@@ -24,6 +29,12 @@ struct MoveSFM
 	static const Centi_DownThenLeft	 downThenLeft;
 	static const Centi_LeftThenDown	 leftThenDown;
 	static const Centi_LeftThenUp	 leftThenUp;
+
+	static const Body_Down	bodyDown;
+	static const Body_Up	bodyUp;
+	static const Body_Left	bodyLeft;
+	static const Body_Right bodyRight;
+
 };
 
 #endif // !MOVE_FSM

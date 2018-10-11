@@ -17,6 +17,11 @@
 #include "Centi_RightThenUp.h"
 #include "Centi_RightThenDown.h"
 
+#include "Body_Left.h"
+#include "Body_Down.h"
+#include "Body_Right.h"
+#include "Body_Up.h"
+
 #define CENTI_SPEED 2
 #define WORKING false
 

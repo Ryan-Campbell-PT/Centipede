@@ -106,6 +106,9 @@
     <Filter Include="Source Files\Game Components\_TEAL\Window and Event Management">
       <UniqueIdentifier>{b170d022-c058-4e94-b847-9689da64a5a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement">
+      <UniqueIdentifier>{63d6e359-23fd-43f2-a80c-61c42004e943}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -341,6 +344,18 @@
     </ClCompile>
     <ClCompile Include="Game Components\CentiHeadFactory.cpp">
       <Filter>Source Files\Game Components\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Body_Down.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Body_Left.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Body_Right.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Body_Up.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -646,6 +661,21 @@
     </ClInclude>
     <ClInclude Include="Game Components\CentiHeadFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Body_Left.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\CentiBodyDirection.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Body_Right.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Body_Down.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Body_Up.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

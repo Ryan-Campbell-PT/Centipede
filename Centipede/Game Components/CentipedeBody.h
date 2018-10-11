@@ -6,6 +6,8 @@
 #include "CentipedePart.h"
 
 #include <queue>
+#include "CentipedeDirectionState.h"
+#include "CentiBodyDirection.h"
 using std::queue;
 
 class CentipedeHead;
@@ -36,6 +38,9 @@ private:
 	virtual void Update() override;
 	
 	void ChangePos();
+	CentiBodyDirection *GetDirectionState(CentiMovementDirectionEnum e);
+
+	const CentiBodyDirection *bodyDirection;
 
 	CentiMovementDirectionEnum currentDirection;
 	AheadInformation aheadTurningInformation;

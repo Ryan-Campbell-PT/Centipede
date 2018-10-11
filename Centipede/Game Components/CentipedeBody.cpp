@@ -26,13 +26,13 @@ CentipedeBody::CentipedeBody()
 void CentipedeBody::InitializeBody(sf::Vector2f const & pos, CentiMovementDirectionEnum direction)
 {
 	this->position = pos;
-	this->active = true; 
+	this->active = true;
 	this->animationCounter = 0;
 
 	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(this->position);
 	this->currentDirection = direction;
-	
+
 	RegisterCollision<CentipedeBody>(*this);
 }
 
@@ -46,34 +46,17 @@ void CentipedeBody::Update()
 	if (!active)
 		return;
 	++animationCounter;
-	
+
 	//todo: turn this into a more effective state machine
-	switch (this->currentDirection)
-	{
-	case CentiMovementDirectionEnum::Left:
-		this->position.x -= CENTI_SPEED;
-		break;
 
-	case CentiMovementDirectionEnum::Right:
-		this->position.x += CENTI_SPEED;
-		break;
-
-	case CentiMovementDirectionEnum::Up:
-		this->position.y -= CENTI_SPEED;
-		break;
-
-	case CentiMovementDirectionEnum::Down:
-		this->position.y += CENTI_SPEED;
-		break;
-
-	}
+	this->bodyDirection->MoveDirection(this->position); //move in the direction given
 
 	if (this->position == aheadTurningInformation.turningPoint)
 		this->ChangePos();
-	
+
 	if (this->animationCounter % 3 == 0)
 		sprite.NextFrame();
-		
+
 	this->sprite.setPosition(this->position);
 }
 
@@ -101,17 +84,43 @@ void CentipedeBody::RemoveBodyFromScreen()
 
 void CentipedeBody::ChangePos()
 {
-	if(this->GetWhosFollowingYou()) //make sure it has a follower
+	if (this->GetWhosFollowingYou()) //make sure it has a follower
 		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(this->aheadTurningInformation.turningPoint, this->aheadTurningInformation.direction);
 
 	this->offsetQueue.pop(); //pop the one youre currently using, off
 
-	this->currentDirection = this->aheadTurningInformation.direction;
+	this->GetDirectionState(this->aheadTurningInformation.direction);
 
 	if (!this->offsetQueue.empty()) //but if the centi added more, continue onto that one
 		this->aheadTurningInformation = this->offsetQueue.front();
 }
- 
+
+CentiBodyDirection * CentipedeBody::GetDirectionState(CentiMovementDirectionEnum e)
+{
+	CentiBodyDirection *p = nullptr;
+
+	switch (e)
+	{
+	case CentiMovementDirectionEnum::Left:
+		this->bodyDirection = &MoveSFM::bodyLeft;
+		break;
+
+	case CentiMovementDirectionEnum::Right:
+		this->bodyDirection = &MoveSFM::bodyRight;
+		break;
+
+	case CentiMovementDirectionEnum::Up:
+		this->bodyDirection = &MoveSFM::bodyUp;
+		break;
+
+	case CentiMovementDirectionEnum::Down:
+		this->bodyDirection = &MoveSFM::bodyDown;
+		break;
+	}
+
+	return p;
+}
+
 void CentipedeBody::UpdateBody(const float & x, const float & y)
 {
 	this->position.x += x;
@@ -122,10 +131,11 @@ void CentipedeBody::UpdateBody(const float & x, const float & y)
 void CentipedeBody::AddOffset(sf::Vector2f const & offset, CentiMovementDirectionEnum direction)
 {
 	const AheadInformation f(offset, direction);
-	
+
 	//if (this->offsetQueue.empty())
 	if (this->offsetQueue.empty())
 		this->aheadTurningInformation = f;
-	
+
 	this->offsetQueue.push(f);
 }
+
