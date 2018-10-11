@@ -38,7 +38,7 @@ private:
 	virtual void Update() override;
 	
 	void ChangePos();
-	CentiBodyDirection *GetDirectionState(CentiMovementDirectionEnum e);
+	const CentiBodyDirection *GetDirectionState(CentiMovementDirectionEnum e);
 
 	const CentiBodyDirection *bodyDirection;
 

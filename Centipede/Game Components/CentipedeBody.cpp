@@ -8,7 +8,7 @@
 #include "MushroomManager.h"
 
 CentipedeBody::CentipedeBody()
-	:active(false)
+	:active(false), bodyDirection(nullptr)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
@@ -31,7 +31,7 @@ void CentipedeBody::InitializeBody(sf::Vector2f const & pos, CentiMovementDirect
 
 	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(this->position);
-	this->currentDirection = direction;
+	this->bodyDirection = this->GetDirectionState(direction);
 
 	RegisterCollision<CentipedeBody>(*this);
 }
@@ -46,8 +46,6 @@ void CentipedeBody::Update()
 	if (!active)
 		return;
 	++animationCounter;
-
-	//todo: turn this into a more effective state machine
 
 	this->bodyDirection->MoveDirection(this->position); //move in the direction given
 
@@ -89,32 +87,32 @@ void CentipedeBody::ChangePos()
 
 	this->offsetQueue.pop(); //pop the one youre currently using, off
 
-	this->GetDirectionState(this->aheadTurningInformation.direction);
+	this->bodyDirection = this->GetDirectionState(this->aheadTurningInformation.direction);
 
 	if (!this->offsetQueue.empty()) //but if the centi added more, continue onto that one
 		this->aheadTurningInformation = this->offsetQueue.front();
 }
 
-CentiBodyDirection * CentipedeBody::GetDirectionState(CentiMovementDirectionEnum e)
+const CentiBodyDirection * CentipedeBody::GetDirectionState(CentiMovementDirectionEnum e)
 {
-	CentiBodyDirection *p = nullptr;
+	const CentiBodyDirection *p = nullptr;
 
 	switch (e)
 	{
 	case CentiMovementDirectionEnum::Left:
-		this->bodyDirection = &MoveSFM::bodyLeft;
+		p = &MoveSFM::bodyLeft;
 		break;
 
 	case CentiMovementDirectionEnum::Right:
-		this->bodyDirection = &MoveSFM::bodyRight;
+		p = &MoveSFM::bodyRight;
 		break;
 
 	case CentiMovementDirectionEnum::Up:
-		this->bodyDirection = &MoveSFM::bodyUp;
+		p = &MoveSFM::bodyUp;
 		break;
 
 	case CentiMovementDirectionEnum::Down:
-		this->bodyDirection = &MoveSFM::bodyDown;
+		p = &MoveSFM::bodyDown;
 		break;
 	}
 
