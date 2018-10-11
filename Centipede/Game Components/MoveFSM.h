@@ -13,6 +13,7 @@ class Centi_DownThenRight;
 class Centi_DownThenLeft;
 class Centi_LeftThenDown;
 class Centi_LeftThenUp;
+class Centi_Poisoned;
 
 class Body_Left;
 class Body_Right;

@@ -360,6 +360,9 @@
     <ClCompile Include="Game Components\Centi_Poisoned.cpp">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\MovementCollection.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -682,6 +685,9 @@
     </ClInclude>
     <ClInclude Include="Game Components\Centi_Poisoned.h">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\MovementCollection.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
