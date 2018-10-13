@@ -2,13 +2,12 @@
 
 #include "Flea.h"
 #include "FleaState1.h"
-#include "FleaState2.h"
 #include "MushroomFactory.h"
-#include "GameGrid.h"
 #include "Ship.h"
 #include "Bullet.h"
 #include "FleaPool.h"
 #include "MushroomManager.h"
+#include "ScoreManager.h"
 
 //TODO: there is a lot of deleting of state in this. figure out a way to modify tht
 //so there isnt much allocation and deletion
@@ -22,10 +21,7 @@ Flea::Flea()
 
 	this->sprite.setScale(0.f, 0.f);
 
-}
-
-Flea::~Flea()
-{
+	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::FleaKilled);
 }
 
 void Flea::Update()
@@ -99,6 +95,8 @@ void Flea::RemoveFlea()
 	this->sprite.setScale(0.f, 0.f);
 	
 	FleaPool::RecycleFlea(this);
+	
+	ScoreManager::SendScoreCmd(this->pDeath);
 
 	delete this->state;
 }

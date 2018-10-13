@@ -369,6 +369,9 @@
     <ClCompile Include="Game Components\ScoreManager.cpp">
       <Filter>Source Files\Game Components\Score</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\ScoreByDistanceCmd.cpp">
+      <Filter>Source Files\Game Components\Score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -699,6 +702,12 @@
       <Filter>Source Files\Game Components\Score</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\ScoreCmd.h">
+      <Filter>Source Files\Game Components\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScoreValueCmd.h">
+      <Filter>Source Files\Game Components\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScoreByDistanceCmd.h">
       <Filter>Source Files\Game Components\Score</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,7 @@
 
 #include "TEAL/CommonElements.h"
 
-class CmdScore;
+class ScoreCmd;
 
 class ScoreManager
 {
@@ -32,7 +32,7 @@ private:
 	static const int SpiderDeathNear = 700;
 	static const int SpiderDistNear = WindowManager::MainWindow.getSize().x * spiderDistNearMultiplier;
 
-	std::queue<CmdScore*> QueueCmds;
+	std::queue<ScoreCmd*> QueueCmds;
 
 	static ScoreManager* ptrInstance;
 
@@ -51,9 +51,9 @@ public:
 
 	static void AddScore(int val);
 
-	static CmdScore* GetScoreCommand(ScoreEvents ev);
+	static ScoreCmd* GetScoreCommand(ScoreEvents ev);
 
-	static void SendScoreCmd(CmdScore* c);
+	static void SendScoreCmd(ScoreCmd* c);
 	static void ProcessScores();
 
 };

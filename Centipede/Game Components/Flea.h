@@ -10,12 +10,13 @@
 
 class Bullet;
 class Ship;
+class ScoreCmd;
 
 class Flea : public GameObject
 {
 public:
 	Flea();
-	virtual ~Flea();
+	virtual ~Flea() = default;
 	Flea &operator=(const Flea &c) = delete;
 	Flea(const Flea &c) = delete;
 
@@ -45,6 +46,7 @@ private:
 	FleaState *state;
 	//this variable should be changed in the future when figuring out how to only call 
 	bool active;
+	ScoreCmd *pDeath;
 };
 
 #endif //FLEA_H

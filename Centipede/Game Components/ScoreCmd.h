@@ -1,7 +1,7 @@
 #ifndef CMD_SCORE
 #define CMD_SCORE
 
-class CmdScore
+class ScoreCmd
 {
 public:
 	virtual void Execute() = 0;
