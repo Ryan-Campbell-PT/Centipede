@@ -109,6 +109,9 @@
     <Filter Include="Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement">
       <UniqueIdentifier>{63d6e359-23fd-43f2-a80c-61c42004e943}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Score">
+      <UniqueIdentifier>{0f0e5952-1c19-4ac0-b415-f92e56b3de5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -362,6 +365,9 @@
     </ClCompile>
     <ClCompile Include="Game Components\MovementCollection.cpp">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\ScoreManager.cpp">
+      <Filter>Source Files\Game Components\Score</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -688,6 +694,12 @@
     </ClInclude>
     <ClInclude Include="Game Components\MovementCollection.h">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScoreManager.h">
+      <Filter>Source Files\Game Components\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ScoreCmd.h">
+      <Filter>Source Files\Game Components\Score</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
