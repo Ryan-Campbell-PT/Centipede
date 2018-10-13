@@ -49,11 +49,13 @@ void CentipedeBody::Update()
 
 	this->bodyDirection->MoveDirection(this->position); //move in the direction given
 
-	if (this->position == aheadTurningInformation.turningPoint)
-		this->ChangePos();
+	//if (this->position == aheadTurningInformation.turningPoint)
+		//this->ChangePos();
 
 	if (this->animationCounter % 3 == 0)
 		sprite.NextFrame();
+	if(this->animationCounter % (SPRITE_SIZE / 2) == 0)
+		this->TellBoiWhoSmells(this->bodyDirection);
 
 	this->sprite.setPosition(this->position);
 }
@@ -80,8 +82,22 @@ void CentipedeBody::RemoveBodyFromScreen()
 	CentiBodyFactory::RemoveCentiBody(this);
 }
 
+void CentipedeBody::TellBoiMyName(CentiMovementDirectionEnum direction)
+{
+	this->currentLiar = direction;
+	this->bodyDirection = this->GetDirectionState(direction);
+}
+
+void CentipedeBody::TellBoiWhoSmells(const CentiBodyDirection * direction)
+{
+	if(this->GetWhosFollowingYou())
+		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->currentLiar);
+}
+
+
 void CentipedeBody::ChangePos()
 {
+#if false
 	if (this->GetWhosFollowingYou()) //make sure it has a follower
 		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(this->aheadTurningInformation.turningPoint, this->aheadTurningInformation.direction);
 
@@ -91,6 +107,10 @@ void CentipedeBody::ChangePos()
 
 	if (!this->offsetQueue.empty()) //but if the centi added more, continue onto that one
 		this->aheadTurningInformation = this->offsetQueue.front();
+#elif true
+	
+#endif
+
 }
 
 const CentiBodyDirection * CentipedeBody::GetDirectionState(CentiMovementDirectionEnum e)

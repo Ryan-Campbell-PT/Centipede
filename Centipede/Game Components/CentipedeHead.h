@@ -64,6 +64,8 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	const CentipedeDirectionState *currentDirectionState;
+	const CentipedeDirectionState *prevDirection;
+
 	std::vector<CentipedeDirectionState*> directionArray;
 
 	unsigned int animationCounter;

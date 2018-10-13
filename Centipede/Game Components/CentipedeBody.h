@@ -33,6 +33,10 @@ public:
 
 	void RemoveBodyFromScreen(); ///this will handle sprite, active, and recycling
 
+
+	void TellBoiMyName(CentiMovementDirectionEnum direction);
+	void TellBoiWhoSmells(const CentiBodyDirection *direction);
+
 private:
 	virtual void Draw() override;
 	virtual void Update() override;
@@ -55,6 +59,10 @@ private:
 
 	bool active;
 	unsigned int animationCounter;
+
+	CentiMovementDirectionEnum currentLiar;
+
+
 };
 
 

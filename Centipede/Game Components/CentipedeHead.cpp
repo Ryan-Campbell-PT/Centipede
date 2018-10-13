@@ -12,7 +12,7 @@
 #include <list>
 
 CentipedeHead::CentipedeHead()
-	:currentDirectionState(nullptr), animationCounter(0), active(false)
+	:currentDirectionState(nullptr), animationCounter(0), active(false), prevDirection(0)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
@@ -71,14 +71,21 @@ void CentipedeHead::Update()
 	}
 
 	this->sprite.setPosition(this->position);
-	//this->sprite.Update();
+	
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
 
-	if (this->animationCounter % SPRITE_SIZE == 0)
-		this->CheckGridAhead(sf::Vector2f(
+	if (this->animationCounter % (SPRITE_SIZE / 2) == 0)
+	{
+		auto ppos = sf::Vector2f(
 			this->position.x + (this->currentDirectionState->GetOffsetArray()).coloffset * SPRITE_SIZE,
-			this->position.y + (this->currentDirectionState->GetOffsetArray()).rowoffset * SPRITE_SIZE));
+			this->position.y + (this->currentDirectionState->GetOffsetArray()).rowoffset * SPRITE_SIZE);
+
+		//ConsoleMsg::WriteLine("Users X: " + Tools::ToString(position.x) + " Users Y: " + Tools::ToString(position.y));
+		//ConsoleMsg::WriteLine("Created X: " + Tools::ToString(ppos.x) + " Created Y: " + Tools::ToString(ppos.y) + "\n");
+
+		this->CheckGridAhead(ppos);
+	}
 }
 
 void CentipedeHead::Draw()
@@ -144,16 +151,24 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 	else if (pos.y < 0.f)
 		this->SetDirection(&MoveSFM::downThenLeft);
 
+	if(GetWhosFollowingYou() && this->prevDirection)
+		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->prevDirection->GetDirectionEnum());
+
 }
 
 void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)
 {
 	direction->Initialize(this);
+	this->prevDirection = this->currentDirectionState;
 	this->currentDirectionState = direction;
 
-	if (this->GetWhosFollowingYou())
+/*	if (this->GetWhosFollowingYou())
 		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(
-			this->position, this->currentDirectionState->GetDirectionEnum());
+			this->position, this->currentDirectionState->GetDirectionEnum());*/
+	if(this->GetWhosFollowingYou())
+	{//todo: work on how this information is passed down. Incorrect atm
+		//static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->prevDirection->GetDirectionEnum());
+	}
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
