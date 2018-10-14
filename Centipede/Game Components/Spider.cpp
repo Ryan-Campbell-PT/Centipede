@@ -6,6 +6,7 @@
 
 #include <random>
 #include "ScoreManager.h"
+#include "MoveFSM.h"
 
 //TODO: turn gameobjects functions into the Destory() and Initalize() GO objects
 Spider::Spider()

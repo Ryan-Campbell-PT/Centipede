@@ -267,9 +267,6 @@
     <ClCompile Include="Game Components\UpSpiderState.cpp">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\BouncingSpiderState.cpp">
-      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\LeftSpiderState.cpp">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClCompile>
@@ -371,6 +368,9 @@
     </ClCompile>
     <ClCompile Include="Game Components\ScoreByDistanceCmd.cpp">
       <Filter>Source Files\Game Components\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\BouncingSpiderStateRight.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -572,9 +572,6 @@
     <ClInclude Include="Game Components\SpiderStates.h">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\BouncingSpiderState.h">
-      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\Ship_Fire.h">
       <Filter>Source Files\Game Components\Ship\ShipButtons</Filter>
     </ClInclude>
@@ -709,6 +706,15 @@
     </ClInclude>
     <ClInclude Include="Game Components\ScoreByDistanceCmd.h">
       <Filter>Source Files\Game Components\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Spider_MoveFSM.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\BouncingSpiderStateLeft.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\BouncingSpiderStateRight.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

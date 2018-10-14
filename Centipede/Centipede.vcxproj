@@ -167,7 +167,7 @@
     <ClCompile Include="Game Components\TEAL\Tools.cpp" />
     <ClCompile Include="Game Components\TEAL\WindowManager.cpp" />
     <ClCompile Include="Game Components\UpSpiderState.cpp" />
-    <ClCompile Include="Game Components\BouncingSpiderState.cpp" />
+    <ClCompile Include="Game Components\BouncingSpiderStateRight.cpp" />
     <ClCompile Include="Game Components\Widget.cpp" />
     <ClCompile Include="Game Components\WidgetGenerator.cpp" />
     <ClCompile Include="Game Components\Bullet.cpp" />
@@ -181,6 +181,7 @@
     <ClInclude Include="Game Components\Body_Left.h" />
     <ClInclude Include="Game Components\Body_Right.h" />
     <ClInclude Include="Game Components\Body_Up.h" />
+    <ClInclude Include="Game Components\BouncingSpiderStateLeft.h" />
     <ClInclude Include="Game Components\BulletFactory.h" />
     <ClInclude Include="Game Components\CentiBodyDirection.h" />
     <ClInclude Include="Game Components\CentiBodyFactory.h" />
@@ -251,6 +252,7 @@
     <ClInclude Include="Game Components\SpiderMovementState.h" />
     <ClInclude Include="Game Components\SpiderPool.h" />
     <ClInclude Include="Game Components\SpiderStates.h" />
+    <ClInclude Include="Game Components\Spider_MoveFSM.h" />
     <ClInclude Include="Game Components\Splash.h" />
     <ClInclude Include="Game Components\SplashController.h" />
     <ClInclude Include="Game Components\State.h" />
@@ -282,7 +284,7 @@
     <ClInclude Include="Game Components\TEAL\Tools.h" />
     <ClInclude Include="Game Components\TEAL\WindowManager.h" />
     <ClInclude Include="Game Components\UpSpiderState.h" />
-    <ClInclude Include="Game Components\BouncingSpiderState.h" />
+    <ClInclude Include="Game Components\BouncingSpiderStateRight.h" />
     <ClInclude Include="Game Components\Widget.h" />
     <ClInclude Include="Game Components\WidgetGenerator.h" />
     <ClInclude Include="Game Components\Bullet.h" />
