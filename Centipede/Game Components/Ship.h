@@ -29,6 +29,7 @@ public:
 	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey);
 
 	static sf::Vector2f GetPosition();
+	static void SetState(ShipFSM state);
 
 	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
 	void DestroyShip(); 

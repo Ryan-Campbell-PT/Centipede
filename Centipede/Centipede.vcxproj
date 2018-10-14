@@ -130,6 +130,7 @@
     <ClCompile Include="Game Components\MushroomFactory.cpp" />
     <ClCompile Include="Game Components\MushroomManager.cpp" />
     <ClCompile Include="Game Components\MushroomPool.cpp" />
+    <ClCompile Include="Game Components\PlayerManager.cpp" />
     <ClCompile Include="Game Components\RightSpiderState.cpp" />
     <ClCompile Include="Game Components\ScoreByDistanceCmd.cpp" />
     <ClCompile Include="Game Components\ScoreManager.cpp" />
@@ -240,6 +241,7 @@
     <ClInclude Include="Game Components\MushroomPool.h" />
     <ClInclude Include="Game Components\Observer.h" />
     <ClInclude Include="Game Components\Observee.h" />
+    <ClInclude Include="Game Components\PlayerManager.h" />
     <ClInclude Include="Game Components\RightSpiderState.h" />
     <ClInclude Include="Game Components\ScoreByDistanceCmd.h" />
     <ClInclude Include="Game Components\ScoreCmd.h" />

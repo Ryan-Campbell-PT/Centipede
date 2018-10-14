@@ -5,8 +5,10 @@
 
 #include "TEAL/CommonElements.h"
 #include "GameGrid.h"
+#include "PlayerManager.h"
 
 class ScoreCmd;
+enum class PlayerID;
 
 class ScoreManager
 {
@@ -45,16 +47,16 @@ private:
 	static const int SpiderDeathNear = 700;
 	static const int SpiderDistNear = COLUMN * SPRITE_SIZE * spiderDistNearMultiplier;
 
-	std::queue<ScoreCmd*> QueueCmds;
-	static ScoreManager* instance;
-	int currentScore;
-
-	ScoreManager()
-		:currentScore(0) {}
+	ScoreManager();
 
 	static ScoreManager * GetInstance();
 
 	void PrivProcessScore();
+
+	std::queue<ScoreCmd*> QueueCmds;
+	std::map<PlayerManager::PlayerID, int> scoreMap;
+	
+	static ScoreManager* instance;
 
 };
 
