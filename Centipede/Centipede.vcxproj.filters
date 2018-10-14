@@ -112,6 +112,15 @@
     <Filter Include="Source Files\Game Components\Score">
       <UniqueIdentifier>{0f0e5952-1c19-4ac0-b415-f92e56b3de5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement">
+      <UniqueIdentifier>{18702112-6071-4302-8bc2-4b7e65f42f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal">
+      <UniqueIdentifier>{dca60433-5e71-4f04-bb36-ee3fcae93949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical">
+      <UniqueIdentifier>{ad1aacf3-9379-4890-a516-34ad1b439306}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -371,6 +380,30 @@
     </ClCompile>
     <ClCompile Include="Game Components\BouncingSpiderStateRight.cpp">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Spider_DiagonalDownLeft.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Spider_DiagonalDownRight.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Spider_DiagonalUpLeft.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Spider_DiagonalUpRight.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Down_ThenLeft.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Down_ThenRight.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Up_ThenLeft.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Up_ThenRight.cpp">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -707,14 +740,38 @@
     <ClInclude Include="Game Components\ScoreByDistanceCmd.h">
       <Filter>Source Files\Game Components\Score</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Spider_MoveFSM.h">
-      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\BouncingSpiderStateLeft.h">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\BouncingSpiderStateRight.h">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Spider_DiagonalDownLeft.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Spider_DiagonalDownRight.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Spider_DiagonalUpLeft.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Spider_DiagonalUpRight.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Diagonal</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Down_ThenLeft.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Down_ThenRight.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Spider_MoveFSM.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Up_ThenLeft.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Up_ThenRight.h">
+      <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
