@@ -3,10 +3,11 @@
 #include "Mushroom.h"
 #include "Ship.h"
 #include "SpiderManager.h"
+#include "SpiderStates.h"
 
 #include <random>
 #include "ScoreManager.h"
-#include "MoveFSM.h"
+#include "MovementCollection.h"
 
 //TODO: turn gameobjects functions into the Destory() and Initalize() GO objects
 Spider::Spider()
@@ -30,7 +31,7 @@ void Spider::Update()
 	if (!active)
 		return;
 
-#if true
+#if SPIDER_CHANGE
 
 	++counterNum;
 
@@ -44,13 +45,13 @@ void Spider::Update()
 		this->verticalRandomNum = rand() % RANDOM_CHANGE_NUM;
 		counterNum = 0;
 	}
-		//if (this->upOrDown == SpiderDirection::Up)
-		//	this->upOrDown = SpiderDirection::Down;
+	//if (this->upOrDown == SpiderDirection::Up)
+	//	this->upOrDown = SpiderDirection::Down;
 
-		//else
-		//	this->upOrDown = SpiderDirection::Up;
+	//else
+	//	this->upOrDown = SpiderDirection::Up;
 
-	//this math is wrong
+//this math is wrong
 	if (this->position.y <= this->boundsTopY)
 		this->upOrDown = SpiderDirection::Down;
 	else if (this->position.y >= this->boundsBottomY)
@@ -74,7 +75,7 @@ void Spider::Update()
 
 	else  //as long as the state is in vertical, we will count the frames its in there and compare to vertRandNum
 	{
-		
+
 
 		if (verticalRandomNum < counterNum)
 		{
@@ -82,14 +83,27 @@ void Spider::Update()
 			verticalRandomNum = 0;
 			counterNum = 0;
 		}
-	} 
+	}
 
 	if (this->upOrDown == SpiderDirection::Up)
 		this->position.y -= Game::FrameTime() * SPEED;
 
-	else 
+	else
 		this->position.y += Game::FrameTime() * SPEED;
-#endif
+
+#elif !SPIDER_CHANGE
+
+
+	this->position.y += this->spiderState->GetOffsetArray().rowoffset * SPEED;
+	this->position.x += this->spiderState->GetOffsetArray().coloffset * SPEED;
+
+	if (this->position.y <= this->boundsTopY)
+		this->spiderState = this->spiderState->GetNextState();
+
+	else if (this->position.y >= this->boundsBottomY)
+		this->spiderState = this->spiderState->GetNextState();
+
+	#endif
 
 	this->sprite.setPosition(this->position);
 
@@ -103,8 +117,8 @@ void Spider::Draw()
 void Spider::SpawnSpider(sf::Vector2f pos)
 {
 
-	
-#if true
+
+	//#if true
 	this->position = pos;
 	this->sprite.setPosition(pos);
 
@@ -114,15 +128,17 @@ void Spider::SpawnSpider(sf::Vector2f pos)
 	this->boundsBottomY = static_cast<int>(pos.y + Y_BOUNDS);
 	this->verticalRandomNum = rand() % RANDOM_CHANGE_NUM;
 
+#if SPIDER_CHANGE
 	if (pos.x == 0) //spawning on left, so we are moving right
 		this->leftOrRight = SpiderDirection::Right;
 	else
 		this->leftOrRight = SpiderDirection::Left;
-#elif true
-	this->position.x = 200;// = WindowManager::MainWindow.getSize().x / 2;
-	this->position.y = 200;// WindowManager::MainWindow.getSize().y / 2;
-	this->sprite.setPosition(position);
-	this->active = true;
+
+#elif !SPIDER_CHANGE
+	if (pos.x == 0)
+		this->spiderState = &Spider_MoveFSM::diagonalDownRight;
+	else
+		this->spiderState = &Spider_MoveFSM::diagonalDownLeft;
 
 #endif
 #if false
@@ -154,11 +170,17 @@ void Spider::Collision(Bullet *bullet)
 
 void Spider::Collision(Mushroom *shroom)
 {
+#if SPIDER_CHANGE
 	//have the spider change to opposite directions when it collides with a shroom
 	if (upOrDown == SpiderDirection::Down)
 		upOrDown = SpiderDirection::Up;
 	else
 		upOrDown = SpiderDirection::Down;
+
+#elif !SPIDER_CHANGE
+
+
+#endif
 
 	shroom->RemoveMushroom();
 }

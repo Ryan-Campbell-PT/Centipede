@@ -6,12 +6,14 @@
 
 #define RANDOM_CHANGE_NUM 100
 #define Y_BOUNDS 50
+#define SPIDER_CHANGE false
 
 class Bullet;
 class Mushroom;
 class Ship;
 enum class SpiderDirection;
 class ScoreCmd;
+class ImprovedSpiderState;
 
 class Spider : public GameObject
 {
@@ -39,16 +41,23 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	bool active;
-	int SPEED = 100;
-	int boundsTopY{}, boundsBottomY{};
-	int counterNum{};
-	int verticalRandomNum{};
+	int SPEED = 3;
+	int boundsTopY, boundsBottomY;
+	int counterNum;
+	int verticalRandomNum;
 
 	//these two variabels will change in the future, will keep for simplicity for now
+#if SPIDER_CHANGE
 	SpiderDirection leftOrRight;
 	SpiderDirection upOrDown;
 	SpiderDirection prevLeftOrRight;
-	ScoreCmd* pDeath{};
+
+#elif true
+	const ImprovedSpiderState *spiderState = nullptr;
+
+#endif
+
+	ScoreCmd* pDeath;
 };
 enum class SpiderDirection
 {

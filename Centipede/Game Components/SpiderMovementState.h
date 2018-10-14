@@ -26,7 +26,7 @@ class HorzSpiderState : public SpiderMovementState
 
 class ImprovedSpiderState
 {
-protected:
+public:
 	virtual OffsetArray GetOffsetArray() const = 0;
 	virtual const ImprovedSpiderState* GetNextState() const = 0;
 };

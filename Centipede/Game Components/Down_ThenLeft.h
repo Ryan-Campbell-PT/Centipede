@@ -5,11 +5,9 @@
 
 class Down_ThenLeft : public ImprovedSpiderState
 {
-protected:
-	virtual OffsetArray GetOffsetArray() const override;
-	virtual const ImprovedSpiderState* GetNextState() const override;
 public:
-	
+	virtual OffsetArray GetOffsetArray() const override;
+	virtual const ImprovedSpiderState* GetNextState() const override;	
 };
 
 #endif // DOWN_THENLEFT_H

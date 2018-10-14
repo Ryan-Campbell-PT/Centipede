@@ -5,7 +5,7 @@
 
 class Spider_DiagonalUpRight : public ImprovedSpiderState
 {
-protected:
+public:
 	virtual OffsetArray GetOffsetArray() const override;
 	virtual const ImprovedSpiderState* GetNextState() const override;	
 };
