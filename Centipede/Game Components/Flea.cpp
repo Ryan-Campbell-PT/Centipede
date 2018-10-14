@@ -12,7 +12,7 @@
 //TODO: there is a lot of deleting of state in this. figure out a way to modify tht
 //so there isnt much allocation and deletion
 Flea::Flea()
-	:state(0), active(false), speed(FLEASTATE1)
+	:state(0), active(false), speed(FLEASTATE1), destroyed(false)
 {
 	bitmap = ResourceManager::GetTextureBitmap("Flea");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Flea"), 4, 2);
@@ -38,7 +38,7 @@ void Flea::Update()
 		RemoveFlea();
 
 	else
-		this->state->StateAction();
+		this->state->StateAction(this);
 }
 
 void Flea::Draw()
@@ -48,7 +48,7 @@ void Flea::Draw()
 
 void Flea::Collision(Bullet * b)
 {
-	this->state->TakeDamage();
+	this->state->TakeDamage(this);
 	b->RemoveBullet();
 }
 
@@ -68,7 +68,7 @@ void Flea::SpawnFlea(sf::Vector2f pos)
 	this->SetCollider(this->sprite, this->bitmap, true);
 	this->RegisterCollision<Flea>(*this);
 
-	this->state = new FleaState1(this);
+	this->state = new FleaState1;
 	this->speed = FLEASTATE1;
 }
 
@@ -82,11 +82,10 @@ void Flea::AttemptSpawnMushroom()
 	MushroomManager::AttemptSpawnShroom(this->position);
 }
 
-sf::Vector2f Flea::GetPosition()
+sf::Vector2f Flea::GetPosition() const
 {
 	return position;
 }
-
 
 void Flea::RemoveFlea()
 {
@@ -95,8 +94,9 @@ void Flea::RemoveFlea()
 	this->sprite.setScale(0.f, 0.f);
 	
 	FleaPool::RecycleFlea(this);
-	
-	ScoreManager::SendScoreCmd(this->pDeath);
+
+	if(this->destroyed)
+		ScoreManager::SendScoreCmd(this->pDeath);
 
 	delete this->state;
 }

@@ -7,15 +7,12 @@
 
 #include <random>
 
-MushroomFactory * MushroomFactory::instance = 0; 
-
-MushroomFactory::MushroomFactory()
-{
-}
+MushroomFactory * MushroomFactory::instance = nullptr; 
 
 void MushroomFactory::RemoveMushroom(Mushroom * shroom)
 {
 	MushroomPool::RecycleMushroom(shroom);
+	GetInstance()->UpdateObservees();
 }
 
 void MushroomFactory::AddNewObserver(Observer * o)

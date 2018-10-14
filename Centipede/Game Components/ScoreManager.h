@@ -4,11 +4,24 @@
 #include <queue>
 
 #include "TEAL/CommonElements.h"
+#include "GameGrid.h"
 
 class ScoreCmd;
 
 class ScoreManager
 {
+public:
+	// events
+	enum class ScoreEvents { FleaKilled, ScorpionKilled, MushroomKilled, MushroomPoisonKilled, SpiderKilled, CentiKilled };
+
+	static void AddScore(int val);
+
+	static ScoreCmd* GetScoreCommand(ScoreEvents ev);
+
+	static void SendScoreCmd(ScoreCmd* c);
+	static void ProcessScores();
+
+
 private:
 	//distance values
 	static const int spiderDistNearMultiplier = 1 / 3;
@@ -22,39 +35,26 @@ private:
 	static const int MushroomPoisonDeath = 400;
 	static const int centiDeath = 300;
 
-//#pragma warning (disable:E2404)
+	///due to the way const works, Im unable to get the MainWindow.GetSize().x like I would otherwise
 	static const int SpiderDeathFar = 500;
-	static const int SpiderDistFar = WindowManager::MainWindow.getSize().x * spiderDistFarMultiplier;
+	static const int SpiderDistFar = COLUMN * SPRITE_SIZE * spiderDistFarMultiplier;
 
 	static const int SpiderDeathMedium = 600;
-	static const int SpiderDistMedium = WindowManager::MainWindow.getSize().x * spiderDistMedMultiplier;
+	static const int SpiderDistMedium = COLUMN * SPRITE_SIZE * spiderDistMedMultiplier;
 
 	static const int SpiderDeathNear = 700;
-	static const int SpiderDistNear = WindowManager::MainWindow.getSize().x * spiderDistNearMultiplier;
+	static const int SpiderDistNear = COLUMN * SPRITE_SIZE * spiderDistNearMultiplier;
 
 	std::queue<ScoreCmd*> QueueCmds;
+	static ScoreManager* instance;
+	int currentScore;
 
-	static ScoreManager* ptrInstance;
+	ScoreManager()
+		:currentScore(0) {}
 
-	static ScoreManager& Instance()	    // Access reference (all public methods will be static)
-	{
-		if (!ptrInstance)
-			ptrInstance = new ScoreManager;
-		return *ptrInstance;
-	};
+	static ScoreManager * GetInstance();
 
-	void privProcessScore();
-
-public:
-	// events
-	enum class ScoreEvents { FleaKilled, ScorpionKilled, MushroomKilled, MushroomPoisonKilled, SpiderKilled, CentiKilled };
-
-	static void AddScore(int val);
-
-	static ScoreCmd* GetScoreCommand(ScoreEvents ev);
-
-	static void SendScoreCmd(ScoreCmd* c);
-	static void ProcessScores();
+	void PrivProcessScore();
 
 };
 

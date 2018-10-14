@@ -29,7 +29,7 @@ public:
 	static void RemoveCurrentObserver(Observer * o);
 
 private:
-	MushroomFactory();
+	MushroomFactory() = default;
 
 	virtual void UpdateObservees() override;
 

@@ -33,7 +33,8 @@ public:
 	void SetState(FleaState *state);
 	///this method will simply take the flea's position and attempt to spawn a mushroom
 	void AttemptSpawnMushroom();
-	sf::Vector2f GetPosition();
+	sf::Vector2f GetPosition() const;
+	void SetDestroyed() { this->destroyed = true; }
 
 private:
 
@@ -47,6 +48,7 @@ private:
 	//this variable should be changed in the future when figuring out how to only call 
 	bool active;
 	ScoreCmd *pDeath;
+	bool destroyed;
 };
 
 #endif //FLEA_H

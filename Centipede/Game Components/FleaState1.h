@@ -9,20 +9,19 @@
 class FleaState1 : public FleaState
 {
 public:
-	FleaState1(Flea *flea) 
-		:flea(flea) {};
+	FleaState1() = default;
 
-	virtual ~FleaState1() {};
+	virtual ~FleaState1() = default;
 	FleaState1 &operator=(const FleaState1 &c) = delete;
 	FleaState1(const FleaState1 &c) = delete;
 
-	virtual void TakeDamage() override
+	virtual void TakeDamage(Flea *flea) override
 	{
 		flea->SetSpeed(FLEASTATE2);
-		flea->SetState(new FleaState2(this->flea));
+		flea->SetState(new FleaState2);
 	}
 
-	virtual void StateAction() override
+	virtual void StateAction(Flea *flea) override
 	{
 		if (static_cast<int>(flea->GetPosition().y) % SPRITE_SIZE == 0)
 		{
@@ -33,7 +32,6 @@ public:
 	}
 
 private:
-	Flea * flea;
 };
 
 #endif //FLEASTATE_1

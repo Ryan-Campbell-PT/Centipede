@@ -2,6 +2,8 @@
 #include "MushroomFactory.h"
 #include "GameGrid.h"
 #include "MushroomManager.h"
+#include "ScoreManager.h"
+#include "ScoreCmd.h"
 
 #if TESTING
 int Mushroom::mushroomNum = 0;
@@ -23,6 +25,8 @@ Mushroom::Mushroom()
 	RegisterCollision<Mushroom>(*this);
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	//then handle positioning and housekeeping
+
+	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::MushroomKilled);
 
 #if TESTING
 	this->thisMushroomNum = mushroomNum++;
@@ -65,7 +69,12 @@ void Mushroom::SetState(MushroomState state)
 	this->state = state;
 
 	if (state == MushroomState::Poison)
+	{
 		this->health += 4; //+= incase the mushroom is damaged
+		delete this->pDeath;
+		this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::MushroomPoisonKilled);
+	}
+
 	else if (state == MushroomState::Healthy) //will likely never be called, but just to be sure
 		this->health = 0; //-= incase the mushroom is damaged
 
@@ -78,18 +87,16 @@ void Mushroom::RemoveMushroom()
 	this->DeregisterCollision(*this);
 
 	MushroomManager::RemoveMushroom(this);
+
+	ScoreManager::SendScoreCmd(this->pDeath);
 }
 
-sf::Vector2f Mushroom::GetPosition()
+sf::Vector2f Mushroom::GetPosition() const
 {
 	return this->position;
 }
 
-MushroomState Mushroom::GetState()
+MushroomState Mushroom::GetState() const
 {
 	return this->state;
-}
-
-Mushroom::~Mushroom()
-{
 }

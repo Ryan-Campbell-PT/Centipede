@@ -4,6 +4,7 @@
 #include "TEAL/CommonElements.h"
 
 class MushroomFactory;
+class ScoreCmd;
 enum class MushroomState
 {
 	Healthy = 0,
@@ -24,12 +25,12 @@ public:
 	void TakeDamage();
 	void RemoveMushroom();
 
-	sf::Vector2f GetPosition();
-	MushroomState GetState(); //this will be used for the centipede
+	sf::Vector2f GetPosition() const;
+	MushroomState GetState() const; //this will be used for the centipede
 	void SetState(MushroomState state);
 
 private:
-	virtual ~Mushroom();
+	virtual ~Mushroom() = default;
 	Mushroom &operator=(const Mushroom &c) = delete;
 	Mushroom(const Mushroom &c) = delete;
 
@@ -39,6 +40,7 @@ private:
 
 	int health;
 	MushroomState state;
+	ScoreCmd *pDeath;
 
 #if TESTING
 	static int mushroomNum;

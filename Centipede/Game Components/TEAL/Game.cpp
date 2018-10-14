@@ -8,16 +8,17 @@
 #include "WindowManager.h"
 #include "SceneManager.h"
 #include "Tools.h"
+#include "../ScoreManager.h"
 
 using namespace std;
 
 const sf::Keyboard::Key Game::KILLGAMEKEY = sf::Keyboard::Escape;
-Game* Game::gameInstance = NULL;
+Game* Game::gameInstance = nullptr;
 
 void Game::Run()
 {
 	// Seed the random generator (Haven't found a more logical spot for it yet...)
-	srand((unsigned)time(0));
+	srand(static_cast<unsigned>(time(nullptr)));
 
 	// Set up the window 
 	WindowManager::Initialize();
@@ -32,6 +33,8 @@ void Game::Run()
 
 		// Actual frame processing
 		SceneManager::ProcessOneFrame();
+
+		ScoreManager::ProcessScores();
 	}
 
 	Instance().TerminateGame();
@@ -46,5 +49,5 @@ void Game::TerminateGame()
 
 	// Clean up the game instance;
 	delete gameInstance;
-	gameInstance = NULL;
+	gameInstance = nullptr;
 }

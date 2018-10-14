@@ -13,8 +13,8 @@ public:
 	FleaState &operator=(const FleaState &c) = delete;
 	FleaState(const FleaState &c) = delete;
 
-	virtual void TakeDamage() = 0;
-	virtual void StateAction() = 0;
+	virtual void TakeDamage(Flea *flea) = 0;
+	virtual void StateAction(Flea *flea) = 0;
 
 private:
 
