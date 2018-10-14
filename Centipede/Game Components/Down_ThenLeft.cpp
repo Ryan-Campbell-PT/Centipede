@@ -10,3 +10,8 @@ const ImprovedSpiderState* Down_ThenLeft::GetNextState() const
 {
 	return &Spider_MoveFSM::up_ThenLeft;
 }
+
+const ImprovedSpiderState * Down_ThenLeft::GetExtraState() const
+{
+	return &Spider_MoveFSM::diagonalUpLeft;
+}

@@ -41,7 +41,7 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	bool active;
-	int SPEED = 3;
+	int SPEED = 2;
 	int boundsTopY, boundsBottomY;
 	int counterNum;
 	int verticalRandomNum;

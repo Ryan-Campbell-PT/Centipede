@@ -29,6 +29,7 @@ class ImprovedSpiderState
 public:
 	virtual OffsetArray GetOffsetArray() const = 0;
 	virtual const ImprovedSpiderState* GetNextState() const = 0;
+	virtual const ImprovedSpiderState* GetExtraState() const = 0;
 };
 
 #endif

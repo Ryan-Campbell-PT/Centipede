@@ -103,7 +103,13 @@ void Spider::Update()
 	else if (this->position.y >= this->boundsBottomY)
 		this->spiderState = this->spiderState->GetNextState();
 
-	#endif
+	if(++counterNum > RANDOM_CHANGE_NUM)
+	{
+		this->spiderState = this->spiderState->GetExtraState();
+		this->counterNum = rand() % RANDOM_CHANGE_NUM;
+	}
+
+#endif
 
 	this->sprite.setPosition(this->position);
 
