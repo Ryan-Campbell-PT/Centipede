@@ -121,6 +121,9 @@
     <Filter Include="Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical">
       <UniqueIdentifier>{ad1aacf3-9379-4890-a516-34ad1b439306}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Ship\Modes">
+      <UniqueIdentifier>{0a59ebdd-d3c2-4afc-ac1e-711a8378dc1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -410,6 +413,15 @@
     </ClCompile>
     <ClCompile Include="Game Components\PlayerManager.cpp">
       <Filter>Source Files\Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Ship_Ai.cpp">
+      <Filter>Source Files\Game Components\Ship\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Ship_Player.cpp">
+      <Filter>Source Files\Game Components\Ship\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\ShipFSM.cpp">
+      <Filter>Source Files\Game Components\Ship</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -781,6 +793,18 @@
     </ClInclude>
     <ClInclude Include="Game Components\PlayerManager.h">
       <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ShipFSM.h">
+      <Filter>Source Files\Game Components\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ShipMode.h">
+      <Filter>Source Files\Game Components\Ship\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Ship_Ai.h">
+      <Filter>Source Files\Game Components\Ship\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Ship_Player.h">
+      <Filter>Source Files\Game Components\Ship\Modes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -131,6 +131,11 @@ sf::Vector2f Ship::GetPosition()
 	return GetInstance()->position;
 }
 
+void Ship::SetState(const ShipMode * state)
+{
+	GetInstance()->shipMode = state;
+}
+
 void Ship::DestroyShip()
 {
 	ConsoleMsg::WriteLine("BOOM");

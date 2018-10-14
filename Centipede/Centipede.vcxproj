@@ -141,6 +141,9 @@
     <ClCompile Include="Game Components\Ship.cpp" />
     <ClCompile Include="Game Components\Level1.cpp" />
     <ClCompile Include="Game Components\ShipExplosion.cpp" />
+    <ClCompile Include="Game Components\ShipFSM.cpp" />
+    <ClCompile Include="Game Components\Ship_Ai.cpp" />
+    <ClCompile Include="Game Components\Ship_Player.cpp" />
     <ClCompile Include="Game Components\Spider.cpp" />
     <ClCompile Include="Game Components\SpiderFactory.cpp" />
     <ClCompile Include="Game Components\SpiderManager.cpp" />
@@ -254,9 +257,13 @@
     <ClInclude Include="Game Components\Ship.h" />
     <ClInclude Include="Game Components\Level1.h" />
     <ClInclude Include="Game Components\ShipExplosion.h" />
+    <ClInclude Include="Game Components\ShipFSM.h" />
+    <ClInclude Include="Game Components\ShipMode.h" />
+    <ClInclude Include="Game Components\Ship_Ai.h" />
     <ClInclude Include="Game Components\Ship_Down.h" />
     <ClInclude Include="Game Components\Ship_Fire.h" />
     <ClInclude Include="Game Components\Ship_Left.h" />
+    <ClInclude Include="Game Components\Ship_Player.h" />
     <ClInclude Include="Game Components\Ship_Right.h" />
     <ClInclude Include="Game Components\Ship_Up.h" />
     <ClInclude Include="Game Components\Spider.h" />

@@ -1,5 +1,8 @@
 #include "PlayerManager.h"
 #include "Ship.h"
+#include "ShipFSM.h"
+#include "Ship_Ai.h"
+#include "Ship_Player.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
 
@@ -18,22 +21,22 @@ void PlayerManager::InitializePlayer(const PlayerID player)
 	switch (player)
 	{
 	case PlayerID::Ai:
-		Ship::SetState(ShipFSM::Ai);
+		Ship::SetState(&ShipFSM::aiMode);
 		break;
 
 	case PlayerID::Player1:
-		Ship::SetState(ShipFSM::Player);
+		Ship::SetState(&ShipFSM::playerMode);
 		break;
 
 	case PlayerID::Player2:
-		Ship::SetState(ShipFSM::Player);
+		Ship::SetState(&ShipFSM::playerMode);
 		break;
 
 	default:
 		break;
 	}
 
-	this->currentPlayer = player;
+	GetInstance()->currentPlayer = player;
 }
 
 PlayerManager * PlayerManager::GetInstance()

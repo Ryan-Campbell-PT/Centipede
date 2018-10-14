@@ -13,6 +13,8 @@ class Widget;
 class Asteroid;
 class Mushroom;
 class KeyboardCommand;
+class ShipFSM;
+class ShipMode;
 
 class Ship : public GameObject
 {
@@ -29,7 +31,7 @@ public:
 	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey);
 
 	static sf::Vector2f GetPosition();
-	static void SetState(ShipFSM state);
+	static void SetState(const ShipMode *state);
 
 	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
 	void DestroyShip(); 
@@ -51,6 +53,7 @@ private:
 	static Ship * GetInstance();
 
 	KeyboardCommand *keyDown, *keyUp, *keyRight, *keyLeft, *keyFire;
+	const ShipMode	*shipMode;
 };
 
 #endif _Ship
