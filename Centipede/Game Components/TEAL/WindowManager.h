@@ -7,7 +7,7 @@
 #ifndef _WINDOWING_H
 #define _WINDOWING_H
 
-#define TESTING true
+#define TESTING false
 
 #include "SFML\Graphics.hpp"
 

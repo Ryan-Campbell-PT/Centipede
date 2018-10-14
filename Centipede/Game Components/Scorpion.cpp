@@ -4,6 +4,7 @@
 #include "GameGrid.h"
 #include "Ship.h"
 #include "ScorpionManager.h"
+#include "ScoreManager.h"
 
 Scorpion::Scorpion()
 {
@@ -13,6 +14,8 @@ Scorpion::Scorpion()
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
 	this->sprite.setScale(0.f, 0.f);
+
+	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::ScorpionKilled);
 
 	SetCollider(sprite, bitmap, true);
 }
@@ -65,6 +68,7 @@ void Scorpion::Collision(Bullet * bullet)
 {
 	RemoveScorpion();
 	bullet->RemoveBullet();
+	ScoreManager::SendScoreCmd(this->pDeath);
 }
 
 void Scorpion::Collision(Mushroom * shroom)

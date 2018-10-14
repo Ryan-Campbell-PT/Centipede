@@ -2,12 +2,14 @@
 #define SCORPION_H
 
 #include "TEAL/CommonElements.h"
+#include "ScoreCmd.h"
 
 #define SPRITE_REFRESH 20
 
 class Bullet;
 class Mushroom;
 class Ship;
+class ScoreCmd;
 
 //todo: fix sprite flipping and add a better animation system
 class Scorpion : public GameObject
@@ -40,6 +42,7 @@ private:
 	const int SPEED = 200;
 
 	bool spawnOnLeft;
+	ScoreCmd* pDeath;
 };
 
 #endif //SCORPION_H

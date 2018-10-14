@@ -5,6 +5,7 @@
 #include "SpiderManager.h"
 
 #include <random>
+#include "ScoreManager.h"
 
 //TODO: turn gameobjects functions into the Destory() and Initalize() GO objects
 Spider::Spider()
@@ -19,10 +20,8 @@ Spider::Spider()
 	SetCollider(sprite, bitmap, true);
 
 	this->active = false;
-}
 
-Spider::~Spider()
-{
+	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::SpiderKilled);
 }
 
 void Spider::Update()
@@ -149,6 +148,7 @@ void Spider::Collision(Bullet *bullet)
 {
 	bullet->RemoveBullet();
 	RemoveSpider();
+	ScoreManager::SendScoreCmd(this->pDeath);
 }
 
 void Spider::Collision(Mushroom *shroom)

@@ -2,6 +2,7 @@
 #define SPIDER_H
 
 #include "TEAL/CommonElements.h"
+#include "ScoreCmd.h"
 
 #define RANDOM_CHANGE_NUM 100
 #define Y_BOUNDS 50
@@ -10,12 +11,13 @@ class Bullet;
 class Mushroom;
 class Ship;
 enum class SpiderDirection;
+class ScoreCmd;
 
 class Spider : public GameObject
 {
 public:
 	Spider();
-	virtual ~Spider();
+	virtual ~Spider() = default;
 	Spider &operator=(const Spider &c) = delete;
 	Spider(const Spider &c) = delete;
 
@@ -38,15 +40,15 @@ private:
 
 	bool active;
 	int SPEED = 100;
-	int boundsTopY, boundsBottomY;
-	int counterNum;
-	int verticalRandomNum;
+	int boundsTopY{}, boundsBottomY{};
+	int counterNum{};
+	int verticalRandomNum{};
 
 	//these two variabels will change in the future, will keep for simplicity for now
 	SpiderDirection leftOrRight;
 	SpiderDirection upOrDown;
 	SpiderDirection prevLeftOrRight;
-
+	ScoreCmd* pDeath{};
 };
 enum class SpiderDirection
 {

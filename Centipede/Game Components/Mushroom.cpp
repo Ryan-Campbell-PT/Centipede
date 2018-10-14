@@ -57,7 +57,10 @@ void Mushroom::TakeDamage()
 	this->sprite.SetAnimation(health, ++health);
 
 	if (health % 4 == 0) //modulous to compensate for poison or healthy
+	{
 		this->RemoveMushroom();
+		ScoreManager::SendScoreCmd(this->pDeath);
+	}
 
 	//this->MainSprite.SetAnimation(1, 2); //second mushroom state
 	//this->MainSprite.SetAnimation(2, 3); //third mushroom state
@@ -87,8 +90,6 @@ void Mushroom::RemoveMushroom()
 	this->DeregisterCollision(*this);
 
 	MushroomManager::RemoveMushroom(this);
-
-	ScoreManager::SendScoreCmd(this->pDeath);
 }
 
 sf::Vector2f Mushroom::GetPosition() const
