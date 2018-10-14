@@ -1,11 +1,15 @@
-﻿#pragma once
+﻿#ifndef UP_THENLEFT_H
+#define UP_THENLEFT_H
+
 #include "SpiderMovementState.h"
 
-class Up_ThenLeft : ImprovedSpiderState
+class Up_ThenLeft : public ImprovedSpiderState
 {
 protected:
 	virtual OffsetArray GetOffsetArray() const override;
-	virtual ImprovedSpiderState* GetNextState() const override;
+	virtual const ImprovedSpiderState* GetNextState() const override;
 public:
 	
 };
+
+#endif // UP_THENLEFT_H

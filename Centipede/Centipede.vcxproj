@@ -148,6 +148,7 @@
     <ClCompile Include="Game Components\Spider_DiagonalDownRight.cpp" />
     <ClCompile Include="Game Components\Spider_DiagonalUpLeft.cpp" />
     <ClCompile Include="Game Components\Spider_DiagonalUpRight.cpp" />
+    <ClCompile Include="Game Components\Spider_MoveFSM.cpp" />
     <ClCompile Include="Game Components\Splash.cpp" />
     <ClCompile Include="Game Components\SplashController.cpp" />
     <ClCompile Include="Game Components\TEAL\AlarmEventTimeline.cpp" />

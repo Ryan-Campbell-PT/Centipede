@@ -4,6 +4,7 @@
 #include "TEAL/CommonElements.h"
 #include "State.h"
 #include "MovementCollection.h"
+#include "SpiderStates.h"
 
 class SpiderMovementState : public State
 {
@@ -26,8 +27,8 @@ class HorzSpiderState : public SpiderMovementState
 class ImprovedSpiderState
 {
 protected:
-	virtual OffsetArray GetOffsetArray() const { return Spider_MovementCollection::DiagonalDownLeft; }
-	virtual ImprovedSpiderState* GetNextState() const { return nullptr; }
+	virtual OffsetArray GetOffsetArray() const = 0;
+	virtual const ImprovedSpiderState* GetNextState() const = 0;
 };
 
 #endif

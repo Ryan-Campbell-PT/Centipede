@@ -1,7 +1,6 @@
 #ifndef SPIDER_MOVE_FSM
 #define SPIDER_MOVE_FSM
 
-
 class Spider_DiagonalDownLeft;
 class Spider_DiagonalDownRight;
 class Spider_DiagonalUpLeft;
