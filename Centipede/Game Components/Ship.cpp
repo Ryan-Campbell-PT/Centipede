@@ -12,6 +12,7 @@
 #include "ScorpionManager.h"
 #include "SpiderManager.h"
 #include "KeyboardIncludes.h"
+#include "PlayerManager.h"
 
 Ship *Ship::instance = 0;
 
@@ -66,6 +67,7 @@ void Ship::Destroy()
 void Ship::InitalizeShip()
 {
 	GetInstance();
+	PlayerManager::InitializePlayer(PlayerManager::PlayerID::Player1); //for now, will just implement as player1
 }
 
 void Ship::Update()
@@ -124,6 +126,13 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 
 	if (k == sf::Keyboard::Key::X)
 		SpiderManager::SpawnSpider();
+
+	if (k == sf::Keyboard::Key::Z) //just for testing purposes
+		if(PlayerManager::GetCurrentPlayer() == PlayerManager::PlayerID::Player1)
+			PlayerManager::InitializePlayer(PlayerManager::PlayerID::Player2);
+		
+		else
+			PlayerManager::InitializePlayer(PlayerManager::PlayerID::Player1);
 }
 
 sf::Vector2f Ship::GetPosition()

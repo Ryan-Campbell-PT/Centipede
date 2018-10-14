@@ -8,9 +8,9 @@ ScoreManager * ScoreManager::instance = nullptr;
 ScoreManager::ScoreManager()
 {
 	//add all the current ways a player can play (no way to programatically do this)
-	GetInstance()->scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Ai, 0));
-	GetInstance()->scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Player1, 0));
-	GetInstance()->scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Player2, 0));
+	ScoreManager::scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Ai, 0));
+	ScoreManager::scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Player1, 0));
+	ScoreManager::scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Player2, 0));
 }
 
 ScoreManager * ScoreManager::GetInstance()
@@ -37,7 +37,13 @@ void ScoreManager::PrivProcessScore()
 			QueueCmds.pop();
 		}
 
-		ConsoleMsg::WriteLine("Current Score: " + Tools::ToString(
+		std::string player;
+		if(PlayerManager::GetCurrentPlayer() == PlayerManager::PlayerID::Player1)
+			player = "Player1";
+		else
+			player = "Player2";
+
+		ConsoleMsg::WriteLine(player + "'s current Score: " + Tools::ToString(
 			GetInstance()->scoreMap.at(PlayerManager::GetCurrentPlayer())) //print the current players score value
 			+ "\n");
 	}
