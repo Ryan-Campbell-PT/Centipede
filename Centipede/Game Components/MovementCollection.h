@@ -19,3 +19,14 @@ public:
 	static const OffsetArray OffsetsTurnDownEndLeft;
 };
 
+struct Spider_MovementCollection
+{
+	static const OffsetArray DiagonalDownLeft;
+	static const OffsetArray DiagonalDownRight;
+	static const OffsetArray DiagonalUpLeft;
+	static const OffsetArray DiagonalUpRight;
+	static const OffsetArray Up_ThenLeft;
+	static const OffsetArray Up_ThenRight;
+	static const OffsetArray Down_ThenLeft;
+	static const OffsetArray Down_ThenRight;
+};

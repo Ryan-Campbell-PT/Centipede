@@ -3,4 +3,5 @@
 #include "RightSpiderState.h"
 #include "UpSpiderState.h"
 #include "DownSpiderState.h"
-#include "BouncingSpiderState.h"
+#include "BouncingSpiderStateLeft.h"
+#include "BouncingSpiderStateRight.h"

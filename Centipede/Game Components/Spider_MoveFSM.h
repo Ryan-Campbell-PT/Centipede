@@ -13,4 +13,9 @@ struct Spider_MoveFSM
 	
 };
 
+struct Spider_OffsetArrays
+{
+	
+};
+
 #endif //SPIDER_MOVE_FSM
