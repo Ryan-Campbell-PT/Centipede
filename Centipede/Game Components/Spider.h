@@ -41,21 +41,11 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	bool active;
-	int SPEED = 2;
+	float SPEED = 1.5f;
 	int boundsTopY, boundsBottomY;
 	int counterNum;
-	int verticalRandomNum;
 
-	//these two variabels will change in the future, will keep for simplicity for now
-#if SPIDER_CHANGE
-	SpiderDirection leftOrRight;
-	SpiderDirection upOrDown;
-	SpiderDirection prevLeftOrRight;
-
-#elif true
 	const ImprovedSpiderState *spiderState = nullptr;
-
-#endif
 
 	ScoreCmd* pDeath;
 };
