@@ -1,24 +1,31 @@
 #ifndef CENTIHEAD_MANAGER
 #define CENTIHEAD_MANAGER
 
-#define MAX_CENTI_BODY 6
-
 class CentipedeHead;
 
 class CentiHeadManager
 {
 public:
-	static void InitializeCentipede();
+	static void InitializeCentipede(const int numBodies, const float centiSpeed, 
+		const int numSoloHeads, const float soloHeadSpeed);
 
 	static CentipedeHead* GetCentiHead();
 	static void RemoveCentiHead(CentipedeHead * const head);
 
 private:
 	CentiHeadManager() = default;
+	void SetApi(const int numBodies, const float centiSpeed,
+		const int numSoloHeads, const float soloHeadSpeed);
 
 	static CentiHeadManager* GetInstance();
 
 	static CentiHeadManager* instance;
+	//todo: solo heads spawning
+	///api stuff
+	int numBodies;
+	float centiSpeed;
+	int numSoloHeads;
+	float soloHeadSpeed;
 };
 
 

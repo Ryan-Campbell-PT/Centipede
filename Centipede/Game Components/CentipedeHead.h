@@ -32,7 +32,6 @@ public:
 	virtual void Collide(GameObject * const go) {};
 	virtual void Collide(Bullet * const bullet);
 
-	sf::Vector2f GetPosition();
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
 
 	void CheckGridAhead(sf::Vector2f pos);
@@ -47,8 +46,9 @@ public:
 	virtual void Collision(GameObject *go) override {};
 	virtual void Collision(Bullet * bullet);
 
-	void CenterOnX();
-	void CenterOnY();
+
+	sf::Vector2f GetPosition();
+	void SetSpeed(const int speed);
 
 private:
 	virtual ~CentipedeHead() = default;
@@ -67,8 +67,10 @@ private:
 	std::vector<CentipedeDirectionState*> directionArray;
 
 	unsigned int animationCounter;
+	float speed;
 
 	bool active;
+
 };
 
 ///this enum will be used so there is no need to delete movements throuhgout the game loop

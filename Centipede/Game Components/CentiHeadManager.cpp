@@ -6,20 +6,15 @@
 #include <random>
 #include "MushroomManager.h"
 
-CentiHeadManager * CentiHeadManager::instance = 0;
+CentiHeadManager * CentiHeadManager::instance = nullptr;
 
-void CentiHeadManager::InitializeCentipede()
+void CentiHeadManager::InitializeCentipede(const int numBodies, const float centiSpeed, 
+		const int numSoloHeads, const float soloHeadSpeed)
 {
+	GetInstance()->SetApi(numBodies, centiSpeed, numSoloHeads, soloHeadSpeed);
 	auto head = CentiHeadFactory::GetCentiHead();
 
-	//this can be changed in the future. for now i will keep it as a random number
-#if !TESTING
-
-	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), rand() % MAX_CENTI_BODY, MoveSFM::downThenLeft);
-#else
-	head->InitializeHead(sf::Vector2f(200, 200), rand() % MAX_CENTI_BODY, MoveSFM::downThenLeft);
-#endif
-
+	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), numBodies, MoveSFM::downThenLeft);
 }
 
 CentipedeHead* CentiHeadManager::GetCentiHead()
@@ -30,6 +25,15 @@ CentipedeHead* CentiHeadManager::GetCentiHead()
 void CentiHeadManager::RemoveCentiHead(CentipedeHead * const head)
 {
 	CentiHeadFactory::RemoveCentiHead(head);
+}
+
+void CentiHeadManager::SetApi(const int numBodies, const float centiSpeed,
+	const int numSoloHeads, const float soloHeadSpeed)
+{
+	this->numBodies = numBodies;
+	this->centiSpeed = centiSpeed;
+	this->numSoloHeads = numSoloHeads;
+	this->soloHeadSpeed = soloHeadSpeed;
 }
 
 CentiHeadManager * CentiHeadManager::GetInstance()

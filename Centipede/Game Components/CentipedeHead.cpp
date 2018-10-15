@@ -12,7 +12,7 @@
 #include <list>
 
 CentipedeHead::CentipedeHead()
-	:currentDirectionState(nullptr), animationCounter(0), active(false)
+	:currentDirectionState(nullptr), animationCounter(0), speed(1.5f), active(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
@@ -82,6 +82,11 @@ sf::Vector2f CentipedeHead::GetPosition()
 	return this->position;
 }
 
+void CentipedeHead::SetSpeed(const int speed)
+{
+	this->speed = speed;
+}
+
 void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFrame)
 {
 	this->sprite.SetAnimation(startFrame, endFrame);
@@ -97,16 +102,6 @@ void CentipedeHead::Collision(Bullet * bullet)
 	bullet->RemoveBullet();
 	this->RemoveHead();
 	MushroomManager::AttemptSpawnShroom(this->GetPosition());
-}
-
-void CentipedeHead::CenterOnX()
-{
-	GameGrid::GetCenterXPosition(this->position);
-}
-
-void CentipedeHead::CenterOnY()
-{
-	GameGrid::GetCenterYPosition(this->position);
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
@@ -156,7 +151,6 @@ const CentipedeDirectionState * CentipedeHead::GetDirection()
 
 void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, int numBodies)
 {
-	numBodies = 7;
 	if (numBodies > 0)
 	{
 		CentipedePart *prev(this), *curr(nullptr);

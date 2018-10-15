@@ -12,6 +12,5 @@ void Centi_Poisoned::MoveDirection(CentipedeHead * centi, sf::Vector2f & pos) co
 const CentipedeDirectionState * Centi_Poisoned::NextState(CentipedeHead * centi) const
 {
 	centi->SetSpriteRotation(180.f);
-	centi->CenterOnY();
 	return &MoveSFM::rightThenUp;
 }

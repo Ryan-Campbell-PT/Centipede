@@ -33,7 +33,7 @@ void Level1::Initialize()
 
 	FleaManager::InitializeFlea(25);
 	ScorpionManager::InitializeScorpion(5.f);
-	CentiHeadManager::InitializeCentipede();
+	CentiHeadManager::InitializeCentipede(6, 1.5f, 0, 0);
 
 	CollisionTestPair<Ship, Mushroom>();
 
