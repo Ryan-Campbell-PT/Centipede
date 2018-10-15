@@ -4,9 +4,19 @@
 
 #include <random>
 
-ScorpionManager *ScorpionManager::instance = 0;
+ScorpionManager *ScorpionManager::instance = nullptr;
 
-void ScorpionManager::SpawnScorpion()
+void ScorpionManager::Alarm0()
+{
+	SpawnScorpion();
+}
+
+void ScorpionManager::Alarm1()
+{
+	SpawnScorpion();
+}
+
+void ScorpionManager::SpawnScorpion() const
 {
 	bool leftSide = rand() % 2; //either left or right side, determined by a random number
 	int x;
@@ -24,14 +34,21 @@ void ScorpionManager::SpawnScorpion()
 	//GetInstance()->scorpion->SetSpawnSide(leftSide); //this is requried to spawn the scorp for whatever reason. todo: fix later
 }
 
+void ScorpionManager::InitializeScorpion(const float timeToSpawnInSeconds)
+{
+	GetInstance()->SetAlarm(0, timeToSpawnInSeconds); //set a timer for when to spawn scorp
+}
+
 void ScorpionManager::RemoveScorpion(Scorpion * const scorpion)
 {
 	ScorpionFactory::RemoveScorpion(scorpion);
+
+//todo: somehow fix this
 }
 
 ScorpionManager * ScorpionManager::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new ScorpionManager;
 
 	return instance;

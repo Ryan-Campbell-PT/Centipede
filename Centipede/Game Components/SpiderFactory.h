@@ -8,21 +8,19 @@ class Spider;
 class SpiderFactory
 {
 public:
-	static void SpawnSpider(sf::Vector2f &pos);
+	static Spider* GetSpider();
 	static void RemoveSpider(Spider * const spider);
 
 private:
 	static SpiderFactory *GetInstance();
 
-	SpiderFactory();
+	SpiderFactory() = default;
 	virtual ~SpiderFactory() {};
 	SpiderFactory &operator=(const SpiderFactory &c) = delete;
 	SpiderFactory(const SpiderFactory &c) = delete;
 
 
 	static SpiderFactory *instance;
-	Spider* spider;
-
 };
 
 #endif //SPIDER_FACTORY_H

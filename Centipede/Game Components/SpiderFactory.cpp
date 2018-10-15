@@ -3,26 +3,19 @@
 #include "SpiderPool.h"
 
 
-SpiderFactory *SpiderFactory::instance = 0;
-
-SpiderFactory::SpiderFactory()
-{
-	this->spider = new Spider;
-}
-
+SpiderFactory *SpiderFactory::instance = nullptr;
 
 SpiderFactory * SpiderFactory::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new SpiderFactory;
 
 	return instance;
 }
 
-void SpiderFactory::SpawnSpider(sf::Vector2f &pos)
+Spider* SpiderFactory::GetSpider()
 {
-	auto spider = SpiderPool::GetSpider();
-	spider->SpawnSpider(pos);
+	return SpiderPool::GetSpider();
 }
 
 void SpiderFactory::RemoveSpider(Spider * const spider)

@@ -9,7 +9,7 @@ class SpiderPool
 {
 public:
 	static Spider *GetSpider();
-	static void RecycleSpider(Spider *spider);
+	static void RecycleSpider(Spider*const spider);
 
 private:
 	static SpiderPool * GetInstance();

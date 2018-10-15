@@ -1,23 +1,30 @@
 #include "SpiderManager.h"
-#include "SpiderPool.h"
+#include "Spider.h"
 #include "SpiderFactory.h"
 #include <random>
 
-SpiderManager* SpiderManager::instance = 0;
+SpiderManager* SpiderManager::instance = nullptr;
 
 SpiderManager * SpiderManager::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new SpiderManager;
 
 	return instance;
+}
+
+void SpiderManager::InitializeSpider(const int timeToSpawn, const float spiderSpeed)
+{
+	GetInstance()->spiderSpeed = spiderSpeed;
+
+	//todo: set alarm
 }
 
 void SpiderManager::SpawnSpider()
 {
 	sf::Vector2f pos;
 
-	bool leftSide = rand() % 2; //either left or right side, determined by a random number
+	const bool leftSide = rand() % 2; //either left or right side, determined by a random number
 
 	if (leftSide) //if its on the left side, then the x= 0
 		pos.x = 0;
@@ -27,10 +34,21 @@ void SpiderManager::SpawnSpider()
 
 	pos.y = static_cast<float>(rand() % WindowManager::MainWindow.getSize().y); //anywhere on the y axis
 
-	SpiderFactory::SpawnSpider(pos);
+	auto spider = SpiderFactory::GetSpider();
+	spider->SpawnSpider(pos, this->spiderSpeed);
 }
 
 void SpiderManager::RemoveSpider(Spider * const spider)
 {
 	SpiderFactory::RemoveSpider(spider);
+}
+
+void SpiderManager::Alarm0()
+{
+	this->SpawnSpider();
+}
+
+void SpiderManager::Alarm1()
+{
+	this->SpawnSpider();
 }

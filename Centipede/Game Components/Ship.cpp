@@ -121,11 +121,11 @@ void Ship::Collision(Mushroom* other)
 void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
 {
 	//todo: this will have to be changed in the future, for now will keep
-	if (k == sf::Keyboard::Key::C)
-		ScorpionManager::SpawnScorpion();
+	//if (k == sf::Keyboard::Key::C)
+		//ScorpionManager::SpawnScorpion();
 
-	if (k == sf::Keyboard::Key::X)
-		SpiderManager::SpawnSpider();
+	//if (k == sf::Keyboard::Key::X)
+	//	SpiderManager::SpawnSpider();
 
 	if (k == sf::Keyboard::Key::Z) //just for testing purposes
 		if(PlayerManager::GetCurrentPlayer() == PlayerManager::PlayerID::Player1)

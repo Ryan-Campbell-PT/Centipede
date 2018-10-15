@@ -21,6 +21,7 @@
 #include "CentipedeBody.h"
 
 #include <vector>
+#include "ScorpionManager.h"
 
 void Level1::Initialize()
 {
@@ -31,7 +32,7 @@ void Level1::Initialize()
 	MushroomManager::InitializeMushroomField(30);
 
 	FleaManager::InitializeFlea(25);
-	
+	ScorpionManager::InitializeScorpion(5.f);
 	CentiHeadManager::InitializeCentipede();
 
 	CollisionTestPair<Ship, Mushroom>();

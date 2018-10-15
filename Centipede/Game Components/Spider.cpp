@@ -55,11 +55,12 @@ void Spider::Draw()
 	WindowManager::MainWindow.draw(this->sprite);
 }
 
-void Spider::SpawnSpider(const sf::Vector2f pos)
+void Spider::SpawnSpider(const sf::Vector2f pos, const float spiderSpeed)
 {
 	this->position = pos;
 	this->sprite.setPosition(pos);
 
+	this->SPEED = spiderSpeed;
 	this->active = true;
 	this->counterNum = rand() % RANDOM_CHANGE_NUM;
 	this->boundsTopY = static_cast<int>(pos.y - Y_BOUNDS);

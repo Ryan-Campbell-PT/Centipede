@@ -31,7 +31,7 @@ public:
 	virtual void Collision(Mushroom * shroom);
 	virtual void Collision(Ship *ship);
 	
-	void SpawnSpider(sf::Vector2f pos);
+	void SpawnSpider(sf::Vector2f pos, const float spiderSpeed);
 
 private:
 	void RemoveSpider();

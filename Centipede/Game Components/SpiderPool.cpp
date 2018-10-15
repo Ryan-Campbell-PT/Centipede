@@ -1,12 +1,12 @@
 #include "SpiderPool.h"
 #include "Spider.h"
 
-SpiderPool* SpiderPool::instance = 0;
+SpiderPool* SpiderPool::instance = nullptr;
 
 Spider * SpiderPool::GetSpider()
 {
 	Spider * spider;
-	if (GetInstance()->recycledSpiders.size() == 0)
+	if (GetInstance()->recycledSpiders.empty())
 		spider = new Spider;
 
 	else
@@ -18,7 +18,7 @@ Spider * SpiderPool::GetSpider()
 	return spider;
 }
 
-void SpiderPool::RecycleSpider(Spider * spider)
+void SpiderPool::RecycleSpider(Spider*const spider)
 {
 	GetInstance()->recycledSpiders.push_front(spider);
 }
@@ -26,7 +26,7 @@ void SpiderPool::RecycleSpider(Spider * spider)
 
 SpiderPool * SpiderPool::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new SpiderPool;
 
 	return instance;
