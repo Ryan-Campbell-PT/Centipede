@@ -44,7 +44,7 @@ void MushroomFactory::AddObservee(Observer * o)
 
 void MushroomFactory::RemoveObservee(Observer * o)
 {
-	// ill deal with this later
+	GetInstance()->obsererList.remove(o);
 }
 
 MushroomFactory::~MushroomFactory()

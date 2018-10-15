@@ -3,14 +3,16 @@
 
 #include "Observer.h"
 
-#define SPAWN_FLEA_NUM 29
-
 class Flea;
 
 class FleaManager : public Observer
 {
 public:
-	static void InitializeFlea();
+	static void InitializeFlea(const int numShroomsToSpawn);
+	///if the flea will not be spawning, we will simply remove it from observing
+	static void DeInitializeFlea();
+
+	static void RemoveFlea(Flea *const flea);
 
 	virtual void ObserverUpdate(int numShrooms) override;
 
@@ -21,6 +23,9 @@ private:
 	static FleaManager* GetInstance();
 
 	static FleaManager *instance;
+
+	int numShroomsToSpawn;
+	bool fleaActive; ///because there can only be 1 flea active, we simply have a bool to know if it is
 };
 
 #endif //FLEA_MANAGER

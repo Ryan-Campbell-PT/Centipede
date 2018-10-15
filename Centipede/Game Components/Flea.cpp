@@ -8,6 +8,7 @@
 #include "FleaPool.h"
 #include "MushroomManager.h"
 #include "ScoreManager.h"
+#include "FleaManager.h"
 
 //TODO: there is a lot of deleting of state in this. figure out a way to modify tht
 //so there isnt much allocation and deletion
@@ -93,9 +94,9 @@ void Flea::RemoveFlea()
 	this->DeregisterCollision<Flea>(*this);
 	this->sprite.setScale(0.f, 0.f);
 	
-	FleaPool::RecycleFlea(this);
+	FleaManager::RemoveFlea(this);
 
-	if(this->destroyed)
+	if(this->destroyed) //make sure the flea was actually shot, not just exceeded window size
 		ScoreManager::SendScoreCmd(this->pDeath);
 
 	delete this->state;

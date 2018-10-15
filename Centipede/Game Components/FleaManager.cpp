@@ -6,26 +6,37 @@
 #include "FleaFactory.h"
 #include "MushroomFactory.h"
 #include "Spider.h"
+#include "Flea.h"
 
-FleaManager *FleaManager::instance = 0;
+FleaManager *FleaManager::instance = nullptr;
 
 FleaManager::FleaManager()
+	:fleaActive(false)
 {
 	MushroomFactory::AddNewObserver(this);
 }
 
-void FleaManager::InitializeFlea()
+void FleaManager::InitializeFlea(const int numShroomsToSpawn)
 {
-	GetInstance();
+	GetInstance()->numShroomsToSpawn = numShroomsToSpawn;
+}
+
+void FleaManager::DeInitializeFlea()
+{
+	MushroomFactory::RemoveCurrentObserver(GetInstance());
+}
+
+void FleaManager::RemoveFlea(Flea * const flea)
+{
+	GetInstance()->fleaActive = false;
+	FleaFactory::RemoveFlea(flea);
 }
 
 void FleaManager::ObserverUpdate(int numShrooms)
 {
-#if TESTING
-	ConsoleMsg::WriteLine(Tools::ToString(numShrooms));
-#endif
-	if (numShrooms < SPAWN_FLEA_NUM)
-		GetInstance()->SpawnFlea();
+	if (numShrooms < numShroomsToSpawn)
+		if(!fleaActive) //make sure only one is on the board
+			GetInstance()->SpawnFlea();
 }
 
 void FleaManager::SpawnFlea()
@@ -34,12 +45,14 @@ void FleaManager::SpawnFlea()
 	auto pos = sf::Vector2f(static_cast<float>(rand() % WindowManager::MainWindow.getSize().x), 0.f);
 	GameGrid::GetCenterGridPosition(pos); //center on the grid
 
-	FleaFactory::SpawnFlea(this, pos);
+	auto flea = FleaFactory::GetFlea();
+	flea->SpawnFlea(pos);
+	fleaActive = true;
 }
 
 FleaManager * FleaManager::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new FleaManager;
 
 	return instance;

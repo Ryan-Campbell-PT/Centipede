@@ -59,7 +59,7 @@ void Mushroom::TakeDamage()
 	if (health % 4 == 0) //modulous to compensate for poison or healthy
 	{
 		this->RemoveMushroom();
-		ScoreManager::SendScoreCmd(this->pDeath);
+		ScoreManager::SendScoreCmd(this->pDeath); //only send score death when shot, not just destroyed
 	}
 
 	//this->MainSprite.SetAnimation(1, 2); //second mushroom state

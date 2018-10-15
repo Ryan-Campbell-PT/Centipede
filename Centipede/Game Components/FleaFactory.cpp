@@ -2,25 +2,21 @@
 #include "Flea.h"
 #include "FleaPool.h"
 
-FleaFactory * FleaFactory::instance = 0;
+FleaFactory * FleaFactory::instance = nullptr;
 
-FleaFactory::FleaFactory()
+Flea * FleaFactory::GetFlea()
 {
+	return FleaPool::GetFlea();
 }
 
-void FleaFactory::SpawnFlea(const FleaManager * const manager, sf::Vector2f const & pos)
+void FleaFactory::RemoveFlea(Flea * const flea)
 {
-	auto flea = FleaPool::GetFlea();
-
-	if (flea == 0) //no fleas to recycle from. Create new flea
-		flea = new Flea();
-
-	flea->SpawnFlea(pos);
+	FleaPool::RecycleFlea(flea);
 }
 
 FleaFactory * FleaFactory::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new FleaFactory;
 
 	return instance;

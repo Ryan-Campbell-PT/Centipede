@@ -28,21 +28,11 @@ void Level1::Initialize()
 
 	Ship::InitalizeShip(); //spawn the ship
 
-	auto a = 0 % 3;
-	auto f = 1 % 3;
-	auto g = 2 % 3;
-	auto r = 3 % 3;
-	auto t = 4 % 3;
-
-
-
 	MushroomManager::InitializeMushroomField(30);
-	//auto shroom = new Mushroom();
-//	shroom->InitializeMushroom(sf::Vector2f(200, 200));
-	FleaManager::InitializeFlea();
+
+	FleaManager::InitializeFlea(25);
 	
 	CentiHeadManager::InitializeCentipede();
-	//new CentipedeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2, 0), 9);
 
 	CollisionTestPair<Ship, Mushroom>();
 
@@ -61,7 +51,4 @@ void Level1::Initialize()
 
 	CollisionTestPair<CentipedeBody, Bullet>();
 	CollisionTestPair<CentipedeHead, Bullet>();
-	//CollisionTestPair<CentipedeBody, Bullet>();
-	//CollisionTestPair<CentipedeBody, Bullet>();
 }
-

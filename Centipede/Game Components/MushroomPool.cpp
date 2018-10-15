@@ -1,11 +1,11 @@
 #include "MushroomPool.h"
 #include "Mushroom.h"
 
-MushroomPool * MushroomPool::instance = 0;
+MushroomPool * MushroomPool::instance = nullptr;
 
 MushroomPool * MushroomPool::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new MushroomPool;
 
 	return instance;
@@ -13,18 +13,19 @@ MushroomPool * MushroomPool::GetInstance()
 
 Mushroom * MushroomPool::GetMushroom()
 {
-	Mushroom* flea;
+	Mushroom* shroom;
 
-	if (GetInstance()->inactiveMushroomList.size() == 0)
-		flea = new Mushroom;
+	if (GetInstance()->inactiveMushroomList.empty())
+		shroom = new Mushroom;
 
 	else
 	{
-		flea = GetInstance()->inactiveMushroomList.front();
+		shroom = GetInstance()->inactiveMushroomList.front();
 		GetInstance()->inactiveMushroomList.pop_front();
 	}
 
-	return flea;
+	GetInstance()->activeMushroomList.push_back(shroom); //we can assume if someone is getting a shroom, its active
+	return shroom;
 }
 
 void MushroomPool::RecycleMushroom(Mushroom * shroom)
