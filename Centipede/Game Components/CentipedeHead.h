@@ -10,6 +10,7 @@
 #define SPRITE_TURN_END 15
 #define DIRECTION_SIZE sizeof(CentiMovementDirectionEnum)
 
+struct OffsetArray;
 class CentipedeDirectionState;
 class CentipedeBody;
 enum class CentiMovementDirectionEnum;
@@ -55,7 +56,7 @@ private:
 	CentipedeHead &operator=(const CentipedeHead &c) = delete;
 	CentipedeHead(const CentipedeHead &c) = delete;
 	///this function will apply the number of bodies connected to the head, at the creation of the head
-	void SetupBodies(CentiMovementDirectionEnum direction, int numBodies);
+	void SetupBodies(OffsetArray direction, int numBodies);
 	
 	void RemoveHead();
 

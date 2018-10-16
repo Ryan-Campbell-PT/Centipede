@@ -4,6 +4,7 @@
 //#include <list>
 //using std::list;
 #include "TEAL/CommonElements.h"
+#include "MovementCollection.h"
 
 class CentipedeBody;
 enum class CentiMovementDirectionEnum;
@@ -14,7 +15,7 @@ class CentiBodyManager
 {
 public:
 	static CentipedeBody* GetCentiBody();
-	static CentipedeBody* GetInitializedCentiBody(sf::Vector2f const &pos, CentiMovementDirectionEnum const &direction);
+	static CentipedeBody* GetInitializedCentiBody(sf::Vector2f const &pos, OffsetArray const &direction);
 
 	///in this one, we will assume we are given the body that has been removed, but not the head that will become body
 	///this one also assumes we have been shot

@@ -23,7 +23,7 @@ CentipedeBody::CentipedeBody()
 	this->SetWhoYoureFollowing(nullptr);
 }
 
-void CentipedeBody::InitializeBody(sf::Vector2f const & pos, CentiMovementDirectionEnum direction)
+void CentipedeBody::InitializeBody(sf::Vector2f const & pos, OffsetArray direction)
 {
 	this->position = pos;
 	this->active = true;
@@ -31,8 +31,9 @@ void CentipedeBody::InitializeBody(sf::Vector2f const & pos, CentiMovementDirect
 
 	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(this->position);
-	this->bodyDirection = this->GetDirectionState(direction);
-
+	//this->bodyDirection = this->GetDirectionState(direction);
+	this->currentOffsetArray = direction;
+	//this->pastOffsetArray = OffsetArray(0,0);
 	RegisterCollision<CentipedeBody>(*this);
 }
 

@@ -18,7 +18,7 @@ class CentipedeBody : public GameObject, public CentipedePart
 {
 public:
 	CentipedeBody();
-	void InitializeBody(sf::Vector2f const& pos, CentiMovementDirectionEnum direction);
+	void InitializeBody(sf::Vector2f const& pos, OffsetArray direction);
 
 	virtual ~CentipedeBody() = default;
 	CentipedeBody &operator=(const CentipedeBody &c) = delete;

@@ -31,7 +31,7 @@ void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, Cen
 {
 	GameGrid::GetCenterGridPosition(pos);
 	this->InitializeHead(pos, direction);
-	SetupBodies(direction.GetDirectionEnum(), numBodies);
+	SetupBodies(direction.GetOffsetArray(), numBodies);
 }
 
 void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction, const bool &setDirection)
@@ -192,7 +192,7 @@ const CentipedeDirectionState * CentipedeHead::GetDirection()
 	return this->currentDirectionState;
 }
 
-void CentipedeHead::SetupBodies(CentiMovementDirectionEnum direction, int numBodies)
+void CentipedeHead::SetupBodies(OffsetArray direction, int numBodies)
 {
 	numBodies = 7;
 	if (numBodies > 0)
