@@ -33,10 +33,8 @@ public:
 
 	void RemoveBodyFromScreen(); ///this will handle sprite, active, and recycling
 
-
-	void TellBoiMyName(CentiMovementDirectionEnum direction);
-	void TellBoiWhoSmells(const CentiBodyDirection *direction);
-
+	//void SendDataBack();
+	void GetDataFromFront(OffsetArray offset);
 private:
 	virtual void Draw() override;
 	virtual void Update() override;
@@ -62,7 +60,8 @@ private:
 
 	CentiMovementDirectionEnum currentLiar;
 
-
+	OffsetArray currentOffsetArray = OffsetArray(0, 0);
+	OffsetArray pastOffsetArray = OffsetArray(0, 0);
 };
 
 

@@ -83,7 +83,10 @@ void CentipedeHead::Update()
 
 		//ConsoleMsg::WriteLine("Users X: " + Tools::ToString(position.x) + " Users Y: " + Tools::ToString(position.y));
 		//ConsoleMsg::WriteLine("Created X: " + Tools::ToString(ppos.x) + " Created Y: " + Tools::ToString(ppos.y) + "\n");
-
+		if(this->GetWhosFollowingYou())
+		{
+			static_cast<CentipedeBody*>( this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
+		}
 		this->CheckGridAhead(ppos);
 	}
 }
@@ -151,8 +154,8 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 	else if (pos.y < 0.f)
 		this->SetDirection(&MoveSFM::downThenLeft);
 
-	if(GetWhosFollowingYou() && this->prevDirection)
-		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->prevDirection->GetDirectionEnum());
+//	if(GetWhosFollowingYou() && this->prevDirection)
+//		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->prevDirection->GetDirectionEnum());
 
 }
 
