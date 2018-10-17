@@ -4,6 +4,7 @@
 #include "TEAL/CommonElements.h"
 #include "CentipedePart.h"
 #include "MovementCollection.h"
+#include "ScoreCmd.h"
 
 #define SPRITE_BEGIN 0
 #define SPRITE_END 7
@@ -75,6 +76,7 @@ private:
 	bool active;
 
 	unsigned int yCounter;
+	ScoreCmd* pDeath;
 };
 
 ///this enum will be used so there is no need to delete movements throuhgout the game loop

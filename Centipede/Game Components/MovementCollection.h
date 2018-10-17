@@ -6,6 +6,7 @@ struct OffsetArray
 	int coloffset;
 
 	OffsetArray(int c, int r) : rowoffset(r), coloffset(c) {};
+	OffsetArray() : rowoffset(0), coloffset(0) {}
 };
 
 class MovementCollection

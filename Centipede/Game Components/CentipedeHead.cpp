@@ -10,6 +10,7 @@
 #include "MushroomManager.h"
 
 #include <list>
+#include "ScoreManager.h"
 
 CentipedeHead::CentipedeHead()
 	:currentDirectionState(nullptr), animationCounter(0), active(false), prevDirection(0), yCounter(0)
@@ -25,6 +26,7 @@ CentipedeHead::CentipedeHead()
 
 	this->SetWhosFollowingYou(nullptr);
 	this->SetWhoYoureFollowing(nullptr);
+	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::CentiKilled);
 }
 
 void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, CentipedeDirectionState const & direction)
@@ -121,6 +123,7 @@ void CentipedeHead::Collision(Bullet * bullet)
 	bullet->RemoveBullet();
 	this->RemoveHead();
 	MushroomManager::AttemptSpawnShroom(this->GetPosition());
+	ScoreManager::SendScoreCmd(this->pDeath);
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)

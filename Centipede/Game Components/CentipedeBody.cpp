@@ -6,6 +6,7 @@
 #include "CentiBodyManager.h"
 #include "CentiBodyFactory.h"
 #include "MushroomManager.h"
+#include "ScoreManager.h"
 
 CentipedeBody::CentipedeBody()
 	:active(false), bodyDirection(nullptr)
@@ -21,6 +22,7 @@ CentipedeBody::CentipedeBody()
 
 	this->SetWhosFollowingYou(nullptr);
 	this->SetWhoYoureFollowing(nullptr);
+	pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::CentiKilled);
 }
 
 void CentipedeBody::InitializeBody(sf::Vector2f const & pos, OffsetArray direction)
@@ -75,6 +77,7 @@ void CentipedeBody::Collision(Bullet * const bullet)
 	bullet->RemoveBullet();
 	this->RemoveBodyFromScreen();
 	CentiBodyManager::SetBehindBodyToHead(this);
+	ScoreManager::SendScoreCmd(this->pDeath);
 }
 
 sf::Vector2f CentipedeBody::GetPosition()

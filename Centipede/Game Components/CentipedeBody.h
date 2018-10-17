@@ -13,6 +13,7 @@ using std::queue;
 class CentipedeHead;
 class Bullet;
 enum class CentiMovementDirectionEnum;
+class ScoreCmd;
 
 class CentipedeBody : public GameObject, public CentipedePart
 {
@@ -58,10 +59,10 @@ private:
 	bool active;
 	unsigned int animationCounter;
 
-	CentiMovementDirectionEnum currentLiar;
+	ScoreCmd *pDeath;
 
-	OffsetArray currentOffsetArray = OffsetArray(0, 0);
-	OffsetArray pastOffsetArray = OffsetArray(0, 0);
+	OffsetArray currentOffsetArray;
+	OffsetArray pastOffsetArray;
 };
 
 
