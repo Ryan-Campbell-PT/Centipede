@@ -9,6 +9,7 @@ class ScorpionManager : public GameObject
 {
 public:
 	static void InitializeScorpion(const float timeToSpawnInSeconds);
+	static void DeInitializeScorpion();
 
 	static void RemoveScorpion(Scorpion * const scorpion);
 
@@ -22,6 +23,7 @@ private:
 	static ScorpionManager* instance;
 
 	float timeToSpawn;
+	bool active;
 };
 
 #endif // !SPIDER_MANAGER

@@ -5,8 +5,8 @@
 #include "FleaState.h"
 #include "Observee.h"
 
-#define FLEASTATE1 100
-#define FLEASTATE2 500
+#define FLEASTATE1 2
+#define FLEASTATE2 5
 
 class Bullet;
 class Ship;

@@ -21,6 +21,12 @@ void SpiderManager::InitializeSpider(const float timeToSpawn, const float spider
 	instance->SetAlarm(0, timeToSpawn);
 }
 
+void SpiderManager::DeInitializeSpider()
+{
+	instance->active = false;
+	instance->AlarmCancel(0);
+}
+
 void SpiderManager::SpawnSpider()
 {
 	sf::Vector2f pos;
@@ -48,8 +54,11 @@ void SpiderManager::RemoveSpider(Spider * const spider)
 {
 	SpiderFactory::RemoveSpider(spider);
 
-	instance->SetAlarm(0, instance->timeToSpawn);
-	ConsoleMsg::WriteLine("removed spider, setting alarm");
+	if (instance->active)
+	{
+		instance->SetAlarm(0, instance->timeToSpawn);
+		ConsoleMsg::WriteLine("removed spider, setting alarm");
+	}
 }
 
 void SpiderManager::Alarm0()

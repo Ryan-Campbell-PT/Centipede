@@ -31,7 +31,7 @@ void Flea::Update()
 	if (!active)
 		return;
 
-	this->position.y += Game::FrameTime() * speed;
+	this->position.y += speed;
 	this->sprite.setPosition(this->position);
 
 

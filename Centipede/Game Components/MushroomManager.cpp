@@ -34,7 +34,7 @@ void MushroomManager::InitializeMushroomField(int numShrooms)
 
 }
 
-bool MushroomManager::AttemptSpawnShroom(sf::Vector2f & pos)
+bool MushroomManager::AttemptSpawnShroom(sf::Vector2f pos)
 {
 	if (GameGrid::GetGridStatus(pos) <= GameGridEnum::Unoccupied)
 	{

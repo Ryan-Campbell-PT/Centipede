@@ -35,6 +35,13 @@ void ScorpionManager::InitializeScorpion(const float timeToSpawnInSeconds)
 {
 	GetInstance()->SetAlarm(0, timeToSpawnInSeconds); //set a timer for when to spawn scorp
 	instance->timeToSpawn = timeToSpawnInSeconds;
+	instance->active = true;
+}
+
+void ScorpionManager::DeInitializeScorpion()
+{
+	instance->active = false;
+	instance->AlarmCancel(0);
 }
 
 void ScorpionManager::RemoveScorpion(Scorpion * const scorpion)
@@ -42,8 +49,11 @@ void ScorpionManager::RemoveScorpion(Scorpion * const scorpion)
 	ScorpionFactory::RemoveScorpion(scorpion);
 	
 	//whenever the scorp is removed, set an alarm for when it should spawn again
-	GetInstance()->SetAlarm(0, instance->timeToSpawn);
-	ConsoleMsg::WriteLine("scorp removed, setting alarm");
+	if(instance)
+	{
+		GetInstance()->SetAlarm(0, instance->timeToSpawn);
+		ConsoleMsg::WriteLine("scorp removed, setting alarm");
+	}
 }
 
 ScorpionManager * ScorpionManager::GetInstance()
