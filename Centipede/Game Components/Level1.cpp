@@ -29,11 +29,12 @@ void Level1::Initialize()
 
 	Ship::InitalizeShip(); //spawn the ship
 
-	MushroomManager::InitializeMushroomField(30);
+	MushroomManager::InitializeMushroomField(15);
 
 	FleaManager::InitializeFlea(25);
 	ScorpionManager::InitializeScorpion(5.f);
-	CentiHeadManager::InitializeCentipede(6, 1.5f, 0, 0);
+	SpiderManager::InitializeSpider(2);
+	CentiHeadManager::InitializeCentipede(1, 1.5f, 0, 0);
 
 	CollisionTestPair<Ship, Mushroom>();
 

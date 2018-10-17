@@ -181,13 +181,13 @@ const CentipedeDirectionState * CentipedeHead::GetDirection()
 
 void CentipedeHead::SetupBodies(OffsetArray direction, int numBodies)
 {
-	numBodies = 7;
 	if (numBodies > 0)
 	{
 		CentipedePart *prev(this), *curr(nullptr);
 
 		for (int i = 0; i < numBodies; ++i)
 		{//create number of bodies needed, and connect all the links at the creation of them
+			//todo: you could possibly dynamically create the bodies depending on the offset
 			curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
 
 			curr->SetWhoYoureFollowing(prev);

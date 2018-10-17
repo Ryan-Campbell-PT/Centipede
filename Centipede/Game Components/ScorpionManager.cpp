@@ -9,16 +9,12 @@ ScorpionManager *ScorpionManager::instance = nullptr;
 void ScorpionManager::Alarm0()
 {
 	SpawnScorpion();
-}
-
-void ScorpionManager::Alarm1()
-{
-	SpawnScorpion();
+	ConsoleMsg::WriteLine("alarm 0 reached");
 }
 
 void ScorpionManager::SpawnScorpion() const
 {
-	bool leftSide = rand() % 2; //either left or right side, determined by a random number
+	const bool leftSide = rand() % 2; //either left or right side, determined by a random number
 	int x;
 
 	if (leftSide) //if its on the left side, then the x= 0
@@ -31,19 +27,23 @@ void ScorpionManager::SpawnScorpion() const
 	GameGrid::GetCenterYPosition(pos);
 
 	ScorpionFactory::SpawnScorpion(pos);
+	ConsoleMsg::WriteLine("scorp spawned");
 	//GetInstance()->scorpion->SetSpawnSide(leftSide); //this is requried to spawn the scorp for whatever reason. todo: fix later
 }
 
 void ScorpionManager::InitializeScorpion(const float timeToSpawnInSeconds)
 {
 	GetInstance()->SetAlarm(0, timeToSpawnInSeconds); //set a timer for when to spawn scorp
+	instance->timeToSpawn = timeToSpawnInSeconds;
 }
 
 void ScorpionManager::RemoveScorpion(Scorpion * const scorpion)
 {
 	ScorpionFactory::RemoveScorpion(scorpion);
-
-//todo: somehow fix this
+	
+	//whenever the scorp is removed, set an alarm for when it should spawn again
+	GetInstance()->SetAlarm(0, instance->timeToSpawn);
+	ConsoleMsg::WriteLine("scorp removed, setting alarm");
 }
 
 ScorpionManager * ScorpionManager::GetInstance()

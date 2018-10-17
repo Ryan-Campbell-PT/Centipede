@@ -14,7 +14,6 @@ public:
 
 private:
 	virtual void Alarm0() override;
-	virtual void Alarm1() override;
 
 	void SpawnScorpion() const;
 

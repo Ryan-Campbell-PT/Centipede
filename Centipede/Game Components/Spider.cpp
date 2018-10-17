@@ -47,6 +47,10 @@ void Spider::Update()
 		this->counterNum = rand() % RANDOM_CHANGE_NUM;
 	}
 
+	if(this->position.x > WindowManager::MainWindow.getSize().x || 
+		this->position.x < 0)
+		this->RemoveSpider();
+
 	this->sprite.setPosition(this->position);
 }
 

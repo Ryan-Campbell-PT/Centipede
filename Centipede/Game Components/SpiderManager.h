@@ -12,14 +12,13 @@ class SpiderManager : public GameObject
 public:
 	///we will assume that, per level, spiders only have one speed
 	///and that will be shared in the manager and passed to each spider
-	static void InitializeSpider(const int timeToSpawn, const float spiderSpeed = DEFAULT_SPIDER_SPEED);
+	static void InitializeSpider(const float timeToSpawn, const float spiderSpeed = DEFAULT_SPIDER_SPEED);
 
 
 	static void RemoveSpider(Spider * const spider);
 
 private:
 	virtual void Alarm0() override;
-	virtual void Alarm1() override;
 
 	void SpawnSpider();
 
@@ -28,5 +27,6 @@ private:
 	static SpiderManager* instance;
 
 	float spiderSpeed;
+	float timeToSpawn;
 };
 #endif // !SPIDER_MANAGER
