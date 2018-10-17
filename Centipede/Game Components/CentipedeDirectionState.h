@@ -4,6 +4,7 @@
 #include "State.h"
 #include "TEAL/CommonElements.h"
 #include "CentipedeHead.h"
+#include "MovementCollection.h"
 
 class CentipedeHead;
 
@@ -20,7 +21,8 @@ public:
 	virtual CentiMovementDirectionEnum GetDirectionEnum() const { return CentiMovementDirectionEnum::Error; };
 
 	virtual void Initialize(CentipedeHead *centi) const  {};
-	//virtual void Initialize(CentipedeHead *centi, sf::Vector2f &pos) {};
+	
+	virtual OffsetArray GetOffsetArray() const { return MovementCollection::OffsetsStraightLeft; };
 
 protected:
 	///removing destructor because linker doesnt like it

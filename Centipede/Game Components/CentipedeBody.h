@@ -18,7 +18,7 @@ class CentipedeBody : public GameObject, public CentipedePart
 {
 public:
 	CentipedeBody();
-	void InitializeBody(sf::Vector2f const& pos, CentiMovementDirectionEnum direction);
+	void InitializeBody(sf::Vector2f const& pos, OffsetArray direction);
 
 	virtual ~CentipedeBody() = default;
 	CentipedeBody &operator=(const CentipedeBody &c) = delete;
@@ -33,6 +33,8 @@ public:
 
 	void RemoveBodyFromScreen(); ///this will handle sprite, active, and recycling
 
+	//void SendDataBack();
+	void GetDataFromFront(OffsetArray offset);
 private:
 	virtual void Draw() override;
 	virtual void Update() override;
@@ -55,6 +57,11 @@ private:
 
 	bool active;
 	unsigned int animationCounter;
+
+	CentiMovementDirectionEnum currentLiar;
+
+	OffsetArray currentOffsetArray = OffsetArray(0, 0);
+	OffsetArray pastOffsetArray = OffsetArray(0, 0);
 };
 
 

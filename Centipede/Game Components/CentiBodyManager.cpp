@@ -13,7 +13,7 @@ CentipedeBody * CentiBodyManager::GetCentiBody()
 	return CentiBodyFactory::GetCentiBody(GetInstance());
 }
 
-CentipedeBody * CentiBodyManager::GetInitializedCentiBody(sf::Vector2f const & pos, CentiMovementDirectionEnum const & direction)
+CentipedeBody * CentiBodyManager::GetInitializedCentiBody(sf::Vector2f const & pos, OffsetArray const & direction)
 {
 	auto body = CentiBodyFactory::GetCentiBody(GetInstance());
 	body->InitializeBody(pos, direction);
