@@ -3,6 +3,7 @@
 
 #include "TEAL/CommonElements.h"
 #include "CentipedePart.h"
+#include "MovementCollection.h"
 
 #define SPRITE_BEGIN 0
 #define SPRITE_END 7
@@ -21,7 +22,7 @@ class CentipedeHead : public GameObject, public CentipedePart
 public:
 	CentipedeHead();
 	///this initilization will be used for completely new heads
-	void InitializeHead(const sf::Vector2f & pos, const int &numBodies, CentipedeDirectionState const & direction);
+	void InitializeHead(sf::Vector2f & pos, const int &numBodies, CentipedeDirectionState const & direction);
 	///while this will be used when turning a body into a head
 	///all the links are already defined, we just need to get the right direction to go, and where to start
 	///the boolean is meant for whether the centipede itself should determine its direction, or if an outside source will handle that
@@ -55,7 +56,7 @@ private:
 	CentipedeHead &operator=(const CentipedeHead &c) = delete;
 	CentipedeHead(const CentipedeHead &c) = delete;
 	///this function will apply the number of bodies connected to the head, at the creation of the head
-	void SetupBodies(CentiMovementDirectionEnum direction, int numBodies);
+	void SetupBodies(OffsetArray direction, int numBodies);
 	
 	void RemoveHead();
 
@@ -64,6 +65,8 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	const CentipedeDirectionState *currentDirectionState;
+	const CentipedeDirectionState *prevDirection;
+
 	std::vector<CentipedeDirectionState*> directionArray;
 
 	unsigned int animationCounter;
@@ -71,6 +74,7 @@ private:
 
 	bool active;
 
+	unsigned int yCounter;
 };
 
 ///this enum will be used so there is no need to delete movements throuhgout the game loop

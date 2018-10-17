@@ -12,7 +12,7 @@
 #include <list>
 
 CentipedeHead::CentipedeHead()
-	:currentDirectionState(nullptr), animationCounter(0), active(false), prevDirection(0)
+	:currentDirectionState(nullptr), animationCounter(0), active(false), prevDirection(0), yCounter(0)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
@@ -121,16 +121,6 @@ void CentipedeHead::Collision(Bullet * bullet)
 	bullet->RemoveBullet();
 	this->RemoveHead();
 	MushroomManager::AttemptSpawnShroom(this->GetPosition());
-}
-
-void CentipedeHead::CenterOnX()
-{
-	GameGrid::GetCenterXPosition(this->position);
-}
-
-void CentipedeHead::CenterOnY()
-{
-	GameGrid::GetCenterYPosition(this->position);
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
