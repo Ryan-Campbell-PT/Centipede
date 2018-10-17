@@ -57,20 +57,14 @@ void CentipedeBody::Update()
 {
 	if (!active)
 		return;
+
 	++animationCounter;
 
-	//this->bodyDirection->MoveDirection(this->position); //move in the direction given
 	this->position.x += this->currentOffsetArray.coloffset * CENTI_SPEED;
 	this->position.y += this->currentOffsetArray.rowoffset * CENTI_SPEED;
 	
-
-	//if (this->position == aheadTurningInformation.turningPoint)
-		//this->ChangePos();
-
 	if (this->animationCounter % 3 == 0)
 		sprite.NextFrame();
-	//	if(this->animationCounter % (SPRITE_SIZE / 2) == 0)
-			//this->TellBoiWhoSmells(this->bodyDirection);
 
 	this->sprite.setPosition(this->position);
 }

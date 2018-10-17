@@ -45,10 +45,7 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 	RegisterCollision<CentipedeHead>(*this);
 
 	this->currentDirectionState = &direction;
-	this->CheckGridAhead(pos);
 	yCounter = 0;
-	//if(setDirection)
-	//	SetDirection(&direction, false);
 }
 
 void CentipedeHead::Update()
@@ -58,37 +55,36 @@ void CentipedeHead::Update()
 
 	++animationCounter;
 
-	//this->currentDirectionState->MoveDirection(this, this->position);
 	this->position.x += (this->currentDirectionState->GetOffsetArray()).coloffset * CENTI_SPEED;
 	this->position.y += (this->currentDirectionState->GetOffsetArray()).rowoffset * CENTI_SPEED;
 
 	if (this->currentDirectionState->GetOffsetArray().rowoffset != 0) //we are moving in the Y
 	{
 		yCounter += (this->currentDirectionState->GetOffsetArray()).rowoffset * CENTI_SPEED;
-	
+
 		if (yCounter % SPRITE_SIZE == 0)
+		{
+			if (this->GetWhosFollowingYou())
+				static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
+			
 			this->SetDirection(this->currentDirectionState->NextState(this));
+		}
+	}
+
+	else if (this->animationCounter % (SPRITE_SIZE / 2) == 0)
+	{
+		if (this->GetWhosFollowingYou())
+			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
+
+		this->CheckGridAhead(sf::Vector2f(
+			this->position.x + this->currentDirectionState->GetOffsetArray().coloffset * SPRITE_SIZE,
+			this->position.y + this->currentDirectionState->GetOffsetArray().rowoffset * SPRITE_SIZE));
 	}
 
 	this->sprite.setPosition(this->position);
-	
+
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
-
-	if (this->animationCounter % (SPRITE_SIZE / 2) == 0)
-	{
-		auto ppos = sf::Vector2f(
-			this->position.x + (this->currentDirectionState->GetOffsetArray()).coloffset * SPRITE_SIZE,
-			this->position.y + (this->currentDirectionState->GetOffsetArray()).rowoffset * SPRITE_SIZE);
-
-		//ConsoleMsg::WriteLine("Users X: " + Tools::ToString(position.x) + " Users Y: " + Tools::ToString(position.y));
-		//ConsoleMsg::WriteLine("Created X: " + Tools::ToString(ppos.x) + " Created Y: " + Tools::ToString(ppos.y) + "\n");
-		if(this->GetWhosFollowingYou())
-		{
-			static_cast<CentipedeBody*>( this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
-		}
-		this->CheckGridAhead(ppos);
-	}
 }
 
 void CentipedeHead::Draw()
@@ -154,8 +150,8 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 	else if (pos.y < 0.f)
 		this->SetDirection(&MoveSFM::downThenLeft);
 
-//	if(GetWhosFollowingYou() && this->prevDirection)
-//		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->prevDirection->GetDirectionEnum());
+	//	if(GetWhosFollowingYou() && this->prevDirection)
+	//		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->prevDirection->GetDirectionEnum());
 
 }
 
@@ -165,13 +161,14 @@ void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)
 	this->prevDirection = this->currentDirectionState;
 	this->currentDirectionState = direction;
 
-/*	if (this->GetWhosFollowingYou())
-		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(
-			this->position, this->currentDirectionState->GetDirectionEnum());*/
-	if(this->GetWhosFollowingYou())
-	{//todo: work on how this information is passed down. Incorrect atm
-		//static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->prevDirection->GetDirectionEnum());
-	}
+	/*	if (this->GetWhosFollowingYou())
+			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(
+				this->position, this->currentDirectionState->GetDirectionEnum());*/
+	if (direction->GetOffsetArray().rowoffset != 0)
+		if (this->GetWhosFollowingYou())
+		{//todo: work on how this information is passed down. Incorrect atm
+			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->prevDirection->GetOffsetArray());
+		}
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
