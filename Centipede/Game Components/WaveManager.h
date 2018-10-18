@@ -4,10 +4,10 @@
 class WaveManager
 {
 public:
+	static void GetWaveInfo(const char* filePath);
 	
 private:
 	WaveManager *GetInstance();
-	void GetWaveInfo(const char* filePath);
 
 	WaveManager* instance;
 
