@@ -6,7 +6,8 @@
 class Ship_Player : public ShipMode
 {
 public:
-	
+	virtual void MoveShip(sf::Vector2f &pos) override;
+
 };
 
 #endif // SHIP_PLAYER_H

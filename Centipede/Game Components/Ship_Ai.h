@@ -6,7 +6,8 @@
 class Ship_Ai : public ShipMode
 {
 public:
-	
+	virtual void MoveShip(sf::Vector2f &pos) override;
+
 };
 
 #endif // SHIP_AI_H

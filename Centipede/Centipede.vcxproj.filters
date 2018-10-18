@@ -423,6 +423,9 @@
     <ClCompile Include="Game Components\ShipFSM.cpp">
       <Filter>Source Files\Game Components\Ship</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\WaveManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -805,6 +808,9 @@
     </ClInclude>
     <ClInclude Include="Game Components\Ship_Player.h">
       <Filter>Source Files\Game Components\Ship\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\WaveManager.h">
+      <Filter>Source Files\Game Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
