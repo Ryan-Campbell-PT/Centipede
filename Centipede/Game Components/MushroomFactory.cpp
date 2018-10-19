@@ -25,6 +25,15 @@ void MushroomFactory::RemoveCurrentObserver(Observer * o)
 	GetInstance()->RemoveObservee(o);
 }
 
+void MushroomFactory::RepairMushrooms()
+{
+	auto list = MushroomPool::GetActiveMushroomList();
+
+	for(auto shroom : list)
+		if(shroom->DamageLevel() > 0)
+			shroom->HealSelf();
+}
+
 void MushroomFactory::UpdateObservees()
 {
 	for (auto o : this->obsererList)

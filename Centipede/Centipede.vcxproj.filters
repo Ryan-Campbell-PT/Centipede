@@ -812,6 +812,9 @@
     <ClInclude Include="Game Components\WaveManager.h">
       <Filter>Source Files\Game Components</Filter>
     </ClInclude>
+    <ClInclude Include="Game Components\GameManager.h">
+      <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt">

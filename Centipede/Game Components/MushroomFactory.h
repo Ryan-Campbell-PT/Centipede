@@ -27,6 +27,7 @@ public:
 
 	static void AddNewObserver(Observer *o);
 	static void RemoveCurrentObserver(Observer * o);
+	static void RepairMushrooms(); ///will be called on every game over to regenerate mushrooms and get points
 
 private:
 	MushroomFactory() = default;

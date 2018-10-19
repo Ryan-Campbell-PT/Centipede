@@ -84,6 +84,17 @@ void Mushroom::SetState(MushroomState state)
 	this->sprite.SetAnimation(health, health);
 }
 
+int Mushroom::DamageLevel() const
+{
+	return this->health;
+}
+
+void Mushroom::HealSelf()
+{
+	this->health = 0; //set to full health
+	this->sprite.SetAnimation(health, health);
+}
+
 void Mushroom::RemoveMushroom()
 {
 	this->sprite.setScale(0.f, 0.f); //remove it from the screen

@@ -10,6 +10,7 @@
 #include "FleaManager.h"
 #include "ScorpionManager.h"
 #include "SpiderManager.h"
+#include "MushroomManager.h"
 
 WaveManager * WaveManager::instance = nullptr;
 
@@ -49,7 +50,7 @@ void WaveManager::loadLevelInfo(const char * filePath)
 				wave.info.spiderSpeed = this->getFloatInfo(line);
 			
 			else if (line.find("active") < MAX_SIZE)
-				wave.info.spiderActive = this->getBoolInfo("spideractive");
+				wave.info.spiderActive = this->getBoolInfo(line);
 		}
 
 		else if (line.find("centi") < MAX_SIZE)
@@ -110,6 +111,11 @@ void WaveManager::SetupLevel(const int & levelNum)
 			curWave = level;
 
 	GetInstance()->setCritterSettings(curWave);
+}
+
+void WaveManager::EndWave()
+{
+	MushroomManager::EndWave();
 }
 
 void WaveManager::setCritterSettings(const WaveManager::Wave wave)

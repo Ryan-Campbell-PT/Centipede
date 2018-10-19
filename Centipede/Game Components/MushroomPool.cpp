@@ -38,3 +38,8 @@ size_t MushroomPool::GetNumActiveShrooms()
 {
 	return GetInstance()->activeMushroomList.size();
 }
+
+std::list<Mushroom*> MushroomPool::GetActiveMushroomList()
+{
+	return GetInstance()->activeMushroomList;
+}

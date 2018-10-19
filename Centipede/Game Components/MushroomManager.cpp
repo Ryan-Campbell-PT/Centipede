@@ -53,6 +53,11 @@ void MushroomManager::RemoveMushroom(Mushroom * const shroom)
 	MushroomFactory::RemoveMushroom(shroom);
 }
 
+void MushroomManager::EndWave()
+{
+	MushroomFactory::RepairMushrooms();
+}
+
 MushroomManager * MushroomManager::GetInstance()
 {
 	if (instance == 0)

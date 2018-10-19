@@ -28,6 +28,9 @@ public:
 	sf::Vector2f GetPosition() const;
 	MushroomState GetState() const; //this will be used for the centipede
 	void SetState(MushroomState state);
+	int DamageLevel() const;
+
+	void HealSelf();
 
 private:
 	virtual ~Mushroom() = default;

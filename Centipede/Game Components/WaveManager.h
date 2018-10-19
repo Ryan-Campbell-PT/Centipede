@@ -7,7 +7,10 @@ class WaveManager
 {
 public:
 	static void LoadLevelInfo(const char* filePath);
+	///will be used to initialize all the necessary info in the level specified
 	static void SetupLevel(const int &levelNum);
+	///this function will be used as a cleanup whenever the wave has ended
+	static void EndWave();
 
 private:
 	struct Wave
