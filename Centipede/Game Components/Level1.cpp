@@ -27,7 +27,7 @@
 void Level1::Initialize()
 {
 	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
-	WaveManager::GetWaveInfo("C:/Users/Ryan/Desktop/sprint.txt");
+	WaveManager::GetWaveInfo("C:/Users/ryaca/Desktop/sprint.txt");
 
 	Ship::InitalizeShip(); //spawn the ship
 

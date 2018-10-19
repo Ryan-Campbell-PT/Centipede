@@ -424,7 +424,7 @@
       <Filter>Source Files\Game Components\Ship</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\WaveManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
