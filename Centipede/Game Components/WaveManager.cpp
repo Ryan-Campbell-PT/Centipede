@@ -5,6 +5,11 @@
 #include <algorithm>
 #include "TEAL/Tools.h"
 #include <list>
+#include "Ship.h"
+#include "CentiHeadManager.h"
+#include "FleaManager.h"
+#include "ScorpionManager.h"
+#include "SpiderManager.h"
 
 WaveManager * WaveManager::instance = nullptr;
 
@@ -16,14 +21,13 @@ WaveManager * WaveManager::GetInstance()
 	return instance;
 }
 
-void WaveManager::getWaveInfo(const char * filePath)
-{	
+void WaveManager::loadLevelInfo(const char * filePath)
+{
 	std::ifstream myFile;
 	std::string line;
 	myFile.open(filePath);
 	size_t charInstance = 0;
 	int levelNumber = 0;
-	std::list<Wave> waveInfo;
 
 #if true
 	//if(myFile.is_open())
@@ -36,60 +40,48 @@ void WaveManager::getWaveInfo(const char * filePath)
 
 		if ((charInstance = line.find("level")) < MAX_SIZE) //found it (100 bc if false, returns huge number)
 		{//we are currently trying to find the level
-			//charInstance = std::size("level"); //take us to the spot past where "level" is
-			//levelNumber = std::stoi(line.substr(charInstance, std::size(line))); //create a substring of the remaining numbers after the space and turn it into a number
-			wave.level = this->getIntInfo("level", line);
+			wave.level = this->getIntInfo(line);
 		}
 
 		else if ((charInstance = line.find("spider")) < MAX_SIZE)
 		{
-			if(line.find("spiderspeed") < MAX_SIZE)
-			{
-				//charInstance = std::size("speed");
-				//wave.info.spiderSpeed = std::stof(line.substr(charInstance, std::size(line)));
-				wave.info.spiderSpeed = this->getFloatInfo("speed", line);
-			}
+			if (line.find("speed") < MAX_SIZE)
+				wave.info.spiderSpeed = this->getFloatInfo(line);
+			
+			else if (line.find("active") < MAX_SIZE)
+				wave.info.spiderActive = this->getBoolInfo("spideractive");
+		}
 
-			else if(line.find("active") < MAX_SIZE)
-			{
-				//charInstance = std::size("spideractive");
-				//wave.info.spiderActive = std::stoi(line.substr(charInstance, std::size(line)));
-				/*if(line.find("yes"))
-					wave.info.spiderActive = true;
-				else 
-					wave.info.spiderActive = false;*/
-				wave.info.spiderActive = this->getBoolInfo("active");
-			}
+		else if (line.find("centi") < MAX_SIZE)
+		{
+			if (line.find("numsolo") < MAX_SIZE)
+				wave.info.centiSoloHeadSpeed = this->getFloatInfo(line);
 
-			else if(line.find("centi") < MAX_SIZE)
-			{
-				if(line.find("numsolo") < MAX_SIZE)
-					//wave.info.centiSoloHeadSpeed = std::stoi(line.substr(charInstance, std::size(line)));
-					wave.info.centiSoloHeadSpeed = this->getIntInfo("numsolo", line);
+			else if (line.find("centispeed") < MAX_SIZE)
+				wave.info.centiSpeed = this->getFloatInfo(line);
 
-				else if(line.find("centispeed") < MAX_SIZE)
-					//wave.info.centiSpeed = std::stof(line.substr(charInstance, std::size(line)));
-					wave.info.centiSpeed = this->getFloatInfo("centispede", line);
-				
-				else if(line.find("soloheadspeed") < MAX_SIZE)
-					//wave.info.centiSoloHeadSpeed= std::stof(line.substr(charInstance, std::size(line)));
-					wave.info.centiSoloHeadSpeed = this->getFloatInfo("soloheadspeed", line);
-			}
+			else if (line.find("soloheadspeed") < MAX_SIZE)
+				wave.info.centiSoloHeadSpeed = this->getFloatInfo(line);
+		}
 
-			else if(line.find('-'))
-			{//this will signify we have ended that levels info
-				waveInfo.push_back(wave);
-			}
+		else if(!line.empty() && line[0] == '_')
+		{//this will signify we have ended that levels info
+			this->levelList.push_back(wave);
 		}
 	}
+
+	auto p = 0;
 
 #endif
 
 }
 
-float WaveManager::getFloatInfo(const std::string& string, const std::string& line) const
+float WaveManager::getFloatInfo(const std::string& line) const
 {
-	return std::stof(line.substr(std::size(string), std::size(line)));
+	return std::stof( //convert it to a float
+		line.substr( //create a substring starting at the space, and ending at the end (just the number)
+			line.find(' '), //find the position of the space, indicating a number will be after it
+			line.size())); //get the entire size of the line, to take us to the end of it
 }
 
 bool WaveManager::getBoolInfo(const std::string& line) const
@@ -97,12 +89,51 @@ bool WaveManager::getBoolInfo(const std::string& line) const
 	return line.find("yes") < MAX_SIZE;
 }
 
-int WaveManager::getIntInfo(const std::string& string, const std::string& line) const
+int WaveManager::getIntInfo(const std::string& line) const
 {
-	return std::stoi(line.substr(std::size(string), std::size(line)));
+	return std::stoi(
+		line.substr(
+			line.find(' '), 
+			line.size()));
 }
 
-void WaveManager::GetWaveInfo(const char * filePath)
+void WaveManager::LoadLevelInfo(const char * filePath)
 {
-	GetInstance()->getWaveInfo(filePath);
+	GetInstance()->loadLevelInfo(filePath);
 }
+
+void WaveManager::SetupLevel(const int & levelNum)
+{
+	Wave curWave;
+	for(auto level : GetInstance()->levelList)
+		if(level.level == levelNum)
+			curWave = level;
+
+	GetInstance()->setCritterSettings(curWave);
+}
+
+void WaveManager::setCritterSettings(const WaveManager::Wave wave)
+{
+	//todo: may want to as well set collision depeding on whos avalble
+	Ship::InitalizeShip(); //always setup the ship
+	CentiHeadManager::InitializeCentipede(wave.info.centiBodyCount, wave.info.centiSpeed,
+		wave.info.numSoloHeads, wave.info.centiSoloHeadSpeed); //assign info for centi
+
+	if(wave.info.fleaActive)
+		FleaManager::InitializeFlea(wave.info.fleaTriggerValue);
+	else
+		FleaManager::DeInitializeFlea(); //if this level doesnt have that critter, dont spawn it
+
+	if(wave.info.scorpActive)
+		ScorpionManager::InitializeScorpion(wave.info.scorpTimeToSpawn);
+	else
+		ScorpionManager::DeInitializeScorpion();
+
+	if(wave.info.spiderActive)
+		SpiderManager::InitializeSpider(wave.info.spiderTimeToSpawn, wave.info.spiderSpeed);
+	else
+		SpiderManager::DeInitializeSpider();
+
+	this->currentLevel = wave.level;
+}
+

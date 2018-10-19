@@ -9,6 +9,7 @@
 #include "../Ship.h"
 
 #include "../Level1.h"
+#include "../WaveManager.h"
 
 void ResourceManager::LoadAllResources()
 {
@@ -30,7 +31,7 @@ void ResourceManager::LoadAllResources()
 
 	AddFont("PointFont", "MotorwerkOblique.ttf"); //keep this for now since we have no other fonts
 	
-	//AddTexture("Splashpage", "DemoSplash.jpg", false);
+	WaveManager::LoadLevelInfo("C:/Users/ryaca/Desktop/sprint.txt");
 
 
 }

@@ -27,8 +27,7 @@
 void Level1::Initialize()
 {
 	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
-	WaveManager::GetWaveInfo("C:/Users/ryaca/Desktop/sprint.txt");
-
+/*
 	Ship::InitalizeShip(); //spawn the ship
 
 	MushroomManager::InitializeMushroomField(15);
@@ -37,7 +36,8 @@ void Level1::Initialize()
 	ScorpionManager::InitializeScorpion(5.f);
 	SpiderManager::InitializeSpider(2);
 	CentiHeadManager::InitializeCentipede(1, 1.5f, 0, 0);
-
+*/
+	WaveManager::SetupLevel(1);
 
 	CollisionTestPair<Ship, Mushroom>();
 

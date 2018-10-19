@@ -1,42 +1,61 @@
 #ifndef WAVEMANAGER_H
 #define WAVEMANAGER_H
 #include <xstring>
+#include <list>
 
 class WaveManager
 {
 public:
-	static void GetWaveInfo(const char* filePath);
-	
+	static void LoadLevelInfo(const char* filePath);
+	static void SetupLevel(const int &levelNum);
+
 private:
-	static WaveManager *GetInstance();
-	void getWaveInfo(const char *filePath);
-
-	float getFloatInfo(const std::string& string, const std::string& line) const;
-	bool getBoolInfo(const std::string& line) const;
-	int getIntInfo(const std::string& string, const std::string& line) const;
-
-	static WaveManager* instance;
-
-	unsigned int currentLevel;
-	const size_t MAX_SIZE = 100;
-
 	struct Wave
 	{
+		Wave()
+			:level(0) {}
+
 		struct LevelInfo
 		{
-			float spiderSpeed; bool spiderActive;
+			LevelInfo()
+				: centiBodyCount(0), numSoloHeads(0), centiSpeed(0.f),
+				centiSoloHeadSpeed(0.f), fleaTriggerValue(0), fleaActive(false),
+				scorpTimeToSpawn(0), scorpActive(false), spiderSpeed(0.f),
+				spiderActive(false), spiderTimeToSpawn(0) {}
+
 
 			int centiBodyCount, numSoloHeads;
 			float centiSpeed, centiSoloHeadSpeed;
 
+			int fleaTriggerValue; bool fleaActive;
 
+			float scorpTimeToSpawn; bool scorpActive;
+			
+			float spiderSpeed; bool spiderActive; float spiderTimeToSpawn;
 		};
-		
+
 		int level;
 
 		LevelInfo info;
-		
 	};
+
+
+	static WaveManager *GetInstance();
+	void loadLevelInfo(const char *filePath);
+	void setCritterSettings(const WaveManager::Wave wave);
+
+	float getFloatInfo(const std::string& line) const;
+	bool getBoolInfo(const std::string& line) const;
+	int getIntInfo(const std::string& line) const;
+
+	static WaveManager* instance;
+
+	int currentLevel;
+	const size_t MAX_SIZE = 100;
+
+
+
+	std::list<WaveManager::Wave> levelList; //this will hold all the level info for quick access
 };
 
 #endif // WAVEMANAGER_H
