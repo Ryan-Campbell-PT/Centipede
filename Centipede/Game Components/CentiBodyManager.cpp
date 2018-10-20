@@ -50,7 +50,8 @@ void CentiBodyManager::SetBodyToHead(CentipedeBody * body)
 	head->SetWhosFollowingYou(body->GetWhosFollowingYou()); //set the current head, to have the same follower as the body did
 	head->SetWhoYoureFollowing(nullptr); //youre the head, you dont have anyone to follow
 
-	head->InitializeHead(body->GetPosition(), *direction);
+	//head->InitializeHead(body->GetPosition(), *direction);
+	CentiHeadManager::InitializeHead(head, body->GetPosition(), *direction);
 
 	body->SetWhosFollowingYou(nullptr);
 	body->SetWhoYoureFollowing(nullptr);

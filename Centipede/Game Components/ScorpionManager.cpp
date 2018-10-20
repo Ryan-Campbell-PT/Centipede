@@ -40,7 +40,7 @@ void ScorpionManager::InitializeScorpion(const float timeToSpawnInSeconds)
 
 void ScorpionManager::DeInitializeScorpion()
 {
-	instance->active = false;
+	GetInstance()->active = false;
 	instance->AlarmCancel(0);
 }
 

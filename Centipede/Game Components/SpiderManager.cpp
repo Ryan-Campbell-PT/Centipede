@@ -23,7 +23,7 @@ void SpiderManager::InitializeSpider(const float timeToSpawn, const float spider
 
 void SpiderManager::DeInitializeSpider()
 {
-	instance->active = false;
+	GetInstance()->active = false;
 	instance->AlarmCancel(0);
 }
 

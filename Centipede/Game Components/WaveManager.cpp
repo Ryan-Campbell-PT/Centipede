@@ -63,6 +63,9 @@ void WaveManager::loadLevelInfo(const char * filePath)
 
 			else if (line.find("soloheadspeed") < MAX_SIZE)
 				wave.info.centiSoloHeadSpeed = this->getFloatInfo(line);
+
+			else if(line.find("bodycount") < MAX_SIZE)
+				wave.info.centiBodyCount = this->getIntInfo(line);
 		}
 
 		else if(!line.empty() && line[0] == '_')

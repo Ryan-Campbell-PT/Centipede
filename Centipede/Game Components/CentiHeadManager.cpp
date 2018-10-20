@@ -5,6 +5,7 @@
 
 #include <random>
 #include "MushroomManager.h"
+#include "WaveManager.h"
 
 CentiHeadManager * CentiHeadManager::instance = nullptr;
 
@@ -15,6 +16,7 @@ void CentiHeadManager::InitializeCentipede(const int numBodies, const float cent
 	auto head = CentiHeadFactory::GetCentiHead();
 
 	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), numBodies, MoveSFM::downThenLeft);
+	instance->numActiveCenti++;
 }
 
 CentipedeHead* CentiHeadManager::GetCentiHead()
@@ -25,6 +27,14 @@ CentipedeHead* CentiHeadManager::GetCentiHead()
 void CentiHeadManager::RemoveCentiHead(CentipedeHead * const head)
 {
 	CentiHeadFactory::RemoveCentiHead(head);
+	if(--instance->numActiveCenti <= 0) 
+		WaveManager::EndWave(); //end round if there are no centipedes remaining
+}
+
+void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f & pos, const CentipedeDirectionState & direction)
+{
+	GetInstance()->numActiveCenti++;
+	head->InitializeHead(pos, direction);
 }
 
 void CentiHeadManager::SetApi(const int numBodies, const float centiSpeed,
@@ -34,6 +44,11 @@ void CentiHeadManager::SetApi(const int numBodies, const float centiSpeed,
 	this->centiSpeed = centiSpeed;
 	this->numSoloHeads = numSoloHeads;
 	this->soloHeadSpeed = soloHeadSpeed;
+}
+
+void CentiHeadManager::SpawnSoloHeads()
+{
+	//if()
 }
 
 CentiHeadManager * CentiHeadManager::GetInstance()

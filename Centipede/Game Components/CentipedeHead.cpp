@@ -208,7 +208,7 @@ void CentipedeHead::RemoveHead()
 	DeregisterCollision<CentipedeHead>(*this);
 	this->active = false;
 
-	CentiHeadManager::RemoveCentiHead(this); //recycle
-
 	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
+
+	CentiHeadManager::RemoveCentiHead(this); //recycle
 }
