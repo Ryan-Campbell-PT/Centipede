@@ -27,11 +27,7 @@ void WaveManager::loadLevelInfo(const char * filePath)
 	std::ifstream myFile;
 	std::string line;
 	myFile.open(filePath);
-	size_t charInstance = 0;
-	int levelNumber = 0;
 
-#if true
-	//if(myFile.is_open())
 	Wave wave;
 
 	while (std::getline(myFile, line))
@@ -39,18 +35,21 @@ void WaveManager::loadLevelInfo(const char * filePath)
 		//transform to lower, for portability
 		std::transform(line.begin(), line.end(), line.begin(), ::tolower);
 
-		if ((charInstance = line.find("level")) < MAX_SIZE) //found it (100 bc if false, returns huge number)
+		if (line.find("level") < MAX_SIZE) //found it (100 bc if false, returns huge number)
 		{//we are currently trying to find the level
 			wave.level = this->getIntInfo(line);
 		}
 
-		else if ((charInstance = line.find("spider")) < MAX_SIZE)
+		else if (line.find("spider") < MAX_SIZE)
 		{
 			if (line.find("speed") < MAX_SIZE)
 				wave.info.spiderSpeed = this->getFloatInfo(line);
 			
 			else if (line.find("active") < MAX_SIZE)
 				wave.info.spiderActive = this->getBoolInfo(line);
+
+			else if(line.find("spawn") < MAX_SIZE)
+				wave.info.spiderTimeToSpawn = this->getFloatInfo(line);
 		}
 
 		else if (line.find("centi") < MAX_SIZE)
@@ -68,16 +67,29 @@ void WaveManager::loadLevelInfo(const char * filePath)
 				wave.info.centiBodyCount = this->getIntInfo(line);
 		}
 
+		else if (line.find("flea") < MAX_SIZE)
+		{
+			if(line.find("active") < MAX_SIZE)
+				wave.info.fleaActive = this->getBoolInfo(line);
+
+			else if(line.find("spawn") < MAX_SIZE)
+				wave.info.fleaTriggerValue = this->getIntInfo(line);
+		}
+
+		else if(line.find("scorpion") < MAX_SIZE)
+		{
+			if(line.find("active") < MAX_SIZE)
+				wave.info.scorpActive = this->getBoolInfo(line);
+
+			else if(line.find("spawn") < MAX_SIZE)
+				wave.info.scorpTimeToSpawn = this->getFloatInfo(line);
+		}
+
 		else if(!line.empty() && line[0] == '_')
 		{//this will signify we have ended that levels info
 			this->levelList.push_back(wave);
 		}
 	}
-
-	auto p = 0;
-
-#endif
-
 }
 
 float WaveManager::getFloatInfo(const std::string& line) const
@@ -109,7 +121,7 @@ void WaveManager::LoadLevelInfo(const char * filePath)
 void WaveManager::SetupLevel(const int & levelNum)
 {
 	Wave curWave;
-	for(auto level : GetInstance()->levelList)
+	for(const auto level : GetInstance()->levelList)
 		if(level.level == levelNum)
 			curWave = level;
 
