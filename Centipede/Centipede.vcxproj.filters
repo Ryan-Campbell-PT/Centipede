@@ -815,6 +815,12 @@
     <ClInclude Include="Game Components\GameManager.h">
       <Filter>Source Files\Game Components</Filter>
     </ClInclude>
+    <ClInclude Include="Game Components\PlayerData.h">
+      <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\PlayerInput.h">
+      <Filter>Source Files\Game Components\Ship\ShipButtons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt">

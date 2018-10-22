@@ -8,6 +8,7 @@
 
 #define SHIP_BOUNDS 7.f
 
+class PlayerInput;
 // Forward declarations
 class Widget;
 class Asteroid;
@@ -38,7 +39,7 @@ public:
 
 private:
 	Ship(); //singleton instance
-	void SetKeyboardCommands();
+	void SetKeyboardCommands() const;
 
 	static Ship *instance;
 
@@ -52,7 +53,7 @@ private:
 	
 	static Ship * GetInstance();
 
-	KeyboardCommand *keyDown, *keyUp, *keyRight, *keyLeft, *keyFire;
+	PlayerInput *playerInput;
 	const ShipMode	*shipMode;
 };
 

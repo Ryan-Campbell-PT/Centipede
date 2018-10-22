@@ -13,8 +13,9 @@
 #include "SpiderManager.h"
 #include "KeyboardIncludes.h"
 #include "PlayerManager.h"
+#include "PlayerInput.h"
 
-Ship *Ship::instance = 0;
+Ship *Ship::instance = nullptr;
 
 Ship::Ship()
 {
@@ -41,18 +42,20 @@ Ship::Ship()
 	RegisterInput( InputFlags::KeyPressed ); // Recieve single-presses events
 }
 
-void Ship::SetKeyboardCommands()
+void Ship::SetKeyboardCommands() const
 {
-	this->keyDown = new	Ship_Right(sf::Keyboard::S);
-	this->keyUp = new Ship_Left(sf::Keyboard::W);
-	this->keyRight = new Ship_Right(sf::Keyboard::D);
-	this->keyLeft = new Ship_Left(sf::Keyboard::A);
-	this->keyFire = new Ship_Fire(sf::Keyboard::Space);
+	playerInput->keyDown = new	Ship_Right(sf::Keyboard::S);
+	playerInput->keyUp = new Ship_Left(sf::Keyboard::W);
+	playerInput->keyRight = new Ship_Right(sf::Keyboard::D);
+	playerInput->keyLeft = new Ship_Left(sf::Keyboard::A);
+	playerInput->keyFire = new Ship_Fire(sf::Keyboard::Space);
+
+	PlayerManager::SetPlayerControls(this->playerInput);
 }
 
 Ship * Ship::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new Ship;
 
 	return instance;
@@ -72,10 +75,10 @@ void Ship::InitalizeShip()
 
 void Ship::Update()
 {
-	if (sf::Keyboard::isKeyPressed(this->keyLeft->GetCommand())) position.x -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyUp->GetCommand())) position.y -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyDown->GetCommand())) position.y += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyRight->GetCommand())) position.x += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(playerInput->keyLeft->GetCommand())) position.x -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(playerInput->keyUp->GetCommand())) position.y -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(playerInput->keyDown->GetCommand())) position.y += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(playerInput->keyRight->GetCommand())) position.x += this->SPEED;
 	// Continuous key-down tests
 	
 	//may not want this in update sequence, one extra if that isnt necessary
@@ -110,10 +113,10 @@ void Ship::Collision(Widget *other)
 
 void Ship::Collision(Mushroom* other)
 {
-	if (sf::Keyboard::isKeyPressed(this->keyLeft->GetCommand())) position.x += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyUp->GetCommand())) position.y += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyDown->GetCommand())) position.y -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(this->keyRight->GetCommand())) position.x -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(playerInput->keyLeft->GetCommand())) position.x += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(playerInput->keyUp->GetCommand())) position.y += this->SPEED;
+	if (sf::Keyboard::isKeyPressed(playerInput->keyDown->GetCommand())) position.y -= this->SPEED;
+	if (sf::Keyboard::isKeyPressed(playerInput->keyRight->GetCommand())) position.x -= this->SPEED;
 
 	sprite.setPosition(position);
 }

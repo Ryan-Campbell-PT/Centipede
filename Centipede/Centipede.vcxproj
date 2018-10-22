@@ -246,6 +246,8 @@
     <ClInclude Include="Game Components\MushroomPool.h" />
     <ClInclude Include="Game Components\Observer.h" />
     <ClInclude Include="Game Components\Observee.h" />
+    <ClInclude Include="Game Components\PlayerData.h" />
+    <ClInclude Include="Game Components\PlayerInput.h" />
     <ClInclude Include="Game Components\PlayerManager.h" />
     <ClInclude Include="Game Components\RightSpiderState.h" />
     <ClInclude Include="Game Components\ScoreByDistanceCmd.h" />

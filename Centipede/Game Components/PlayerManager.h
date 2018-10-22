@@ -1,7 +1,11 @@
 #ifndef PLAYERMANAGER_H
 #define PLAYERMANAGER_H
+#include <vector>
+#include "PlayerData.h"
 
 //enum class PlayerID;
+
+class PlayerInput;
 
 class PlayerManager
 {
@@ -16,14 +20,18 @@ public:
 	static PlayerManager::PlayerID GetCurrentPlayer();
 	static void InitializePlayer(PlayerID player);
 
-
+	static void AddScore(const int score);
+	static void LoseHealth();
+	static void SetPlayerControls(PlayerInput *input);
 
 private:
 	PlayerManager();
 	static PlayerManager* GetInstance();
 
 	static PlayerManager* instance;
-	PlayerID currentPlayer;
+	PlayerData currentPlayer;
+
+	std::vector<PlayerData> listOfPlayers;
 };
 
 #endif // PLAYERMANAGER_H

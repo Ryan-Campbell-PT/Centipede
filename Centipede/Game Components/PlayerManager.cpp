@@ -3,17 +3,44 @@
 #include "ShipFSM.h"
 #include "Ship_Ai.h"
 #include "Ship_Player.h"
+#include "PlayerData.h"
+#include "PlayerInput.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
 
-PlayerManager::PlayerManager()
+void PlayerManager::AddScore(const int score)
 {
+	/*for(auto player : GetInstance()->listOfPlayers)
+		if(player.player == instance->currentPlayer)
+			player.playerScore += score;*/
+	GetInstance()->currentPlayer.playerScore += score;
+}
 
+void PlayerManager::LoseHealth()
+{
+	GetInstance()->currentPlayer.playerLives--;
+}
+
+void PlayerManager::SetPlayerControls(PlayerInput * input)
+{
+	if(GetInstance()->currentPlayer.playerInput != nullptr)
+		delete instance->currentPlayer.playerInput;
+
+	instance->currentPlayer.playerInput = input;
+}
+
+PlayerManager::PlayerManager()
+	: currentPlayer()
+{
+	//emplace back essentially just takes the constructor of an object instead of calling the constructor
+	this->listOfPlayers.emplace_back(PlayerID::Ai);
+	this->listOfPlayers.emplace_back(PlayerID::Player1);
+	this->listOfPlayers.emplace_back(PlayerID::Player2);
 }
 
 PlayerManager::PlayerID PlayerManager::GetCurrentPlayer()
 {
-	return GetInstance()->currentPlayer;
+	return GetInstance()->currentPlayer.player;
 }
 
 void PlayerManager::InitializePlayer(const PlayerID player)
@@ -36,7 +63,9 @@ void PlayerManager::InitializePlayer(const PlayerID player)
 		break;
 	}
 
-	GetInstance()->currentPlayer = player;
+	for(const auto playerr : GetInstance()->listOfPlayers)
+		if(playerr.player == player)
+			GetInstance()->currentPlayer = playerr;
 }
 
 PlayerManager * PlayerManager::GetInstance()

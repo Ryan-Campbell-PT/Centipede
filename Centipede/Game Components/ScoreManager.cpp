@@ -7,10 +7,6 @@ ScoreManager * ScoreManager::instance = nullptr;
 
 ScoreManager::ScoreManager()
 {
-	//add all the current ways a player can play (no way to programatically do this)
-	ScoreManager::scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Ai, 0));
-	ScoreManager::scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Player1, 0));
-	ScoreManager::scoreMap.insert(std::pair<PlayerManager::PlayerID, int>(PlayerManager::PlayerID::Player2, 0));
 }
 
 ScoreManager * ScoreManager::GetInstance()
@@ -43,16 +39,18 @@ void ScoreManager::PrivProcessScore()
 		else
 			player = "Player2";
 
-		ConsoleMsg::WriteLine(player + "'s current Score: " + Tools::ToString(
-			GetInstance()->scoreMap.at(PlayerManager::GetCurrentPlayer())) //print the current players score value
-			+ "\n");
+		//ConsoleMsg::WriteLine(player + "'s current Score: " + Tools::ToString(
+		//	GetInstance()->scoreMap.at(PlayerManager::GetCurrentPlayer())) //print the current players score value
+		//	+ "\n");
 	}
 }
 
 void ScoreManager::AddScore(int val)
 {
 	//you have to get the players score first, then add to it the value added
-	GetInstance()->scoreMap.at(PlayerManager::GetCurrentPlayer()) += val;
+	//GetInstance()->scoreMap.at(PlayerManager::GetCurrentPlayer()) += val;
+	//todo: may want to keep a local score value, and then send over the data to the player after they lose.
+	PlayerManager::AddScore(val);
 }
 
 ScoreCmd * ScoreManager::GetScoreCommand(ScoreEvents ev)

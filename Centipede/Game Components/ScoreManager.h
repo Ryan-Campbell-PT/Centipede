@@ -54,7 +54,6 @@ private:
 	void PrivProcessScore();
 
 	std::queue<ScoreCmd*> QueueCmds;
-	std::map<PlayerManager::PlayerID, int> scoreMap;
 	
 	static ScoreManager* instance;
 
