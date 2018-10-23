@@ -29,7 +29,10 @@ void ResourceManager::LoadAllResources()
 
 	AddSound("Fire1", "fire1.wav");
 
-	AddFont("PointFont", "MotorwerkOblique.ttf"); //keep this for now since we have no other fonts
+	AddFont("PointFont", "MotorwerkOblique.ttf" );
+
+	AddTexture("Alphabet", "FONT.bmp");
+	AddTexture("Keys", "Keycaps.tga");
 	
 	WaveManager::LoadLevelInfo("C:/Users/ryaca/Desktop/sprint.txt");
 

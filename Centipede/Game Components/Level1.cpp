@@ -23,35 +23,7 @@
 #include <vector>
 #include "ScorpionManager.h"
 #include "WaveManager.h"
-
-
-struct Ding : public GameObject
-{
-	virtual void Update() override
-	{
-		this->sprite.setPosition(200, 400);
-	}
-
-	virtual void Draw() override
-	{
-		this->sprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
-		WindowManager::MainWindow.draw(this->sprite);
-	}
-
-	void Alarm0() override
-	{
-		this->RegisterToCurrentScene();
-	}
-
-	void Thing()
-	{
-		this->sprite.setPosition(200, 400);
-	}
-	
-	
-	int far = 16;
-	sf::Sprite sprite;
-};
+#include "TextEditor.h"
 
 void Level1::Initialize()
 {
@@ -74,8 +46,10 @@ void Level1::Initialize()
 	d->RegisterToCurrentScene();
 	d->Thing();
 	*/
-	WaveManager::SetupLevel(1);
-	MushroomManager::InitializeMushroomField(15);
+	//WaveManager::SetupLevel(1);
+	//MushroomManager::InitializeMushroomField(15);
+
+	TextEditor::CurrentScore(368);
 
 	CollisionTestPair<Ship, Mushroom>();
 

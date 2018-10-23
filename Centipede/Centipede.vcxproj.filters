@@ -447,6 +447,9 @@
     <ClCompile Include="Game Components\KeysFont.cpp">
       <Filter>Source Files\Game Components\TextWriting\Fonts</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\TextEditor.cpp">
+      <Filter>Source Files\Game Components\TextWriting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -856,6 +859,9 @@
     </ClInclude>
     <ClInclude Include="Game Components\KeysFont.h">
       <Filter>Source Files\Game Components\TextWriting\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\TextEditor.h">
+      <Filter>Source Files\Game Components\TextWriting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
