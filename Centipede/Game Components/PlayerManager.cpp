@@ -13,20 +13,19 @@ void PlayerManager::AddScore(const int score)
 	/*for(auto player : GetInstance()->listOfPlayers)
 		if(player.player == instance->currentPlayer)
 			player.playerScore += score;*/
-	GetInstance()->currentPlayer.playerScore += score;
+	GetInstance()->currentPlayer->playerScore += score;
 }
 
 void PlayerManager::LoseHealth()
 {
-	GetInstance()->currentPlayer.playerLives--;
+	GetInstance()->currentPlayer->playerLives--;
 }
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
 {
-	if(GetInstance()->currentPlayer.playerInput != nullptr)
-		delete instance->currentPlayer.playerInput;
+	delete instance->currentPlayer->playerInput;
 
-	instance->currentPlayer.playerInput = input;
+	instance->currentPlayer->playerInput = input;
 }
 
 PlayerManager::PlayerManager()
@@ -40,7 +39,7 @@ PlayerManager::PlayerManager()
 
 PlayerManager::PlayerID PlayerManager::GetCurrentPlayer()
 {
-	return GetInstance()->currentPlayer.player;
+	return GetInstance()->currentPlayer->player;
 }
 
 void PlayerManager::InitializePlayer(const PlayerID player)
@@ -63,9 +62,9 @@ void PlayerManager::InitializePlayer(const PlayerID player)
 		break;
 	}
 
-	for(const auto playerr : GetInstance()->listOfPlayers)
+	for(auto playerr : GetInstance()->listOfPlayers)
 		if(playerr.player == player)
-			GetInstance()->currentPlayer = playerr;
+			GetInstance()->currentPlayer = &playerr;
 }
 
 PlayerManager * PlayerManager::GetInstance()
