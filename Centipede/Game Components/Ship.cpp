@@ -14,6 +14,7 @@
 #include "KeyboardIncludes.h"
 #include "PlayerManager.h"
 #include "PlayerInput.h"
+#include "ScoreManager.h"
 
 Ship *Ship::instance = nullptr;
 
@@ -139,6 +140,11 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 		
 		else
 			PlayerManager::InitializePlayer(PlayerData::PlayerID::Player1);
+
+	if (k == sf::Keyboard::Key::T)
+	{
+		ScoreManager::AddScore(-500); //just for testing purposes
+	}
 }
 
 sf::Vector2f Ship::GetPosition()

@@ -23,6 +23,8 @@ private:
 	Glyph *glyphLink;
 	sf::Vector2f startingPos;
 	unsigned int sizeFont;
+	///this is simply to remove magic numbers
+	const int DEFAULT_SIZE = 6;
 };
 
 #endif // TEXTEDITOR_H

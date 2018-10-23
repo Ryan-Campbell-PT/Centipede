@@ -3,8 +3,13 @@
 TextEditor* TextEditor::instance = nullptr;
 
 TextEditor::TextEditor()
-	: glyphLink(nullptr), startingPos(sf::Vector2f(200, 200)), sizeFont(0)
+	: sizeFont(0)
 {
+	//the concept of this is that we allocate a size that the player will likely get,
+	//and just change the contents of the pointer as we add points
+	this->glyphLink = new Glyph[this->DEFAULT_SIZE];
+	startingPos = sf::Vector2f(static_cast<float>(WindowManager::MainWindow.getSize().x - this->myFont.CellWidth()),
+	                           static_cast<float>(this->myFont.CellHeight()));
 }
 
 void TextEditor::CurrentScore(const unsigned int score)
@@ -15,13 +20,14 @@ void TextEditor::CurrentScore(const unsigned int score)
 void TextEditor::ScoreToText(const unsigned int score)
 {	
 	auto scoreText = Tools::ToString(score);
+	this->sizeFont = scoreText.size();
+	//delete[] glyphLink;
 
-	delete[] glyphLink;
+	//glyphLink = new Glyph[(sizeFont = scoreText.size())];
 
-	glyphLink = new Glyph[(sizeFont = scoreText.size())];
-
-	for(auto iter = 0; iter < sizeFont; ++iter)
+	for(unsigned int iter = 0; iter < sizeFont; ++iter)
 	{
+		//simply change the contents of the array to the numbers in the given score
 		glyphLink[iter] = myFont.GetGlyph(scoreText.at(sizeFont - iter - 1), 
 			sf::Vector2f(startingPos.x - (iter * myFont.CellWidth()), startingPos.y));
 
@@ -32,7 +38,7 @@ void TextEditor::ScoreToText(const unsigned int score)
 
 void TextEditor::Draw()
 {
-	for(auto i = 0; i < sizeFont; ++i)
+	for(unsigned int i = 0; i < sizeFont; ++i)
 		this->glyphLink[i].Draw();
 }
 
