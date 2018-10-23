@@ -38,12 +38,15 @@ Ship::Ship()
 	
 	SetDrawOrder(1000);
 
+	playerInput = new PlayerInput;
 	SetKeyboardCommands();
 	RegisterInput( InputFlags::KeyPressed ); // Recieve single-presses events
+
 }
 
 void Ship::SetKeyboardCommands() const
 {
+
 	playerInput->keyDown = new	Ship_Right(sf::Keyboard::S);
 	playerInput->keyUp = new Ship_Left(sf::Keyboard::W);
 	playerInput->keyRight = new Ship_Right(sf::Keyboard::D);

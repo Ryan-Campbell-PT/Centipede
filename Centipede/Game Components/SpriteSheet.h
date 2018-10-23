@@ -23,12 +23,16 @@ public:
 
 	Glyph GetGlyph( char c, sf::Vector2f pos );
 
+protected:
+	sf::Sprite GetSprite() { return MainSprite; }
+
 private:
 	std::vector<sf::IntRect> cells; 
 	sf::Sprite MainSprite;
 	int cellWidth;
 	int cellHeight;
 
+	float SCALE; //this was added to see the images better
 	virtual int CharToIndex( char& c ) =0;  // abstract method. 
 };
 

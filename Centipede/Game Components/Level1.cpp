@@ -46,10 +46,10 @@ void Level1::Initialize()
 	d->RegisterToCurrentScene();
 	d->Thing();
 	*/
-	//WaveManager::SetupLevel(1);
-	//MushroomManager::InitializeMushroomField(15);
+	WaveManager::SetupLevel(1);
+	MushroomManager::InitializeMushroomField(15);
 
-	TextEditor::CurrentScore(368);
+	//TextEditor::CurrentScore(368);
 
 	CollisionTestPair<Ship, Mushroom>();
 

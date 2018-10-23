@@ -6,7 +6,9 @@
 
 AwesomeFont::AwesomeFont()
 	: SpriteSheet( ResourceManager::GetTexture("Alphabet"), 16, 3 )
-{}
+{
+	this->GetSprite().setScale(2.f, 2.f);
+}
 
 // Computing the magic value of the cellIndex for each char
 int AwesomeFont::CharToIndex( char& c )

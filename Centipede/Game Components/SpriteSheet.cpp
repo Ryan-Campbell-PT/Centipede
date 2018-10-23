@@ -5,14 +5,16 @@
 #include "TEAL\WindowManager.h" 
 
 SpriteSheet::SpriteSheet( sf::Texture& tex, int CellCountHor, int CellCountVert )
+	:SCALE(2.F)
 {
 	MainSprite = sf::Sprite(tex);
+	MainSprite.setScale(SCALE, SCALE); //may have to change this when doing collision
 
 	// Rectangle dimension corresponding to a single cell of the sprite sheet
 	cellWidth = tex.getSize().x / CellCountHor;
 	cellHeight = tex.getSize().y / CellCountVert;
 
-	cells.resize(CellCountHor * CellCountVert );
+	cells.resize(CellCountHor * CellCountVert);
 
 	// Determine the rectangle for each cell
 	int left;
@@ -29,11 +31,11 @@ SpriteSheet::SpriteSheet( sf::Texture& tex, int CellCountHor, int CellCountVert 
 }
 
 int SpriteSheet::CellWidth(){ 
-	return cellWidth;
+	return cellWidth * SCALE; //may have to change this when doing collision
 }
 
 int SpriteSheet::CellHeight(){
-	return cellHeight;
+	return cellHeight * SCALE; //may have to change this when doing collision
 }
 
 Glyph SpriteSheet::GetGlyph( char c, sf::Vector2f pos )

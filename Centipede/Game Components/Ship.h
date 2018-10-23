@@ -43,7 +43,7 @@ private:
 
 	static Ship *instance;
 
-	const float SPEED = 3;
+	const float SPEED = 2.5f;
 	sf::Vector2f GunOffset;
 	sf::Vector2f position;
 	sf::Sprite sprite; //changed from AnimatedSprite
