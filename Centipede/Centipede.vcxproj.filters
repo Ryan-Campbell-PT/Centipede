@@ -124,6 +124,12 @@
     <Filter Include="Source Files\Game Components\Ship\Modes">
       <UniqueIdentifier>{0a59ebdd-d3c2-4afc-ac1e-711a8378dc1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\TextWriting">
+      <UniqueIdentifier>{23cf2502-56e9-4e25-bbd1-139de0ebbc20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\TextWriting\Fonts">
+      <UniqueIdentifier>{b6a20914-41df-4cac-a537-3e01305923b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -425,6 +431,21 @@
     </ClCompile>
     <ClCompile Include="Game Components\WaveManager.cpp">
       <Filter>Source Files\Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Glyph.cpp">
+      <Filter>Source Files\Game Components\TextWriting</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\SimpleTextDemo.cpp">
+      <Filter>Source Files\Game Components\TextWriting</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\SpriteSheet.cpp">
+      <Filter>Source Files\Game Components\TextWriting</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\AwesomeFont.cpp">
+      <Filter>Source Files\Game Components\TextWriting\Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\KeysFont.cpp">
+      <Filter>Source Files\Game Components\TextWriting\Fonts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -820,6 +841,21 @@
     </ClInclude>
     <ClInclude Include="Game Components\PlayerInput.h">
       <Filter>Source Files\Game Components\Ship\ShipButtons</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Glyph.h">
+      <Filter>Source Files\Game Components\TextWriting</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SimpleTextDemo.h">
+      <Filter>Source Files\Game Components\TextWriting</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SpriteSheet.h">
+      <Filter>Source Files\Game Components\TextWriting</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\AwesomeFont.h">
+      <Filter>Source Files\Game Components\TextWriting\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\KeysFont.h">
+      <Filter>Source Files\Game Components\TextWriting\Fonts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClCompile Include="Game Components\Asteroid.cpp" />
     <ClCompile Include="Game Components\AsteroidField.cpp" />
+    <ClCompile Include="Game Components\AwesomeFont.cpp" />
     <ClCompile Include="Game Components\Body_Down.cpp" />
     <ClCompile Include="Game Components\Body_Left.cpp" />
     <ClCompile Include="Game Components\Body_Right.cpp" />
@@ -122,7 +123,9 @@
     <ClCompile Include="Game Components\FleaPool.cpp" />
     <ClCompile Include="Game Components\GameController.cpp" />
     <ClCompile Include="Game Components\GameGrid.cpp" />
+    <ClCompile Include="Game Components\Glyph.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
+    <ClCompile Include="Game Components\KeysFont.cpp" />
     <ClCompile Include="Game Components\LeftSpiderState.cpp" />
     <ClCompile Include="Game Components\MoveFSM.cpp" />
     <ClCompile Include="Game Components\MovementCollection.cpp" />
@@ -144,6 +147,7 @@
     <ClCompile Include="Game Components\ShipFSM.cpp" />
     <ClCompile Include="Game Components\Ship_Ai.cpp" />
     <ClCompile Include="Game Components\Ship_Player.cpp" />
+    <ClCompile Include="Game Components\SimpleTextDemo.cpp" />
     <ClCompile Include="Game Components\Spider.cpp" />
     <ClCompile Include="Game Components\SpiderFactory.cpp" />
     <ClCompile Include="Game Components\SpiderManager.cpp" />
@@ -155,6 +159,7 @@
     <ClCompile Include="Game Components\Spider_MoveFSM.cpp" />
     <ClCompile Include="Game Components\Splash.cpp" />
     <ClCompile Include="Game Components\SplashController.cpp" />
+    <ClCompile Include="Game Components\SpriteSheet.cpp" />
     <ClCompile Include="Game Components\TEAL\AlarmEventTimeline.cpp" />
     <ClCompile Include="Game Components\TEAL\AlarmManager.cpp" />
     <ClCompile Include="Game Components\TEAL\AnimatedSprite.cpp" />
@@ -191,6 +196,7 @@
     <ClInclude Include="Game Components\AheadInformation.h" />
     <ClInclude Include="Game Components\Asteroid.h" />
     <ClInclude Include="Game Components\AsteroidField.h" />
+    <ClInclude Include="Game Components\AwesomeFont.h" />
     <ClInclude Include="Game Components\Body_Down.h" />
     <ClInclude Include="Game Components\Body_Left.h" />
     <ClInclude Include="Game Components\Body_Right.h" />
@@ -234,9 +240,11 @@
     <ClInclude Include="Game Components\GameController.h" />
     <ClInclude Include="Game Components\GameGrid.h" />
     <ClInclude Include="Game Components\GameManager.h" />
+    <ClInclude Include="Game Components\Glyph.h" />
     <ClInclude Include="Game Components\HUD.h" />
     <ClInclude Include="Game Components\KeyboardCommand.h" />
     <ClInclude Include="Game Components\KeyboardIncludes.h" />
+    <ClInclude Include="Game Components\KeysFont.h" />
     <ClInclude Include="Game Components\LeftSpiderState.h" />
     <ClInclude Include="Game Components\MoveFSM.h" />
     <ClInclude Include="Game Components\MovementCollection.h" />
@@ -270,6 +278,7 @@
     <ClInclude Include="Game Components\Ship_Player.h" />
     <ClInclude Include="Game Components\Ship_Right.h" />
     <ClInclude Include="Game Components\Ship_Up.h" />
+    <ClInclude Include="Game Components\SimpleTextDemo.h" />
     <ClInclude Include="Game Components\Spider.h" />
     <ClInclude Include="Game Components\SpiderFactory.h" />
     <ClInclude Include="Game Components\SpiderManager.h" />
@@ -283,6 +292,7 @@
     <ClInclude Include="Game Components\Spider_MoveFSM.h" />
     <ClInclude Include="Game Components\Splash.h" />
     <ClInclude Include="Game Components\SplashController.h" />
+    <ClInclude Include="Game Components\SpriteSheet.h" />
     <ClInclude Include="Game Components\State.h" />
     <ClInclude Include="Game Components\TEAL\AlarmEventTimeline.h" />
     <ClInclude Include="Game Components\TEAL\AlarmManager.h" />
