@@ -14,33 +14,29 @@ void PlayerManager::AddScore(const int score)
 	/*for(auto player : GetInstance()->listOfPlayers)
 		if(player.player == instance->currentPlayer)
 			player.playerScore += score;*/
-	//todo: for some reason, the currnetPlayer deletes itself throughout the game life, find out why
-	GetInstance()->currentPlayer->playerScore += score;
-	TextEditor::CurrentScore(instance->currentPlayer->playerScore);
+			//todo: for some reason, the currnetPlayer deletes itself throughout the game life, find out why
+	GetInstance()->currentPlayer.playerScore += score;
+	TextEditor::CurrentScore(instance->currentPlayer.playerScore);
 }
 
 void PlayerManager::LoseHealth()
 {
-	GetInstance()->currentPlayer->playerLives--;
+	GetInstance()->currentPlayer.playerLives--;
 }
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
 {
-	if (GetInstance()->currentPlayer)
-	{
-		delete instance->currentPlayer->playerInput;
+	delete GetInstance()->currentPlayer.playerInput;
 
-		instance->currentPlayer->playerInput = input;
-	}
+	instance->currentPlayer.playerInput = input;
 }
 
 PlayerManager::PlayerManager()
-	:currentPlayer(nullptr)
 {
 	//emplace back essentially just takes the constructor of an object instead of calling the constructor
-	this->listOfPlayers.emplace_back(PlayerID::Ai);
-	this->listOfPlayers.emplace_back(PlayerID::Player1);
-	this->listOfPlayers.emplace_back(PlayerID::Player2);
+	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Ai);
+	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Player1);
+	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Player2);
 
 	//set the first player, cuz there is no simple way to just say "get player1"
 	//for(auto player : this->listOfPlayers)
@@ -51,24 +47,24 @@ PlayerManager::PlayerManager()
 	//	}
 }
 
-PlayerManager::PlayerID PlayerManager::GetCurrentPlayer()
+PlayerData::PlayerID PlayerManager::GetCurrentPlayer()
 {
-	return GetInstance()->currentPlayer->player;
+	return GetInstance()->currentPlayer.player;
 }
 
-void PlayerManager::InitializePlayer(const PlayerID player)
+void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 {
 	switch (player)
 	{
-	case PlayerID::Ai:
+	case PlayerData::PlayerID::Ai:
 		Ship::SetState(&ShipFSM::aiMode);
 		break;
 
-	case PlayerID::Player1:
+	case PlayerData::PlayerID::Player1:
 		Ship::SetState(&ShipFSM::playerMode);
 		break;
 
-	case PlayerID::Player2:
+	case PlayerData::PlayerID::Player2:
 		Ship::SetState(&ShipFSM::playerMode);
 		break;
 
@@ -79,7 +75,7 @@ void PlayerManager::InitializePlayer(const PlayerID player)
 	for (auto playerr : GetInstance()->listOfPlayers)
 		if (playerr.player == player)
 		{
-			GetInstance()->currentPlayer = &playerr;
+			GetInstance()->currentPlayer = playerr;
 			break;
 		}
 }

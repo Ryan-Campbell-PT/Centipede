@@ -34,7 +34,7 @@ void ScoreManager::PrivProcessScore()
 		}
 
 		std::string player;
-		if(PlayerManager::GetCurrentPlayer() == PlayerManager::PlayerID::Player1)
+		if(PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Player1)
 			player = "Player1";
 		else
 			player = "Player2";
