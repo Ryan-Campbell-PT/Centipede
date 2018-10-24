@@ -90,6 +90,8 @@ void WaveManager::loadLevelInfo(const char * filePath)
 			this->levelList.push_back(wave);
 		}
 	}
+
+	myFile.close();
 }
 
 float WaveManager::getFloatInfo(const std::string& line) const

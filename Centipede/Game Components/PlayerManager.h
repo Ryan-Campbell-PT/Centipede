@@ -16,11 +16,12 @@ public:
 	static void InitializePlayer(PlayerData::PlayerID player);
 
 	static void AddScore(const int score);
-	static void LoseHealth();
+	static void TakeDamage();
 	static void SetPlayerControls(PlayerInput *input);
 
 private:
 	PlayerManager();
+	void assignPlayerData(PlayerData::PlayerID player);
 	static PlayerManager* GetInstance();
 
 	static PlayerManager* instance;

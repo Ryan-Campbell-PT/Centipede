@@ -11,17 +11,14 @@ PlayerManager * PlayerManager::instance = nullptr;
 
 void PlayerManager::AddScore(const int score)
 {
-	/*for(auto player : GetInstance()->listOfPlayers)
-		if(player.player == instance->currentPlayer)
-			player.playerScore += score;*/
-			//todo: for some reason, the currnetPlayer deletes itself throughout the game life, find out why
 	GetInstance()->currentPlayer.playerScore += score;
 	TextEditor::CurrentScore(instance->currentPlayer.playerScore);
 }
 
-void PlayerManager::LoseHealth()
+void PlayerManager::TakeDamage()
 {
 	GetInstance()->currentPlayer.playerLives--;
+	//todo:after this, we want to initialize the next player
 }
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
@@ -37,14 +34,29 @@ PlayerManager::PlayerManager()
 	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Ai);
 	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Player1);
 	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Player2);
+}
 
-	//set the first player, cuz there is no simple way to just say "get player1"
-	//for(auto player : this->listOfPlayers)
-	//	if(player.player == PlayerID::Player1)
-	//	{
-	//		this->currentPlayer = &player;
-	//		break;
-	//	}
+void PlayerManager::assignPlayerData(PlayerData::PlayerID player)
+{
+	//this loop handles modifying the list, so we can get the information back later again
+	int counter = 0;
+	for (const auto playerr : this->listOfPlayers)
+	{
+		if (playerr.player == this->currentPlayer.player)
+		{
+			this->listOfPlayers[counter] = this->currentPlayer;
+			break;
+		}
+		++counter;
+	}
+
+	//this loop handles setting the current player to the player specified
+	for (const auto playerr : this->listOfPlayers)
+		if (playerr.player == player)
+		{
+			this->currentPlayer = playerr;
+			break;
+		}
 }
 
 PlayerData::PlayerID PlayerManager::GetCurrentPlayer()
@@ -72,12 +84,8 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 		break;
 	}
 
-	for (auto playerr : GetInstance()->listOfPlayers)
-		if (playerr.player == player)
-		{
-			GetInstance()->currentPlayer = playerr;
-			break;
-		}
+	GetInstance()->assignPlayerData(player);
+
 }
 
 PlayerManager * PlayerManager::GetInstance()
