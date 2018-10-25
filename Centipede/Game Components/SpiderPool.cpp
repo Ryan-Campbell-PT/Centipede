@@ -24,6 +24,14 @@ void SpiderPool::RecycleSpider(Spider*const spider)
 }
 
 
+SpiderPool::~SpiderPool()
+{
+	for(auto s : this->recycledSpiders)
+		delete s;
+
+	delete instance;
+}
+
 SpiderPool * SpiderPool::GetInstance()
 {
 	if (instance == nullptr)

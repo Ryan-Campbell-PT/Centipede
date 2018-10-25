@@ -5,6 +5,7 @@
 
 class MushroomFactory;
 class ScoreCmd;
+
 enum class MushroomState
 {
 	Healthy = 0,
@@ -15,7 +16,7 @@ class Mushroom : public GameObject
 {
 public:
 	///using the float version means youre going to specify where its being placed pixel wise
-	Mushroom(sf::Vector2f v); 
+	explicit Mushroom(sf::Vector2f v);
 	Mushroom();
 
 	virtual void Draw();
@@ -32,10 +33,12 @@ public:
 
 	void HealSelf();
 
-private:
-	virtual ~Mushroom() = default;
 	Mushroom &operator=(const Mushroom &c) = delete;
 	Mushroom(const Mushroom &c) = delete;
+
+	virtual ~Mushroom();
+
+private:
 
 	sf::Vector2f position;
 	AnimatedSprite sprite;

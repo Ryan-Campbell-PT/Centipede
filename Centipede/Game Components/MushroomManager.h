@@ -15,7 +15,14 @@ public:
 	static void RemoveMushroom(Mushroom * const shroom);
 	///this will be used for whatever happens when the game ends
 	static void EndWave();
+
+	MushroomManager(const MushroomManager &s) = delete;
+	MushroomManager operator = (const MushroomManager &) = delete;
+
 private:
+	MushroomManager() = default;
+	virtual ~MushroomManager() { delete instance; }
+
 	static MushroomManager * GetInstance();
 	void SpawnMushroom(sf::Vector2f &pos);
 

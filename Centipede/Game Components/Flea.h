@@ -16,7 +16,7 @@ class Flea : public GameObject
 {
 public:
 	Flea();
-	virtual ~Flea() = default;
+	virtual ~Flea();
 	Flea &operator=(const Flea &c) = delete;
 	Flea(const Flea &c) = delete;
 

@@ -19,7 +19,7 @@ class Spider : public GameObject
 {
 public:
 	Spider();
-	virtual ~Spider() = default;
+	virtual ~Spider();
 	Spider &operator=(const Spider &c) = delete;
 	Spider(const Spider &c) = delete;
 

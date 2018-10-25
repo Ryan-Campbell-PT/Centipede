@@ -17,8 +17,13 @@ public:
 	///this method strictly handles the recycling of it, nothing more
 	static void RecycleFlea(Flea *flea);
 
+	FleaPool(const FleaPool &pool) = delete;
+	FleaPool operator = (const FleaPool &pool) = delete;
+
 private:
 	FleaPool();
+	~FleaPool();
+
 	static FleaPool * GetInstance();
 	
 	static FleaPool * instance;

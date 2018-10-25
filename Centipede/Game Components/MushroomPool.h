@@ -14,7 +14,13 @@ public:
 	static size_t GetNumActiveShrooms();
 	static std::list<Mushroom*> GetActiveMushroomList();
 
+	MushroomPool(const MushroomPool &pool) = delete;
+	MushroomPool operator = (const MushroomPool &pool) = delete;
+
 private:
+	MushroomPool() = default;
+	~MushroomPool();
+
 	static MushroomPool * GetInstance();
 	
 	static MushroomPool *instance;

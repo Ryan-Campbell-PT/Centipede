@@ -29,6 +29,25 @@ CentipedeHead::CentipedeHead()
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::CentiKilled);
 }
 
+CentipedeHead::~CentipedeHead()
+{
+	delete this->pDeath;
+	//todo: currently breaking at the Destroy(), look into
+#if false
+	auto tmp = this->GetWhosFollowingYou();
+	CentipedePart* prev = nullptr;
+
+	while (tmp)
+	{
+		prev = tmp;
+		tmp = tmp->GetWhosFollowingYou();
+		static_cast<CentipedeBody*>(prev)->Destroy();
+		//delete prev;
+		//tmp = tmp->GetWhosFollowingYou();
+	}
+#endif
+}
+
 void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, CentipedeDirectionState const & direction)
 {
 	GameGrid::GetCenterGridPosition(pos);
@@ -68,7 +87,7 @@ void CentipedeHead::Update()
 		{
 			if (this->GetWhosFollowingYou())
 				static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
-			
+
 			this->SetDirection(this->currentDirectionState->NextState(this));
 		}
 	}

@@ -11,14 +11,15 @@ public:
 	static Spider* GetSpider();
 	static void RemoveSpider(Spider * const spider);
 
+	SpiderFactory &operator=(const SpiderFactory &c) = delete;
+	SpiderFactory(const SpiderFactory &c) = delete;
+
 private:
 	static SpiderFactory *GetInstance();
 
 	SpiderFactory() = default;
-	virtual ~SpiderFactory() {};
-	SpiderFactory &operator=(const SpiderFactory &c) = delete;
-	SpiderFactory(const SpiderFactory &c) = delete;
-
+	virtual ~SpiderFactory() { delete instance; };
+	
 
 	static SpiderFactory *instance;
 };

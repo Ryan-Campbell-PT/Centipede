@@ -13,7 +13,13 @@ public:
 
 	static void RemoveScorpion(Scorpion * const scorpion);
 
+	ScorpionManager(const ScorpionManager &s) = delete;
+	ScorpionManager& operator = (const ScorpionManager &) = delete;
+
 private:
+	ScorpionManager() = default;
+	virtual ~ScorpionManager() { delete instance; }
+
 	virtual void Alarm0() override;
 
 	void SpawnScorpion() const;

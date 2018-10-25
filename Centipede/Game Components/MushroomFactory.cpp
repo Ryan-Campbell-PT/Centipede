@@ -58,6 +58,7 @@ void MushroomFactory::RemoveObservee(Observer * o)
 
 MushroomFactory::~MushroomFactory()
 {
+	delete instance;
 }
 
 MushroomFactory * MushroomFactory::GetInstance()

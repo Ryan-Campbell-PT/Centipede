@@ -25,6 +25,11 @@
 #include "WaveManager.h"
 #include "TextEditor.h"
 
+#define _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h>  
+
+
 void Level1::Initialize()
 {
 	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
@@ -68,4 +73,5 @@ void Level1::Initialize()
 
 	CollisionTestPair<CentipedeBody, Bullet>();
 	CollisionTestPair<CentipedeHead, Bullet>();
+	//_CrtDumpMemoryLeaks();  
 }

@@ -16,10 +16,15 @@ public:
 
 	virtual void ObserverUpdate(int numShrooms) override;
 
+	FleaManager(const FleaManager &s) = delete;
+	FleaManager operator = (const FleaManager &) = delete;
+
 private:
+	FleaManager();
+	virtual ~FleaManager() { delete instance; }
+	
 	void SpawnFlea();
 
-	FleaManager();
 	static FleaManager* GetInstance();
 
 	static FleaManager *instance;

@@ -20,6 +20,11 @@ Scorpion::Scorpion()
 	SetCollider(sprite, bitmap, true);
 }
 
+Scorpion::~Scorpion()
+{
+	delete pDeath;
+}
+
 void Scorpion::Update()
 {
 	if (!active)

@@ -95,6 +95,11 @@ void Mushroom::HealSelf()
 	this->sprite.SetAnimation(health, health);
 }
 
+Mushroom::~Mushroom()
+{
+	delete this->pDeath;
+}
+
 void Mushroom::RemoveMushroom()
 {
 	this->sprite.setScale(0.f, 0.f); //remove it from the screen

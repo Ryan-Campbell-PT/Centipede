@@ -23,8 +23,12 @@ public:
 	///this one assumes whatever head is given to us, is the body that will become the head
 	static void SetBodyToHead(CentipedeBody *body);
 
+	CentiBodyManager(const CentiBodyManager &s) = delete;
+	CentiBodyManager operator = (const CentiBodyManager &) = delete;
+
 private:
 	CentiBodyManager() = default;
+	virtual ~CentiBodyManager() { delete instance; }
 
 	void AlignLinks(CentipedePart * leader, CentipedePart* follower);
 

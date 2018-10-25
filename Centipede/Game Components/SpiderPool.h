@@ -11,7 +11,13 @@ public:
 	static Spider *GetSpider();
 	static void RecycleSpider(Spider*const spider);
 
+	SpiderPool(const SpiderPool &pool) = delete;
+	SpiderPool operator = (const SpiderPool &pool) = delete;
+
 private:
+	SpiderPool() = default;
+	~SpiderPool();
+
 	static SpiderPool * GetInstance();
 
 	static SpiderPool *instance;

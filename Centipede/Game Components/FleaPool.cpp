@@ -8,6 +8,14 @@ FleaPool::FleaPool()
 
 }
 
+FleaPool::~FleaPool()
+{
+	for(auto f : this->fleaList)
+		delete f;
+
+	delete instance;
+}
+
 Flea * FleaPool::GetFlea()
 {
 	Flea* flea;

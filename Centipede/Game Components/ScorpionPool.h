@@ -10,8 +10,14 @@ class ScorpionPool
 public:
 	static Scorpion *GetScorpion();
 	static void RecycleScorpion(Scorpion * const scorpion);
+	
+	ScorpionPool(const ScorpionPool &pool) = delete;
+	ScorpionPool operator = (const ScorpionPool &pool) = delete;
 
 private:
+	ScorpionPool() = default;
+	~ScorpionPool();
+
 	static ScorpionPool * GetInstance();
 
 	static ScorpionPool *instance;

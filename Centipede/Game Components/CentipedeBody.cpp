@@ -9,7 +9,7 @@
 #include "ScoreManager.h"
 
 CentipedeBody::CentipedeBody()
-	:active(false), bodyDirection(nullptr)
+	:active(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
@@ -37,6 +37,11 @@ void CentipedeBody::InitializeBody(sf::Vector2f const & pos, OffsetArray directi
 	this->currentOffsetArray = direction;
 	//this->pastOffsetArray = OffsetArray(0,0);
 	RegisterCollision<CentipedeBody>(*this);
+}
+
+CentipedeBody::~CentipedeBody()
+{
+	delete this->pDeath;
 }
 
 void CentipedeBody::GetDataFromFront(OffsetArray offset)

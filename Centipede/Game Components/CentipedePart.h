@@ -5,7 +5,11 @@ class CentipedePart
 {
 public:
 	CentipedePart()
-		: yourFollower(0), whoYoureFollowing(0) {}
+		: yourFollower(nullptr), whoYoureFollowing(nullptr) {}
+	virtual ~CentipedePart() = default;
+	CentipedePart &operator=(const CentipedePart &c) = delete;
+	CentipedePart(const CentipedePart &c) = delete;
+
 	void SetWhosFollowingYou(CentipedePart  * const follower) { this->yourFollower = follower; }
 	void SetWhoYoureFollowing(CentipedePart * const followee) { this->whoYoureFollowing = followee; }
 

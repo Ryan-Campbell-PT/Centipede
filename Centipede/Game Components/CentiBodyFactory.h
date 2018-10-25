@@ -15,7 +15,8 @@ public:
 	static void RemoveCentiBody(CentipedeBody *const body);
 
 private:
-	CentiBodyFactory() {};
+	CentiBodyFactory() = default;
+	~CentiBodyFactory() { delete instance; }
 
 	static CentiBodyFactory* GetInstance();
 

@@ -17,7 +17,13 @@ public:
 
 	static void RemoveSpider(Spider * const spider);
 
+	SpiderManager(const SpiderManager &s) = delete;
+	SpiderManager& operator = (const SpiderManager &) = delete;
+
 private:
+	SpiderManager() = default;
+	virtual ~SpiderManager() { delete instance; }
+	
 	virtual void Alarm0() override;
 
 	void SpawnSpider();

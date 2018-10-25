@@ -26,6 +26,11 @@ Spider::Spider()
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::SpiderKilled);
 }
 
+Spider::~Spider()
+{
+	delete pDeath;
+}
+
 void Spider::Update()
 {
 	if (!active)

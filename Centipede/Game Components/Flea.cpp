@@ -9,6 +9,7 @@
 #include "MushroomManager.h"
 #include "ScoreManager.h"
 #include "FleaManager.h"
+#include "ScoreCmd.h"
 
 //TODO: there is a lot of deleting of state in this. figure out a way to modify tht
 //so there isnt much allocation and deletion
@@ -23,6 +24,12 @@ Flea::Flea()
 	this->sprite.setScale(0.f, 0.f);
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::FleaKilled);
+}
+
+Flea::~Flea()
+{
+	delete pDeath;
+	delete state;
 }
 
 void Flea::Update()

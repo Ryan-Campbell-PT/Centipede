@@ -14,14 +14,14 @@ public:
 	static void SpawnScorpion(sf::Vector2f pos);
 	static void RemoveScorpion(Scorpion * const scorpion);
 
+	ScorpionFactory &operator=(const ScorpionFactory &c) = delete;
+	ScorpionFactory(const ScorpionFactory &c) = delete;
+
 private:
 	static ScorpionFactory* GetInstance();
 	
 	ScorpionFactory();
-	virtual ~ScorpionFactory();
-	ScorpionFactory &operator=(const ScorpionFactory &c) = delete;
-	ScorpionFactory(const ScorpionFactory &c) = delete;
-
+	virtual ~ScorpionFactory();	
 
 	static ScorpionFactory* instance;
 };

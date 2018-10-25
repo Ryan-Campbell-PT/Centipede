@@ -23,6 +23,14 @@ void ScorpionPool::RecycleScorpion(Scorpion  * const scorpion)
 	GetInstance()->recycledScorpions.push_front(scorpion);
 }
 
+ScorpionPool::~ScorpionPool()
+{
+	for(auto s : this->recycledScorpions)
+		delete s;
+
+	delete instance;
+}
+
 ScorpionPool * ScorpionPool::GetInstance()
 {
 	if (instance == 0)

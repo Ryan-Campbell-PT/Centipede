@@ -17,13 +17,14 @@ public:
 	static Flea* GetFlea();
 	static void RemoveFlea(Flea * const flea);
 
+	FleaFactory &operator=(const FleaFactory &c) = delete;
+	FleaFactory(const FleaFactory &c) = delete;
+
 private:
 	static FleaFactory *GetInstance();
 
 	FleaFactory() = default;
-	virtual ~FleaFactory() {};
-	FleaFactory &operator=(const FleaFactory &c) = delete;
-	FleaFactory(const FleaFactory &c) = delete;
+	virtual ~FleaFactory() { delete instance; };
 
 	static FleaFactory * instance;
 };

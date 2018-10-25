@@ -21,7 +21,7 @@ public:
 	CentipedeBody();
 	void InitializeBody(sf::Vector2f const& pos, OffsetArray direction);
 
-	virtual ~CentipedeBody() = default;
+	virtual ~CentipedeBody();
 	CentipedeBody &operator=(const CentipedeBody &c) = delete;
 	CentipedeBody(const CentipedeBody &c) = delete;
 	
@@ -36,6 +36,7 @@ public:
 
 	//void SendDataBack();
 	void GetDataFromFront(OffsetArray offset);
+
 private:
 	virtual void Draw() override;
 	virtual void Update() override;
@@ -44,9 +45,6 @@ private:
 	///this method will convert head directions into the simplified states the body's use
 	const CentiBodyDirection *GetDirectionState(CentiMovementDirectionEnum e);
 
-	const CentiBodyDirection *bodyDirection;
-
-	CentiMovementDirectionEnum currentDirection;
 	AheadInformation aheadTurningInformation;
 	std::queue<AheadInformation> offsetQueue;
 

@@ -12,8 +12,12 @@ public:
 	static CentipedeHead* GetCentiHead();
 	static void RemoveCentiHead(CentipedeHead *const head);
 
+	CentiHeadFactory &operator=(const CentiHeadFactory &c) = delete;
+	CentiHeadFactory(const CentiHeadFactory &c) = delete;
+
 private:
-	CentiHeadFactory() {};
+	CentiHeadFactory() = default;
+	virtual ~CentiHeadFactory() { delete instance; }
 
 	static CentiHeadFactory* GetInstance();
 

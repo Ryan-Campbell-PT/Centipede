@@ -17,8 +17,13 @@ public:
 	///this is used to initialize a body to a head
 	static void InitializeHead(CentipedeHead* head, const sf::Vector2f& pos, const CentipedeDirectionState& direction);
 
+	CentiHeadManager(const CentiHeadManager &s) = delete;
+	CentiHeadManager operator = (const CentiHeadManager &) = delete;
+
 private:
 	CentiHeadManager() = default;
+	virtual ~CentiHeadManager() { delete instance; }
+
 	void SetApi(const int numBodies, const float centiSpeed,
 		const int numSoloHeads, const float soloHeadSpeed);
 	void SpawnSoloHeads();

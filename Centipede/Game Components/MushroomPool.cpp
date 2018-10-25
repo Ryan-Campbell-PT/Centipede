@@ -3,6 +3,17 @@
 
 MushroomPool * MushroomPool::instance = nullptr;
 
+MushroomPool::~MushroomPool()
+{
+	for(auto m : this->inactiveMushroomList)
+		delete m;
+
+	for(auto m : this->activeMushroomList)
+		delete m;
+
+	delete instance;
+}
+
 MushroomPool * MushroomPool::GetInstance()
 {
 	if (instance == nullptr)

@@ -18,6 +18,7 @@ ScorpionFactory::ScorpionFactory()
 
 ScorpionFactory::~ScorpionFactory()
 {
+	delete instance;
 }
 
 void ScorpionFactory::SpawnScorpion(sf::Vector2f pos)

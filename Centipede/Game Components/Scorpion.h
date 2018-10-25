@@ -16,7 +16,7 @@ class Scorpion : public GameObject
 {
 public:
 	Scorpion();
-	virtual ~Scorpion() {};
+	virtual ~Scorpion();
 	Scorpion &operator=(const Scorpion &c) = delete;
 	Scorpion(const Scorpion &c) = delete;
 

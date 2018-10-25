@@ -12,8 +12,13 @@ public:
 	static CentipedeHead * GetCentiHead();
 	static void RecycleCentiBody(CentipedeHead * const body);
 
+	CentiHeadPool(const CentiHeadPool &pool) = delete;
+	CentiHeadPool operator = (const CentiHeadPool &pool) = delete;
+
 private:
-	CentiHeadPool() {};
+	CentiHeadPool() = default;
+	~CentiHeadPool();
+
 
 	static CentiHeadPool* GetInstance();
 

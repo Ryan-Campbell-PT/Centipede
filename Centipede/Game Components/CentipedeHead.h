@@ -22,6 +22,10 @@ class CentipedeHead : public GameObject, public CentipedePart
 {
 public:
 	CentipedeHead();
+	virtual ~CentipedeHead();
+	CentipedeHead &operator=(const CentipedeHead &c) = delete;
+	CentipedeHead(const CentipedeHead &c) = delete;
+
 	///this initilization will be used for completely new heads
 	void InitializeHead(sf::Vector2f & pos, const int &numBodies, CentipedeDirectionState const & direction);
 	///while this will be used when turning a body into a head
@@ -53,9 +57,6 @@ public:
 	void SetSpeed(const int speed);
 
 private:
-	virtual ~CentipedeHead() = default;
-	CentipedeHead &operator=(const CentipedeHead &c) = delete;
-	CentipedeHead(const CentipedeHead &c) = delete;
 	///this function will apply the number of bodies connected to the head, at the creation of the head
 	void SetupBodies(OffsetArray direction, int numBodies);
 	

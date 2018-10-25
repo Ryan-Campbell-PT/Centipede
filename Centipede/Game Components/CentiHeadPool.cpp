@@ -24,6 +24,14 @@ void CentiHeadPool::RecycleCentiBody(CentipedeHead * const body)
 	GetInstance()->bodyList.push_front(body);
 }
 
+CentiHeadPool::~CentiHeadPool()
+{
+	for(auto c : this->bodyList)
+		delete c;
+
+	delete instance;
+}
+
 CentiHeadPool * CentiHeadPool::GetInstance()
 {
 	if (instance == 0)
