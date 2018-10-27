@@ -34,7 +34,7 @@ void ResourceManager::LoadAllResources()
 	AddTexture("Alphabet", "FONT.bmp");
 	AddTexture("Keys", "Keycaps.tga");
 	
-	WaveManager::LoadLevelInfo("C:/Users/ryaca/Desktop/sprint.txt");
+	WaveManager::LoadLevelInfo("WaveData.txt");
 
 
 }

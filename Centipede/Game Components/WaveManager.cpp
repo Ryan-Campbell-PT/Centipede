@@ -27,9 +27,9 @@ void WaveManager::loadLevelInfo(const char * filePath)
 	std::ifstream myFile;
 	std::string line;
 	myFile.open(filePath);
-
+	
 	Wave wave;
-
+	
 	while (std::getline(myFile, line))
 	{
 		//transform to lower, for portability

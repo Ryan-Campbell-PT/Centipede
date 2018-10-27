@@ -29,6 +29,8 @@
 #include <stdlib.h>  
 #include <crtdbg.h>  
 
+#include <iostream>
+#include <fstream>
 
 void Level1::Initialize()
 {
@@ -53,7 +55,7 @@ void Level1::Initialize()
 	*/
 	WaveManager::SetupLevel(1);
 	MushroomManager::InitializeMushroomField(15);
-
+	
 	//TextEditor::CurrentScore(368);
 
 	CollisionTestPair<Ship, Mushroom>();
