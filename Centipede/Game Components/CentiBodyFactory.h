@@ -21,7 +21,7 @@ private:
 	static CentiBodyFactory* GetInstance();
 
 	static CentiBodyFactory* instance;
-	//std::list<CentipedeHead*> bodyList;
+	//std::list<CentipedeHead*> headList;
 };
 
 

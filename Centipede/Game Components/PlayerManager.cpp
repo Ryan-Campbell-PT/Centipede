@@ -88,6 +88,10 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 
 }
 
+void PlayerManager::SwapPlayer()
+{
+}
+
 PlayerManager * PlayerManager::GetInstance()
 {
 	if (instance == nullptr)

@@ -15,6 +15,7 @@ public:
 
 	ScorpionManager(const ScorpionManager &s) = delete;
 	ScorpionManager& operator = (const ScorpionManager &) = delete;
+	static void EndWave();
 
 private:
 	ScorpionManager() = default;

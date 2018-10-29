@@ -14,6 +14,7 @@ public:
 
 	CentiHeadPool(const CentiHeadPool &pool) = delete;
 	CentiHeadPool operator = (const CentiHeadPool &pool) = delete;
+	static void EndWave();
 
 private:
 	CentiHeadPool() = default;
@@ -23,7 +24,7 @@ private:
 	static CentiHeadPool* GetInstance();
 
 	static CentiHeadPool* instance;
-	std::list<CentipedeHead*> bodyList;
+	std::list<CentipedeHead*> headList;
 };
 
 

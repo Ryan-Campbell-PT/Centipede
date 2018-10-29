@@ -61,6 +61,11 @@ void SpiderManager::RemoveSpider(Spider * const spider)
 	}
 }
 
+void SpiderManager::EndWave()
+{
+
+}
+
 void SpiderManager::Alarm0()
 {
 	ConsoleMsg::WriteLine("alarm 0 reached");

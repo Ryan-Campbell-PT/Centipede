@@ -25,6 +25,7 @@ public:
 
 	CentiBodyManager(const CentiBodyManager &s) = delete;
 	CentiBodyManager operator = (const CentiBodyManager &) = delete;
+	static void EndWave();
 
 private:
 	CentiBodyManager() = default;

@@ -14,6 +14,7 @@ public:
 
 	static PlayerData::PlayerID GetCurrentPlayer();
 	static void InitializePlayer(PlayerData::PlayerID player);
+	static void SwapPlayer();
 
 	static void AddScore(const int score);
 	static void TakeDamage();

@@ -19,6 +19,7 @@ public:
 
 	SpiderManager(const SpiderManager &s) = delete;
 	SpiderManager& operator = (const SpiderManager &) = delete;
+	static void EndWave();
 
 private:
 	SpiderManager() = default;

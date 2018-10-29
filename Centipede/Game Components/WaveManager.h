@@ -46,6 +46,7 @@ private:
 	static WaveManager *GetInstance();
 	void loadLevelInfo(const char *filePath);
 	void setCritterSettings(const WaveManager::Wave wave);
+	void endWave() const;
 
 	float getFloatInfo(const std::string& line) const;
 	bool getBoolInfo(const std::string& line) const;

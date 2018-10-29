@@ -132,7 +132,18 @@ void WaveManager::SetupLevel(const int & levelNum)
 
 void WaveManager::EndWave()
 {
+	GetInstance()->endWave();
+}
+
+void WaveManager::endWave() const
+{
 	MushroomManager::EndWave();
+
+	CentiBodyManager::EndWave();
+	CentiHeadManager::EndWave();
+	FleaManager::EndWave();
+	ScorpionManager::EndWave();
+	SpiderManager::EndWave();
 }
 
 void WaveManager::setCritterSettings(const WaveManager::Wave wave)

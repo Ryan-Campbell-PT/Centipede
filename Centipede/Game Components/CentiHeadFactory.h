@@ -14,6 +14,7 @@ public:
 
 	CentiHeadFactory &operator=(const CentiHeadFactory &c) = delete;
 	CentiHeadFactory(const CentiHeadFactory &c) = delete;
+	static void EndWave();
 
 private:
 	CentiHeadFactory() = default;
@@ -22,7 +23,7 @@ private:
 	static CentiHeadFactory* GetInstance();
 
 	static CentiHeadFactory* instance;
-	//std::list<CentipedeHead*> bodyList;
+	//std::list<CentipedeHead*> headList;
 };
 
 

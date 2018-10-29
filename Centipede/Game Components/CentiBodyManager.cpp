@@ -57,6 +57,10 @@ void CentiBodyManager::SetBodyToHead(CentipedeBody * body)
 	body->SetWhoYoureFollowing(nullptr);
 }
 
+void CentiBodyManager::EndWave()
+{
+}
+
 const CentipedeDirectionState * CentiBodyManager::GetBodysHeadDirection(CentipedeBody * body)
 {
 	CentipedePart *tmp = body;

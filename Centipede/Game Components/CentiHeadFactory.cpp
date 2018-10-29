@@ -13,6 +13,11 @@ void CentiHeadFactory::RemoveCentiHead(CentipedeHead * const head)
 	CentiHeadPool::RecycleCentiBody(head);
 }
 
+void CentiHeadFactory::EndWave()
+{
+	CentiHeadPool::EndWave();
+}
+
 CentiHeadFactory * CentiHeadFactory::GetInstance()
 {
 	if (instance == 0)

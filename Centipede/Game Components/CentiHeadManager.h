@@ -19,6 +19,7 @@ public:
 
 	CentiHeadManager(const CentiHeadManager &s) = delete;
 	CentiHeadManager operator = (const CentiHeadManager &) = delete;
+	static void EndWave();
 
 private:
 	CentiHeadManager() = default;

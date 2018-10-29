@@ -27,7 +27,7 @@ CentipedeHead* CentiHeadManager::GetCentiHead()
 void CentiHeadManager::RemoveCentiHead(CentipedeHead * const head)
 {
 	CentiHeadFactory::RemoveCentiHead(head);
-	if(--instance->numActiveCenti <= 0) 
+	if(--GetInstance()->numActiveCenti <= 0) 
 		WaveManager::EndWave(); //end round if there are no centipedes remaining
 }
 
@@ -35,6 +35,11 @@ void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f &
 {
 	GetInstance()->numActiveCenti++;
 	head->InitializeHead(pos, direction);
+}
+
+void CentiHeadManager::EndWave()
+{
+	CentiHeadFactory::EndWave();
 }
 
 void CentiHeadManager::SetApi(const int numBodies, const float centiSpeed,

@@ -10,6 +10,10 @@
 
 FleaManager *FleaManager::instance = nullptr;
 
+void FleaManager::EndWave()
+{
+}
+
 FleaManager::FleaManager()
 	:fleaActive(false)
 {

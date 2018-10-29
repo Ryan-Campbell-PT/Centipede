@@ -18,6 +18,7 @@ public:
 
 	FleaManager(const FleaManager &s) = delete;
 	FleaManager operator = (const FleaManager &) = delete;
+	static void EndWave();
 
 private:
 	FleaManager();

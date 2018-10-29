@@ -56,6 +56,10 @@ void ScorpionManager::RemoveScorpion(Scorpion * const scorpion)
 	}
 }
 
+void ScorpionManager::EndWave()
+{
+}
+
 ScorpionManager * ScorpionManager::GetInstance()
 {
 	if (instance == nullptr)

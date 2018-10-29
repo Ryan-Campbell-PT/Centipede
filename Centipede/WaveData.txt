@@ -1,5 +1,19 @@
 level 1
 
-centiBodyCount: 4
+centiBodyCount: 1
 
 _
+
+level 2
+
+centiBodyCount 2
+spiderActive false
+scorpionActive true
+
+_
+
+level 3
+
+centiBodyCount 3
+spiderActive true
+scorpionActive true
