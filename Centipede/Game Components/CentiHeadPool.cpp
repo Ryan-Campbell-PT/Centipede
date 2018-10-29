@@ -1,5 +1,6 @@
 #include "CentiHeadPool.h"
 #include "CentipedeHead.h"
+#include "WaveManager.h"
 
 CentiHeadPool * CentiHeadPool::instance = nullptr;
 
@@ -8,7 +9,11 @@ CentipedeHead * CentiHeadPool::GetCentiHead()
 	CentipedeHead* head;
 
 	if (GetInstance()->headList.empty())
+	{
 		head = new CentipedeHead;
+		head->SetExternalManagement(RecycleCentiBody);
+		instance->numActiveCenti++;
+	}
 
 	else
 	{
@@ -19,9 +24,13 @@ CentipedeHead * CentiHeadPool::GetCentiHead()
 	return head;
 }
 
-void CentiHeadPool::RecycleCentiBody(CentipedeHead * const body)
+void CentiHeadPool::RecycleCentiBody(GameObject * const body)
 {
-	GetInstance()->headList.push_front(body);
+	GetInstance()->numActiveCenti--;
+	GetInstance()->headList.push_front(static_cast<CentipedeHead*>(body));
+	
+	if(instance->numActiveCenti <= 0)
+		WaveManager::EndWave();
 }
 
 void CentiHeadPool::EndWave()

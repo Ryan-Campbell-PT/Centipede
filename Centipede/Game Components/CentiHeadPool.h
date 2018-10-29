@@ -2,15 +2,15 @@
 #define CENTIHEAD_POOL
 
 #include <list>
-using std::list;
 
 class CentipedeHead;
+class GameObject;
 
 class CentiHeadPool
 {
 public:
 	static CentipedeHead * GetCentiHead();
-	static void RecycleCentiBody(CentipedeHead * const body);
+	static void RecycleCentiBody(GameObject * const body);
 
 	CentiHeadPool(const CentiHeadPool &pool) = delete;
 	CentiHeadPool operator = (const CentiHeadPool &pool) = delete;
@@ -25,6 +25,7 @@ private:
 
 	static CentiHeadPool* instance;
 	std::list<CentipedeHead*> headList;
+	int numActiveCenti;
 };
 
 

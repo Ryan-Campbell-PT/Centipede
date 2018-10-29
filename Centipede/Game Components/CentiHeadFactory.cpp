@@ -8,11 +8,6 @@ CentipedeHead * CentiHeadFactory::GetCentiHead()
 	return CentiHeadPool::GetCentiHead();
 }
 
-void CentiHeadFactory::RemoveCentiHead(CentipedeHead * const head)
-{
-	CentiHeadPool::RecycleCentiBody(head);
-}
-
 void CentiHeadFactory::EndWave()
 {
 	CentiHeadPool::EndWave();

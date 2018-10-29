@@ -13,14 +13,14 @@
 #include "ScoreManager.h"
 
 CentipedeHead::CentipedeHead()
-	:currentDirectionState(nullptr), animationCounter(0), active(false), prevDirection(0), yCounter(0)
+	:currentDirectionState(nullptr), animationCounter(0), prevDirection(0), yCounter(0), speed(2)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
 	this->sprite.SetAnimation(SPRITE_BEGIN, SPRITE_END);
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
-	this->sprite.setScale(0.f, 0.f);
+	this->sprite.setScale(2.f, 2.f);
 
 	SetCollider(this->sprite, this->bitmap, true);
 
@@ -57,10 +57,8 @@ void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, Cen
 
 void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction, const bool &setDirection)
 {
-	this->active = true;
 	this->position = pos;
 
-	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(pos);
 
 	RegisterCollision<CentipedeHead>(*this);
@@ -71,17 +69,14 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 
 void CentipedeHead::Update()
 {
-	if (!active)
-		return;
-
 	++animationCounter;
 
-	this->position.x += (this->currentDirectionState->GetOffsetArray()).coloffset * CENTI_SPEED;
-	this->position.y += (this->currentDirectionState->GetOffsetArray()).rowoffset * CENTI_SPEED;
+	this->position.x += (this->currentDirectionState->GetOffsetArray()).coloffset * speed;
+	this->position.y += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
 
 	if (this->currentDirectionState->GetOffsetArray().rowoffset != 0) //we are moving in the Y
 	{
-		yCounter += (this->currentDirectionState->GetOffsetArray()).rowoffset * CENTI_SPEED;
+		yCounter += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
 
 		if (yCounter % SPRITE_SIZE == 0)
 		{
@@ -103,7 +98,7 @@ void CentipedeHead::Update()
 	}
 
 	this->sprite.setPosition(this->position);
-
+	
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
 }
@@ -117,9 +112,18 @@ void CentipedeHead::Collide(Bullet * const bullet)
 {
 	bullet->RemoveBullet(); //remove the bullet
 
-	this->RemoveHead(); //remove the head from screen, and recycle
+	this->MarkForDestroy(); //remove the head from screen, and recycle
 
 	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)
+}
+
+void CentipedeHead::Destroy()
+{	
+	DeregisterCollision<CentipedeHead>(*this);
+
+	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
+
+	//CentiHeadManager::RemoveCentiHead(this); //recycle
 }
 
 sf::Vector2f CentipedeHead::GetPosition()
@@ -137,13 +141,13 @@ CentiMovementDirectionEnum CentipedeHead::GetDirectionEnum()
 	return CentiMovementDirectionEnum::Error;
 }
 
-void CentipedeHead::Collision(Bullet * bullet)
+/*void CentipedeHead::Collision(Bullet * bullet)
 {
 	bullet->RemoveBullet();
 	this->RemoveHead();
 	MushroomManager::AttemptSpawnShroom(this->GetPosition());
 	ScoreManager::SendScoreCmd(this->pDeath);
-}
+}*/
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 {
@@ -220,14 +224,12 @@ void CentipedeHead::SetupBodies(OffsetArray direction, int numBodies)
 	}
 }
 
-void CentipedeHead::RemoveHead()
+/*void CentipedeHead::RemoveHead()
 {
 	//remove from screen
-	this->sprite.setScale(0.f, 0.f);
 	DeregisterCollision<CentipedeHead>(*this);
-	this->active = false;
 
 	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
 
 	CentiHeadManager::RemoveCentiHead(this); //recycle
-}
+}*/

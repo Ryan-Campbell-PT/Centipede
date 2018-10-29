@@ -32,11 +32,12 @@ public:
 	///all the links are already defined, we just need to get the right direction to go, and where to start
 	///the boolean is meant for whether the centipede itself should determine its direction, or if an outside source will handle that
 	void InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction, const bool &setDirection = true);
-
+	//todo: speed not currenly in the api
 	virtual void Update() override;
 	virtual void Draw() override;
 	virtual void Collide(GameObject * const go) {};
 	virtual void Collide(Bullet * const bullet);
+	virtual void Destroy() override;
 
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
 
@@ -50,7 +51,7 @@ public:
 	CentiMovementDirectionEnum GetDirectionEnum(); ///this is the direction, but tranfered to enum
 
 	virtual void Collision(GameObject *go) override {};
-	virtual void Collision(Bullet * bullet);
+	//virtual void Collision(Bullet * bullet);
 
 
 	sf::Vector2f GetPosition();
@@ -60,7 +61,7 @@ private:
 	///this function will apply the number of bodies connected to the head, at the creation of the head
 	void SetupBodies(OffsetArray direction, int numBodies);
 	
-	void RemoveHead();
+	//void RemoveHead();
 
 	sf::Vector2f position;
 	AnimatedSprite sprite;
@@ -73,8 +74,6 @@ private:
 
 	unsigned int animationCounter;
 	float speed;
-
-	bool active;
 
 	unsigned int yCounter;
 	ScoreCmd* pDeath;

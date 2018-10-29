@@ -10,7 +10,6 @@ class CentiHeadFactory
 {
 public:
 	static CentipedeHead* GetCentiHead();
-	static void RemoveCentiHead(CentipedeHead *const head);
 
 	CentiHeadFactory &operator=(const CentiHeadFactory &c) = delete;
 	CentiHeadFactory(const CentiHeadFactory &c) = delete;

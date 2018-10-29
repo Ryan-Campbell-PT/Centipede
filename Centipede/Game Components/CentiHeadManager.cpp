@@ -13,8 +13,9 @@ void CentiHeadManager::InitializeCentipede(const int numBodies, const float cent
 		const int numSoloHeads, const float soloHeadSpeed)
 {
 	GetInstance()->SetApi(numBodies, centiSpeed, numSoloHeads, soloHeadSpeed);
-	auto head = CentiHeadFactory::GetCentiHead();
 
+	auto head = CentiHeadFactory::GetCentiHead();
+	head->RegisterToCurrentScene();
 	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), numBodies, MoveSFM::downThenLeft);
 	instance->numActiveCenti++;
 }
@@ -24,16 +25,16 @@ CentipedeHead* CentiHeadManager::GetCentiHead()
 	return CentiHeadFactory::GetCentiHead();
 }
 
-void CentiHeadManager::RemoveCentiHead(CentipedeHead * const head)
+/*void CentiHeadManager::RemoveCentiHead(CentipedeHead * const head)
 {
-	CentiHeadFactory::RemoveCentiHead(head);
 	if(--GetInstance()->numActiveCenti <= 0) 
 		WaveManager::EndWave(); //end round if there are no centipedes remaining
-}
+}*/
 
 void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f & pos, const CentipedeDirectionState & direction)
 {
 	GetInstance()->numActiveCenti++;
+	head->RegisterToCurrentScene();
 	head->InitializeHead(pos, direction);
 }
 
