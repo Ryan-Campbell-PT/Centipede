@@ -16,6 +16,7 @@ public:
 	static void DeInitializeSpider();
 
 	static void RemoveSpider(Spider * const spider);
+	static void SetTimer();
 
 	SpiderManager(const SpiderManager &s) = delete;
 	SpiderManager& operator = (const SpiderManager &) = delete;

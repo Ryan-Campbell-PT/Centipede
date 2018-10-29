@@ -4,12 +4,13 @@
 #include <list>
 
 class Spider;
+class GameObject;
 
 class SpiderPool
 {
 public:
 	static Spider *GetSpider();
-	static void RecycleSpider(Spider*const spider);
+	static void RecycleSpider(GameObject *spider);
 
 	SpiderPool(const SpiderPool &pool) = delete;
 	SpiderPool operator = (const SpiderPool &pool) = delete;
@@ -22,7 +23,7 @@ private:
 
 	static SpiderPool *instance;
 
-	std::list<Spider*> recycledSpiders; ///this list will be used for purposes like healing broken mushrooms at new level
+	std::list<Spider*> recycledSpiders;
 
 };
 

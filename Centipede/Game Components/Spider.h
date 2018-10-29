@@ -23,24 +23,21 @@ public:
 	Spider &operator=(const Spider &c) = delete;
 	Spider(const Spider &c) = delete;
 
-	virtual void Update() override;
-	virtual void Draw() override;
-
-	virtual void Collision(GameObject *) {};
+	virtual void Collision(GameObject *) override{};
 	virtual void Collision(Bullet * bullet);
 	virtual void Collision(Mushroom * shroom);
 	virtual void Collision(Ship *ship);
-	
+	virtual void Update() override;
+	virtual void Draw() override;
+	virtual void Destroy() override;
+
 	void SpawnSpider(sf::Vector2f pos, const float spiderSpeed);
 
 private:
-	void RemoveSpider();
-
 	sf::Vector2f position;
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
-	bool active;
 	float SPEED = 1.5f;
 	int boundsTopY, boundsBottomY;
 	int counterNum;

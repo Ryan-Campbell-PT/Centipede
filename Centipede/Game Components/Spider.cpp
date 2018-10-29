@@ -9,7 +9,6 @@
 #include "ScoreManager.h"
 #include "MovementCollection.h"
 
-//TODO: turn gameobjects functions into the Destory() and Initalize() GO objects
 Spider::Spider()
 {
 	bitmap = ResourceManager::GetTextureBitmap("Spider");
@@ -17,11 +16,9 @@ Spider::Spider()
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	this->sprite.SetAnimation(0, 7);
-	this->sprite.setScale(0.f, 0.f);
+	this->sprite.setScale(1.4f, 1.4f);
 
 	SetCollider(sprite, bitmap, true);
-
-	this->active = false;
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::SpiderKilled);
 }
@@ -33,9 +30,6 @@ Spider::~Spider()
 
 void Spider::Update()
 {
-	if (!active)
-		return;
-
 	this->position.y += this->spiderState->GetOffsetArray().rowoffset * SPEED;
 	this->position.x += this->spiderState->GetOffsetArray().coloffset * SPEED;
 
@@ -54,7 +48,10 @@ void Spider::Update()
 
 	if(this->position.x > WindowManager::MainWindow.getSize().x || 
 		this->position.x < 0)
-		this->RemoveSpider();
+	{
+		this->MarkForDestroy();
+		SpiderManager::SetTimer();
+	}
 
 	this->sprite.setPosition(this->position);
 }
@@ -64,13 +61,17 @@ void Spider::Draw()
 	WindowManager::MainWindow.draw(this->sprite);
 }
 
+void Spider::Destroy()
+{
+	this->DeregisterCollision<Spider>(*this);
+}
+
 void Spider::SpawnSpider(const sf::Vector2f pos, const float spiderSpeed)
 {
 	this->position = pos;
 	this->sprite.setPosition(pos);
 
 	this->SPEED = spiderSpeed;
-	this->active = true;
 	this->counterNum = rand() % RANDOM_CHANGE_NUM;
 	this->boundsTopY = static_cast<int>(pos.y - Y_BOUNDS);
 	this->boundsBottomY = static_cast<int>(pos.y + Y_BOUNDS);
@@ -80,15 +81,15 @@ void Spider::SpawnSpider(const sf::Vector2f pos, const float spiderSpeed)
 	else
 		this->spiderState = &Spider_MoveFSM::diagonalDownLeft;
 
-	this->sprite.setScale(1.4f, 1.4f);
 	RegisterCollision<Spider>(*this);
 }
 
 void Spider::Collision(Bullet *bullet)
 {
 	bullet->RemoveBullet();
-	RemoveSpider();
+	SpiderManager::RemoveSpider(this);
 	ScoreManager::SendScoreCmd(this->pDeath);
+	this->MarkForDestroy();
 }
 
 void Spider::Collision(Mushroom *shroom)
@@ -101,13 +102,4 @@ void Spider::Collision(Mushroom *shroom)
 void Spider::Collision(Ship * ship)
 {
 	ship->DestroyShip();
-}
-
-void Spider::RemoveSpider()
-{
-	this->active = false;
-	this->DeregisterCollision<Spider>(*this);
-	this->sprite.setScale(0.f, 0.f);
-
-	SpiderManager::RemoveSpider(this);
 }

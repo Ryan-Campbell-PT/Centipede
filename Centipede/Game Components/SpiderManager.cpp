@@ -17,7 +17,7 @@ void SpiderManager::InitializeSpider(const float timeToSpawn, const float spider
 {
 	GetInstance()->spiderSpeed = spiderSpeed;
 
-	GetInstance()->timeToSpawn = timeToSpawn;
+	instance->timeToSpawn = timeToSpawn;
 	instance->SetAlarm(0, timeToSpawn);
 }
 
@@ -46,19 +46,19 @@ void SpiderManager::SpawnSpider()
 	pos.y = static_cast<float>(rand() % WindowManager::MainWindow.getSize().y); //anywhere on the y axis
 
 	auto spider = SpiderFactory::GetSpider();
+	spider->RegisterToCurrentScene();
 	spider->SpawnSpider(pos, this->spiderSpeed);
-	ConsoleMsg::WriteLine("spider spawned");
+
 }
 
 void SpiderManager::RemoveSpider(Spider * const spider)
 {
 	SpiderFactory::RemoveSpider(spider);
+}
 
-	if (instance->active)
-	{
-		instance->SetAlarm(0, instance->timeToSpawn);
-		ConsoleMsg::WriteLine("removed spider, setting alarm");
-	}
+void SpiderManager::SetTimer()
+{
+	GetInstance()->SetAlarm(0, instance->timeToSpawn);
 }
 
 void SpiderManager::EndWave()
@@ -68,6 +68,5 @@ void SpiderManager::EndWave()
 
 void SpiderManager::Alarm0()
 {
-	ConsoleMsg::WriteLine("alarm 0 reached");
 	this->SpawnSpider();
 }

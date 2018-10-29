@@ -7,7 +7,10 @@ Spider * SpiderPool::GetSpider()
 {
 	Spider * spider;
 	if (GetInstance()->recycledSpiders.empty())
+	{
 		spider = new Spider;
+		spider->SetExternalManagement(RecycleSpider);
+	}
 
 	else
 	{
@@ -18,9 +21,9 @@ Spider * SpiderPool::GetSpider()
 	return spider;
 }
 
-void SpiderPool::RecycleSpider(Spider*const spider)
+void SpiderPool::RecycleSpider(GameObject *spider)
 {
-	GetInstance()->recycledSpiders.push_front(spider);
+	GetInstance()->recycledSpiders.push_front(static_cast<Spider*>(spider));
 }
 
 

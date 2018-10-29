@@ -1,8 +1,9 @@
 level 1
 
 centiBodyCount: 1
-fleaActive yes
-fleaSpawn 15
+spiderActive yes
+spiderSpawn 3
+spiderSpeed 1.4
 _
 
 level 2
