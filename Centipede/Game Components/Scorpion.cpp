@@ -13,7 +13,7 @@ Scorpion::Scorpion()
 	this->sprite.SetAnimation(0, 3);
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
-	this->sprite.setScale(0.f, 0.f);
+	//this->sprite.setScale(0.f, 0.f);
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::ScorpionKilled);
 
@@ -27,10 +27,7 @@ Scorpion::~Scorpion()
 
 void Scorpion::Update()
 {
-	if (!active)
-		return;
-
-	if(++counter % SPRITE_REFRESH == 0)
+	if (++counter % SPRITE_REFRESH == 0)
 		this->sprite.NextFrame();
 
 	if (spawnOnLeft)
@@ -38,7 +35,10 @@ void Scorpion::Update()
 		this->position.x += Game::FrameTime() * SPEED;
 
 		if (this->position.x > WindowManager::MainWindow.getSize().x)
-			RemoveScorpion();
+		{
+			this->MarkForDestroy();
+			ScorpionManager::SetTimer();
+		}
 	}
 
 	else
@@ -46,7 +46,10 @@ void Scorpion::Update()
 		this->position.x -= Game::FrameTime() * SPEED;
 
 		if (this->position.x < 0)
-			RemoveScorpion();
+		{
+			this->MarkForDestroy();
+			ScorpionManager::SetTimer();
+		}
 	}
 
 	this->sprite.setPosition(this->position);
@@ -61,24 +64,25 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 {
 	this->position = pos;
 	this->sprite.setPosition(pos);
-	
-	this->active = true;
+
 	this->spawnOnLeft = pos.x < SPRITE_SIZE;
-	this->sprite.setScale(1.f, 1.f);
+	//this->sprite.setScale(1.f, 1.f);
 
 	RegisterCollision<Scorpion>(*this);
 }
 
 void Scorpion::Collision(Bullet * bullet)
 {
-	RemoveScorpion();
 	bullet->RemoveBullet();
 	ScoreManager::SendScoreCmd(this->pDeath);
+	//ScorpionManager::RemoveScorpion(this); //let the manager handle recyling
+	ScorpionManager::SetTimer(); //because it was destroyed by the bullet, we can spawn again
+	this->MarkForDestroy(); //remove from screen/teal
 }
 
 void Scorpion::Collision(Mushroom * shroom)
 {
-	if(shroom->GetState() == MushroomState::Healthy)
+	if (shroom->GetState() == MushroomState::Healthy)
 		shroom->SetState(MushroomState::Poison);
 }
 
@@ -87,16 +91,22 @@ void Scorpion::Collision(Ship * ship)
 	ship->DestroyShip();
 }
 
+void Scorpion::Destroy()
+{
+	//i dont want to handle setting the timer in the destroy method, because 
+	//not every time the scorp is destroyed (like end of level) do we want it spawning again
+	this->DeregisterCollision<Scorpion>(*this);
+}
+
 void Scorpion::SetSpawnSide(bool b)
 {
 	spawnOnLeft = b;
 }
 
-void Scorpion::RemoveScorpion()
+/*void Scorpion::RemoveScorpion()
 {
 	this->active = false;
-	this->DeregisterCollision<Scorpion>(*this);
 	this->sprite.setScale(0.f, 0.f);
 
-	ScorpionManager::RemoveScorpion(this);
 }
+*/

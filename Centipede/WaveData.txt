@@ -1,19 +1,20 @@
 level 1
 
 centiBodyCount: 1
-
+scorpionActive yes
+scorpionSpawn 3
 _
 
 level 2
 
 centiBodyCount 2
-spiderActive false
-scorpionActive true
+spiderActive no
+scorpionActive yes
 
 _
 
 level 3
 
 centiBodyCount 3
-spiderActive true
-scorpionActive true
+spiderActive yes
+scorpionActive yes

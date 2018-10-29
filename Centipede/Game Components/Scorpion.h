@@ -25,20 +25,20 @@ public:
 
 	void SpawnScorpion(sf::Vector2f &pos);
 
-	virtual void Collision(GameObject *) {};
+	virtual void Collision(GameObject *) override {};
 	virtual void Collision(Bullet *bullet);
 	virtual void Collision(Mushroom *shroom);
 	virtual void Collision(Ship *ship);
+	virtual void Destroy() override;
 
 	///this method will be changed in teh future, but will suffice for now
 	void SetSpawnSide(bool b);
 private:
-	void RemoveScorpion();
+	//void RemoveScorpion();
 	int counter;
 	sf::Vector2f position;
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
-	bool active;
 	const int SPEED = 200;
 
 	bool spawnOnLeft;

@@ -1,6 +1,7 @@
 #include "ScorpionManager.h"
 #include "ScorpionFactory.h"
 #include "GameGrid.h"
+#include "Scorpion.h"
 
 #include <random>
 
@@ -11,6 +12,7 @@ void ScorpionManager::Alarm0()
 	SpawnScorpion();
 	ConsoleMsg::WriteLine("alarm 0 reached");
 }
+
 
 void ScorpionManager::SpawnScorpion() const
 {
@@ -26,9 +28,10 @@ void ScorpionManager::SpawnScorpion() const
 	auto pos = sf::Vector2f(static_cast<float>(x), static_cast<float>(rand() % WindowManager::MainWindow.getSize().y));
 	GameGrid::GetCenterYPosition(pos);
 
-	ScorpionFactory::SpawnScorpion(pos);
-	ConsoleMsg::WriteLine("scorp spawned");
-	//GetInstance()->scorpion->SetSpawnSide(leftSide); //this is requried to spawn the scorp for whatever reason. todo: fix later
+	//ScorpionFactory::SpawnScorpion(pos);
+	auto scorp = ScorpionFactory::GetScorpion();
+	scorp->RegisterToCurrentScene();
+	scorp->SpawnScorpion(pos);
 }
 
 void ScorpionManager::InitializeScorpion(const float timeToSpawnInSeconds)
@@ -44,16 +47,9 @@ void ScorpionManager::DeInitializeScorpion()
 	instance->AlarmCancel(0);
 }
 
-void ScorpionManager::RemoveScorpion(Scorpion * const scorpion)
+void ScorpionManager::SetTimer()
 {
-	ScorpionFactory::RemoveScorpion(scorpion);
-	
-	//whenever the scorp is removed, set an alarm for when it should spawn again
-	if(instance)
-	{
-		GetInstance()->SetAlarm(0, instance->timeToSpawn);
-		ConsoleMsg::WriteLine("scorp removed, setting alarm");
-	}
+	GetInstance()->SetAlarm(0, instance->timeToSpawn);
 }
 
 void ScorpionManager::EndWave()

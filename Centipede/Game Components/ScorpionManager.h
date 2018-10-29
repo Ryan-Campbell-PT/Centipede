@@ -11,10 +11,10 @@ public:
 	static void InitializeScorpion(const float timeToSpawnInSeconds);
 	static void DeInitializeScorpion();
 
-	static void RemoveScorpion(Scorpion * const scorpion);
-
 	ScorpionManager(const ScorpionManager &s) = delete;
 	ScorpionManager& operator = (const ScorpionManager &) = delete;
+	static void SetTimer();
+
 	static void EndWave();
 
 private:

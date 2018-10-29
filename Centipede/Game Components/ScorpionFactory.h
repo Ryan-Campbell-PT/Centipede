@@ -4,15 +4,12 @@
 #include "TEAL/CommonElements.h"
 #include "Observee.h"
 
-#define SCORPIONSPAWN 25
-
 class Scorpion;
 
 class ScorpionFactory 
 {
 public:
-	static void SpawnScorpion(sf::Vector2f pos);
-	static void RemoveScorpion(Scorpion * const scorpion);
+	static Scorpion* GetScorpion();
 
 	ScorpionFactory &operator=(const ScorpionFactory &c) = delete;
 	ScorpionFactory(const ScorpionFactory &c) = delete;
@@ -20,7 +17,7 @@ public:
 private:
 	static ScorpionFactory* GetInstance();
 	
-	ScorpionFactory();
+	ScorpionFactory() = default;
 	virtual ~ScorpionFactory();	
 
 	static ScorpionFactory* instance;
