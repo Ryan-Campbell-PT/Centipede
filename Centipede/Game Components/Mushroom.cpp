@@ -5,13 +5,9 @@
 #include "ScoreManager.h"
 #include "ScoreCmd.h"
 
-#if TESTING
-int Mushroom::mushroomNum = 0;
-#endif
-
 Mushroom::Mushroom(sf::Vector2f v)
 {
-	Mushroom();
+	Mushroom(); //this is just to run all the info in the default
 
 	this->InitializeMushroom(v, MushroomState::Healthy);
 }
@@ -22,15 +18,10 @@ Mushroom::Mushroom()
 	this->bitmap = ResourceManager::GetTextureBitmap("Mushroom");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Mushroom"), 4, 2); //4 and 2 show the first mushroom, undamaged
 	SetCollider(sprite, bitmap, true);
-	RegisterCollision<Mushroom>(*this);
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	//then handle positioning and housekeeping
-
+	
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::MushroomKilled);
-
-#if TESTING
-	this->thisMushroomNum = mushroomNum++;
-#endif
 }
 
 void Mushroom::Draw()
@@ -38,28 +29,33 @@ void Mushroom::Draw()
 	WindowManager::MainWindow.draw(this->sprite);
 }
 
+void Mushroom::Destroy()
+{
+	MushroomManager::RemoveMushroom(this);
+	DeregisterCollision<Mushroom>(*this);
+}
+
 void Mushroom::InitializeMushroom(sf::Vector2f const & pos, MushroomState state)
 {
 	this->sprite.setPosition(pos);
+	this->sprite.setScale(1.f, 1.f);
 	position = pos;
 
 	this->health = 0; //setting the positions of a mushroom assumes its full health
 	this->SetState(state);
-
-#if TESTING
-	ConsoleMsg::WriteLine("Mushroom number:" + Tools::ToString(this->mushroomNum));
-#endif
+	RegisterCollision<Mushroom>(*this);
 }
 
 void Mushroom::TakeDamage()
 {
 	//progress the health of the mushroom, while also moving the animation one forward
 	this->sprite.SetAnimation(health, ++health);
-
+	
 	if (health % 4 == 0) //modulous to compensate for poison or healthy
 	{
-		this->RemoveMushroom();
+		this->sprite.setScale(0.f, 0.f); //this is to avoid the 1 frame glitch
 		ScoreManager::SendScoreCmd(this->pDeath); //only send score death when shot, not just destroyed
+		this->MarkForDestroy();
 	}
 
 	//this->MainSprite.SetAnimation(1, 2); //second mushroom state
@@ -98,14 +94,6 @@ void Mushroom::HealSelf()
 Mushroom::~Mushroom()
 {
 	delete this->pDeath;
-}
-
-void Mushroom::RemoveMushroom()
-{
-	this->sprite.setScale(0.f, 0.f); //remove it from the screen
-	this->DeregisterCollision(*this);
-
-	MushroomManager::RemoveMushroom(this);
 }
 
 sf::Vector2f Mushroom::GetPosition() const

@@ -11,7 +11,6 @@ MushroomFactory * MushroomFactory::instance = nullptr;
 
 void MushroomFactory::RemoveMushroom(Mushroom * shroom)
 {
-	MushroomPool::RecycleMushroom(shroom);
 	GetInstance()->UpdateObservees();
 }
 
@@ -40,10 +39,9 @@ void MushroomFactory::UpdateObservees()
 		o->ObserverUpdate(MushroomPool::GetNumActiveShrooms());
 }
 
-void MushroomFactory::SpawnMushroom(sf::Vector2f pos)
+Mushroom *MushroomFactory::GetMushroom()
 {
-	auto shroom = MushroomPool::GetMushroom();
-	shroom->InitializeMushroom(pos);
+	return MushroomPool::GetMushroom();
 }
 
 void MushroomFactory::AddObservee(Observer * o)

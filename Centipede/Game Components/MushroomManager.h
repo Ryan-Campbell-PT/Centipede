@@ -24,7 +24,7 @@ private:
 	virtual ~MushroomManager() { delete instance; }
 
 	static MushroomManager * GetInstance();
-	void SpawnMushroom(sf::Vector2f &pos);
+	void SpawnMushroom(sf::Vector2f &pos) const;
 
 	static MushroomManager* instance;
 };

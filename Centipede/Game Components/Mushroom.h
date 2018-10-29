@@ -19,12 +19,12 @@ public:
 	explicit Mushroom(sf::Vector2f v);
 	Mushroom();
 
-	virtual void Draw();
+	virtual void Draw() override;
+	virtual void Destroy() override;
 
 	///this will handle necessary code to put the mushroom on screen
 	void InitializeMushroom(sf::Vector2f const & pos, MushroomState state = MushroomState::Healthy);
 	void TakeDamage();
-	void RemoveMushroom();
 
 	sf::Vector2f GetPosition() const;
 	MushroomState GetState() const; //this will be used for the centipede

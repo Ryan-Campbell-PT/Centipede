@@ -27,7 +27,10 @@ Mushroom * MushroomPool::GetMushroom()
 	Mushroom* shroom;
 
 	if (GetInstance()->inactiveMushroomList.empty())
+	{
 		shroom = new Mushroom;
+		shroom->SetExternalManagement(RecycleMushroom);
+	}
 
 	else
 	{
@@ -39,10 +42,10 @@ Mushroom * MushroomPool::GetMushroom()
 	return shroom;
 }
 
-void MushroomPool::RecycleMushroom(Mushroom * shroom)
+void MushroomPool::RecycleMushroom(GameObject * shroom)
 {
-	GetInstance()->activeMushroomList.remove(shroom);
-	GetInstance()->inactiveMushroomList.push_front(shroom);
+	GetInstance()->activeMushroomList.remove(static_cast<Mushroom*>(shroom));
+	GetInstance()->inactiveMushroomList.push_front(static_cast<Mushroom*>(shroom));
 }
 
 size_t MushroomPool::GetNumActiveShrooms()

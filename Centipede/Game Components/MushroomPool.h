@@ -4,12 +4,13 @@
 #include <list>
 
 class Mushroom;
+class GameObject;
 
 class MushroomPool
 {
 public:
 	static Mushroom *GetMushroom();
-	static void RecycleMushroom(Mushroom *shroom);
+	static void RecycleMushroom(GameObject *shroom);
 	
 	static size_t GetNumActiveShrooms();
 	static std::list<Mushroom*> GetActiveMushroomList();

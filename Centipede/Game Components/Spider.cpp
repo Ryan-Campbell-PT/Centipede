@@ -96,7 +96,7 @@ void Spider::Collision(Mushroom *shroom)
 {
 	this->spiderState = this->spiderState->GetNextState();
 
-	shroom->RemoveMushroom();
+	shroom->MarkForDestroy();
 }
 
 void Spider::Collision(Ship * ship)

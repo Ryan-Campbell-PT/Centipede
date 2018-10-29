@@ -3,9 +3,7 @@
 
 #include <list>
 
-#include "Factory.h"
 #include "Observee.h"
-#include "TEAL/CommonElements.h"
 
 class Mushroom;
 class Observer;
@@ -13,14 +11,14 @@ class Observer;
 ///this class will keep track of all mushrooms on screen and control whether they should be created
 
 ///the MushroomFactory handles whether a Mushroom can be placed in an area. The Mushroom itself handles actually setting the grid's data
-class MushroomFactory : public Factory, public Observee
+class MushroomFactory : public Observee
 {
 public:
 	///remove all mushrooms created by the factory, and then delete itself
 	virtual ~MushroomFactory();
 
 	///spawns a new mushroom, or recycles one from the inactiveList
-	static void SpawnMushroom(sf::Vector2f pos);
+	static Mushroom* GetMushroom();
 
 	///takes the mushroom off the screen, and adds to a recycle list
 	static void RemoveMushroom(Mushroom *shroom);

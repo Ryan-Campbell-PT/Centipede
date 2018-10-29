@@ -4,34 +4,28 @@
 #include "MushroomPool.h"
 #include "Mushroom.h"
 
-MushroomManager* MushroomManager::instance = 0;
+MushroomManager* MushroomManager::instance = nullptr;
 
-void MushroomManager::InitializeMushroomField(int numShrooms)
+void MushroomManager::InitializeMushroomField(const int numShrooms)
 {
-	float x, y;
 	sf::Vector2f pos;
 
-	int windowX = static_cast<int>(WindowManager::MainWindow.getView().getSize().x);
-	int windowY = static_cast<int>(WindowManager::MainWindow.getView().getSize().y);
-	int gridUnoccupied = static_cast<int>(GameGridEnum::Unoccupied);
+	const int windowX = static_cast<int>(WindowManager::MainWindow.getView().getSize().x);
+	const int windowY = static_cast<int>(WindowManager::MainWindow.getView().getSize().y);
+	const int gridUnoccupied = static_cast<int>(GameGridEnum::Unoccupied);
 
-	//for now, mushroom spawning is randomized by the given grid set in GameGrid
 	for (int i = 0; i < numShrooms; ++i)
 	{
 		do
 		{
-			x = static_cast<float>(rand() % windowX);
-			y = static_cast<float>(rand() % windowY);
-		} while ((int)GameGrid::GetGridStatus(sf::Vector2f(x, y)) >= gridUnoccupied);
+			pos.x = static_cast<float>(rand() % windowX);
+			pos.y = static_cast<float>(rand() % windowY);
+		} while (static_cast<int>(GameGrid::GetGridStatus(pos)) >= gridUnoccupied);
 		//the choice to use >= 0 is b/c when the array space is unused, its garbage data, typically -ABigNumber
 		//so this tests whether its unusued, or Unoccupied
 
-		pos.x = static_cast<float>(x);
-		pos.y = static_cast<float>(y);
-
 		GetInstance()->SpawnMushroom(pos);
 	}
-
 }
 
 bool MushroomManager::AttemptSpawnShroom(sf::Vector2f pos)
@@ -60,16 +54,18 @@ void MushroomManager::EndWave()
 
 MushroomManager * MushroomManager::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new MushroomManager;
 
 	return instance;
 }
 
-void MushroomManager::SpawnMushroom(sf::Vector2f & pos)
+void MushroomManager::SpawnMushroom(sf::Vector2f & pos) const
 {
 	GameGrid::SetGridStatus(pos, GameGridEnum::Mushroom);
 	GameGrid::GetCenterGridPosition(pos);
 
-	MushroomFactory::SpawnMushroom(pos);
+	auto shroom = MushroomFactory::GetMushroom();
+	shroom->RegisterToCurrentScene();
+	shroom->InitializeMushroom(pos);
 }
