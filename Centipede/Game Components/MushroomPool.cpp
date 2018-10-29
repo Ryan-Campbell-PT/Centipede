@@ -36,6 +36,7 @@ Mushroom * MushroomPool::GetMushroom()
 	{
 		shroom = GetInstance()->inactiveMushroomList.front();
 		GetInstance()->inactiveMushroomList.pop_front();
+		shroom->RegisterToCurrentScene();
 	}
 
 	GetInstance()->activeMushroomList.push_back(shroom); //we can assume if someone is getting a shroom, its active

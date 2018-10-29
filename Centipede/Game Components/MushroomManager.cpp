@@ -66,6 +66,5 @@ void MushroomManager::SpawnMushroom(sf::Vector2f & pos) const
 	GameGrid::GetCenterGridPosition(pos);
 
 	auto shroom = MushroomFactory::GetMushroom();
-	shroom->RegisterToCurrentScene();
 	shroom->InitializeMushroom(pos);
 }

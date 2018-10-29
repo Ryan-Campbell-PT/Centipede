@@ -49,7 +49,6 @@ void FleaManager::SpawnFlea()
 	GameGrid::GetCenterGridPosition(pos); //center on the grid
 
 	auto flea = FleaFactory::GetFlea();
-	flea->RegisterToCurrentScene();
 	flea->SpawnFlea(pos);
 	fleaActive = true; ///make sure the game knows the flea is currently working
 }

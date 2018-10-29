@@ -19,6 +19,7 @@ CentipedeHead * CentiHeadPool::GetCentiHead()
 	{
 		head = GetInstance()->headList.front();
 		GetInstance()->headList.pop_front();
+		head->RegisterToCurrentScene();
 	}
 
 	return head;

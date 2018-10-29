@@ -17,6 +17,7 @@ Scorpion * ScorpionPool::GetScorpion()
 	{
 		scorpion = GetInstance()->recycledScorpions.front();
 		GetInstance()->recycledScorpions.pop_front();
+		scorpion->RegisterToCurrentScene();
 	}
 
 	return scorpion;

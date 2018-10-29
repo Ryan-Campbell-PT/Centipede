@@ -46,7 +46,6 @@ void SpiderManager::SpawnSpider()
 	pos.y = static_cast<float>(rand() % WindowManager::MainWindow.getSize().y); //anywhere on the y axis
 
 	auto spider = SpiderFactory::GetSpider();
-	spider->RegisterToCurrentScene();
 	spider->SpawnSpider(pos, this->spiderSpeed);
 
 }

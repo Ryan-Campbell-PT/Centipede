@@ -30,7 +30,6 @@ void ScorpionManager::SpawnScorpion() const
 
 	//ScorpionFactory::SpawnScorpion(pos);
 	auto scorp = ScorpionFactory::GetScorpion();
-	scorp->RegisterToCurrentScene();
 	scorp->SpawnScorpion(pos);
 }
 

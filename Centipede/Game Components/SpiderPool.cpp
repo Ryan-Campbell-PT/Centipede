@@ -16,6 +16,7 @@ Spider * SpiderPool::GetSpider()
 	{
 		spider = GetInstance()->recycledSpiders.front();
 		GetInstance()->recycledSpiders.pop_front();
+		spider->RegisterToCurrentScene();
 	}
 
 	return spider;

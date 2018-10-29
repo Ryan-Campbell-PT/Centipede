@@ -15,7 +15,6 @@ void CentiHeadManager::InitializeCentipede(const int numBodies, const float cent
 	GetInstance()->SetApi(numBodies, centiSpeed, numSoloHeads, soloHeadSpeed);
 
 	auto head = CentiHeadFactory::GetCentiHead();
-	head->RegisterToCurrentScene();
 	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), numBodies, MoveSFM::downThenLeft);
 	instance->numActiveCenti++;
 }
@@ -34,7 +33,6 @@ CentipedeHead* CentiHeadManager::GetCentiHead()
 void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f & pos, const CentipedeDirectionState & direction)
 {
 	GetInstance()->numActiveCenti++;
-	head->RegisterToCurrentScene();
 	head->InitializeHead(pos, direction);
 }
 

@@ -30,6 +30,7 @@ Flea * FleaPool::GetFlea()
 	{
 		flea = GetInstance()->fleaList.front();
 		GetInstance()->fleaList.pop_front();
+		flea->RegisterToCurrentScene();
 	}
 
 	return flea;
