@@ -9,11 +9,6 @@ Flea * FleaFactory::GetFlea()
 	return FleaPool::GetFlea();
 }
 
-void FleaFactory::RemoveFlea(Flea * const flea)
-{
-	FleaPool::RecycleFlea(flea);
-}
-
 FleaFactory * FleaFactory::GetInstance()
 {
 	if (instance == nullptr)

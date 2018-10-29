@@ -1,8 +1,8 @@
 level 1
 
 centiBodyCount: 1
-scorpionActive yes
-scorpionSpawn 3
+fleaActive yes
+fleaSpawn 15
 _
 
 level 2

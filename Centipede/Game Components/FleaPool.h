@@ -3,9 +3,8 @@
 
 #include <list>
 
-#include "TEAL/CommonElements.h"
-
 class Flea;
+class GameObject;
 
 class FleaPool
 {
@@ -15,7 +14,7 @@ public:
 	static Flea *GetFlea();
 	///if the flea needs to be removed, it will call this method
 	///this method strictly handles the recycling of it, nothing more
-	static void RecycleFlea(Flea *flea);
+	static void RecycleFlea(GameObject * flea);
 
 	FleaPool(const FleaPool &pool) = delete;
 	FleaPool operator = (const FleaPool &pool) = delete;

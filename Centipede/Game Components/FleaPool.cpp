@@ -1,7 +1,7 @@
 #include "FleaPool.h"
 #include "Flea.h"
 
-FleaPool* FleaPool::instance = 0;
+FleaPool* FleaPool::instance = nullptr;
 
 FleaPool::FleaPool()
 {
@@ -20,8 +20,11 @@ Flea * FleaPool::GetFlea()
 {
 	Flea* flea;
 
-	if (GetInstance()->fleaList.size() == 0)
+	if (GetInstance()->fleaList.empty())
+	{
 		flea = new Flea;
+		flea->SetExternalManagement(RecycleFlea);
+	}
 
 	else
 	{
@@ -32,9 +35,9 @@ Flea * FleaPool::GetFlea()
 	return flea;
 }
 
-void FleaPool::RecycleFlea(Flea * flea)
+void FleaPool::RecycleFlea(GameObject * flea)
 {
-	GetInstance()->fleaList.push_back(flea);
+	GetInstance()->fleaList.push_back(static_cast<Flea*>(flea));
 
 }
 

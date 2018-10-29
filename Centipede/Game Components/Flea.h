@@ -20,12 +20,12 @@ public:
 	Flea &operator=(const Flea &c) = delete;
 	Flea(const Flea &c) = delete;
 
-
 	virtual void Update() override;
 	virtual void Draw() override;
-	virtual void Collision(GameObject* o) {};
+	virtual void Collision(GameObject* o) override{};
 	virtual void Collision(Bullet *b);
 	virtual void Collision(Ship *ship);
+	virtual void Destroy() override;
 
 	void SpawnFlea(sf::Vector2f pos);
 	void SetSpeed(const int &speed);
@@ -45,8 +45,6 @@ private:
 	int speed;
 
 	FleaState *state;
-	//this variable should be changed in the future when figuring out how to only call 
-	bool active;
 	ScoreCmd *pDeath;
 	bool destroyed;
 };

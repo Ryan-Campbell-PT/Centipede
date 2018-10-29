@@ -14,14 +14,13 @@
 //TODO: there is a lot of deleting of state in this. figure out a way to modify tht
 //so there isnt much allocation and deletion
 Flea::Flea()
-	:state(0), active(false), speed(FLEASTATE1), destroyed(false)
+	:state(nullptr), speed(FLEASTATE1), destroyed(false)
 {
 	bitmap = ResourceManager::GetTextureBitmap("Flea");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Flea"), 4, 2);
+	this->SetCollider(this->sprite, this->bitmap, true);
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
-
-	this->sprite.setScale(0.f, 0.f);
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::FleaKilled);
 }
@@ -34,16 +33,11 @@ Flea::~Flea()
 
 void Flea::Update()
 {
-	//this will have to be changed in the future. for now this will work
-	if (!active)
-		return;
-
 	this->position.y += speed;
 	this->sprite.setPosition(this->position);
 
-
 	if (this->position.y > WindowManager::MainWindow.getView().getSize().y)
-		RemoveFlea();
+		this->MarkForDestroy();
 
 	else
 		this->state->StateAction(this);
@@ -65,15 +59,17 @@ void Flea::Collision(Ship * ship)
 	ship->DestroyShip();
 }
 
+void Flea::Destroy()
+{
+	this->DeregisterCollision<Flea>(*this);
+	FleaManager::SetNotActive();
+}
+
 void Flea::SpawnFlea(sf::Vector2f pos)
 {
-	this->active = true;
 	this->position = pos;
 	this->sprite.setPosition(pos);
 
-	this->sprite.setScale(1.f, 1.f);
-
-	this->SetCollider(this->sprite, this->bitmap, true);
 	this->RegisterCollision<Flea>(*this);
 
 	this->state = new FleaState1;
@@ -96,17 +92,14 @@ sf::Vector2f Flea::GetPosition() const
 }
 
 void Flea::RemoveFlea()
-{
-	this->active = false;
-	this->DeregisterCollision<Flea>(*this);
-	this->sprite.setScale(0.f, 0.f);
-	
-	FleaManager::RemoveFlea(this);
-
+{	
 	if(this->destroyed) //make sure the flea was actually shot, not just exceeded window size
+	{
 		ScoreManager::SendScoreCmd(this->pDeath);
+		this->MarkForDestroy();
+	}
 
-	delete this->state;
+	//delete this->state; //todo: this should be a fsm
 }
 
 void Flea::SetState(FleaState * state)

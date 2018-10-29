@@ -12,7 +12,8 @@ public:
 	///if the flea will not be spawning, we will simply remove it from observing
 	static void DeInitializeFlea();
 
-	static void RemoveFlea(Flea *const flea);
+	///this will tell the game that there isnt a flea remaining, so its able to spawn again
+	static void SetNotActive();
 
 	virtual void ObserverUpdate(int numShrooms) override;
 
@@ -30,7 +31,7 @@ private:
 
 	static FleaManager *instance;
 
-	int numShroomsToSpawn;
+	int numShroomsToSpawn; ///will indicate how many shrooms have to be on screen to spawn
 	bool fleaActive; ///because there can only be 1 flea active, we simply have a bool to know if it is
 };
 

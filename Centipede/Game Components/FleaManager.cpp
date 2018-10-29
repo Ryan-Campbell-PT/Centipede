@@ -15,7 +15,7 @@ void FleaManager::EndWave()
 }
 
 FleaManager::FleaManager()
-	:fleaActive(false)
+	:numShroomsToSpawn(0), fleaActive(false)
 {
 	MushroomFactory::AddNewObserver(this);
 }
@@ -30,10 +30,9 @@ void FleaManager::DeInitializeFlea()
 	MushroomFactory::RemoveCurrentObserver(GetInstance());
 }
 
-void FleaManager::RemoveFlea(Flea * const flea)
+void FleaManager::SetNotActive()
 {
 	GetInstance()->fleaActive = false;
-	FleaFactory::RemoveFlea(flea);
 }
 
 void FleaManager::ObserverUpdate(int numShrooms)
@@ -50,8 +49,9 @@ void FleaManager::SpawnFlea()
 	GameGrid::GetCenterGridPosition(pos); //center on the grid
 
 	auto flea = FleaFactory::GetFlea();
+	flea->RegisterToCurrentScene();
 	flea->SpawnFlea(pos);
-	fleaActive = true;
+	fleaActive = true; ///make sure the game knows the flea is currently working
 }
 
 FleaManager * FleaManager::GetInstance()
