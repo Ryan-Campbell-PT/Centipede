@@ -62,7 +62,7 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 	this->sprite.setPosition(pos);
 
 	RegisterCollision<CentipedeHead>(*this);
-
+	
 	this->currentDirectionState = &direction;
 	yCounter = 0;
 }
@@ -108,22 +108,11 @@ void CentipedeHead::Draw()
 	WindowManager::MainWindow.draw(this->sprite);
 }
 
-void CentipedeHead::Collide(Bullet * const bullet)
-{
-	bullet->RemoveBullet(); //remove the bullet
-
-	this->MarkForDestroy(); //remove the head from screen, and recycle
-
-	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)
-}
-
 void CentipedeHead::Destroy()
 {	
 	DeregisterCollision<CentipedeHead>(*this);
 
 	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
-
-	//CentiHeadManager::RemoveCentiHead(this); //recycle
 }
 
 sf::Vector2f CentipedeHead::GetPosition()
@@ -139,6 +128,15 @@ void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFr
 CentiMovementDirectionEnum CentipedeHead::GetDirectionEnum()
 {
 	return CentiMovementDirectionEnum::Error;
+}
+
+void CentipedeHead::Collision(Bullet * bullet)
+{
+	bullet->RemoveBullet(); //remove the bullet
+
+	this->MarkForDestroy(); //remove the head from screen, and recycle
+
+	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)
 }
 
 /*void CentipedeHead::Collision(Bullet * bullet)

@@ -9,7 +9,6 @@
 #include "ScoreManager.h"
 
 CentipedeBody::CentipedeBody()
-	:active(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
@@ -17,6 +16,7 @@ CentipedeBody::CentipedeBody()
 	this->sprite.SetAnimation(SPRITE_BEGIN, SPRITE_END);
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
+	this->sprite.setScale(2.f, 2.f);
 
 	SetCollider(this->sprite, this->bitmap, true);
 
@@ -28,14 +28,11 @@ CentipedeBody::CentipedeBody()
 void CentipedeBody::InitializeBody(sf::Vector2f const & pos, OffsetArray direction)
 {
 	this->position = pos;
-	this->active = true;
 	this->animationCounter = 0;
 
-	this->sprite.setScale(2.f, 2.f);
 	this->sprite.setPosition(this->position);
-	//this->bodyDirection = this->GetDirectionState(direction);
 	this->currentOffsetArray = direction;
-	//this->pastOffsetArray = OffsetArray(0,0);
+
 	RegisterCollision<CentipedeBody>(*this);
 }
 
@@ -62,9 +59,6 @@ void CentipedeBody::Draw()
 
 void CentipedeBody::Update()
 {
-	if (!active)
-		return;
-
 	++animationCounter;
 
 	this->position.x += this->currentOffsetArray.coloffset * CENTI_SPEED;
@@ -80,23 +74,19 @@ void CentipedeBody::Collision(Bullet * const bullet)
 {
 	MushroomManager::AttemptSpawnShroom(this->position);
 	bullet->RemoveBullet();
-	this->RemoveBodyFromScreen();
 	CentiBodyManager::SetBehindBodyToHead(this);
 	ScoreManager::SendScoreCmd(this->pDeath);
+	this->MarkForDestroy();
+}
+
+void CentipedeBody::Destroy()
+{
+	DeregisterCollision <CentipedeBody>(*this);
 }
 
 sf::Vector2f CentipedeBody::GetPosition()
 {
 	return this->position;
-}
-
-void CentipedeBody::RemoveBodyFromScreen()
-{
-	DeregisterCollision <CentipedeBody>(*this);
-	this->sprite.setScale(0.f, 0.f);
-	this->active = false;
-
-	CentiBodyFactory::RemoveCentiBody(this);
 }
 
 void CentipedeBody::ChangePos()

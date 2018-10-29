@@ -6,16 +6,16 @@
 #include "MushroomManager.h"
 #include "CentipedeDirectionState.h"
 
-CentiBodyManager * CentiBodyManager::instance = 0;
+CentiBodyManager * CentiBodyManager::instance = nullptr;
 
 CentipedeBody * CentiBodyManager::GetCentiBody()
 {
-	return CentiBodyFactory::GetCentiBody(GetInstance());
+	return CentiBodyFactory::GetCentiBody();
 }
 
 CentipedeBody * CentiBodyManager::GetInitializedCentiBody(sf::Vector2f const & pos, OffsetArray const & direction)
 {
-	auto body = CentiBodyFactory::GetCentiBody(GetInstance());
+	auto body = CentiBodyFactory::GetCentiBody();
 	body->InitializeBody(pos, direction);
 
 	return body;
@@ -27,7 +27,7 @@ void CentiBodyManager::SetBehindBodyToHead(CentipedeBody * body)
 		if (body->GetWhoYoureFollowing()) //whoever you were following
 			body->GetWhoYoureFollowing()->SetWhosFollowingYou(nullptr); //tell them nobody is following anymore
 
-	GetInstance()->SetBodyToHead(static_cast<CentipedeBody*>(body->GetWhosFollowingYou()));
+	SetBodyToHead(static_cast<CentipedeBody*>(body->GetWhosFollowingYou()));
 }
 
 void CentiBodyManager::SetBodyToHead(CentipedeBody * body)
@@ -35,7 +35,7 @@ void CentiBodyManager::SetBodyToHead(CentipedeBody * body)
 	if (body == nullptr)
 		return; //nobody is following you, no need to do anything
 
-	body->RemoveBodyFromScreen(); //take off screen, no longer care about body
+	body->MarkForDestroy(); //take off screen, no longer care about body
 	auto head = CentiHeadManager::GetCentiHead();
 	const auto direction = GetInstance()->GetBodysHeadDirection(body);
 

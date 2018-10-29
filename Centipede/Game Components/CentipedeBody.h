@@ -32,14 +32,13 @@ public:
 	virtual void Collision(GameObject *g) override {};
 	virtual void Collision(Bullet * bullet);
 
-	void RemoveBodyFromScreen(); ///this will handle sprite, active, and recycling
-
 	//void SendDataBack();
 	void GetDataFromFront(OffsetArray offset);
 
 private:
 	virtual void Draw() override;
 	virtual void Update() override;
+	virtual void Destroy() override;
 	
 	void ChangePos();
 	///this method will convert head directions into the simplified states the body's use
@@ -54,7 +53,6 @@ private:
 
 	sf::Vector2f currentOffset;
 
-	bool active;
 	unsigned int animationCounter;
 
 	ScoreCmd *pDeath;

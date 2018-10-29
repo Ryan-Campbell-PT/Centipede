@@ -35,8 +35,6 @@ public:
 	//todo: speed not currenly in the api
 	virtual void Update() override;
 	virtual void Draw() override;
-	virtual void Collide(GameObject * const go) {};
-	virtual void Collide(Bullet * const bullet);
 	virtual void Destroy() override;
 
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
@@ -51,7 +49,7 @@ public:
 	CentiMovementDirectionEnum GetDirectionEnum(); ///this is the direction, but tranfered to enum
 
 	virtual void Collision(GameObject *go) override {};
-	//virtual void Collision(Bullet * bullet);
+	virtual void Collision(Bullet * bullet);
 
 
 	sf::Vector2f GetPosition();

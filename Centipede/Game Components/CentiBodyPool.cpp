@@ -1,27 +1,31 @@
 #include "CentiBodyPool.h"
 #include "CentipedeBody.h"
 
-CentiBodyPool * CentiBodyPool::instance = 0;
+CentiBodyPool * CentiBodyPool::instance = nullptr;
 
 CentipedeBody * CentiBodyPool::GetCentiBody()
 {
 	CentipedeBody* body;
 
-	if (GetInstance()->bodyList.size() == 0)
+	if (GetInstance()->bodyList.empty())
+	{
 		body = new CentipedeBody;
+		body->SetExternalManagement(RecycleCentiBody);
+	}
 
 	else
 	{
 		body = GetInstance()->bodyList.front();
 		GetInstance()->bodyList.pop_front();
+		body->RegisterToCurrentScene();
 	}
 
 	return body;
 }
 
-void CentiBodyPool::RecycleCentiBody(CentipedeBody * const body)
+void CentiBodyPool::RecycleCentiBody(GameObject * const body)
 {
-	GetInstance()->bodyList.push_front(body);
+	GetInstance()->bodyList.push_front(static_cast<CentipedeBody*>(body));
 }
 
 CentiBodyPool::~CentiBodyPool()
@@ -34,7 +38,7 @@ CentiBodyPool::~CentiBodyPool()
 
 CentiBodyPool * CentiBodyPool::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new CentiBodyPool;
 
 	return instance;

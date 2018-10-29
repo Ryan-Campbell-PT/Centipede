@@ -1,21 +1,16 @@
 #include "CentiBodyFactory.h"
 #include "CentiBodyPool.h"
 
-CentiBodyFactory * CentiBodyFactory::instance = 0;
+CentiBodyFactory * CentiBodyFactory::instance = nullptr;
 
-CentipedeBody * CentiBodyFactory::GetCentiBody(const CentiBodyManager * const d)
+CentipedeBody * CentiBodyFactory::GetCentiBody()
 {
 	return CentiBodyPool::GetCentiBody();
 }
 
-void CentiBodyFactory::RemoveCentiBody(CentipedeBody * const body)
-{
-	CentiBodyPool::RecycleCentiBody(body);
-}
-
 CentiBodyFactory * CentiBodyFactory::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new CentiBodyFactory;
 
 	return instance;
