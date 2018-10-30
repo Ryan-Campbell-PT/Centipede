@@ -20,8 +20,6 @@ class ShipMode;
 class Ship : public GameObject
 {
 public:
-	static void InitalizeShip();
-
 	virtual void Update();
 	virtual void Draw();
 	virtual void Destroy();

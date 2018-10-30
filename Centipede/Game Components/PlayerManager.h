@@ -7,6 +7,7 @@
 
 class PlayerInput;
 struct PlayerData;
+class ShipMode;
 
 class PlayerManager
 {
@@ -18,8 +19,14 @@ public:
 	static void AddScore(const int score);
 	static void PlayerDeath();
 	static void SetPlayerControls(PlayerInput *input);
+	static void SetPlayerMode(PlayerData::PlayerID player);
 
 private:
+	enum class PlayerMode
+	{
+		Attractor, OnePlayer, TwoPlayer	
+	};
+
 	PlayerManager();
 	void assignPlayerData(PlayerData::PlayerID player);
 	static PlayerManager* GetInstance();
@@ -29,7 +36,7 @@ private:
 
 	static PlayerManager* instance;
 	PlayerData currentPlayer;
-
+	PlayerMode playerMode;
 	std::vector<PlayerData> listOfPlayers;
 };
 

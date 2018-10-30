@@ -20,8 +20,10 @@ void PlayerManager::AddScore(const int score)
 
 void PlayerManager::PlayerDeath()
 {
-	//todo swap to next player if avaliable
-	if(--GetInstance()->currentPlayer.playerLives <= 0)
+	if(GetInstance()->playerMode == PlayerMode::TwoPlayer)
+		instance->SwapPlayer();
+
+	if (--instance->currentPlayer.playerLives <= 0)
 	{
 		//todo: save info for current player
 
@@ -33,6 +35,30 @@ void PlayerManager::SetPlayerControls(PlayerInput * input)
 	delete GetInstance()->currentPlayer.playerInput;
 
 	instance->currentPlayer.playerInput = input;
+}
+
+void PlayerManager::SetPlayerMode(PlayerData::PlayerID player)
+{
+	switch (player)
+	{
+	case PlayerData::PlayerID::Ai:
+		GetInstance()->playerMode = PlayerMode::Attractor;
+		instance->InitializePlayer(PlayerData::PlayerID::Ai);
+		break;
+
+	case PlayerData::PlayerID::Player1:
+		GetInstance()->playerMode = PlayerMode::OnePlayer;
+		instance->InitializePlayer(PlayerData::PlayerID::Player1);
+		break;
+
+	case PlayerData::PlayerID::Player2:
+		GetInstance()->playerMode = PlayerMode::TwoPlayer; //todo: change this to two player mode
+		instance->InitializePlayer(PlayerData::PlayerID::Player2);
+		break;
+
+	default:
+		break;
+	}
 }
 
 PlayerManager::PlayerManager()
@@ -84,7 +110,7 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 		break;
 
 	case PlayerData::PlayerID::Player2:
-		Ship::SetState(&ShipFSM::playerMode);
+		Ship::SetState(&ShipFSM::playerMode); //todo: change this to two player mode
 		break;
 
 	default:
@@ -101,8 +127,8 @@ void PlayerManager::SwapPlayer()
 	this->currentPlayer.playerScore = ScoreManager::GetCurrentScore();
 	this->currentPlayer.waveLevel = WaveManager::GetCurrentWave();
 
-	for(size_t i = 0; i < this->listOfPlayers.size() - 1; ++i)
-		if(this->listOfPlayers[i].player == this->currentPlayer.player)
+	for (size_t i = 0; i < this->listOfPlayers.size() - 1; ++i)
+		if (this->listOfPlayers[i].player == this->currentPlayer.player)
 			this->listOfPlayers[i] = this->currentPlayer;
 }
 

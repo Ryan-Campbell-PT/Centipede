@@ -93,6 +93,9 @@ void WaveManager::loadLevelInfo(const char * filePath)
 	}
 
 	myFile.close();
+
+	//at the beginnning of the game, we assume we are in attractor mode
+	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
 }
 
 float WaveManager::getFloatInfo(const std::string& line) const
@@ -157,7 +160,6 @@ void WaveManager::endWave() const
 void WaveManager::setCritterSettings(const WaveManager::Wave wave)
 {
 	//todo: may want to as well set collision depeding on whos avalble
-	Ship::InitalizeShip(); //always setup the ship
 	CentiHeadManager::InitializeCentipede(wave.info.centiBodyCount, wave.info.centiSpeed,
 		wave.info.numSoloHeads, wave.info.centiSoloHeadSpeed); //assign info for centi
 

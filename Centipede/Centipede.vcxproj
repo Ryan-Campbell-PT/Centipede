@@ -128,6 +128,7 @@
     <ClCompile Include="Game Components\KeysFont.cpp" />
     <ClCompile Include="Game Components\LeftSpiderState.cpp" />
     <ClCompile Include="Game Components\Level2.cpp" />
+    <ClCompile Include="Game Components\LevelAttractor.cpp" />
     <ClCompile Include="Game Components\MoveFSM.cpp" />
     <ClCompile Include="Game Components\MovementCollection.cpp" />
     <ClCompile Include="Game Components\Mushroom.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="Game Components\KeysFont.h" />
     <ClInclude Include="Game Components\LeftSpiderState.h" />
     <ClInclude Include="Game Components\Level2.h" />
+    <ClInclude Include="Game Components\LevelAttractor.h" />
     <ClInclude Include="Game Components\MoveFSM.h" />
     <ClInclude Include="Game Components\MovementCollection.h" />
     <ClInclude Include="Game Components\Mushroom.h" />

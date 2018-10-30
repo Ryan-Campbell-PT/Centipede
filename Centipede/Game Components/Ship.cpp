@@ -71,12 +71,6 @@ void Ship::Destroy()
 	DeregisterCollision<Ship>(*this);
 }
 
-void Ship::InitalizeShip()
-{
-	GetInstance();
-	PlayerManager::InitializePlayer(PlayerData::PlayerID::Player1); //for now, will just implement as player1
-}
-
 void Ship::Update()
 {
 	if (sf::Keyboard::isKeyPressed(playerInput->keyLeft->GetCommand())) position.x -= this->SPEED;
