@@ -23,6 +23,8 @@ public:
 	static void SendScoreCmd(ScoreCmd* c);
 	static void ProcessScores();
 
+	static void SetCurrentScore(const int score);
+	static int GetCurrentScore();
 
 private:
 	//distance values
@@ -48,13 +50,12 @@ private:
 	static const int SpiderDistNear = COLUMN * SPRITE_SIZE * spiderDistNearMultiplier;
 
 	ScoreManager();
-
 	static ScoreManager * GetInstance();
 
 	void PrivProcessScore();
 
 	std::queue<ScoreCmd*> QueueCmds;
-	
+	int currentScore;
 	static ScoreManager* instance;
 
 };

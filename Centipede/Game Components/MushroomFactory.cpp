@@ -59,6 +59,11 @@ MushroomFactory::~MushroomFactory()
 	delete instance;
 }
 
+std::list<Mushroom*>* MushroomFactory::GetCurrentLayout()
+{
+	return MushroomPool::GetCurrentLayout();
+}
+
 MushroomFactory * MushroomFactory::GetInstance()
 {
 	if (MushroomFactory::instance == 0)

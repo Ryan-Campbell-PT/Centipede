@@ -2,10 +2,12 @@
 #include "ScoreValueCmd.h"
 #include "ScoreByDistanceCmd.h"
 #include "PlayerManager.h"
+#include "TextEditor.h"
 
 ScoreManager * ScoreManager::instance = nullptr;
 
 ScoreManager::ScoreManager()
+	:currentScore(0)
 {
 }
 
@@ -50,7 +52,9 @@ void ScoreManager::AddScore(int val)
 	//you have to get the players score first, then add to it the value added
 	//GetInstance()->scoreMap.at(PlayerManager::GetCurrentPlayer()) += val;
 	//todo: may want to keep a local score value, and then send over the data to the player after they lose.
-	PlayerManager::AddScore(val);
+	//PlayerManager::AddScore(val);
+	GetInstance()->currentScore += val;
+	TextEditor::CurrentScore(instance->currentScore);
 }
 
 ScoreCmd * ScoreManager::GetScoreCommand(ScoreEvents ev)
@@ -107,4 +111,14 @@ void ScoreManager::SendScoreCmd(ScoreCmd * c)
 void ScoreManager::ProcessScores()
 {
 	GetInstance()->PrivProcessScore();
+}
+
+void ScoreManager::SetCurrentScore(const int score)
+{
+	GetInstance()->currentScore = score;
+}
+
+int ScoreManager::GetCurrentScore()
+{
+	return GetInstance()->currentScore;
 }

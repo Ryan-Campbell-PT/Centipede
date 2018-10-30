@@ -6,6 +6,9 @@
 #include "PlayerData.h"
 #include "PlayerInput.h"
 #include "TextEditor.h"
+#include "MushroomManager.h"
+#include "ScoreManager.h"
+#include "WaveManager.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
 
@@ -15,10 +18,14 @@ void PlayerManager::AddScore(const int score)
 	TextEditor::CurrentScore(instance->currentPlayer.playerScore);
 }
 
-void PlayerManager::TakeDamage()
+void PlayerManager::PlayerDeath()
 {
-	GetInstance()->currentPlayer.playerLives--;
-	//todo:after this, we want to initialize the next player
+	//todo swap to next player if avaliable
+	if(--GetInstance()->currentPlayer.playerLives <= 0)
+	{
+		//todo: save info for current player
+
+	}
 }
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
@@ -90,6 +97,13 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 
 void PlayerManager::SwapPlayer()
 {
+	this->currentPlayer.mushroomSetup = MushroomManager::GetCurrentLayout();
+	this->currentPlayer.playerScore = ScoreManager::GetCurrentScore();
+	this->currentPlayer.waveLevel = WaveManager::GetCurrentWave();
+
+	for(size_t i = 0; i < this->listOfPlayers.size() - 1; ++i)
+		if(this->listOfPlayers[i].player == this->currentPlayer.player)
+			this->listOfPlayers[i] = this->currentPlayer;
 }
 
 PlayerManager * PlayerManager::GetInstance()

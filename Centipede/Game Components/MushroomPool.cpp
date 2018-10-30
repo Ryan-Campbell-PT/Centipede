@@ -58,3 +58,8 @@ std::list<Mushroom*> MushroomPool::GetActiveMushroomList()
 {
 	return GetInstance()->activeMushroomList;
 }
+
+std::list<Mushroom*>* MushroomPool::GetCurrentLayout()
+{
+	return &GetInstance()->activeMushroomList;
+}

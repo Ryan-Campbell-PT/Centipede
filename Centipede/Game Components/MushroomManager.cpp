@@ -52,6 +52,11 @@ void MushroomManager::EndWave()
 	MushroomFactory::RepairMushrooms();
 }
 
+std::list<Mushroom*>* MushroomManager::GetCurrentLayout()
+{
+	return MushroomFactory::GetCurrentLayout();
+}
+
 MushroomManager * MushroomManager::GetInstance()
 {
 	if (instance == nullptr)

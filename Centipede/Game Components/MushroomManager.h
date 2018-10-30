@@ -15,6 +15,7 @@ public:
 	static void RemoveMushroom(Mushroom * const shroom);
 	///this will be used for whatever happens when the game ends
 	static void EndWave();
+	static std::list<Mushroom*>* GetCurrentLayout();
 
 	MushroomManager(const MushroomManager &s) = delete;
 	MushroomManager operator = (const MushroomManager &) = delete;
@@ -28,4 +29,5 @@ private:
 
 	static MushroomManager* instance;
 };
+
 #endif // !MUSHROOM_MANAGER

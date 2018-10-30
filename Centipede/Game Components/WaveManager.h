@@ -2,6 +2,7 @@
 #define WAVEMANAGER_H
 #include <xstring>
 #include <list>
+#include "PlayerManager.h"
 
 class WaveManager
 {
@@ -11,6 +12,7 @@ public:
 	static void SetupLevel(const int &levelNum);
 	///this function will be used as a cleanup whenever the wave has ended
 	static void EndWave();
+	static int GetCurrentWave();
 
 private:
 	struct Wave
@@ -56,8 +58,6 @@ private:
 
 	int currentLevel;
 	const size_t MAX_SIZE = 100;
-
-
 
 	std::list<WaveManager::Wave> levelList; //this will hold all the level info for quick access
 };

@@ -14,16 +14,18 @@ public:
 
 	static PlayerData::PlayerID GetCurrentPlayer();
 	static void InitializePlayer(PlayerData::PlayerID player);
-	static void SwapPlayer();
 
 	static void AddScore(const int score);
-	static void TakeDamage();
+	static void PlayerDeath();
 	static void SetPlayerControls(PlayerInput *input);
 
 private:
 	PlayerManager();
 	void assignPlayerData(PlayerData::PlayerID player);
 	static PlayerManager* GetInstance();
+
+	///when swapping players, the info will be stored for further use
+	void SwapPlayer(); 
 
 	static PlayerManager* instance;
 	PlayerData currentPlayer;

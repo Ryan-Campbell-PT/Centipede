@@ -115,6 +115,11 @@ int WaveManager::getIntInfo(const std::string& line) const
 			line.size()));
 }
 
+int WaveManager::GetCurrentWave()
+{
+	return GetInstance()->currentLevel;
+}
+
 void WaveManager::LoadLevelInfo(const char * filePath)
 {
 	GetInstance()->loadLevelInfo(filePath);
@@ -128,6 +133,7 @@ void WaveManager::SetupLevel(const int & levelNum)
 			curWave = level;
 
 	GetInstance()->setCritterSettings(curWave);
+	instance->currentLevel = levelNum;
 }
 
 void WaveManager::EndWave()

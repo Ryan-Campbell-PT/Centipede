@@ -19,6 +19,7 @@ public:
 
 	///spawns a new mushroom, or recycles one from the inactiveList
 	static Mushroom* GetMushroom();
+	static std::list<Mushroom*>* GetCurrentLayout();
 
 	///takes the mushroom off the screen, and adds to a recycle list
 	static void RemoveMushroom(Mushroom *shroom);
@@ -26,6 +27,7 @@ public:
 	static void AddNewObserver(Observer *o);
 	static void RemoveCurrentObserver(Observer * o);
 	static void RepairMushrooms(); ///will be called on every game over to regenerate mushrooms and get points
+
 
 private:
 	MushroomFactory() = default;
