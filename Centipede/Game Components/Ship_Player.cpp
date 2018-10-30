@@ -1,11 +1,13 @@
 ﻿#include "Ship_Player.h"
 #include "TEAL/CommonElements.h"
+#include "PlayerInput.h"
+#include "KeyboardCommand.h"
 
-void Ship_Player::MoveShip(sf::Vector2f & pos)
-{	
-	//if (sf::Keyboard::isKeyPressed(this->keyLeft->GetCommand())) position.x -= this->SPEED;
-	//if (sf::Keyboard::isKeyPressed(this->keyUp->GetCommand())) position.y -= this->SPEED;
-	//if (sf::Keyboard::isKeyPressed(this->keyDown->GetCommand())) position.y += this->SPEED;
-	//if (sf::Keyboard::isKeyPressed(this->keyRight->GetCommand())) position.x += this->SPEED;
+void Ship_Player::MoveShip(const PlayerInput * input, sf::Vector2f &pos, const float &speed)
+{
+	if (sf::Keyboard::isKeyPressed(input->keyLeft->GetCommand())) pos.x -= speed;
+	if (sf::Keyboard::isKeyPressed(input->keyUp->GetCommand())) pos.y -= speed;
+	if (sf::Keyboard::isKeyPressed(input->keyDown->GetCommand())) pos.y += speed;
+	if (sf::Keyboard::isKeyPressed(input->keyRight->GetCommand())) pos.x += speed;
 
 }

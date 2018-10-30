@@ -3,8 +3,9 @@
 
 class KeyboardCommand;
 
-struct PlayerInput
+class PlayerInput
 {
+public:
 	//all the avaliable commands a player can use
 	KeyboardCommand *keyDown, *keyUp, *keyRight, *keyLeft, *keyFire;
 };

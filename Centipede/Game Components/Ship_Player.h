@@ -6,7 +6,7 @@
 class Ship_Player : public ShipMode
 {
 public:
-	virtual void MoveShip(sf::Vector2f &pos) override;
+	virtual void MoveShip(const PlayerInput * input, sf::Vector2f &pos, const float &speed) override;
 
 };
 

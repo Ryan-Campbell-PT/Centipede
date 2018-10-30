@@ -8,13 +8,14 @@
 
 #include "../Ship.h"
 
-#include "../Level1.h"
 #include "../WaveManager.h"
+#include "../LevelAttractor.h"
+#include "../Level1.h"
 
 void ResourceManager::LoadAllResources()
 {
-	SetStartScene( new Level1 );
-
+	SetStartScene( new Level1 ); //todo: change to attactor
+	
 	AddTexture("PlayerShip", "blaster.png");
 	AddTexture("Bullet", "bullet.png");
 	AddTexture("CentiBody", "centipede_segment.png");

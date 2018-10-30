@@ -31,6 +31,13 @@
 
 #include <iostream>
 #include <fstream>
+#include "Level2.h"
+
+Level1::Level1()
+	:currentLevelNum(1)
+{
+	MushroomManager::InitializeMushroomField(15);
+}
 
 void Level1::Initialize()
 {
@@ -54,7 +61,6 @@ void Level1::Initialize()
 	d->Thing();
 	*/
 	WaveManager::SetupLevel(1);
-	MushroomManager::InitializeMushroomField(15);
 	
 	//TextEditor::CurrentScore(368);
 

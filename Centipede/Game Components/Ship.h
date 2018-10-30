@@ -23,17 +23,17 @@ public:
 	virtual void Update();
 	virtual void Draw();
 	virtual void Destroy();
-	
-	virtual void Collision( GameObject *other ){};
+
+	virtual void Collision(GameObject *other) {};
 	virtual void Collision(Widget *other);
 	virtual void Collision(Mushroom* other);
 	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey);
 
 	static sf::Vector2f GetPosition();
-	static void SetState(const ShipMode *state);
+	static void SetState(ShipMode *state);
 
 	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
-	void DestroyShip(); 
+	void DestroyShip();
 
 private:
 	Ship(); //singleton instance
@@ -48,11 +48,11 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	sf::Sound FireSnd;
-	
+
 	static Ship * GetInstance();
 
 	PlayerInput *playerInput;
-	const ShipMode	*shipMode;
+	ShipMode *shipMode;
 };
 
 #endif _Ship

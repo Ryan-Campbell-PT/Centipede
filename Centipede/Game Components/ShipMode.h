@@ -8,10 +8,10 @@ class ShipMode
 {
 	//REMEMBER ALL CONST
 public:
-	virtual void MoveShip(sf::Vector2f &pos) {} ///this will be used for attractor mode
-	virtual void MoveShip(PlayerInput *input) {} ///this will be used for playerinput
+	virtual void MoveShip(const PlayerInput * input, sf::Vector2f &pos, const float &speed) {} ///this will be used for attractor mode
+	//virtual void MoveShip() {} ///this will be used for playerinput
 
-	static ShipMode* GetShipMode();
+	//static ShipMode* GetShipMode();
 };
 
 #endif // SHIPMODE_H

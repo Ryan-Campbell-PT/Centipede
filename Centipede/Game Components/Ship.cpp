@@ -15,10 +15,12 @@
 #include "PlayerManager.h"
 #include "PlayerInput.h"
 #include "ScoreManager.h"
+#include "ShipMode.h"
 
 Ship *Ship::instance = nullptr;
 
 Ship::Ship()
+	:shipMode(nullptr)
 {
 	bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
 	this->sprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
@@ -42,7 +44,6 @@ Ship::Ship()
 	playerInput = new PlayerInput;
 	SetKeyboardCommands();
 	RegisterInput( InputFlags::KeyPressed ); // Recieve single-presses events
-
 }
 
 void Ship::SetKeyboardCommands() const
@@ -73,6 +74,7 @@ void Ship::Destroy()
 
 void Ship::Update()
 {
+#if false
 	if (sf::Keyboard::isKeyPressed(playerInput->keyLeft->GetCommand())) position.x -= this->SPEED;
 	if (sf::Keyboard::isKeyPressed(playerInput->keyUp->GetCommand())) position.y -= this->SPEED;
 	if (sf::Keyboard::isKeyPressed(playerInput->keyDown->GetCommand())) position.y += this->SPEED;
@@ -87,6 +89,12 @@ void Ship::Update()
 		{
 		}//FireSnd.play(); //only play the sound if the bullet can be spawned
 	}
+
+#elif true
+	this->shipMode->MoveShip(this->playerInput, this->position, this->SPEED);
+
+
+#endif
 
 	Tools::Clamp<float>(
 		position.x,
@@ -146,8 +154,9 @@ sf::Vector2f Ship::GetPosition()
 	return GetInstance()->position;
 }
 
-void Ship::SetState(const ShipMode * state)
+void Ship::SetState(ShipMode * state)
 {
+	delete GetInstance()->shipMode;
 	GetInstance()->shipMode = state;
 }
 

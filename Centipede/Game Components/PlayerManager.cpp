@@ -99,6 +99,7 @@ PlayerData::PlayerID PlayerManager::GetCurrentPlayer()
 
 void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 {
+#if false
 	switch (player)
 	{
 	case PlayerData::PlayerID::Ai:
@@ -117,6 +118,26 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 		break;
 	}
 
+#elif true
+	switch (player)
+	{
+	case PlayerData::PlayerID::Ai:
+		Ship::SetState(new Ship_Ai);
+		break;
+
+	case PlayerData::PlayerID::Player1:
+		Ship::SetState(new Ship_Player);
+		break;
+
+	case PlayerData::PlayerID::Player2:
+		Ship::SetState(new Ship_Player); //todo: change this to two player mode
+		break;
+
+	default:
+		break;
+	}
+#endif
+
 	GetInstance()->assignPlayerData(player);
 
 }
@@ -127,9 +148,23 @@ void PlayerManager::SwapPlayer()
 	this->currentPlayer.playerScore = ScoreManager::GetCurrentScore();
 	this->currentPlayer.waveLevel = WaveManager::GetCurrentWave();
 
+	PlayerData tmp;
+	if(this->currentPlayer.player == PlayerData::PlayerID::Player1)
+		tmp.player = PlayerData::PlayerID::Player2;
+	else if(this->currentPlayer.player == PlayerData::PlayerID::Player2)
+		tmp.player = PlayerData::PlayerID::Player1;
+
 	for (size_t i = 0; i < this->listOfPlayers.size() - 1; ++i)
+	{
+		//change the data of the list to the current players information
 		if (this->listOfPlayers[i].player == this->currentPlayer.player)
 			this->listOfPlayers[i] = this->currentPlayer;
+		//look around for the player mode we are looking for
+		if(tmp.player == this->listOfPlayers[i].player)
+			tmp = this->listOfPlayers[i];
+	}
+
+	this->currentPlayer = tmp;
 }
 
 PlayerManager * PlayerManager::GetInstance()
