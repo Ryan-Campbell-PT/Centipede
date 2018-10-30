@@ -22,28 +22,28 @@ Ship *Ship::instance = nullptr;
 Ship::Ship()
 	:shipMode(nullptr)
 {
-	bitmap = ResourceManager::GetTextureBitmap("PlayerShip"); 
+	bitmap = ResourceManager::GetTextureBitmap("PlayerShip");
 	this->sprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
 
-	this->sprite.setOrigin( sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
+	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	this->sprite.setPosition(position);
-	
+
 	this->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f, WindowManager::MainWindow.getView().getSize().y * .9f);
-	
+
 	this->GunOffset = sf::Vector2f(0, 0);
-		
+
 	SetCollider(sprite, bitmap, true);
 	RegisterCollision<Ship>(*this);
 
-	FireSnd.setBuffer( ResourceManager::GetSound("Fire1")  );
+	FireSnd.setBuffer(ResourceManager::GetSound("Fire1"));
 	FireSnd.setPitch(2);
 	FireSnd.setVolume(25);
-	
+
 	SetDrawOrder(1000);
 
 	playerInput = new PlayerInput;
 	SetKeyboardCommands();
-	RegisterInput( InputFlags::KeyPressed ); // Recieve single-presses events
+	RegisterInput(InputFlags::KeyPressed); // Recieve single-presses events
 }
 
 void Ship::SetKeyboardCommands() const
@@ -80,7 +80,7 @@ void Ship::Update()
 	if (sf::Keyboard::isKeyPressed(playerInput->keyDown->GetCommand())) position.y += this->SPEED;
 	if (sf::Keyboard::isKeyPressed(playerInput->keyRight->GetCommand())) position.x += this->SPEED;
 	// Continuous key-down tests
-	
+
 	//may not want this in update sequence, one extra if that isnt necessary
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
@@ -113,7 +113,7 @@ void Ship::Update()
 
 void Ship::Collision(Widget *other)
 {
-	GameController::Instance().AddScore( other->GetValue() );
+	GameController::Instance().AddScore(other->GetValue());
 	other->MarkForDestroy();
 }
 
@@ -137,9 +137,9 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 	//	SpiderManager::SpawnSpider();
 
 	if (k == sf::Keyboard::Key::Z) //just for testing purposes
-		if(PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Player1)
+		if (PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Player1)
 			PlayerManager::InitializePlayer(PlayerData::PlayerID::Player2);
-		
+
 		else
 			PlayerManager::InitializePlayer(PlayerData::PlayerID::Player1);
 
@@ -156,8 +156,7 @@ sf::Vector2f Ship::GetPosition()
 
 void Ship::SetState(ShipMode * state)
 {
-	if(!GetInstance()->shipMode)
-		delete instance->shipMode;
+	delete GetInstance()->shipMode;
 	instance->shipMode = state;
 }
 

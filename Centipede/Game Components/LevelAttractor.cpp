@@ -2,20 +2,17 @@
 #include "PlayerManager.h"
 #include "MushroomManager.h"
 
-LevelAttractor::LevelAttractor()
-{
-	MushroomManager::InitializeMushroomField(15);
-}
-
 void LevelAttractor::Initialize()
 {
 	//todo:
+	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
+	
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
 	MushroomManager::InitializeMushroomField(15);
 
 }
 
-void LevelAttractor::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
+/*void LevelAttractor::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
 {
 	if(k == sf::Keyboard::Num1)
 	{
@@ -26,4 +23,4 @@ void LevelAttractor::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, 
 	{
 		PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player2);
 	}//two player mode
-}
+}*/

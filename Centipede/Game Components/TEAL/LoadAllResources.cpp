@@ -14,7 +14,7 @@
 
 void ResourceManager::LoadAllResources()
 {
-	SetStartScene( new Level1 ); //todo: change to attactor
+	SetStartScene( new LevelAttractor ); //todo: change to attactor
 	
 	AddTexture("PlayerShip", "blaster.png");
 	AddTexture("Bullet", "bullet.png");
