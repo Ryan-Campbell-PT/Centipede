@@ -9,11 +9,11 @@
 class Level1 : public Scene
 {
 public:
-	Level1();
+	//Level1();
 	virtual void Initialize() override;
 
 private:
-	int currentLevelNum;
+	//int currentLevelNum;
 };
 
 #endif _Level1

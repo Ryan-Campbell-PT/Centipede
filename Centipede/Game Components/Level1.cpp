@@ -33,11 +33,11 @@
 #include <fstream>
 #include "Level2.h"
 
-Level1::Level1()
-	:currentLevelNum(1)
-{
-	MushroomManager::InitializeMushroomField(15);
-}
+//Level1::Level1()
+//	:currentLevelNum(1)
+//{
+//	//MushroomManager::InitializeMushroomField(15);
+//}
 
 void Level1::Initialize()
 {
@@ -60,9 +60,8 @@ void Level1::Initialize()
 	d->RegisterToCurrentScene();
 	d->Thing();
 	*/
+	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
 	WaveManager::SetupLevel(1);
-	
-	//TextEditor::CurrentScore(368);
 
 	CollisionTestPair<Ship, Mushroom>();
 

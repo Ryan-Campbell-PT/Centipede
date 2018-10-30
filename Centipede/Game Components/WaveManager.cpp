@@ -95,7 +95,7 @@ void WaveManager::loadLevelInfo(const char * filePath)
 	myFile.close();
 
 	//at the beginnning of the game, we assume we are in attractor mode
-	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
+	//PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
 }
 
 float WaveManager::getFloatInfo(const std::string& line) const

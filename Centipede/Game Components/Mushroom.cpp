@@ -7,7 +7,7 @@
 
 Mushroom::Mushroom(sf::Vector2f v)
 {
-	Mushroom(); //this is just to run all the info in the default
+	//Mushroom(); //this is just to run all the info in the default
 
 	this->InitializeMushroom(v, MushroomState::Healthy);
 }

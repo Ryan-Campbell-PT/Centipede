@@ -8,6 +8,9 @@ MushroomManager* MushroomManager::instance = nullptr;
 
 void MushroomManager::InitializeMushroomField(const int numShrooms)
 {
+	if(!MushroomPool::GetActiveMushroomList().empty())
+		return; //no need to make a mushroom field if there already is one
+
 	sf::Vector2f pos;
 
 	const int windowX = static_cast<int>(WindowManager::MainWindow.getView().getSize().x);

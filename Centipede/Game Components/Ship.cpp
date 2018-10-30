@@ -156,8 +156,9 @@ sf::Vector2f Ship::GetPosition()
 
 void Ship::SetState(ShipMode * state)
 {
-	delete GetInstance()->shipMode;
-	GetInstance()->shipMode = state;
+	if(!GetInstance()->shipMode)
+		delete instance->shipMode;
+	instance->shipMode = state;
 }
 
 void Ship::DestroyShip()
