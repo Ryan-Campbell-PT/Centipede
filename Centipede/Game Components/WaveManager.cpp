@@ -11,6 +11,7 @@
 #include "ScorpionManager.h"
 #include "SpiderManager.h"
 #include "MushroomManager.h"
+#include "TextEditor.h"
 
 WaveManager * WaveManager::instance = nullptr;
 
@@ -134,6 +135,7 @@ void WaveManager::SetupLevel(const int & levelNum)
 
 	GetInstance()->setCritterSettings(curWave);
 	instance->currentLevel = levelNum;
+	TextEditor::WaveLevel(levelNum);
 }
 
 void WaveManager::EndWave()

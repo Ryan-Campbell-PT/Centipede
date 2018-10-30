@@ -8,10 +8,12 @@ class TextEditor : public GameObject
 {
 public:
 	static void CurrentScore(const unsigned int score);
+	static void WaveLevel(const int levelNum);
 
 private:
 	TextEditor();
 	void ScoreToText(const unsigned int score);
+	void waveToText(const int levelNum);
 
 	virtual void Draw() override;
 
@@ -20,8 +22,10 @@ private:
 	static TextEditor* instance;
 	AwesomeFont myFont;
 
-	Glyph *glyphLink;
-	sf::Vector2f startingPos;
+	Glyph *scoreGlyph;
+	Glyph *waveGlyph;
+	sf::Vector2f startingPos_Score;
+	sf::Vector2f startingPos_Wave;
 	unsigned int sizeFont;
 	///this is simply to remove magic numbers
 	const int DEFAULT_SIZE = 6;

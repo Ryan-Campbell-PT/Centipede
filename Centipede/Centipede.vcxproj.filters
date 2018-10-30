@@ -31,9 +31,6 @@
     <Filter Include="Source Files\Game Components\Splash">
       <UniqueIdentifier>{6ac79bbe-3c8f-45bd-885e-e0098b109aec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Components\Level1">
-      <UniqueIdentifier>{80fd3264-c8c6-43dc-851e-bd919076c45a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Components\Factories">
       <UniqueIdentifier>{9bda28b6-dae2-4079-842b-06421ebd430d}</UniqueIdentifier>
     </Filter>
@@ -130,6 +127,12 @@
     <Filter Include="Source Files\Game Components\TextWriting\Fonts">
       <UniqueIdentifier>{b6a20914-41df-4cac-a537-3e01305923b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Levels">
+      <UniqueIdentifier>{e6215b75-dafa-4be0-b6ed-989ee7912097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Components\Levels\Level1">
+      <UniqueIdentifier>{80fd3264-c8c6-43dc-851e-bd919076c45a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -211,16 +214,16 @@
       <Filter>Source Files\Game Components\Asteroid</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\FinalScore.cpp">
-      <Filter>Source Files\Game Components\Level1</Filter>
+      <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\GameController.cpp">
-      <Filter>Source Files\Game Components\Level1</Filter>
+      <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\HUD.cpp">
-      <Filter>Source Files\Game Components\Level1</Filter>
+      <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\Level1.cpp">
-      <Filter>Source Files\Game Components\Level1</Filter>
+      <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\Splash.cpp">
       <Filter>Source Files\Game Components\Splash</Filter>
@@ -450,6 +453,9 @@
     <ClCompile Include="Game Components\TextEditor.cpp">
       <Filter>Source Files\Game Components\TextWriting</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\Level2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -552,16 +558,16 @@
       <Filter>Source Files\Game Components\Asteroid</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\FinalScore.h">
-      <Filter>Source Files\Game Components\Level1</Filter>
+      <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\GameController.h">
-      <Filter>Source Files\Game Components\Level1</Filter>
+      <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\HUD.h">
-      <Filter>Source Files\Game Components\Level1</Filter>
+      <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\Level1.h">
-      <Filter>Source Files\Game Components\Level1</Filter>
+      <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\Splash.h">
       <Filter>Source Files\Game Components\Splash</Filter>
@@ -862,6 +868,9 @@
     </ClInclude>
     <ClInclude Include="Game Components\TextEditor.h">
       <Filter>Source Files\Game Components\TextWriting</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Level2.h">
+      <Filter>Source Files\Game Components\Levels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
