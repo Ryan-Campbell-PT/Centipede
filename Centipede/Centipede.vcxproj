@@ -286,6 +286,8 @@
     <ClInclude Include="Game Components\Ship_Right.h" />
     <ClInclude Include="Game Components\Ship_Up.h" />
     <ClInclude Include="Game Components\SimpleTextDemo.h" />
+    <ClInclude Include="Game Components\SoundCmd.h" />
+    <ClInclude Include="Game Components\SoundManager.h" />
     <ClInclude Include="Game Components\Spider.h" />
     <ClInclude Include="Game Components\SpiderFactory.h" />
     <ClInclude Include="Game Components\SpiderManager.h" />

@@ -133,6 +133,9 @@
     <Filter Include="Source Files\Game Components\Levels\Level1">
       <UniqueIdentifier>{80fd3264-c8c6-43dc-851e-bd919076c45a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Sound">
+      <UniqueIdentifier>{e712d9dc-8910-480a-af2e-a0556d639da8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -460,7 +463,7 @@
       <Filter>Source Files\Game Components\Levels</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\HighScoreManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components\Score</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -883,6 +886,12 @@
     </ClInclude>
     <ClInclude Include="Game Components\HighScoreManager.h">
       <Filter>Source Files\Game Components\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SoundManager.h">
+      <Filter>Source Files\Game Components\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SoundCmd.h">
+      <Filter>Source Files\Game Components\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
