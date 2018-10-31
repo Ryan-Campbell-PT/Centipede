@@ -10,9 +10,11 @@ public:
 	virtual void MoveShip(const PlayerInput * input, sf::Vector2f &pos, const float &speed) override;
 
 private:
-	bool up, left, down, right;
+	bool up, left, down, right, stop;
 	float yTopBounds, yBottomBounds;
 	float xLeftBounds, xRightBounds;
+	unsigned int stopCounter;
+	int randomNum;
 };
 
 #endif // SHIP_AI_H

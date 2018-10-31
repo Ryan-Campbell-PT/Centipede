@@ -9,6 +9,7 @@ class TextEditor : public GameObject
 public:
 	static void CurrentScore(const unsigned int score);
 	static void WaveLevel(const int levelNum);
+	static void WriteText(const char &str, const sf::Vector2f &pos);
 
 private:
 	TextEditor();
@@ -29,6 +30,8 @@ private:
 	unsigned int sizeFont;
 	///this is simply to remove magic numbers
 	const int DEFAULT_SIZE = 6;
+
+	std::vector<Glyph> listOfGlyphs;
 };
 
 #endif // TEXTEDITOR_H

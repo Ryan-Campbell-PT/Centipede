@@ -459,6 +459,9 @@
     <ClCompile Include="Game Components\Level2.cpp">
       <Filter>Source Files\Game Components\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\HighScoreManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -877,6 +880,9 @@
     </ClInclude>
     <ClInclude Include="Game Components\LevelAttractor.h">
       <Filter>Source Files\Game Components\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\HighScoreManager.h">
+      <Filter>Source Files\Game Components\Score</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,13 @@ void TextEditor::WaveLevel(const int levelNum)
 	GetInstance()->waveToText(levelNum);
 }
 
+void TextEditor::WriteText(const char & str, const sf::Vector2f & pos)
+{
+	GetInstance()->listOfGlyphs.push_back(
+	instance->myFont.GetGlyph(str, pos)
+	);
+}
+
 void TextEditor::ScoreToText(const unsigned int score)
 {
 	auto scoreText = Tools::ToString(score);
