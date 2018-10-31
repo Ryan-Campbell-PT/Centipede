@@ -10,6 +10,7 @@ public:
 	static void CurrentScore(const unsigned int score);
 	static void WaveLevel(const int levelNum);
 	static void WriteText(const char &str, const sf::Vector2f &pos);
+	static void AttractorMode(const bool &t);
 
 private:
 	TextEditor();
@@ -32,6 +33,19 @@ private:
 	const int DEFAULT_SIZE = 6;
 
 	std::vector<Glyph> listOfGlyphs;
+
+	struct HS
+	{
+		HS(int score, std::string st)
+			:score(score), str(st) {}
+		int score;
+		std::string str;
+	};
+	bool attractorMode;
+	std::vector<Glyph> attractorGlyphs;
+	std::vector<HS> highScoreInfo;
+	void attractorF();
+	std::vector<Glyph> highscore;
 };
 
 #endif // TEXTEDITOR_H

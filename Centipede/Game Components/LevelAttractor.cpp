@@ -9,6 +9,7 @@
 #include "Flea.h"
 #include "Spider.h"
 #include "Scorpion.h"
+#include "TextEditor.h"
 
 void LevelAttractor::Initialize()
 {
@@ -17,8 +18,9 @@ void LevelAttractor::Initialize()
 	
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
 	MushroomManager::InitializeMushroomField(15);
+	TextEditor::AttractorMode(true);
 
-		CollisionTestPair<Ship, Mushroom>();
+	CollisionTestPair<Ship, Mushroom>();
 
 	CollisionTestPair<Bullet, Mushroom>();
 	CollisionTestPair<Bullet, Flea>();

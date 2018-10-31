@@ -1,4 +1,5 @@
 #include "TextEditor.h"
+#include "GameGrid.h"
 
 TextEditor* TextEditor::instance = nullptr;
 
@@ -19,6 +20,8 @@ TextEditor::TextEditor()
 		static_cast<float>(this->myFont.CellWidth()),
 		static_cast<float>(this->myFont.CellWidth())
 	); //top left
+
+	this->attractorF();
 }
 
 void TextEditor::CurrentScore(const unsigned int score)
@@ -34,8 +37,13 @@ void TextEditor::WaveLevel(const int levelNum)
 void TextEditor::WriteText(const char & str, const sf::Vector2f & pos)
 {
 	GetInstance()->listOfGlyphs.push_back(
-	instance->myFont.GetGlyph(str, pos)
+		instance->myFont.GetGlyph(str, pos)
 	);
+}
+
+void TextEditor::AttractorMode(const bool & t)
+{
+	GetInstance()->attractorMode = t;
 }
 
 void TextEditor::ScoreToText(const unsigned int score)
@@ -58,10 +66,10 @@ void TextEditor::ScoreToText(const unsigned int score)
 }
 
 void TextEditor::waveToText(const int levelNum)
-{	
+{
 	auto levelChar = Tools::ToString(levelNum);
 
-	for(unsigned int i = 0; i < levelChar.size(); ++i)
+	for (unsigned int i = 0; i < levelChar.size(); ++i)
 		waveGlyph[i] = myFont.GetGlyph(levelChar[i],
 			sf::Vector2f(
 				startingPos_Wave.x + (i * myFont.CellWidth()), startingPos_Wave.y));
@@ -70,12 +78,25 @@ void TextEditor::waveToText(const int levelNum)
 
 void TextEditor::Draw()
 {
-	//tood: fix all this in the future (sizeWave is one)
-	for (unsigned int i = 0; i < sizeFont; ++i)
-		this->scoreGlyph[i].Draw();
+	if (attractorMode)
+	{
+		for (auto t : this->attractorGlyphs)
+			t.Draw();
 
-	for (unsigned int i = 0; i < 1; ++i)
-		this->waveGlyph[i].Draw();
+	}
+
+	else
+	{
+		//tood: fix all this in the future (sizeWave is one)
+		for (unsigned int i = 0; i < sizeFont; ++i)
+			this->scoreGlyph[i].Draw();
+
+		for (unsigned int i = 0; i < 1; ++i)
+			this->waveGlyph[i].Draw();
+
+	}
+	for(auto f : this->highscore)
+		f.Draw();
 }
 
 TextEditor * TextEditor::GetInstance()
@@ -85,3 +106,51 @@ TextEditor * TextEditor::GetInstance()
 
 	return instance;
 }
+
+void TextEditor::attractorF()
+{
+	this->highScoreInfo.emplace_back(12345, "suh");
+	this->highScoreInfo.emplace_back(78945, "dud");
+	this->highScoreInfo.emplace_back(56482, "pen");
+
+	auto startingPos = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2 - (SPRITE_SIZE * 5), SPRITE_SIZE * 5);
+	//auto firstScore = this->highScoreInfo.front();
+	//auto scoreStr;// = Tools::ToString(firstScore.score);
+
+	//display "high scores"
+	std::string highScores = "High Scores";
+
+	for(int i = 0; i < highScores.size(); i++)
+	{
+			this->attractorGlyphs.push_back(myFont.GetGlyph(highScores.at(i), sf::Vector2f(startingPos.x + (SPRITE_SIZE * i), startingPos.y)));
+	}
+	
+	startingPos.y += SPRITE_SIZE;
+	startingPos.x += SPRITE_SIZE * 5;
+	for (auto hs : this->highScoreInfo)
+	{
+		auto scoreStr = Tools::ToString(hs.score);
+		//score
+		for (int i = 0; i < scoreStr.size(); i++)
+		{
+			this->attractorGlyphs.push_back(myFont.GetGlyph(scoreStr.at(scoreStr.size() - 1 - i), sf::Vector2f(startingPos.x - (SPRITE_SIZE * i), startingPos.y)));
+
+		}
+		//string
+		for (int j = 0; j < hs.str.size(); j++)
+		{
+			this->attractorGlyphs.push_back(myFont.GetGlyph(hs.str.at(j), sf::Vector2f(startingPos.x + SPRITE_SIZE * 2 + (SPRITE_SIZE * j), startingPos.y)));
+		}
+
+		startingPos.y += SPRITE_SIZE;
+	}
+
+	startingPos.y = 0;
+	startingPos.x -= SPRITE_SIZE * 2;
+	auto highest = Tools::ToString(78945);
+	
+	for(int i = 0 ;i < highest.size(); i++)
+		this->highscore.push_back(myFont.GetGlyph(highest.at(i), sf::Vector2f(startingPos.x + (SPRITE_SIZE * i), startingPos.y)));
+}
+
+
