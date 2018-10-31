@@ -23,6 +23,7 @@ Flea::Flea()
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::FleaKilled);
+	this->spawnSound = SoundManager::GetSound(SoundManager::SoundEvent::FleaSpawn);
 }
 
 Flea::~Flea()
@@ -74,6 +75,7 @@ void Flea::SpawnFlea(sf::Vector2f pos)
 
 	this->state = new FleaState1;
 	this->speed = FLEASTATE1;
+	SoundManager::SendSoundCommand(this->spawnSound);
 }
 
 void Flea::SetSpeed(const int & speed)

@@ -465,6 +465,9 @@
     <ClCompile Include="Game Components\HighScoreManager.cpp">
       <Filter>Source Files\Game Components\Score</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\SoundManager.cpp">
+      <Filter>Source Files\Game Components\Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -891,6 +894,12 @@
       <Filter>Source Files\Game Components\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\SoundCmd.h">
+      <Filter>Source Files\Game Components\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SoundOn.h">
+      <Filter>Source Files\Game Components\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\SoundOff.h">
       <Filter>Source Files\Game Components\Sound</Filter>
     </ClInclude>
   </ItemGroup>

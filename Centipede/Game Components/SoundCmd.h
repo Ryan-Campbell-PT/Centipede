@@ -9,6 +9,12 @@ protected:
 	sf::Sound sound;
 
 public:
+	explicit SoundCmd(const sf::Sound &sound)
+		:sound(sound)
+	{
+		this->sound.setVolume(10);
+	}
+
 	virtual void Execute()
 	{
 		SoundManager::PlaySound(this->sound);

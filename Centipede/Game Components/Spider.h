@@ -45,6 +45,7 @@ private:
 	const ImprovedSpiderState *spiderState = nullptr;
 
 	ScoreCmd* pDeath;
+	SoundCmd *spawnSound;
 };
 enum class SpiderDirection
 {

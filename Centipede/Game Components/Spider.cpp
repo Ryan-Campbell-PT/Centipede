@@ -8,6 +8,7 @@
 #include <random>
 #include "ScoreManager.h"
 #include "MovementCollection.h"
+//#include "SoundCmd.h"
 
 Spider::Spider()
 {
@@ -21,6 +22,7 @@ Spider::Spider()
 	SetCollider(sprite, bitmap, true);
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::SpiderKilled);
+	this->spawnSound = SoundManager::GetSound(SoundManager::SoundEvent::SpiderSpawn);
 }
 
 Spider::~Spider()
@@ -81,6 +83,7 @@ void Spider::SpawnSpider(const sf::Vector2f pos, const float spiderSpeed)
 	else
 		this->spiderState = &Spider_MoveFSM::diagonalDownLeft;
 
+	SoundManager::SendSoundCommand(this->spawnSound);
 	RegisterCollision<Spider>(*this);
 }
 

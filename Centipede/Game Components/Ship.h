@@ -8,14 +8,15 @@
 
 #define SHIP_BOUNDS 7.f
 
-class PlayerInput;
 // Forward declarations
+class PlayerInput;
 class Widget;
 class Asteroid;
 class Mushroom;
 class KeyboardCommand;
 class ShipFSM;
 class ShipMode;
+class SoundCmd;
 
 class Ship : public GameObject
 {
@@ -47,7 +48,7 @@ private:
 	sf::Sprite sprite; //changed from AnimatedSprite
 	CollisionTools::TextureBitmap bitmap;
 
-	sf::Sound FireSnd;
+	SoundCmd *fireSound;
 
 	static Ship * GetInstance();
 

@@ -9,6 +9,8 @@
 #include "MushroomManager.h"
 #include "ScoreManager.h"
 #include "WaveManager.h"
+#include "SoundOff.h"
+#include "SoundOn.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
 
@@ -20,7 +22,7 @@ void PlayerManager::AddScore(const int score)
 
 void PlayerManager::PlayerDeath()
 {
-	if(GetInstance()->playerMode == PlayerMode::TwoPlayer)
+	if (GetInstance()->playerMode == PlayerMode::TwoPlayer)
 		instance->SwapPlayer();
 
 	if (--instance->currentPlayer.playerLives <= 0)
@@ -123,14 +125,17 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 	{
 	case PlayerData::PlayerID::Ai:
 		Ship::SetState(new Ship_Ai);
+		SoundManager::SetSoundProfile(new SoundOff);
 		break;
 
 	case PlayerData::PlayerID::Player1:
 		Ship::SetState(new Ship_Player);
+		SoundManager::SetSoundProfile(new SoundOn);
 		break;
 
 	case PlayerData::PlayerID::Player2:
 		Ship::SetState(new Ship_Player); //todo: change this to two player mode
+		SoundManager::SetSoundProfile(new SoundOn);
 		break;
 
 	default:
@@ -149,9 +154,9 @@ void PlayerManager::SwapPlayer()
 	this->currentPlayer.waveLevel = WaveManager::GetCurrentWave();
 
 	PlayerData tmp;
-	if(this->currentPlayer.player == PlayerData::PlayerID::Player1)
+	if (this->currentPlayer.player == PlayerData::PlayerID::Player1)
 		tmp.player = PlayerData::PlayerID::Player2;
-	else if(this->currentPlayer.player == PlayerData::PlayerID::Player2)
+	else if (this->currentPlayer.player == PlayerData::PlayerID::Player2)
 		tmp.player = PlayerData::PlayerID::Player1;
 
 	for (size_t i = 0; i < this->listOfPlayers.size() - 1; ++i)
@@ -160,7 +165,7 @@ void PlayerManager::SwapPlayer()
 		if (this->listOfPlayers[i].player == this->currentPlayer.player)
 			this->listOfPlayers[i] = this->currentPlayer;
 		//look around for the player mode we are looking for
-		if(tmp.player == this->listOfPlayers[i].player)
+		if (tmp.player == this->listOfPlayers[i].player)
 			tmp = this->listOfPlayers[i];
 	}
 

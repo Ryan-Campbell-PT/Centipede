@@ -16,6 +16,7 @@ Scorpion::Scorpion()
 	//this->sprite.setScale(0.f, 0.f);
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::ScorpionKilled);
+	this->spawnSound = SoundManager::GetSound(SoundManager::SoundEvent::FleaSpawn);
 
 	SetCollider(sprite, bitmap, true);
 }
@@ -67,6 +68,7 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 
 	this->spawnOnLeft = pos.x < SPRITE_SIZE;
 	//this->sprite.setScale(1.f, 1.f);
+	SoundManager::SendSoundCommand(this->spawnSound);
 
 	RegisterCollision<Scorpion>(*this);
 }

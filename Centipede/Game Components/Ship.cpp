@@ -35,15 +35,13 @@ Ship::Ship()
 	SetCollider(sprite, bitmap, true);
 	RegisterCollision<Ship>(*this);
 
-	FireSnd.setBuffer(ResourceManager::GetSound("Fire1"));
-	FireSnd.setPitch(2);
-	FireSnd.setVolume(25);
-
 	SetDrawOrder(1000);
 
 	playerInput = new PlayerInput;
 	SetKeyboardCommands();
 	RegisterInput(InputFlags::KeyPressed); // Recieve single-presses events
+
+	this->fireSound = SoundManager::GetSound(SoundManager::SoundEvent::ShipFire);
 }
 
 void Ship::SetKeyboardCommands() const
@@ -93,6 +91,14 @@ void Ship::Update()
 #elif true
 	this->shipMode->MoveShip(this->playerInput, this->position, this->SPEED);
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
+		if (BulletFactory::AttemptSpawnBullet(position + GunOffset))
+		{
+			SoundManager::SendSoundCommand(this->fireSound); //only play the sound if the bullet can be spawned
+		}
+	}
 
 #endif
 

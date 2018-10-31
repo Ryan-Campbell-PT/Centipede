@@ -21,10 +21,16 @@ public:
 
 	};
 
-	static void PlaySound(sf::Sound sound);
-	static SoundCmd *GetSound(SoundEvent event);
-
+	static void PlaySound(sf::Sound &sound);
+	static SoundCmd *GetSound(SoundEvent even);
+	static void SendSoundCommand(SoundCmd *cmd);
 	static void ProcessSounds();
+	static void SetSoundProfile(SoundManager *profile);
+
+protected:
+	SoundManager(); //protected to allow children to be created
+	virtual void processSounds() {}
+	virtual void sendSoundCommand(SoundCmd *cmd) {}
 
 private:
 	//these have to be non-static because initialzing them in class creates an error
@@ -34,14 +40,12 @@ private:
 	const sf::Sound shipFire = sf::Sound(ResourceManager::GetSound("Fire1"));
 	const sf::Sound death = sf::Sound(ResourceManager::GetSound("Death"));
 	const sf::Sound beat = sf::Sound(ResourceManager::GetSound("Beat"));
-	
-	SoundManager()
-	{
-		//todo: seems like cheating. find a better way
-		//const_cast<sf::Sound*>(&scorpSpawn)->setBuffer();
-		//scorpSpawn = sf::Sound()
-	}
 
-	std::queue<SoundCmd*> soundQueue;
+	static SoundManager* GetInstance();
+
+	//void processSounds();
+
+	static SoundManager* instance;
+	SoundManager* soundProfile;
 };
 #endif // SOUNDMANAGER_H

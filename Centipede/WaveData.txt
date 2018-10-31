@@ -3,6 +3,7 @@ level 1
 centiBodyCount: 1
 centispeed 2
 scorpionActive yes
+spiderActive yes
 _
 
 level 2

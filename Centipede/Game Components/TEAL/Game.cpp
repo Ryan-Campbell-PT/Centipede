@@ -9,11 +9,17 @@
 #include "SceneManager.h"
 #include "Tools.h"
 #include "../ScoreManager.h"
+#include "../SoundCmd.h"
 
 using namespace std;
 
 const sf::Keyboard::Key Game::KILLGAMEKEY = sf::Keyboard::Escape;
 Game* Game::gameInstance = nullptr;
+
+Game::Game()
+{
+	this->beat = SoundManager::GetSound(SoundManager::SoundEvent::Beat);
+}
 
 void Game::Run()
 {
@@ -33,8 +39,10 @@ void Game::Run()
 
 		// Actual frame processing
 		SceneManager::ProcessOneFrame();
+		//SoundManager::SendSoundCommand(gameInstance->beat);
 
 		ScoreManager::ProcessScores();
+		SoundManager::ProcessSounds();
 	}
 
 	Instance().TerminateGame();
@@ -49,5 +57,7 @@ void Game::TerminateGame()
 
 	// Clean up the game instance;
 	delete gameInstance;
+	delete beat;
 	gameInstance = nullptr;
+	beat = nullptr;
 }

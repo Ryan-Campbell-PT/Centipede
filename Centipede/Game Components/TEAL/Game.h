@@ -7,13 +7,18 @@
 #define _Game
 
 #include "GameClock.h"
+#include "CommonElements.h"
+#include "../SoundManager.h"
+
+class SoundCmd;
 
 class Game
 {
 private:
 	static Game* gameInstance;			// Game set up as a singleton
 
-	Game() { };								// Private constructor
+	Game();									// Private constructor
+
 	Game(const Game&) = delete;				// Prevent copy-construction
 	Game& operator=(const Game&) = delete;	// Prevent assignment
 	~Game() = default;						// Only this class can delete
@@ -31,6 +36,8 @@ private:
 
 public:
 	static const sf::Keyboard::Key KILLGAMEKEY;
+	///as the game plays, its constantly causing the beat
+	SoundCmd* beat;
 
 	static void Run();
 

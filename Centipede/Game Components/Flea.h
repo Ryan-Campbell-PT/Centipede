@@ -11,6 +11,7 @@
 class Bullet;
 class Ship;
 class ScoreCmd;
+class SoundCmd;
 
 class Flea : public GameObject
 {
@@ -46,6 +47,7 @@ private:
 
 	FleaState *state;
 	ScoreCmd *pDeath;
+	SoundCmd *spawnSound;
 	bool destroyed;
 };
 
