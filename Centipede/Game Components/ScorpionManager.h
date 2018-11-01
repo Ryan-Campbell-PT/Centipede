@@ -17,9 +17,12 @@ public:
 
 	static void EndWave();
 
+	static void Terminate(GameObject *);
+
 private:
 	ScorpionManager() = default;
-	virtual ~ScorpionManager() { delete instance; }
+	virtual ~ScorpionManager();
+	
 
 	virtual void Alarm0() override;
 

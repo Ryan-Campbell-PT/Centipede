@@ -28,12 +28,18 @@ void ScorpionPool::RecycleScorpion(GameObject * scorpion)
 	GetInstance()->recycledScorpions.push_front(static_cast<Scorpion*>(scorpion));
 }
 
-ScorpionPool::~ScorpionPool()
+void ScorpionPool::Terminate()
 {
-	for(auto s : this->recycledScorpions)
+
+	for (auto s : GetInstance()->recycledScorpions)
+	{//todo: coudl need work
+		//s->MarkForDestroy();
 		delete s;
+	}
 
 	delete instance;
+	instance = nullptr;
+
 }
 
 ScorpionPool * ScorpionPool::GetInstance()

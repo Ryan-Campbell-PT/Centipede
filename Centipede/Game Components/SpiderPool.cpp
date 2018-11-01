@@ -28,12 +28,13 @@ void SpiderPool::RecycleSpider(GameObject *spider)
 }
 
 
-SpiderPool::~SpiderPool()
+void SpiderPool::Terminate()
 {
-	for(auto s : this->recycledSpiders)
-		delete s;
+	for(auto f : GetInstance()->recycledSpiders)
+		delete f;
 
 	delete instance;
+	instance = nullptr;
 }
 
 SpiderPool * SpiderPool::GetInstance()

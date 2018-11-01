@@ -5,6 +5,14 @@
 
 SpiderFactory *SpiderFactory::instance = nullptr;
 
+void SpiderFactory::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+
+	SpiderPool::Terminate();
+}
+
 SpiderFactory * SpiderFactory::GetInstance()
 {
 	if (instance == nullptr)

@@ -15,9 +15,10 @@ public:
 	SpiderPool(const SpiderPool &pool) = delete;
 	SpiderPool operator = (const SpiderPool &pool) = delete;
 
+	static void Terminate();
 private:
 	SpiderPool() = default;
-	~SpiderPool();
+	~SpiderPool() = default;
 
 	static SpiderPool * GetInstance();
 

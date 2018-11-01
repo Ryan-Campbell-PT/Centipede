@@ -14,11 +14,12 @@ public:
 	SpiderFactory &operator=(const SpiderFactory &c) = delete;
 	SpiderFactory(const SpiderFactory &c) = delete;
 
+	static void Terminate();
 private:
 	static SpiderFactory *GetInstance();
 
 	SpiderFactory() = default;
-	virtual ~SpiderFactory() { delete instance; };
+	virtual ~SpiderFactory() = default;
 	
 
 	static SpiderFactory *instance;

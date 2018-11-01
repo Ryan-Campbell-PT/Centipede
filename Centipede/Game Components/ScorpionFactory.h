@@ -14,11 +14,12 @@ public:
 	ScorpionFactory &operator=(const ScorpionFactory &c) = delete;
 	ScorpionFactory(const ScorpionFactory &c) = delete;
 
+	static void Terminate();
 private:
 	static ScorpionFactory* GetInstance();
 	
 	ScorpionFactory() = default;
-	virtual ~ScorpionFactory();	
+	virtual ~ScorpionFactory() = default;	
 
 	static ScorpionFactory* instance;
 };

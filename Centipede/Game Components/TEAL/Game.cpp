@@ -10,6 +10,8 @@
 #include "Tools.h"
 #include "../ScoreManager.h"
 #include "../SoundCmd.h"
+#include "../ScorpionManager.h"
+#include "../SpiderManager.h"
 
 using namespace std;
 
@@ -50,14 +52,18 @@ void Game::Run()
 
 void Game::TerminateGame()
 {
+	//ScorpionManager::Terminate();
+	//SpiderManager::Terminate();
+
 	// Clean up the managers
 	SceneManager::Terminate();
 	WindowManager::Terminate();
 	ResourceManager::UnloadAllResources();
+	
 
 	// Clean up the game instance;
 	delete gameInstance;
-	delete beat;
+	//delete beat;
 	gameInstance = nullptr;
 	beat = nullptr;
 }

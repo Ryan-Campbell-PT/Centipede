@@ -1,8 +1,8 @@
 level 1
 
-centiBodyCount: 1
+centiBodyCount: 5
 centispeed 2
-scorpionActive yes
+scorpionActive no
 spiderActive yes
 spiderSpawn 4
 _

@@ -22,9 +22,10 @@ public:
 	SpiderManager& operator = (const SpiderManager &) = delete;
 	static void EndWave();
 
+	static void Terminate();
 private:
 	SpiderManager() = default;
-	virtual ~SpiderManager() { delete instance; }
+	//virtual ~SpiderManager() = default;
 	
 	virtual void Alarm0() override;
 

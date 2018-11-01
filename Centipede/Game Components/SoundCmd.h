@@ -19,5 +19,7 @@ public:
 	{
 		SoundManager::PlaySound(this->sound);
 	}
+
+	virtual ~SoundCmd() = default;
 };
 #endif // SOUNDCMD_H

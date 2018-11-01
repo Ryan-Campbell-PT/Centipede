@@ -16,9 +16,10 @@ public:
 	ScorpionPool(const ScorpionPool &pool) = delete;
 	ScorpionPool operator = (const ScorpionPool &pool) = delete;
 
+	static void Terminate();
 private:
 	ScorpionPool() = default;
-	~ScorpionPool();
+	~ScorpionPool() = default;
 
 
 	static ScorpionPool * GetInstance();

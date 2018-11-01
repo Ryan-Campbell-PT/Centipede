@@ -65,6 +65,14 @@ void SpiderManager::EndWave()
 
 }
 
+void SpiderManager::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+
+	SpiderFactory::Terminate();
+}
+
 void SpiderManager::Alarm0()
 {
 	this->SpawnSpider();

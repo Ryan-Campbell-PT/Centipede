@@ -4,17 +4,19 @@
 
 ScorpionFactory * ScorpionFactory::instance = nullptr;
 
+void ScorpionFactory::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+	ScorpionPool::Terminate();
+}
+
 ScorpionFactory * ScorpionFactory::GetInstance()
 {
 	if (instance == nullptr)
 		instance = new ScorpionFactory;
 
 	return instance;
-}
-
-ScorpionFactory::~ScorpionFactory()
-{
-	delete instance;
 }
 
 Scorpion * ScorpionFactory::GetScorpion()

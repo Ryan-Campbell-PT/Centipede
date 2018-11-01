@@ -89,6 +89,7 @@ void WaveManager::loadLevelInfo(const char * filePath)
 		else if(!line.empty() && line[0] == '_')
 		{//this will signify we have ended that levels info
 			this->levelList.push_back(wave);
+			wave = Wave();
 		}
 	}
 
