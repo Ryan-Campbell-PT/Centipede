@@ -29,12 +29,12 @@ void TextEditor::CurrentScore(const unsigned int score)
 {
 	GetInstance()->ScoreToText(score);
 }
-
+/*
 void TextEditor::WaveLevel(const int levelNum)
 {
 	GetInstance()->waveToText(levelNum);
 }
-
+*/
 Glyph TextEditor::WriteText(const char & str, const sf::Vector2f & pos)
 {
 	return GetInstance()->myFont.GetGlyph(str, pos);
@@ -82,23 +82,23 @@ void TextEditor::waveToText(const int levelNum)
 
 void TextEditor::Draw()
 {
-	if (attractorMode)
-	{
-		for (auto t : this->attractorGlyphs)
-			t.Draw();
+	//if (attractorMode)
+	//{
+	//	for (auto t : this->attractorGlyphs)
+	//		t.Draw();
 
-	}
+	//}
 
-	else
-	{
+	//else
+	//{
 		//tood: fix all this in the future (sizeWave is one)
-		for (unsigned int i = 0; i < sizeFont; ++i)
-			this->scoreGlyph[i].Draw();
+		//for (unsigned int i = 0; i < sizeFont; ++i)
+		//	this->scoreGlyph[i].Draw();
 
-		for (unsigned int i = 0; i < 1; ++i)
-			this->waveGlyph[i].Draw();
+		//for (unsigned int i = 0; i < 1; ++i)
+		//	this->waveGlyph[i].Draw();
 
-	}
+	//}
 //this is that single highscore at the top
 //	for (auto f : this->highscore)
 //		f.Draw();

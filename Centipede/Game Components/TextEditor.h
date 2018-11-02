@@ -9,7 +9,7 @@ class TextEditor : public GameObject
 {
 public:
 	static void CurrentScore(const unsigned int score);
-	static void WaveLevel(const int levelNum);
+	//static void WaveLevel(const int levelNum);
 	static Glyph WriteText(const char &str, const sf::Vector2f &pos);
 	static void AttractorMode(const bool &t);
 	static void WriteHighScores(std::vector<HighScoreManager::HighScore> highScoreList, sf::Vector2f startingPos);

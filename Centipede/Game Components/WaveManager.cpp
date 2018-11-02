@@ -12,8 +12,16 @@
 #include "SpiderManager.h"
 #include "MushroomManager.h"
 #include "TextEditor.h"
+#include "GameGrid.h"
 
 WaveManager * WaveManager::instance = nullptr;
+
+WaveManager::WaveManager()
+	: waveTextPosition(sf::Vector2f(SPRITE_SIZE * 3, 0.f)),
+	numGlyphsForWave(2), currentLevel(0), writer(nullptr)
+{
+	waveGlyphs = new Glyph[numGlyphsForWave];
+}
 
 WaveManager * WaveManager::GetInstance()
 {
@@ -23,14 +31,22 @@ WaveManager * WaveManager::GetInstance()
 	return instance;
 }
 
+/*void WaveManager::Draw()
+{	
+	//now display the glyphs
+	for(int i =0 ; i < instance->numGlyphsForWave - 1; i++)
+		instance->waveGlyphs[i].Draw();
+
+}*/
+
 void WaveManager::loadLevelInfo(const char * filePath)
 {
 	std::ifstream myFile;
 	std::string line;
 	myFile.open(filePath);
-	
+
 	Wave wave;
-	
+
 	while (std::getline(myFile, line))
 	{
 		//transform to lower, for portability
@@ -45,11 +61,11 @@ void WaveManager::loadLevelInfo(const char * filePath)
 		{
 			if (line.find("speed") < MAX_SIZE)
 				wave.info.spiderSpeed = this->getFloatInfo(line);
-			
+
 			else if (line.find("active") < MAX_SIZE)
 				wave.info.spiderActive = this->getBoolInfo(line);
 
-			else if(line.find("spawn") < MAX_SIZE)
+			else if (line.find("spawn") < MAX_SIZE)
 				wave.info.spiderTimeToSpawn = this->getFloatInfo(line);
 		}
 
@@ -64,29 +80,29 @@ void WaveManager::loadLevelInfo(const char * filePath)
 			else if (line.find("soloheadspeed") < MAX_SIZE)
 				wave.info.centiSoloHeadSpeed = this->getFloatInfo(line);
 
-			else if(line.find("bodycount") < MAX_SIZE)
+			else if (line.find("bodycount") < MAX_SIZE)
 				wave.info.centiBodyCount = this->getIntInfo(line);
 		}
 
 		else if (line.find("flea") < MAX_SIZE)
 		{
-			if(line.find("active") < MAX_SIZE)
+			if (line.find("active") < MAX_SIZE)
 				wave.info.fleaActive = this->getBoolInfo(line);
 
-			else if(line.find("spawn") < MAX_SIZE)
+			else if (line.find("spawn") < MAX_SIZE)
 				wave.info.fleaTriggerValue = this->getIntInfo(line);
 		}
 
-		else if(line.find("scorpion") < MAX_SIZE)
+		else if (line.find("scorpion") < MAX_SIZE)
 		{
-			if(line.find("active") < MAX_SIZE)
+			if (line.find("active") < MAX_SIZE)
 				wave.info.scorpActive = this->getBoolInfo(line);
 
-			else if(line.find("spawn") < MAX_SIZE)
+			else if (line.find("spawn") < MAX_SIZE)
 				wave.info.scorpTimeToSpawn = this->getFloatInfo(line);
 		}
 
-		else if(!line.empty() && line[0] == '_')
+		else if (!line.empty() && line[0] == '_')
 		{//this will signify we have ended that levels info
 			this->levelList.push_back(wave);
 			wave = Wave();
@@ -116,13 +132,39 @@ int WaveManager::getIntInfo(const std::string& line) const
 {
 	return std::stoi(
 		line.substr(
-			line.find(' '), 
+			line.find(' '),
 			line.size()));
 }
 
 int WaveManager::GetCurrentWave()
 {
 	return GetInstance()->currentLevel;
+}
+
+void WaveManager::WriteWaveText()
+{
+	auto wave = Tools::ToString(GetInstance()->currentLevel);
+	auto tmpStartingPos = instance->waveTextPosition;
+
+	if(wave.size() < instance->numGlyphsForWave)
+	{ //it is a wave that is < 10, so hard code the 0 on
+		//todo: dont hard code this
+		instance->waveGlyphs[1] = TextEditor::WriteText(wave.at(0), tmpStartingPos);
+		instance->waveGlyphs[0] = TextEditor::WriteText('0', sf::Vector2f(tmpStartingPos.x -= SPRITE_SIZE, tmpStartingPos.y));
+	}
+
+	else
+	{
+		for(unsigned int i = wave.size() - 1; i >= 0; i++)
+		{
+			instance->waveGlyphs[i] = TextEditor::WriteText(wave.at(i), tmpStartingPos);
+			tmpStartingPos.x -= SPRITE_SIZE;
+		}
+	}
+
+	//one time creation of the writer when its requested to write to the screen
+	if(instance->writer == nullptr)
+		instance->writer = new WaveInfoWriter;
 }
 
 void WaveManager::LoadLevelInfo(const char * filePath)
@@ -133,13 +175,13 @@ void WaveManager::LoadLevelInfo(const char * filePath)
 void WaveManager::SetupLevel(const int & levelNum)
 {
 	Wave curWave;
-	for(const auto level : GetInstance()->levelList)
-		if(level.level == levelNum)
+	for (const auto level : GetInstance()->levelList)
+		if (level.level == levelNum)
 			curWave = level;
 
 	GetInstance()->setCritterSettings(curWave);
 	instance->currentLevel = levelNum;
-	TextEditor::WaveLevel(levelNum);
+	instance->WriteWaveText();
 }
 
 void WaveManager::EndWave()
@@ -164,17 +206,17 @@ void WaveManager::setCritterSettings(const WaveManager::Wave wave)
 	CentiHeadManager::InitializeCentipede(wave.info.centiBodyCount, wave.info.centiSpeed,
 		wave.info.numSoloHeads, wave.info.centiSoloHeadSpeed); //assign info for centi
 
-	if(wave.info.fleaActive)
+	if (wave.info.fleaActive)
 		FleaManager::InitializeFlea(wave.info.fleaTriggerValue);
 	else
 		FleaManager::DeInitializeFlea(); //if this level doesnt have that critter, dont spawn it
 
-	if(wave.info.scorpActive)
+	if (wave.info.scorpActive)
 		ScorpionManager::InitializeScorpion(wave.info.scorpTimeToSpawn);
 	else
 		ScorpionManager::DeInitializeScorpion();
 
-	if(wave.info.spiderActive)
+	if (wave.info.spiderActive)
 		SpiderManager::InitializeSpider(wave.info.spiderTimeToSpawn, wave.info.spiderSpeed);
 	else
 		SpiderManager::DeInitializeSpider();
@@ -182,3 +224,11 @@ void WaveManager::setCritterSettings(const WaveManager::Wave wave)
 	this->currentLevel = wave.level;
 }
 
+void WaveManager::WaveInfoWriter::Draw()
+{
+	if(instance && instance->waveGlyphs)
+	{
+		for(unsigned int i = 0 ; i < instance->numGlyphsForWave; i++)
+			instance->waveGlyphs[i].Draw();
+	}
+}
