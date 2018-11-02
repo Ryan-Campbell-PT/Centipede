@@ -22,7 +22,7 @@ public:
 	SpiderManager& operator = (const SpiderManager &) = delete;
 	static void EndWave();
 
-	static void Terminate();
+	static void Terminate(GameObject *);
 private:
 	SpiderManager() = default;
 	//virtual ~SpiderManager() = default;

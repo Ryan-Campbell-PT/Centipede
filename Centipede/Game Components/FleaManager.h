@@ -21,9 +21,11 @@ public:
 	FleaManager operator = (const FleaManager &) = delete;
 	static void EndWave();
 
+	static void Terminate();
+
 private:
 	FleaManager();
-	virtual ~FleaManager() { delete instance; }
+	virtual ~FleaManager() = default;
 	
 	void SpawnFlea();
 

@@ -3,17 +3,13 @@
 
 FleaPool* FleaPool::instance = nullptr;
 
-FleaPool::FleaPool()
-{
-
-}
-
-FleaPool::~FleaPool()
-{
-	for(auto f : this->fleaList)
-		delete f;
+void FleaPool::Terminate()
+{	
+	//for(auto f : this->fleaList)
+	//	delete f;
 
 	delete instance;
+	instance = nullptr;
 }
 
 Flea * FleaPool::GetFlea()

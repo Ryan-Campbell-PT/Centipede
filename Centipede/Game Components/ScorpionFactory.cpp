@@ -8,6 +8,7 @@ void ScorpionFactory::Terminate()
 {
 	delete instance;
 	instance = nullptr;
+	
 	ScorpionPool::Terminate();
 }
 

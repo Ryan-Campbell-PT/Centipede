@@ -63,6 +63,12 @@ void PlayerManager::SetPlayerMode(PlayerData::PlayerID player)
 	}
 }
 
+void PlayerManager::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+}
+
 PlayerManager::PlayerManager()
 {
 	//emplace back essentially just takes the constructor of an object instead of calling the constructor

@@ -10,7 +10,7 @@ public:
 	static void SetPlayerMode();
 
 private:
-
+	GameManager() = default;
 };
 
 #endif // GAMEMANAGER_H

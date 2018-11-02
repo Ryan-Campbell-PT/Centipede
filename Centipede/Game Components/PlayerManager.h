@@ -21,6 +21,8 @@ public:
 	static void SetPlayerControls(PlayerInput *input);
 	static void SetPlayerMode(PlayerData::PlayerID player);
 
+	static void Terminate();
+
 private:
 	enum class PlayerMode
 	{

@@ -15,11 +15,13 @@ public:
 	FleaFactory &operator=(const FleaFactory &c) = delete;
 	FleaFactory(const FleaFactory &c) = delete;
 
+	static void Terminate();
+
 private:
 	static FleaFactory *GetInstance();
 
 	FleaFactory() = default;
-	virtual ~FleaFactory() { delete instance; };
+	virtual ~FleaFactory() = default;
 
 	static FleaFactory * instance;
 };

@@ -41,6 +41,14 @@ void CentiHeadManager::EndWave()
 	CentiHeadFactory::EndWave();
 }
 
+void CentiHeadManager::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+
+	CentiHeadFactory::Terminate();
+}
+
 void CentiHeadManager::SetApi(const int numBodies, const float centiSpeed,
 	const int numSoloHeads, const float soloHeadSpeed)
 {

@@ -43,12 +43,13 @@ void CentiHeadPool::EndWave()
 	}
 }
 
-CentiHeadPool::~CentiHeadPool()
+void CentiHeadPool::Terminate()
 {
-	for(auto c : this->headList)
-		delete c;
+		//for(auto c : this->headList)
+		//delete c;
 
 	delete instance;
+	instance = nullptr;
 }
 
 CentiHeadPool * CentiHeadPool::GetInstance()

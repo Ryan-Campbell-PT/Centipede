@@ -3,17 +3,6 @@
 
 MushroomPool * MushroomPool::instance = nullptr;
 
-MushroomPool::~MushroomPool()
-{
-	for(auto m : this->inactiveMushroomList)
-		delete m;
-
-	for(auto m : this->activeMushroomList)
-		delete m;
-
-	delete instance;
-}
-
 MushroomPool * MushroomPool::GetInstance()
 {
 	if (instance == nullptr)
@@ -62,4 +51,17 @@ std::list<Mushroom*> MushroomPool::GetActiveMushroomList()
 std::list<Mushroom*>* MushroomPool::GetCurrentLayout()
 {
 	return &GetInstance()->activeMushroomList;
+}
+
+void MushroomPool::Terminate()
+{
+	if (instance)
+	{
+		//for (auto m : instance->inactiveMushroomList)
+		//	delete m;
+		//todo: the mushrooms seem to already be deleted?
+
+		delete instance;
+		instance = nullptr;
+	}
 }

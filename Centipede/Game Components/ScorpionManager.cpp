@@ -7,14 +7,6 @@
 
 ScorpionManager *ScorpionManager::instance = nullptr;
 
-ScorpionManager::~ScorpionManager()
-{
-	//delete instance;
-	//instance = nullptr;
-	ScorpionFactory::Terminate();
-
-}
-
 void ScorpionManager::Alarm0()
 {
 	SpawnScorpion();
@@ -56,6 +48,10 @@ void ScorpionManager::DeInitializeScorpion()
 
 void ScorpionManager::Terminate(GameObject *)
 {
+	delete instance;
+	instance = nullptr;
+	
+	ScorpionFactory::Terminate();
 }
 
 void ScorpionManager::SetTimer()

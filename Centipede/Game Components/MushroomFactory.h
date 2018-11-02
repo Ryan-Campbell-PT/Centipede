@@ -15,7 +15,7 @@ class MushroomFactory : public Observee
 {
 public:
 	///remove all mushrooms created by the factory, and then delete itself
-	virtual ~MushroomFactory();
+	static void Terminate();
 
 	///spawns a new mushroom, or recycles one from the inactiveList
 	static Mushroom* GetMushroom();
@@ -31,6 +31,7 @@ public:
 
 private:
 	MushroomFactory() = default;
+	virtual ~MushroomFactory() = default;
 
 	virtual void UpdateObservees() override;
 

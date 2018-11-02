@@ -17,6 +17,8 @@ private:
 
 public:
 	Glyph();
+	virtual ~Glyph();
+
 	Glyph( SpriteSheet* sheet, int cellInd, sf::Vector2f pos);
 	void Draw();
 

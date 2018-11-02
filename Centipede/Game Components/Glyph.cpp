@@ -14,6 +14,13 @@ Glyph::Glyph()
 	position = sf::Vector2f(0,0);
 }
 
+Glyph::~Glyph()
+{
+	//todo: this is constanyl being called because we are always making new glyphs in the text writing
+	//will want to add a facotry
+	//delete sprsheet;
+}
+
 Glyph::Glyph( SpriteSheet* sheet, int cellInd, sf::Vector2f pos )
 {
 	sprsheet = sheet;

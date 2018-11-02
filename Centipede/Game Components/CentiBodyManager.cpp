@@ -61,6 +61,14 @@ void CentiBodyManager::EndWave()
 {
 }
 
+void CentiBodyManager::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+
+	CentiBodyFactory::Terminate();
+}
+
 const CentipedeDirectionState * CentiBodyManager::GetBodysHeadDirection(CentipedeBody * body)
 {
 	CentipedePart *tmp = body;

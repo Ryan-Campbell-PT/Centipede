@@ -19,9 +19,11 @@ public:
 	FleaPool(const FleaPool &pool) = delete;
 	FleaPool operator = (const FleaPool &pool) = delete;
 
+	static void Terminate();
+
 private:
-	FleaPool();
-	~FleaPool();
+	FleaPool() = default;
+	~FleaPool() = default;
 
 	static FleaPool * GetInstance();
 	

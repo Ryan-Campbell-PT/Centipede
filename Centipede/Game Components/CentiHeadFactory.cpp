@@ -1,7 +1,7 @@
 #include "CentiHeadFactory.h"
 #include "CentiHeadPool.h"
 
-CentiHeadFactory * CentiHeadFactory::instance = 0;
+CentiHeadFactory * CentiHeadFactory::instance = nullptr;
 
 CentipedeHead * CentiHeadFactory::GetCentiHead()
 {
@@ -13,9 +13,17 @@ void CentiHeadFactory::EndWave()
 	CentiHeadPool::EndWave();
 }
 
+void CentiHeadFactory::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+
+	CentiHeadPool::Terminate();
+}
+
 CentiHeadFactory * CentiHeadFactory::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new CentiHeadFactory;
 
 	return instance;

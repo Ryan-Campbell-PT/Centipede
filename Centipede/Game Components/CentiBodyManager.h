@@ -27,9 +27,11 @@ public:
 	CentiBodyManager operator = (const CentiBodyManager &) = delete;
 	static void EndWave();
 
+	static void Terminate();
+
 private:
 	CentiBodyManager() = default;
-	virtual ~CentiBodyManager() { delete instance; }
+	virtual ~CentiBodyManager() = default;
 
 	void AlignLinks(CentipedePart * leader, CentipedePart* follower);
 

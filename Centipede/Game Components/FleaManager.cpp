@@ -14,6 +14,14 @@ void FleaManager::EndWave()
 {
 }
 
+void FleaManager::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+
+	FleaFactory::Terminate();
+}
+
 FleaManager::FleaManager()
 	:numShroomsToSpawn(0), fleaActive(false)
 {

@@ -13,9 +13,11 @@ public:
 	///the manager is only there to confirm the manager is the one requesting the objects
 	static CentipedeBody* GetCentiBody();
 
+	static void Terminate();
+
 private:
 	CentiBodyFactory() = default;
-	~CentiBodyFactory() { delete instance; }
+	~CentiBodyFactory() = default;
 
 	static CentiBodyFactory* GetInstance();
 

@@ -12,6 +12,17 @@
 #include "../SoundCmd.h"
 #include "../ScorpionManager.h"
 #include "../SpiderManager.h"
+#include "../ScorpionPool.h"
+#include "../MushroomManager.h"
+#include "../FleaManager.h"
+#include "../CentiHeadManager.h"
+
+#define _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h>  
+#include "../GameManager.h"
+#include "../WaveManager.h"
+
 
 using namespace std;
 
@@ -33,7 +44,6 @@ void Game::Run()
 
 	// Load resources
 	ResourceManager::LoadAllResources();
-
 	while (WindowManager::MainWindow.isOpen() && ! sf::Keyboard::isKeyPressed( KILLGAMEKEY ) )
     {	
 		// Adjust game time clock
@@ -52,18 +62,27 @@ void Game::Run()
 
 void Game::TerminateGame()
 {
-	//ScorpionManager::Terminate();
-	//SpiderManager::Terminate();
-
 	// Clean up the managers
 	SceneManager::Terminate();
 	WindowManager::Terminate();
 	ResourceManager::UnloadAllResources();
-	
+
+	MushroomManager::Terminate();
+	FleaManager::Terminate();
+	CentiHeadManager::Terminate();
+	CentiBodyManager::Terminate();
+
+	GameGrid::Terminate();
+	PlayerManager::Terminate();
+	WaveManager::Terminate();
 
 	// Clean up the game instance;
+	//todo: be sure to check beat
 	delete gameInstance;
 	//delete beat;
 	gameInstance = nullptr;
-	beat = nullptr;
+	//beat = nullptr;
+
+	//_CrtDumpMemoryLeaks();  
+
 }

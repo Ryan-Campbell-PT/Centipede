@@ -60,6 +60,14 @@ std::list<Mushroom*>* MushroomManager::GetCurrentLayout()
 	return MushroomFactory::GetCurrentLayout();
 }
 
+void MushroomManager::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+
+	MushroomFactory::Terminate();
+}
+
 MushroomManager * MushroomManager::GetInstance()
 {
 	if (instance == nullptr)

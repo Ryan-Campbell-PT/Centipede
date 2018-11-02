@@ -14,10 +14,12 @@ public:
 
 	CentiBodyPool(const CentiBodyPool &pool) = delete;
 	CentiBodyPool operator = (const CentiBodyPool &pool) = delete;
+	
+	static void Terminate();
 
 private:
 	CentiBodyPool() = default;
-	~CentiBodyPool();
+	~CentiBodyPool() = default;
 
 
 	static CentiBodyPool* GetInstance();

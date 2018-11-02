@@ -25,10 +25,6 @@
 #include "WaveManager.h"
 #include "TextEditor.h"
 
-#define _CRTDBG_MAP_ALLOC  
-#include <stdlib.h>  
-#include <crtdbg.h>  
-
 #include <iostream>
 #include <fstream>
 #include "Level2.h"
@@ -82,5 +78,4 @@ void Level1::Initialize()
 
 	CollisionTestPair<CentipedeBody, Bullet>();
 	CollisionTestPair<CentipedeHead, Bullet>();
-	//_CrtDumpMemoryLeaks();  
 }

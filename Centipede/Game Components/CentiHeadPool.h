@@ -16,9 +16,11 @@ public:
 	CentiHeadPool operator = (const CentiHeadPool &pool) = delete;
 	static void EndWave();
 
+	static void Terminate();
+
 private:
 	CentiHeadPool() = default;
-	~CentiHeadPool();
+	~CentiHeadPool() = default;
 
 
 	static CentiHeadPool* GetInstance();

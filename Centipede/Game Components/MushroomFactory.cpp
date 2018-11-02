@@ -54,9 +54,13 @@ void MushroomFactory::RemoveObservee(Observer * o)
 	GetInstance()->obsererList.remove(o);
 }
 
-MushroomFactory::~MushroomFactory()
+void MushroomFactory::Terminate()
 {
+	//todo: may want to make sure the observer list is deleted
 	delete instance;
+	instance = nullptr;
+
+	MushroomPool::Terminate();
 }
 
 std::list<Mushroom*>* MushroomFactory::GetCurrentLayout()
@@ -66,7 +70,7 @@ std::list<Mushroom*>* MushroomFactory::GetCurrentLayout()
 
 MushroomFactory * MushroomFactory::GetInstance()
 {
-	if (MushroomFactory::instance == 0)
+	if (MushroomFactory::instance == nullptr)
 		MushroomFactory::instance = new MushroomFactory;
 
 	return MushroomFactory::instance;

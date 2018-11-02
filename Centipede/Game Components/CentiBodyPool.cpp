@@ -28,12 +28,13 @@ void CentiBodyPool::RecycleCentiBody(GameObject * const body)
 	GetInstance()->bodyList.push_front(static_cast<CentipedeBody*>(body));
 }
 
-CentiBodyPool::~CentiBodyPool()
-{
-	for(auto c : this->bodyList)
-		delete c;
+void CentiBodyPool::Terminate()
+{	
+	//for(auto c : this->bodyList)
+	//	delete c;
 
 	delete instance;
+	instance = nullptr;
 }
 
 CentiBodyPool * CentiBodyPool::GetInstance()

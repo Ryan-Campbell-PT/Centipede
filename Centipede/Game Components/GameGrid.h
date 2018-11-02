@@ -34,11 +34,13 @@ public:
 	GameGrid &operator=(const GameGrid &c) = delete;
 	GameGrid(const GameGrid &c) = delete;
 
+	static void Terminate();
+
 private:
 	static GameGrid *GetInstance();
 
 	GameGrid() = default;
-	virtual ~GameGrid();
+	virtual ~GameGrid() = default;
 
 	///when using the vector, this function may be unneeded due to being unable to move beyond the bounds
 	bool BoundsCheck(const sf::Vector2f &v);

@@ -21,7 +21,7 @@ public:
 
 private:
 	ScorpionManager() = default;
-	virtual ~ScorpionManager();
+	virtual ~ScorpionManager() = default;
 	
 
 	virtual void Alarm0() override;

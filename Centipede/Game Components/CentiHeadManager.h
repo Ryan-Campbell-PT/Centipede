@@ -21,9 +21,11 @@ public:
 	CentiHeadManager operator = (const CentiHeadManager &) = delete;
 	static void EndWave();
 
+	static void Terminate();
+
 private:
 	CentiHeadManager() = default;
-	virtual ~CentiHeadManager() { delete instance; }
+	virtual ~CentiHeadManager() = default;
 
 	void SetApi(const int numBodies, const float centiSpeed,
 		const int numSoloHeads, const float soloHeadSpeed);

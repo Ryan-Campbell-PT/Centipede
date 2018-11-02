@@ -469,7 +469,7 @@
       <Filter>Source Files\Game Components\Sound</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\GameManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

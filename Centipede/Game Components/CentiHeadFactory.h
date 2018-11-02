@@ -15,9 +15,11 @@ public:
 	CentiHeadFactory(const CentiHeadFactory &c) = delete;
 	static void EndWave();
 
-private:
+	static void Terminate();
+
+	private:
 	CentiHeadFactory() = default;
-	virtual ~CentiHeadFactory() { delete instance; }
+	virtual ~CentiHeadFactory() = default;
 
 	static CentiHeadFactory* GetInstance();
 

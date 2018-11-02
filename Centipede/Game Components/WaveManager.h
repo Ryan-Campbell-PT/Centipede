@@ -35,6 +35,8 @@ public:
 
 	static void WriteWaveText();
 
+	static void Terminate();
+
 private:
 	struct Wave
 	{

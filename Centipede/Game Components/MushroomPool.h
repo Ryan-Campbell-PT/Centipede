@@ -19,9 +19,11 @@ public:
 	MushroomPool operator = (const MushroomPool &pool) = delete;
 	static std::list<Mushroom*>* GetCurrentLayout();
 
+	static void Terminate();
+
 private:
 	MushroomPool() = default;
-	~MushroomPool();
+	virtual ~MushroomPool() = default;
 
 	static MushroomPool * GetInstance();
 	

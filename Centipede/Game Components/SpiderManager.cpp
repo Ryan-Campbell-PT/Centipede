@@ -8,7 +8,10 @@ SpiderManager* SpiderManager::instance = nullptr;
 SpiderManager * SpiderManager::GetInstance()
 {
 	if (instance == nullptr)
+	{
 		instance = new SpiderManager;
+		instance->SetExternalManagement(Terminate);
+	}
 
 	return instance;
 }
@@ -65,7 +68,7 @@ void SpiderManager::EndWave()
 
 }
 
-void SpiderManager::Terminate()
+void SpiderManager::Terminate(GameObject *)
 {
 	delete instance;
 	instance = nullptr;

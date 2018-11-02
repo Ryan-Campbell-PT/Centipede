@@ -11,6 +11,7 @@
 #include "../WaveManager.h"
 #include "../LevelAttractor.h"
 #include "../Level1.h"
+#include "../Level2.h"
 
 void ResourceManager::LoadAllResources()
 {
@@ -41,7 +42,5 @@ void ResourceManager::LoadAllResources()
 	AddTexture("Keys", "Keycaps.tga");
 	
 	WaveManager::LoadLevelInfo("WaveData.txt");
-
-
 }
 

@@ -2,9 +2,10 @@
 
 GameGrid *GameGrid::instance = nullptr;
 
-GameGrid::~GameGrid()
+void GameGrid::Terminate()
 {
 	delete instance;
+	instance = nullptr;
 }
 
 GameGrid * GameGrid::GetInstance()

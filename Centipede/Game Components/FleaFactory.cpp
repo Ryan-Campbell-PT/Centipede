@@ -9,6 +9,14 @@ Flea * FleaFactory::GetFlea()
 	return FleaPool::GetFlea();
 }
 
+void FleaFactory::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+
+	FleaPool::Terminate();
+}
+
 FleaFactory * FleaFactory::GetInstance()
 {
 	if (instance == nullptr)

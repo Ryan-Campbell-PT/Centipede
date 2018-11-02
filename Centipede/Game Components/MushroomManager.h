@@ -20,9 +20,11 @@ public:
 	MushroomManager(const MushroomManager &s) = delete;
 	MushroomManager operator = (const MushroomManager &) = delete;
 
+	static void Terminate();
+
 private:
 	MushroomManager() = default;
-	virtual ~MushroomManager() { delete instance; }
+	virtual ~MushroomManager() = default;
 
 	static MushroomManager * GetInstance();
 	void SpawnMushroom(sf::Vector2f &pos) const;

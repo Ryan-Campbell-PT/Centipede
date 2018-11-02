@@ -32,7 +32,7 @@ WaveManager * WaveManager::GetInstance()
 }
 
 /*void WaveManager::Draw()
-{	
+{
 	//now display the glyphs
 	for(int i =0 ; i < instance->numGlyphsForWave - 1; i++)
 		instance->waveGlyphs[i].Draw();
@@ -146,7 +146,7 @@ void WaveManager::WriteWaveText()
 	auto wave = Tools::ToString(GetInstance()->currentLevel);
 	auto tmpStartingPos = instance->waveTextPosition;
 
-	if(wave.size() < instance->numGlyphsForWave)
+	if (wave.size() < instance->numGlyphsForWave)
 	{ //it is a wave that is < 10, so hard code the 0 on
 		//todo: dont hard code this
 		instance->waveGlyphs[1] = TextEditor::WriteText(wave.at(0), tmpStartingPos);
@@ -155,7 +155,7 @@ void WaveManager::WriteWaveText()
 
 	else
 	{
-		for(unsigned int i = wave.size() - 1; i >= 0; i++)
+		for (unsigned int i = wave.size() - 1; i >= 0; i++)
 		{
 			instance->waveGlyphs[i] = TextEditor::WriteText(wave.at(i), tmpStartingPos);
 			tmpStartingPos.x -= SPRITE_SIZE;
@@ -163,8 +163,24 @@ void WaveManager::WriteWaveText()
 	}
 
 	//one time creation of the writer when its requested to write to the screen
-	if(instance->writer == nullptr)
+	if (instance->writer == nullptr)
 		instance->writer = new WaveInfoWriter;
+}
+
+void WaveManager::Terminate()
+{
+	if (instance)
+	{
+		delete[] instance->waveGlyphs;
+		instance->waveGlyphs = nullptr;
+		
+		//delete instance->writer;
+		//instance->writer = nullptr;
+		//todo: check that writer is destyored
+
+		delete instance;
+		instance = nullptr;
+	}
 }
 
 void WaveManager::LoadLevelInfo(const char * filePath)
@@ -226,9 +242,9 @@ void WaveManager::setCritterSettings(const WaveManager::Wave wave)
 
 void WaveManager::WaveInfoWriter::Draw()
 {
-	if(instance && instance->waveGlyphs)
+	if (instance && instance->waveGlyphs)
 	{
-		for(unsigned int i = 0 ; i < instance->numGlyphsForWave; i++)
+		for (unsigned int i = 0; i < instance->numGlyphsForWave; i++)
 			instance->waveGlyphs[i].Draw();
 	}
 }
