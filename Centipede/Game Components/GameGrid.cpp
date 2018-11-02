@@ -1,10 +1,6 @@
 #include "GameGrid.h"
 
-GameGrid *GameGrid::instance = 0;
-
-GameGrid::GameGrid()
-{
-}
+GameGrid *GameGrid::instance = nullptr;
 
 GameGrid::~GameGrid()
 {
@@ -13,7 +9,7 @@ GameGrid::~GameGrid()
 
 GameGrid * GameGrid::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new GameGrid;
 
 	return instance;

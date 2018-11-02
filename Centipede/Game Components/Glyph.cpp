@@ -5,6 +5,7 @@
 #include "SpriteSheet.h"
 #include "TEAL\ResourceManager.h"
 #include <assert.h>
+#include "GameGrid.h"
 
 Glyph::Glyph()
 {
@@ -18,6 +19,7 @@ Glyph::Glyph( SpriteSheet* sheet, int cellInd, sf::Vector2f pos )
 	sprsheet = sheet;
 	position = pos;
 	cellIndex = cellInd;
+	GameGrid::SetGridStatus(pos, GameGridEnum::Glyph);
 }
 
 void Glyph::Draw()

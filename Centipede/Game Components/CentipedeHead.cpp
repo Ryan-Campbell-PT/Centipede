@@ -150,8 +150,12 @@ void CentipedeHead::Collision(Bullet * bullet)
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 {
 	//if we are reaching the end of the window,or see a shroom, switch to next state
-	if (GameGrid::GetGridStatus(pos) == GameGridEnum::Mushroom)// ||
+	if (GameGrid::GetGridStatus(pos) == GameGridEnum::Mushroom ||
+		GameGrid::GetGridStatus(pos) == GameGridEnum::Glyph)
 		this->SetDirection(this->currentDirectionState->NextState(this));
+
+	else if(GameGrid::GetGridStatus(pos) == GameGridEnum::PoisonMushroom)
+	{}//todo: bezerk
 
 	else if (pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
 		pos.x < 0.f)

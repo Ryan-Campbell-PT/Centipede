@@ -31,16 +31,17 @@ public:
 	static void GetCenterYPosition(sf::Vector2f &pos);
 	static void GetCenterXPosition(sf::Vector2f &pos);
 
-private:
-	static GameGrid *GetInstance();
-	
-	GameGrid();
-	~GameGrid();
 	GameGrid &operator=(const GameGrid &c) = delete;
 	GameGrid(const GameGrid &c) = delete;
-	
+
+private:
+	static GameGrid *GetInstance();
+
+	GameGrid() = default;
+	virtual ~GameGrid();
+
 	///when using the vector, this function may be unneeded due to being unable to move beyond the bounds
-	bool BoundsCheck(const sf::Vector2f &v); 
+	bool BoundsCheck(const sf::Vector2f &v);
 
 	static GameGrid *instance;
 
@@ -53,12 +54,9 @@ enum class GameGridEnum
 {
 	Error = -1,
 	Unoccupied = 0,
-	Mushroom = 1
+	Mushroom = 1,
+	PoisonMushroom = 2,
+	Glyph = 3
 };
-
-//bool operator ==(GameGridEnum &g, GameGridEnum &r)
-//{
-//	return (static_cast<int>(g) == static_cast<int>(r));
-//};
 
 #endif //GAMEGRID_H
