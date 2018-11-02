@@ -2,14 +2,14 @@
 #include "PlayerManager.h"
 #include "HighScoreManager.h"
 #include "WaveManager.h"
+#include "ScoreManager.h"
 
 void GameManager::SetAttractorMode()
 {
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
 	HighScoreManager::WriteHighScoreList();
 	HighScoreManager::WriteHighScore();
-	//todo: make sure that the wave is showing
-	//coudl be done in this code
+	ScoreManager::AttractorMode(true);
 	WaveManager::WriteWaveText();
 }
 

@@ -3,12 +3,17 @@
 #include "ScoreByDistanceCmd.h"
 #include "PlayerManager.h"
 #include "TextEditor.h"
+#include "Glyph.h"
 
 ScoreManager * ScoreManager::instance = nullptr;
 
 ScoreManager::ScoreManager()
-	:currentScore(0)
+	:scoreGlyph(nullptr), maxScoreSize(6),
+	startingPos_Score(WindowManager::MainWindow.getSize().x - SPRITE_SIZE * 3, 0),
+	currentScore(0)
 {
+	this->scoreGlyph = new Glyph[maxScoreSize];
+	this->writeZero();
 }
 
 ScoreManager * ScoreManager::GetInstance()
@@ -17,16 +22,20 @@ ScoreManager * ScoreManager::GetInstance()
 		instance = new ScoreManager;
 
 	return instance;
-};
+}
 
-void ScoreManager::PrivProcessScore()
+void ScoreManager::Draw()
 {
-	printf("\nProcessing all scores commands for this frame:\n");
+	for (unsigned int i = 0; i < this->currentScoreSize; i++)
+		this->scoreGlyph[i].Draw();
+}
 
+void ScoreManager::privProcessScore()
+{
 	ScoreCmd* c = nullptr;
 
 	if (!QueueCmds.empty())
-	{ //this is simply so the WriteLine doesnt constantly print
+	{ //this is simply so the writeScore doesnt constantly run
 		while (!QueueCmds.empty())
 		{
 			c = QueueCmds.front();
@@ -35,26 +44,50 @@ void ScoreManager::PrivProcessScore()
 			QueueCmds.pop();
 		}
 
-		std::string player;
-		if(PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Player1)
-			player = "Player1";
-		else
-			player = "Player2";
-
-		//ConsoleMsg::WriteLine(player + "'s current Score: " + Tools::ToString(
-		//	GetInstance()->scoreMap.at(PlayerManager::GetCurrentPlayer())) //print the current players score value
-		//	+ "\n");
+		this->writeScore();
+		//todo: may want to send to HighScoreManager to make middle one dynamic
 	}
+
+}
+
+void ScoreManager::writeScore()
+{
+	auto scoreText = Tools::ToString(this->currentScore);
+	this->currentScoreSize = scoreText.size();
+
+	auto tmpPos = this->startingPos_Score;
+
+	for (unsigned int iter = 0; iter < currentScoreSize; ++iter)
+	{
+		//simply change the contents of the array to the numbers in the given score
+
+		this->scoreGlyph[iter] = TextEditor::WriteText(scoreText.at(currentScoreSize - iter - 1), tmpPos);
+
+		tmpPos.x -= SPRITE_SIZE;
+	}
+}
+
+void ScoreManager::writeZero()
+{
+	const std::string zeroZero = "00";
+	auto tmpPos = startingPos_Score;
+	this->currentScoreSize = zeroZero.size();
+
+	for (unsigned int iter = 0; iter < currentScoreSize; ++iter)
+	{
+		//simply change the contents of the array to the numbers in the given score
+
+		this->scoreGlyph[iter] = TextEditor::WriteText(zeroZero[iter], tmpPos);
+
+		tmpPos.x -= SPRITE_SIZE;
+	}
+
+
 }
 
 void ScoreManager::AddScore(int val)
 {
-	//you have to get the players score first, then add to it the value added
-	//GetInstance()->scoreMap.at(PlayerManager::GetCurrentPlayer()) += val;
-	//todo: may want to keep a local score value, and then send over the data to the player after they lose.
-	//PlayerManager::AddScore(val);
 	GetInstance()->currentScore += val;
-	TextEditor::CurrentScore(instance->currentScore);
 }
 
 ScoreCmd * ScoreManager::GetScoreCommand(ScoreEvents ev)
@@ -105,12 +138,16 @@ ScoreCmd * ScoreManager::GetScoreCommand(ScoreEvents ev)
 
 void ScoreManager::SendScoreCmd(ScoreCmd * c)
 {
-	GetInstance()->QueueCmds.push(c);
+	//attractor mode doesnt count score, so just dont bother adding them
+	if (GetInstance()->attractorMode)
+		return;
+
+	instance->QueueCmds.push(c);
 }
 
 void ScoreManager::ProcessScores()
 {
-	GetInstance()->PrivProcessScore();
+	GetInstance()->privProcessScore();
 }
 
 void ScoreManager::SetCurrentScore(const int score)
@@ -121,4 +158,9 @@ void ScoreManager::SetCurrentScore(const int score)
 int ScoreManager::GetCurrentScore()
 {
 	return GetInstance()->currentScore;
+}
+
+void ScoreManager::AttractorMode(bool b)
+{
+	GetInstance()->attractorMode = b;
 }

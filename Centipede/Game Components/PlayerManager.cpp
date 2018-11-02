@@ -17,7 +17,7 @@ PlayerManager * PlayerManager::instance = nullptr;
 void PlayerManager::AddScore(const int score)
 {
 	GetInstance()->currentPlayer.playerScore += score;
-	TextEditor::CurrentScore(instance->currentPlayer.playerScore);
+//	TextEditor::CurrentScore(instance->currentPlayer.playerScore);
 }
 
 void PlayerManager::PlayerDeath()

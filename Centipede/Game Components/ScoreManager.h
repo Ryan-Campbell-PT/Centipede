@@ -9,8 +9,9 @@
 
 class ScoreCmd;
 enum class PlayerID;
+class Glyph;
 
-class ScoreManager
+class ScoreManager : public GameObject
 {
 public:
 	// events
@@ -25,6 +26,8 @@ public:
 
 	static void SetCurrentScore(const int score);
 	static int GetCurrentScore();
+	
+	static void AttractorMode(bool b);
 
 private:
 	//distance values
@@ -51,8 +54,17 @@ private:
 
 	ScoreManager();
 	static ScoreManager * GetInstance();
+	virtual void Draw() override;
 
-	void PrivProcessScore();
+	void privProcessScore();
+	void writeScore();
+	void writeZero();
+
+	Glyph *scoreGlyph;
+	unsigned int maxScoreSize; ///this is the maximum the score can get to (character size)
+	unsigned int currentScoreSize;
+	sf::Vector2f startingPos_Score;
+	bool attractorMode;
 
 	std::queue<ScoreCmd*> QueueCmds;
 	int currentScore;

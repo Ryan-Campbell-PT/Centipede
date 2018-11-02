@@ -6,7 +6,7 @@
 HighScoreManager* HighScoreManager::instance = nullptr;
 
 HighScoreManager::HighScoreManager()
-	:startingPos_HS(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, SPRITE_SIZE)),
+	:startingPos_HS(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0)),
 	startingPos_List(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, SPRITE_SIZE * 6))
 {
 	for (int i = 0; i < 6; ++i)
@@ -54,7 +54,7 @@ void HighScoreManager::WriteHighScore()
 	for (unsigned int i = 0; i < hs.size(); i++)
 	{
 		instance->highScoreCharacters.push_back(
-			TextEditor::WriteText(hs.at(i), instance->startingPos_HS)
+			TextEditor::WriteText(hs.at(hs.size() - i - 1), instance->startingPos_HS)
 		);
 		tmpStart.x += SPRITE_SIZE * i;
 		//instance->startingPos_HS.y

@@ -63,7 +63,7 @@ void Level1::Initialize()
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
 	WaveManager::SetupLevel(1);
 	MushroomManager::InitializeMushroomField(15);
-	TextEditor::AttractorMode(false);
+	//TextEditor::AttractorMode(false);
 
 	CollisionTestPair<Ship, Mushroom>();
 
