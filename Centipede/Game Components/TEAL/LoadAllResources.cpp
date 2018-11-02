@@ -14,7 +14,7 @@
 
 void ResourceManager::LoadAllResources()
 {
-	SetStartScene( new Level1 );
+	SetStartScene( new LevelAttractor );
 	
 	AddTexture("PlayerShip", "blaster.png");
 	AddTexture("Bullet", "bullet.png");

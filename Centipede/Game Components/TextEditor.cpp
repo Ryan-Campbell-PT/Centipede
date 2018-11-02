@@ -1,5 +1,6 @@
 #include "TextEditor.h"
 #include "GameGrid.h"
+#include "HighScoreManager.h"
 
 TextEditor* TextEditor::instance = nullptr;
 
@@ -8,8 +9,8 @@ TextEditor::TextEditor()
 {
 	//the concept of this is that we allocate a size that the player will likely get,
 	//and just change the contents of the pointer as we add points
-	this->scoreGlyph = new Glyph[this->DEFAULT_SIZE];
-	this->waveGlyph = new Glyph[this->DEFAULT_SIZE];
+	this->scoreGlyph = new Glyph[this->SCORE_SIZE];
+	this->waveGlyph = new Glyph[this->WAVE_SIZE];
 
 	this->startingPos_Score = sf::Vector2f(
 		static_cast<float>(WindowManager::MainWindow.getSize().x - this->myFont.CellWidth()),
@@ -21,7 +22,7 @@ TextEditor::TextEditor()
 		static_cast<float>(this->myFont.CellWidth())
 	); //top left
 
-	this->attractorF();
+	//this->writeHighScores();
 }
 
 void TextEditor::CurrentScore(const unsigned int score)
@@ -34,16 +35,19 @@ void TextEditor::WaveLevel(const int levelNum)
 	GetInstance()->waveToText(levelNum);
 }
 
-void TextEditor::WriteText(const char & str, const sf::Vector2f & pos)
+Glyph TextEditor::WriteText(const char & str, const sf::Vector2f & pos)
 {
-	GetInstance()->listOfGlyphs.push_back(
-		instance->myFont.GetGlyph(str, pos)
-	);
+	return GetInstance()->myFont.GetGlyph(str, pos);
 }
 
 void TextEditor::AttractorMode(const bool & t)
 {
 	GetInstance()->attractorMode = t;
+}
+
+void TextEditor::WriteHighScores(std::vector<HighScoreManager::HighScore> highScoreList, sf::Vector2f startingPos)
+{
+	GetInstance()->writeHighScores(highScoreList, startingPos);
 }
 
 void TextEditor::ScoreToText(const unsigned int score)
@@ -95,8 +99,9 @@ void TextEditor::Draw()
 			this->waveGlyph[i].Draw();
 
 	}
-	for(auto f : this->highscore)
-		f.Draw();
+//this is that single highscore at the top
+//	for (auto f : this->highscore)
+//		f.Draw();
 }
 
 TextEditor * TextEditor::GetInstance()
@@ -107,8 +112,9 @@ TextEditor * TextEditor::GetInstance()
 	return instance;
 }
 
-void TextEditor::attractorF()
+void TextEditor::writeHighScores(std::vector<HighScoreManager::HighScore> highScoreList, sf::Vector2f startingPos)
 {
+#if false
 	this->highScoreInfo.emplace_back(12345, "suh");
 	this->highScoreInfo.emplace_back(78945, "dud");
 	this->highScoreInfo.emplace_back(56482, "pen");
@@ -120,11 +126,11 @@ void TextEditor::attractorF()
 	//display "high scores"
 	std::string highScores = "High Scores";
 
-	for(int i = 0; i < highScores.size(); i++)
+	for (int i = 0; i < highScores.size(); i++)
 	{
-			this->attractorGlyphs.push_back(myFont.GetGlyph(highScores.at(i), sf::Vector2f(startingPos.x + (SPRITE_SIZE * i), startingPos.y)));
+		this->attractorGlyphs.push_back(myFont.GetGlyph(highScores.at(i), sf::Vector2f(startingPos.x + (SPRITE_SIZE * i), startingPos.y)));
 	}
-	
+
 	startingPos.y += SPRITE_SIZE;
 	startingPos.x += SPRITE_SIZE * 5;
 	for (auto hs : this->highScoreInfo)
@@ -148,9 +154,31 @@ void TextEditor::attractorF()
 	startingPos.y = 0;
 	startingPos.x -= SPRITE_SIZE * 2;
 	auto highest = Tools::ToString(78945);
-	
-	for(int i = 0 ;i < highest.size(); i++)
+
+	for (int i = 0; i < highest.size(); i++)
 		this->highscore.push_back(myFont.GetGlyph(highest.at(i), sf::Vector2f(startingPos.x + (SPRITE_SIZE * i), startingPos.y)));
+
+#elif true
+
+	//auto highScores = HighScoreManager::GetHighScoreList();
+
+	for (auto hs : highScoreList)
+	{
+		auto scoreText = Tools::ToString(hs.score);
+		for (unsigned int i = 0; i < scoreText.size(); i++)
+		{//write the score to the left of the starting position
+			this->attractorGlyphs.push_back(myFont.GetGlyph(scoreText.at(scoreText.size() - 1 - i), sf::Vector2f(startingPos.x - (SPRITE_SIZE * i), startingPos.y)));
+		}
+
+		//string
+		for (unsigned int j = 0; j < hs.text.size(); j++)
+		{//write the text associated with it to the right
+			this->attractorGlyphs.push_back(myFont.GetGlyph(hs.text.at(j), sf::Vector2f(startingPos.x + SPRITE_SIZE * 2 + (SPRITE_SIZE * j), startingPos.y)));
+		}
+
+		startingPos.y += SPRITE_SIZE;
+	}
+#endif
 }
 
 

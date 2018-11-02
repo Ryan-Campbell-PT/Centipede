@@ -10,15 +10,17 @@
 #include "Spider.h"
 #include "Scorpion.h"
 #include "TextEditor.h"
+#include "GameManager.h"
+#include "WaveManager.h"
 
 void LevelAttractor::Initialize()
 {
 	//todo:
-	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
-	
-	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
+	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255));
+
+	GameManager::SetAttractorMode();
 	MushroomManager::InitializeMushroomField(15);
-	TextEditor::AttractorMode(true);
+	WaveManager::SetupLevel(0); //allows the designer to determine what is in attractor mode
 
 	CollisionTestPair<Ship, Mushroom>();
 
@@ -39,16 +41,3 @@ void LevelAttractor::Initialize()
 	CollisionTestPair<CentipedeHead, Bullet>();
 
 }
-
-/*void LevelAttractor::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
-{
-	if(k == sf::Keyboard::Num1)
-	{
-		PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
-	}//one player mode
-
-	else if(k == sf::Keyboard::Num2)
-	{
-		PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player2);
-	}//two player mode
-}*/
