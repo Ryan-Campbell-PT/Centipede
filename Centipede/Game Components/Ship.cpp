@@ -7,7 +7,7 @@
 #include "ShipExplosion.h"
 #include "Widget.h"
 #include "Asteroid.h"
-#include "BulletFactory.h"
+#include "BulletManager.h"
 #include "Mushroom.h"
 #include "ScorpionManager.h"
 #include "SpiderManager.h"
@@ -94,7 +94,7 @@ void Ship::Update()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
-		if (BulletFactory::AttemptSpawnBullet(position + GunOffset))
+		if (BulletManager::AttemptSpawnBullet())
 		{
 			SoundManager::SendSoundCommand(this->fireSound); //only play the sound if the bullet can be spawned
 		}
@@ -125,6 +125,7 @@ void Ship::Collision(Widget *other)
 
 void Ship::Collision(Mushroom* other)
 {
+	//todo: attractor mode doesnt collide, can probably just get opposite of offset array
 	if (sf::Keyboard::isKeyPressed(playerInput->keyLeft->GetCommand())) position.x += this->SPEED;
 	if (sf::Keyboard::isKeyPressed(playerInput->keyUp->GetCommand())) position.y += this->SPEED;
 	if (sf::Keyboard::isKeyPressed(playerInput->keyDown->GetCommand())) position.y -= this->SPEED;

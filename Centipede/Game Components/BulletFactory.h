@@ -7,28 +7,29 @@
 
 class Bullet;
 
-//this class handles the creation of bullets throughout the game
-//the game is set to only spawn a single bullet at a time
+/***
+ * Due to the simplicity of the bullet, I didnt want to make a seprate pool for the bullet
+ */
 class BulletFactory
 {
 public:
-	//boolean to confirm whether the bullet can spawn
-	static bool AttemptSpawnBullet(sf::Vector2f pos);
-	static bool CanSpawnBullet();
+	static void RecycleBullet(GameObject * bullet);
+	static Bullet* GetBullet();
 
-	static void ChangeBulletStatus(bool b);
+	static void Terminate();
+
+	BulletFactory &operator=(const BulletFactory &c) = delete;
+	BulletFactory(const BulletFactory &c) = delete;
 
 private:
 	static BulletFactory *GetInstance();
-	
-	static BulletFactory *instance;
-	Bullet *bullet; //there should only ever be 1 bullet on screen, so we just leave it as a single pointer
-	bool canSpawnBullet;
 
-	BulletFactory();
-	~BulletFactory();
-	BulletFactory &operator=(const BulletFactory &c) = delete;
-	BulletFactory(const BulletFactory &c) = delete;
+	static BulletFactory *instance;
+
+	std::vector<Bullet*> recycledBullets;
+
+	BulletFactory() = default;
+	virtual ~BulletFactory() = default;
 
 };
 

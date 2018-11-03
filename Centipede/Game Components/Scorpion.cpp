@@ -75,7 +75,7 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 
 void Scorpion::Collision(Bullet * bullet)
 {
-	bullet->RemoveBullet();
+	bullet->MarkForDestroy();
 	ScoreManager::SendScoreCmd(this->pDeath);
 	//ScorpionManager::RemoveScorpion(this); //let the manager handle recyling
 	ScorpionManager::SetTimer(); //because it was destroyed by the bullet, we can spawn again

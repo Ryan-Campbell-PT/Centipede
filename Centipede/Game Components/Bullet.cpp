@@ -4,75 +4,51 @@
 #include "Bullet.h"
 #include "BulletFactory.h"
 #include "Mushroom.h"
-#include "Ship.h"
-
-/*
-Bullet::Bullet(sf::Vector2f p)
-{
-
-	SetCollider(MainSprite, bitmap);
-
-	Pos = p;
-	RegisterCollision<Bullet>( *this );
-}
-*/
+#include "BulletManager.h"
 
 Bullet::Bullet()
+	:manager(nullptr), SPEED(10)
 {
-	SPEED = 800;
-
 	this->bitmap = ResourceManager::GetTextureBitmap("Bullet");
 	this->sprite = sf::Sprite(ResourceManager::GetTexture("Bullet"));
 	
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
 	SetCollider(sprite, bitmap);
-	RegisterCollision<Bullet>(*this);
 }
 
 void Bullet::Update()
 {
-	//not sure if this is needed
-	//MainSprite.Update();
-
-	position.y -= Game::FrameTime() * SPEED; //changed from x to y
+	position.y -= SPEED;
 
 	//if we are out of the bounds of the screen
 	if (position.y < 0)
-		RemoveBullet();
+		this->MarkForDestroy();
 	
 	sprite.setPosition(position);
 }
 
 void Bullet::Draw()
 {
-	WindowManager::MainWindow.draw(sprite);
+	WindowManager::MainWindow.draw(this->sprite);
 }
 
 void Bullet::Destroy()
 {
 	DeregisterCollision<Bullet>( *this );
+	this->manager->SetBulletInactive();
 }
 
-void Bullet::RedrawBullet(sf::Vector2f pos)
+void Bullet::InitializeBullet(BulletManager* manager, sf::Vector2f pos)
 {
+	this->manager = manager;
 	this->position = pos;
-	BulletFactory::ChangeBulletStatus(false);
 	RegisterCollision<Bullet>(*this);
-	this->sprite.setScale(1, 1); //reapply the regular scale for the bullet
-}
-
-void Bullet::RemoveBullet()
-{
-	BulletFactory::ChangeBulletStatus(true);
-	
-	DeregisterCollision<Bullet>(*this);
-	this->sprite.setScale(0, 0); //i set the scale to remove the image from the scene. May be changed later on
 }
 
 void Bullet::Collision( Mushroom *shroom )
 {
 	shroom->TakeDamage();
 	
-	this->RemoveBullet();
+	this->MarkForDestroy();
 }

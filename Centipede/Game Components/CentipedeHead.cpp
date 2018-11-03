@@ -132,7 +132,7 @@ CentiMovementDirectionEnum CentipedeHead::GetDirectionEnum()
 
 void CentipedeHead::Collision(Bullet * bullet)
 {
-	bullet->RemoveBullet(); //remove the bullet
+	bullet->MarkForDestroy(); //remove the bullet
 
 	this->MarkForDestroy(); //remove the head from screen, and recycle
 

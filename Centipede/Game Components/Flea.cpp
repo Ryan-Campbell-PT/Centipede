@@ -52,7 +52,7 @@ void Flea::Draw()
 void Flea::Collision(Bullet * b)
 {
 	this->state->TakeDamage(this);
-	b->RemoveBullet();
+	b->MarkForDestroy();
 }
 
 void Flea::Collision(Ship * ship)

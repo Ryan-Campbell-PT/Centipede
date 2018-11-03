@@ -73,7 +73,7 @@ void CentipedeBody::Update()
 void CentipedeBody::Collision(Bullet * const bullet)
 {
 	MushroomManager::AttemptSpawnShroom(this->position);
-	bullet->RemoveBullet();
+	bullet->MarkForDestroy();
 	CentiBodyManager::SetBehindBodyToHead(this);
 	ScoreManager::SendScoreCmd(this->pDeath);
 	this->MarkForDestroy();

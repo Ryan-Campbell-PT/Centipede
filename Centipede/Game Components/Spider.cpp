@@ -89,7 +89,7 @@ void Spider::SpawnSpider(const sf::Vector2f pos, const float spiderSpeed)
 
 void Spider::Collision(Bullet *bullet)
 {
-	bullet->RemoveBullet();
+	bullet->MarkForDestroy();
 	SpiderManager::RemoveSpider(this);
 	ScoreManager::SendScoreCmd(this->pDeath);
 	this->MarkForDestroy();

@@ -1,44 +1,43 @@
 #include "BulletFactory.h"
 #include "Bullet.h"
 
-BulletFactory * BulletFactory::instance = 0;
+BulletFactory * BulletFactory::instance = nullptr;
 
+void BulletFactory::RecycleBullet(GameObject* bullet)
+{
+	instance->recycledBullets.push_back(static_cast<Bullet*>(bullet));
+}
+
+Bullet * BulletFactory::GetBullet()
+{
+	Bullet *b = nullptr;
+
+	if(GetInstance()->recycledBullets.empty())
+	{
+		b = new Bullet;
+		b->SetExternalManagement(RecycleBullet);
+	}
+
+	else
+	{
+		b = instance->recycledBullets.back();
+		instance->recycledBullets.pop_back();
+		b->RegisterToCurrentScene();
+	}
+
+	return b;
+}
+
+void BulletFactory::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+}
 
 BulletFactory * BulletFactory::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 		instance = new BulletFactory;
 
 	return instance;
-}
-
-BulletFactory::BulletFactory()
-{
-	bullet = new Bullet;
-}
-
-BulletFactory::~BulletFactory()
-{
-	delete this->bullet;
-}
-
-bool BulletFactory::AttemptSpawnBullet(sf::Vector2f pos)
-{
-	if (BulletFactory::CanSpawnBullet())
-	{
-		GetInstance()->bullet->RedrawBullet(pos);
-		return true;
-	}
-
-	return false;
-}
-
-bool BulletFactory::CanSpawnBullet()
-{
-	return GetInstance()->canSpawnBullet;
-}
-
-void BulletFactory::ChangeBulletStatus(bool b)
-{
-	GetInstance()->canSpawnBullet = b;
 }

@@ -471,6 +471,9 @@
     <ClCompile Include="Game Components\GameManager.cpp">
       <Filter>Source Files\Game Components</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\BulletManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -904,6 +907,9 @@
     </ClInclude>
     <ClInclude Include="Game Components\SoundOff.h">
       <Filter>Source Files\Game Components\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\BulletManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

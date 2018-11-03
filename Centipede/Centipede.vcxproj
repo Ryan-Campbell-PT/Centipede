@@ -94,6 +94,7 @@
     <ClCompile Include="Game Components\Body_Right.cpp" />
     <ClCompile Include="Game Components\Body_Up.cpp" />
     <ClCompile Include="Game Components\BulletFactory.cpp" />
+    <ClCompile Include="Game Components\BulletManager.cpp" />
     <ClCompile Include="Game Components\CentiBodyFactory.cpp" />
     <ClCompile Include="Game Components\CentiBodyManager.cpp" />
     <ClCompile Include="Game Components\CentiBodyPool.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Game Components\Body_Up.h" />
     <ClInclude Include="Game Components\BouncingSpiderStateLeft.h" />
     <ClInclude Include="Game Components\BulletFactory.h" />
+    <ClInclude Include="Game Components\BulletManager.h" />
     <ClInclude Include="Game Components\CentiBodyDirection.h" />
     <ClInclude Include="Game Components\CentiBodyFactory.h" />
     <ClInclude Include="Game Components\CentiBodyManager.h" />
