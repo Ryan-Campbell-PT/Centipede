@@ -21,14 +21,6 @@ class SoundCmd;
 class Ship : public GameObject
 {
 public:
-	virtual void Update();
-	virtual void Draw();
-	virtual void Destroy();
-
-	virtual void Collision(GameObject *other) {};
-	virtual void Collision(Widget *other);
-	virtual void Collision(Mushroom* other);
-	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey);
 
 	static sf::Vector2f GetPosition();
 	static void SetState(ShipMode *state);
@@ -36,21 +28,32 @@ public:
 	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
 	void DestroyShip();
 
+	virtual void Collision(GameObject *other) override {};
+	virtual void Collision(Widget *other);
+	virtual void Collision(Mushroom* other);
+
+	static void Terminate(GameObject *);
+
 private:
 	Ship(); //singleton instance
+	virtual ~Ship() = default;
+	static Ship * GetInstance();
 	void SetKeyboardCommands() const;
+
+	virtual void Update() override;
+	virtual void Draw() override;
+	virtual void Destroy() override;
+
+	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey) override;
 
 	static Ship *instance;
 
 	const float SPEED = 2.5f;
-	sf::Vector2f GunOffset;
 	sf::Vector2f position;
-	sf::Sprite sprite; //changed from AnimatedSprite
+	sf::Sprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
 	SoundCmd *fireSound;
-
-	static Ship * GetInstance();
 
 	PlayerInput *playerInput;
 	ShipMode *shipMode;

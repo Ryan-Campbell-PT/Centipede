@@ -93,3 +93,18 @@ void Ship_Ai::MoveShip(const PlayerInput* const input, sf::Vector2f &pos, const 
 	}
 
 }
+
+void Ship_Ai::MushroomCollision(const PlayerInput * input, sf::Vector2f &pos, const float &speed)
+{ //we dont care about any of the parametrs for this state
+	if(up)
+	{
+		up = false;
+		down = true;
+	}
+
+	else if(down)
+	{
+		down = false;
+		up = true;
+	}
+}

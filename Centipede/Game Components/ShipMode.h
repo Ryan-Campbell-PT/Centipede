@@ -6,12 +6,9 @@ class PlayerInput;
 
 class ShipMode
 {
-	//REMEMBER ALL CONST
 public:
+	virtual ~ShipMode() = default;
 	virtual void MoveShip(const PlayerInput * input, sf::Vector2f &pos, const float &speed) {} ///this will be used for attractor mode
-	//virtual void MoveShip() {} ///this will be used for playerinput
-
-	//static ShipMode* GetShipMode();
+	virtual void MushroomCollision(const PlayerInput * input, sf::Vector2f &pos, const float &speed) {}
 };
-
 #endif // SHIPMODE_H

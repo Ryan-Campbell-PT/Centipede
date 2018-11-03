@@ -22,6 +22,8 @@
 #include <crtdbg.h>  
 #include "../GameManager.h"
 #include "../WaveManager.h"
+#include "../Ship.h"
+#include "../BulletManager.h"
 
 
 using namespace std;
@@ -71,6 +73,7 @@ void Game::TerminateGame()
 	FleaManager::Terminate();
 	CentiHeadManager::Terminate();
 	CentiBodyManager::Terminate();
+	BulletManager::Terminate();
 
 	GameGrid::Terminate();
 	PlayerManager::Terminate();

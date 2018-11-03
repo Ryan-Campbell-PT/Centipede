@@ -16,6 +16,7 @@
 #include "PlayerInput.h"
 #include "ScoreManager.h"
 #include "ShipMode.h"
+#include "SoundCmd.h"
 
 Ship *Ship::instance = nullptr;
 
@@ -29,8 +30,6 @@ Ship::Ship()
 	this->sprite.setPosition(position);
 
 	this->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f, WindowManager::MainWindow.getView().getSize().y * .9f);
-
-	this->GunOffset = sf::Vector2f(0, 0);
 
 	SetCollider(sprite, bitmap, true);
 	RegisterCollision<Ship>(*this);
@@ -59,7 +58,10 @@ void Ship::SetKeyboardCommands() const
 Ship * Ship::GetInstance()
 {
 	if (instance == nullptr)
+	{
 		instance = new Ship;
+		instance->SetExternalManagement(Terminate);
+	}
 
 	return instance;
 }
@@ -92,13 +94,8 @@ void Ship::Update()
 	this->shipMode->MoveShip(this->playerInput, this->position, this->SPEED);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	{
-		//the sound could possibly be moved to the SpawnBullet() function to relieve the need for an if
 		if (BulletManager::AttemptSpawnBullet())
-		{
 			SoundManager::SendSoundCommand(this->fireSound); //only play the sound if the bullet can be spawned
-		}
-	}
 
 #endif
 
@@ -125,11 +122,8 @@ void Ship::Collision(Widget *other)
 
 void Ship::Collision(Mushroom* other)
 {
-	//todo: attractor mode doesnt collide, can probably just get opposite of offset array
-	if (sf::Keyboard::isKeyPressed(playerInput->keyLeft->GetCommand())) position.x += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(playerInput->keyUp->GetCommand())) position.y += this->SPEED;
-	if (sf::Keyboard::isKeyPressed(playerInput->keyDown->GetCommand())) position.y -= this->SPEED;
-	if (sf::Keyboard::isKeyPressed(playerInput->keyRight->GetCommand())) position.x -= this->SPEED;
+	//let the state handle what happens when I collide
+	this->shipMode->MushroomCollision(this->playerInput, this->position, this->SPEED);
 
 	sprite.setPosition(position);
 }
@@ -170,6 +164,20 @@ void Ship::SetState(ShipMode * state)
 void Ship::DestroyShip()
 {
 	ConsoleMsg::WriteLine("BOOM");
+}
+
+void Ship::Terminate(GameObject *)
+{
+	delete instance->fireSound;
+	delete instance->playerInput;
+	delete instance->shipMode;
+	
+	instance->fireSound = nullptr;
+	instance->playerInput = nullptr;
+	instance->shipMode = nullptr;
+	
+	delete instance;
+	instance = nullptr;
 }
 
 void Ship::Draw()
