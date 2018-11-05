@@ -472,7 +472,7 @@
       <Filter>Source Files\Game Components</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\BulletManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

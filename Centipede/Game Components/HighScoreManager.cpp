@@ -2,30 +2,25 @@
 #include "TEAL/WindowManager.h"
 #include "GameGrid.h"
 #include "TextEditor.h"
+#include "ScoreManager.h"
 
 HighScoreManager* HighScoreManager::instance = nullptr;
 
 HighScoreManager::HighScoreManager()
 	:startingPos_HS(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0)),
-	startingPos_List(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, SPRITE_SIZE * 6))
+	startingPos_List(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, SPRITE_SIZE * 6)),
+	maxSizeScores(5)
 {
-	for (int i = 0; i < 6; ++i)
-		this->highScoreList.emplace_back(12345, "doi");
+	for (unsigned int i = 0; i < maxSizeScores; ++i)
+		this->highScoreList.emplace_back(0, "doi");
+
+	this->currentHighScore = this->highScoreList[0].score;
 }
 
-void HighScoreManager::AddScore(const int & score)
+void HighScoreManager::AddScore(const unsigned int & score)
 {
-	//todo
-#if false
-	HighScoreManager r;
-	if (score > r.highScoreList[r.highScoreList.size() - 1].score)
-	{
-		//r.highScoreList.empl
-	}
-	std::set<int> s;
-
-	r.highScoreList.erase(r.highScoreList.begin(), r.highScoreList.end() + r.highScoreList.size())
-#endif
+	if (GetInstance()->currentHighScore < score)
+		instance->currentHighScore = score;
 }
 
 int HighScoreManager::GetHighScore()
@@ -61,6 +56,11 @@ void HighScoreManager::WriteHighScore()
 	}
 }
 
+void HighScoreManager::EndWave()
+{
+	GetInstance()->endWave();
+}
+
 HighScoreManager * HighScoreManager::GetInstance()
 {
 	if (instance == nullptr)
@@ -90,9 +90,15 @@ void HighScoreManager::setupScores()
 
 void HighScoreManager::writeHighScoreList()
 {
+	//bring me the loops, bruder
 	for (auto hs : this->highScoreList)
 	{
-		auto scoreText = Tools::ToString(hs.score);
+		std::string scoreText;
+		if (hs.score == 0)
+			for (unsigned int i = 0; i < this->maxSizeScores; i++)
+				scoreText += '0'; //add a bunch of 0's because just having score == 0 will only be one char
+		else
+			scoreText = Tools::ToString(hs.score);
 
 		for (unsigned int i = 0; i < scoreText.size(); i++)
 		{//write the score to the left of the starting position
@@ -112,4 +118,63 @@ void HighScoreManager::writeHighScoreList()
 		startingPos_List.y += SPRITE_SIZE;
 
 	}
+}
+
+void HighScoreManager::endWave()
+{
+	const auto curScore = ScoreManager::GetCurrentScore();
+
+	if (curScore < this->highScoreList[this->maxSizeScores].score)
+		return; //cant place anywhere in list, so dont do anything
+
+	else if (curScore > this->highScoreList[0].score)
+	{ //if the current score is greater than the current high score
+		for (unsigned int i = 0; i < this->maxSizeScores - 1; i++)
+		{ //move all the high scores down one place
+			this->highScoreList[i + 1] = this->highScoreList[i];
+		}
+		//todo: you will need to somehow take user input
+		this->setHighScore(0, curScore);
+	}
+
+	else
+	{ // the current score is somewhere inbetween
+		unsigned int i = 0;
+		while (i < this->maxSizeScores - 1)
+		{
+			if (this->highScoreList[i].score > curScore && this->highScoreList[i + 1].score < curScore)
+			{ //high score should be placed in between these two scores
+				this->setHighScore(i, curScore);
+
+				//now move everything down one, from the place we are at in the current loop
+				//(it looks like a nested for loop, but its not)
+				while(i < this->maxSizeScores - 1)
+				{//after this loop, above loop should end because i > maxSizeScore
+					this->highScoreList[i + 1] = this->highScoreList[i];
+					++i;
+				}
+					
+			}
+			++i;
+		}
+	}
+
+}
+
+void HighScoreManager::setHighScore(const int& place, const int& score, const std::string& user)
+{
+	this->highScoreList[place].score = score;
+	if(user.empty())
+	{
+		this->highScoreList[place].text = this->requestUserName();
+	}
+
+	else
+		this->highScoreList[place].text = user;
+}
+
+std::string HighScoreManager::requestUserName()
+{
+	//todo
+	return "";
 }
