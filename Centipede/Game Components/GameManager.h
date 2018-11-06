@@ -8,6 +8,8 @@ class GameManager
 public:
 	static void SetAttractorMode();
 	static void SetPlayerMode();
+	static void RestartWave();
+	static void EndGame();
 
 private:
 	GameManager() = default;

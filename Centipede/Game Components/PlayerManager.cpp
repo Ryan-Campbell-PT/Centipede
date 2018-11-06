@@ -11,25 +11,35 @@
 #include "WaveManager.h"
 #include "SoundOff.h"
 #include "SoundOn.h"
+#include "GameManager.h"
+#include "LivesManager.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
 
 void PlayerManager::AddScore(const int score)
 {
 	GetInstance()->currentPlayer.playerScore += score;
-//	TextEditor::CurrentScore(instance->currentPlayer.playerScore);
+	//	TextEditor::CurrentScore(instance->currentPlayer.playerScore);
 }
 
 void PlayerManager::PlayerDeath()
 {
-	if (GetInstance()->playerMode == PlayerMode::TwoPlayer)
-		instance->SwapPlayer();
+	GetInstance()->currentPlayer.playerLives--;
 
-	if (--instance->currentPlayer.playerLives <= 0)
+	//if we are set to 2 player mode, swap to next player
+	if (instance->playerMode == PlayerMode::TwoPlayer)
 	{
-		//todo: save info for current player
-
+		instance->saveCurrentPlayerData();
+		instance->SwapPlayer();
 	}
+
+	//if we no longer have any lives, end the game
+	else if (instance->currentPlayer.playerLives <= 0)
+		GameManager::EndGame();
+
+	//if we are still alive, and are only a single player, restart the wave
+	else
+		GameManager::RestartWave();
 }
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
@@ -70,6 +80,7 @@ void PlayerManager::Terminate()
 }
 
 PlayerManager::PlayerManager()
+	:indexOfCurrentPlayer(-1)
 {
 	//emplace back essentially just takes the constructor of an object instead of calling the constructor
 	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Ai);
@@ -77,27 +88,25 @@ PlayerManager::PlayerManager()
 	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Player2);
 }
 
-void PlayerManager::assignPlayerData(PlayerData::PlayerID player)
+void PlayerManager::saveCurrentPlayerData()
 {
-	//this loop handles modifying the list, so we can get the information back later again
-	int counter = 0;
-	for (const auto playerr : this->listOfPlayers)
-	{
-		if (playerr.player == this->currentPlayer.player)
+	if (indexOfCurrentPlayer == -1)
+	{//if we havent already modified the current player
+		for (unsigned int i = 0; i < this->listOfPlayers.size(); ++i)
 		{
-			this->listOfPlayers[counter] = this->currentPlayer;
-			break;
+			if (this->listOfPlayers[i].player == this->currentPlayer.player)
+			{
+				this->listOfPlayers[i] = this->currentPlayer;
+				this->indexOfCurrentPlayer = i;
+				break;
+			}
 		}
-		++counter;
 	}
 
-	//this loop handles setting the current player to the player specified
-	for (const auto playerr : this->listOfPlayers)
-		if (playerr.player == player)
-		{
-			this->currentPlayer = playerr;
-			break;
-		}
+	else
+	{ //weve done this before
+		this->listOfPlayers[this->indexOfCurrentPlayer] = this->currentPlayer;
+	}
 }
 
 PlayerData::PlayerID PlayerManager::GetCurrentPlayer()
@@ -107,54 +116,31 @@ PlayerData::PlayerID PlayerManager::GetCurrentPlayer()
 
 void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 {
-#if false
 	switch (player)
 	{
 	case PlayerData::PlayerID::Ai:
-		Ship::SetState(&ShipFSM::aiMode);
-		break;
-
-	case PlayerData::PlayerID::Player1:
-		Ship::SetState(&ShipFSM::playerMode);
-		break;
-
-	case PlayerData::PlayerID::Player2:
-		Ship::SetState(&ShipFSM::playerMode); //todo: change this to two player mode
-		break;
-
-	default:
-		break;
-	}
-
-#elif true
-	switch (player)
-	{
-	case PlayerData::PlayerID::Ai:
-		Ship::SetState(new Ship_Ai);
+		Ship::InitializeShip(new Ship_Ai);
 		SoundManager::SetSoundProfile(new SoundOff);
 		break;
 
 	case PlayerData::PlayerID::Player1:
-		Ship::SetState(new Ship_Player);
+		Ship::InitializeShip(new Ship_Player);
 		SoundManager::SetSoundProfile(new SoundOn);
 		break;
 
 	case PlayerData::PlayerID::Player2:
-		Ship::SetState(new Ship_Player); //todo: change this to two player mode
+		Ship::InitializeShip(new Ship_Player); //todo: change this to two player mode
 		SoundManager::SetSoundProfile(new SoundOn);
 		break;
 
 	default:
 		break;
 	}
-#endif
-
-	GetInstance()->assignPlayerData(player);
-
 }
 
 void PlayerManager::SwapPlayer()
-{
+{//todo
+#if false
 	this->currentPlayer.mushroomSetup = MushroomManager::GetCurrentLayout();
 	this->currentPlayer.playerScore = ScoreManager::GetCurrentScore();
 	this->currentPlayer.waveLevel = WaveManager::GetCurrentWave();
@@ -176,6 +162,28 @@ void PlayerManager::SwapPlayer()
 	}
 
 	this->currentPlayer = tmp;
+
+#elif true
+
+	if(this->currentPlayer.player == PlayerData::PlayerID::Player1)
+		this->currentPlayer = this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player2)];
+
+	else if(this->currentPlayer.player == PlayerData::PlayerID::Player2)
+		this->currentPlayer = this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player1)];
+
+	//we can assume now we swapped players and now have all the information necessary
+	if(this->currentPlayer.playerLives <= 0)
+		GameManager::EndGame(); //if we swapped players and this player has no lives, end the game
+
+	else
+	{ //now initialize all the data associated with this player
+		WaveManager::SetupLevel(this->currentPlayer.waveLevel);
+		ScoreManager::SetCurrentScore(this->currentPlayer.playerScore);
+		MushroomManager::InitializeMushroomField(this->currentPlayer.mushroomSetup);
+		LivesManager::DisplayLives(this->currentPlayer.playerLives);
+	}
+
+#endif
 }
 
 PlayerManager * PlayerManager::GetInstance()

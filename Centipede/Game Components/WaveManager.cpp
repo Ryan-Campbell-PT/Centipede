@@ -183,6 +183,11 @@ void WaveManager::Terminate()
 	}
 }
 
+sf::Vector2f WaveManager::GetStartingPos()
+{
+	return GetInstance()->waveTextPosition;
+}
+
 void WaveManager::LoadLevelInfo(const char * filePath)
 {
 	GetInstance()->loadLevelInfo(filePath);

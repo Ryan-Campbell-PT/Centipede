@@ -8,7 +8,10 @@ class Mushroom;
 class MushroomManager
 {
 public:
+	///this initialize will setup mushrooms assuming you havent before (fresh start)
 	static void InitializeMushroomField(int numShrooms);
+	///this initialize assumes youve already been given a setup, and you just want to reinstate them
+	static void InitializeMushroomField(std::list<Mushroom*> *shroomField);
 	///given a position on screen, the mushroomManager will attempt to spawn a mushroom if avaliable
 	static bool AttemptSpawnShroom(sf::Vector2f pos);
 
@@ -28,6 +31,7 @@ private:
 
 	static MushroomManager * GetInstance();
 	void SpawnMushroom(sf::Vector2f &pos) const;
+	void initializeMushroomField(std::list<Mushroom*> *shroomField);
 
 	static MushroomManager* instance;
 };

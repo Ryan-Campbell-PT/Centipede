@@ -37,6 +37,8 @@ public:
 
 	static void Terminate();
 
+	static sf::Vector2f GetStartingPos();
+
 private:
 	struct Wave
 	{

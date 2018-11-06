@@ -90,7 +90,7 @@ void Scorpion::Collision(Mushroom * shroom)
 
 void Scorpion::Collision(Ship * ship)
 {
-	ship->DestroyShip();
+	ship->MarkForDestroy();
 }
 
 void Scorpion::Destroy()

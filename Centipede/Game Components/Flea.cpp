@@ -57,7 +57,7 @@ void Flea::Collision(Bullet * b)
 
 void Flea::Collision(Ship * ship)
 {
-	ship->DestroyShip();
+	ship->MarkForDestroy();
 }
 
 void Flea::Destroy()

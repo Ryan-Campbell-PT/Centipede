@@ -31,6 +31,11 @@ void MushroomManager::InitializeMushroomField(const int numShrooms)
 	}
 }
 
+void MushroomManager::InitializeMushroomField(std::list<Mushroom*>* shroomField)
+{
+	GetInstance()->initializeMushroomField(shroomField);
+}
+
 bool MushroomManager::AttemptSpawnShroom(sf::Vector2f pos)
 {
 	if (GameGrid::GetGridStatus(pos) <= GameGridEnum::Unoccupied)
@@ -83,4 +88,13 @@ void MushroomManager::SpawnMushroom(sf::Vector2f & pos) const
 
 	auto shroom = MushroomFactory::GetMushroom();
 	shroom->InitializeMushroom(pos);
+}
+
+void MushroomManager::initializeMushroomField(std::list<Mushroom*>* shroomField)
+{
+	for(auto shroom : *this->GetCurrentLayout())
+		shroom->MarkForDestroy();
+
+	for(auto shroom : *shroomField)
+		shroom->InitializeMushroom();
 }

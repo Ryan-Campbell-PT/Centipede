@@ -104,5 +104,5 @@ void Spider::Collision(Mushroom *shroom)
 
 void Spider::Collision(Ship * ship)
 {
-	ship->DestroyShip();
+	ship->MarkForDestroy();
 }

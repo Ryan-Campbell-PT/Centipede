@@ -22,8 +22,10 @@ public:
 	virtual void Draw() override;
 	virtual void Destroy() override;
 
-	///this will handle necessary code to put the mushroom on screen
+	///this inititialize handles that the mushroom is currently being set somewhere it wasnt before
 	void InitializeMushroom(sf::Vector2f const & pos, MushroomState state = MushroomState::Healthy);
+	///while this initialize assumes you dont care where it was before, just put it on screen
+	void InitializeMushroom();
 	void TakeDamage();
 
 	sf::Vector2f GetPosition() const;

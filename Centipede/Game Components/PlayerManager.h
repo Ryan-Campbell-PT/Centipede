@@ -26,11 +26,12 @@ public:
 private:
 	enum class PlayerMode
 	{
-		Attractor, OnePlayer, TwoPlayer	
+		Attractor = 0, OnePlayer = 1, TwoPlayer	 = 2
 	};
 
 	PlayerManager();
-	void assignPlayerData(PlayerData::PlayerID player);
+	void saveCurrentPlayerData();
+	//void initializeNewPlayer
 	static PlayerManager* GetInstance();
 
 	///when swapping players, the info will be stored for further use
@@ -40,6 +41,7 @@ private:
 	PlayerData currentPlayer;
 	PlayerMode playerMode;
 	std::vector<PlayerData> listOfPlayers;
+	int indexOfCurrentPlayer;
 };
 
 #endif // PLAYERMANAGER_H

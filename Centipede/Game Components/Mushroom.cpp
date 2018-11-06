@@ -38,11 +38,17 @@ void Mushroom::Destroy()
 void Mushroom::InitializeMushroom(sf::Vector2f const & pos, MushroomState state)
 {
 	this->sprite.setPosition(pos);
-	this->sprite.setScale(1.f, 1.f);
 	position = pos;
 
 	this->health = 0; //setting the positions of a mushroom assumes its full health
 	this->SetState(state);
+	RegisterCollision<Mushroom>(*this);
+}
+
+void Mushroom::InitializeMushroom()
+{
+	RegisterToCurrentScene(); //todo may break things, also make sure this function works
+	this->sprite.setPosition(this->position);
 	RegisterCollision<Mushroom>(*this);
 }
 

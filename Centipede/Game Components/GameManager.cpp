@@ -14,5 +14,13 @@ void GameManager::SetAttractorMode()
 }
 
 void GameManager::SetPlayerMode()
-{
+{//todo
+}
+
+void GameManager::RestartWave()
+{//todo
+}
+
+void GameManager::EndGame()
+{//todo
 }

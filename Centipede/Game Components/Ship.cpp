@@ -21,38 +21,20 @@
 Ship *Ship::instance = nullptr;
 
 Ship::Ship()
-	:shipMode(nullptr)
+	:shipMode(nullptr), timeToSpawn(3.f)
 {
 	bitmap = ResourceManager::GetTextureBitmap("PlayerShip");
 	this->sprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	this->sprite.setPosition(position);
-
-	this->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f, WindowManager::MainWindow.getView().getSize().y * .9f);
-
 	SetCollider(sprite, bitmap, true);
-	RegisterCollision<Ship>(*this);
-
-	SetDrawOrder(1000);
 
 	playerInput = new PlayerInput;
-	SetKeyboardCommands();
+	PlayerManager::SetPlayerControls(this->playerInput);
 	RegisterInput(InputFlags::KeyPressed); // Recieve single-presses events
 
 	this->fireSound = SoundManager::GetSound(SoundManager::SoundEvent::ShipFire);
-}
-
-void Ship::SetKeyboardCommands() const
-{
-
-	playerInput->keyDown = new	Ship_Right(sf::Keyboard::S);
-	playerInput->keyUp = new Ship_Left(sf::Keyboard::W);
-	playerInput->keyRight = new Ship_Right(sf::Keyboard::D);
-	playerInput->keyLeft = new Ship_Left(sf::Keyboard::A);
-	playerInput->keyFire = new Ship_Fire(sf::Keyboard::Space);
-
-	PlayerManager::SetPlayerControls(this->playerInput);
 }
 
 Ship * Ship::GetInstance()
@@ -70,6 +52,13 @@ void Ship::Destroy()
 {
 	DeregisterInput();
 	DeregisterCollision<Ship>(*this);
+	PlayerManager::PlayerDeath();
+	this->SetAlarm(0, this->timeToSpawn); //so we spawn back later
+}
+
+void Ship::Alarm0()
+{
+	this->InitializeShip(this->shipMode);
 }
 
 void Ship::Update()
@@ -161,11 +150,6 @@ void Ship::SetState(ShipMode * state)
 	instance->shipMode = state;
 }
 
-void Ship::DestroyShip()
-{
-	ConsoleMsg::WriteLine("BOOM");
-}
-
 void Ship::Terminate(GameObject *)
 {
 	delete instance->fireSound;
@@ -178,6 +162,19 @@ void Ship::Terminate(GameObject *)
 	
 	delete instance;
 	instance = nullptr;
+}
+
+void Ship::InitializeShip(ShipMode * state)
+{
+	delete GetInstance()->shipMode;
+	instance->shipMode = state;
+
+	//always spawn in the center
+	instance->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f,
+		WindowManager::MainWindow.getView().getSize().y * .9f);
+	
+	instance->RegisterInput();
+	instance->RegisterCollision<Ship>(*instance);
 }
 
 void Ship::Draw()
