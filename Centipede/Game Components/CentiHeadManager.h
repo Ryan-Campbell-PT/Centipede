@@ -19,8 +19,9 @@ public:
 
 	CentiHeadManager(const CentiHeadManager &s) = delete;
 	CentiHeadManager operator = (const CentiHeadManager &) = delete;
-	static void EndWave();
 
+	static void RestartWave();
+	static void EndWave();
 	static void Terminate();
 
 private:
@@ -30,6 +31,7 @@ private:
 	void SetApi(const int numBodies, const float centiSpeed,
 		const int numSoloHeads, const float soloHeadSpeed);
 	void SpawnSoloHeads();
+	void reinitializeCenti();
 
 	static CentiHeadManager* GetInstance();
 

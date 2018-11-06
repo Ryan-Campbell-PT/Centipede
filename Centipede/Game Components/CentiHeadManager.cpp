@@ -36,6 +36,11 @@ void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f &
 	head->InitializeHead(pos, direction);
 }
 
+void CentiHeadManager::RestartWave()
+{
+	GetInstance()->reinitializeCenti();
+}
+
 void CentiHeadManager::EndWave()
 {
 	CentiHeadFactory::EndWave();
@@ -61,6 +66,10 @@ void CentiHeadManager::SetApi(const int numBodies, const float centiSpeed,
 void CentiHeadManager::SpawnSoloHeads()
 {
 	//if()
+}
+
+void CentiHeadManager::reinitializeCenti()
+{//todo
 }
 
 CentiHeadManager * CentiHeadManager::GetInstance()

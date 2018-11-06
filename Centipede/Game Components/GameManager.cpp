@@ -3,6 +3,9 @@
 #include "HighScoreManager.h"
 #include "WaveManager.h"
 #include "ScoreManager.h"
+#include "LivesManager.h"
+#include "Ship.h"
+#include "CentiHeadManager.h"
 
 void GameManager::SetAttractorMode()
 {
@@ -15,10 +18,16 @@ void GameManager::SetAttractorMode()
 
 void GameManager::SetPlayerMode()
 {//todo
+	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
+	HighScoreManager::WriteHighScore();
+	ScoreManager::AttractorMode(false);
+	WaveManager::WriteWaveText();
+	LivesManager::DisplayLives(LivesManager::GetStartingLives());
 }
 
 void GameManager::RestartWave()
 {//todo
+	CentiHeadManager::RestartWave();
 }
 
 void GameManager::EndGame()

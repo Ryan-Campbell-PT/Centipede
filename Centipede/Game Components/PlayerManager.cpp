@@ -55,17 +55,17 @@ void PlayerManager::SetPlayerMode(PlayerData::PlayerID player)
 	{
 	case PlayerData::PlayerID::Ai:
 		GetInstance()->playerMode = PlayerMode::Attractor;
-		instance->InitializePlayer(PlayerData::PlayerID::Ai);
+		InitializePlayer(PlayerData::PlayerID::Ai);
 		break;
 
 	case PlayerData::PlayerID::Player1:
 		GetInstance()->playerMode = PlayerMode::OnePlayer;
-		instance->InitializePlayer(PlayerData::PlayerID::Player1);
+		InitializePlayer(PlayerData::PlayerID::Player1);
 		break;
 
 	case PlayerData::PlayerID::Player2:
 		GetInstance()->playerMode = PlayerMode::TwoPlayer; //todo: change this to two player mode
-		instance->InitializePlayer(PlayerData::PlayerID::Player2);
+		InitializePlayer(PlayerData::PlayerID::Player2);
 		break;
 
 	default:

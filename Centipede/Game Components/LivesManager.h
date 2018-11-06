@@ -7,12 +7,13 @@ class LivesManager : public GameObject
 {
 public:
 	static void DisplayLives(const int &lives);
+	static int GetStartingLives();
 
 private:
 	LivesManager();
 	static LivesManager* GetInstance();
 
-	virtual void Draw();
+	virtual void Draw() override;
 
 	int maxNumLives;
 	int currentNumLives;

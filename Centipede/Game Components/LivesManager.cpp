@@ -11,6 +11,11 @@ void LivesManager::DisplayLives(const int & lives)
 		instance->liveSprites[i] = instance->spriteToDisplay;
 }
 
+int LivesManager::GetStartingLives()
+{
+	return GetInstance()->maxNumLives;
+}
+
 LivesManager::LivesManager()
 	:maxNumLives(3),
 	currentNumLives(0),
