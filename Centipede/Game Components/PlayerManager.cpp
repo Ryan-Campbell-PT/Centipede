@@ -44,7 +44,7 @@ void PlayerManager::PlayerDeath()
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
 {
-	delete GetInstance()->currentPlayer.playerInput;
+	//delete GetInstance()->currentPlayer.playerInput;
 
 	instance->currentPlayer.playerInput = input;
 }

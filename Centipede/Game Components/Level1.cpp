@@ -38,28 +38,10 @@
 void Level1::Initialize()
 {
 	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
-/*
-	Ship::InitalizeShip(); //spawn the ship
 
-
-	FleaManager::InitializeFlea(25);
-	ScorpionManager::InitializeScorpion(5.f);
-	SpiderManager::InitializeSpider(2);
-	CentiHeadManager::InitializeCentipede(1, 1.5f, 0, 0);
-*/
-/*	auto d = new Ding;
-	d->far = 8;
-	d->MarkForDestroy();
-	d->far = 16;
-	//d->Draw();
-	//d->SetAlarm(0, 1);
-	d->RegisterToCurrentScene();
-	d->Thing();
-	*/
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
 	WaveManager::SetupLevel(1);
 	MushroomManager::InitializeMushroomField(15);
-	//TextEditor::AttractorMode(false);
 
 	CollisionTestPair<Ship, Mushroom>();
 

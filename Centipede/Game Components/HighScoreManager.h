@@ -35,6 +35,7 @@ public:
 
 	//todo: this will take the current score from the ScoreManager, and save it in the highScoreList
 	static void EndWave();
+	static void Terminate(GameObject *);
 
 private:
 

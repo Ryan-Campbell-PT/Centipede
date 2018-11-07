@@ -17,9 +17,10 @@
 WaveManager * WaveManager::instance = nullptr;
 
 WaveManager::WaveManager()
-	: waveTextPosition(sf::Vector2f(SPRITE_SIZE * 3, 0.f)),
-	numGlyphsForWave(2), currentLevel(0), writer(nullptr)
+	:numGlyphsForWave(2), currentLevel(0), writer(nullptr)
 {
+	waveTextPosition = sf::Vector2f(SPRITE_SIZE * 3, 0.f);
+	GameGrid::GetCenterGridPosition(waveTextPosition);
 	waveGlyphs = new Glyph[numGlyphsForWave];
 }
 

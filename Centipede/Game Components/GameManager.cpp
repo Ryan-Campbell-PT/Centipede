@@ -6,9 +6,13 @@
 #include "LivesManager.h"
 #include "Ship.h"
 #include "CentiHeadManager.h"
+#include "Level1.h"
+#include "LevelAttractor.h"
 
 void GameManager::SetAttractorMode()
 {
+	if(!SceneManager::GetCurrentScene())
+		SceneManager::ChangeScene(new LevelAttractor);
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
 	HighScoreManager::WriteHighScoreList();
 	HighScoreManager::WriteHighScore();
@@ -16,9 +20,10 @@ void GameManager::SetAttractorMode()
 	WaveManager::WriteWaveText();
 }
 
-void GameManager::SetPlayerMode()
+void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
 {//todo
-	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
+	SceneManager::ChangeScene(new Level1);
+	PlayerManager::SetPlayerMode(playerMode);
 	HighScoreManager::WriteHighScore();
 	ScoreManager::AttractorMode(false);
 	WaveManager::WriteWaveText();
