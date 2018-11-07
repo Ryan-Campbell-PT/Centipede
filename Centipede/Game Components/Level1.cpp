@@ -37,8 +37,7 @@
 //}
 
 void Level1::Initialize()
-{
-	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
+{	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
 
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
 	WaveManager::SetupLevel(1);
