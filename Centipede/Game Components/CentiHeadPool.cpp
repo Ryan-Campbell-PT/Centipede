@@ -32,7 +32,13 @@ void CentiHeadPool::RecycleCentiBody(GameObject * const body)
 	GetInstance()->headList.push_front(static_cast<CentipedeHead*>(body));
 	
 	if(instance->numActiveCenti <= 0)
-		GameManager::EndWave();
+	{
+		if(!instance->bs)
+		{
+			GameManager::EndWave();
+			instance->bs = true;
+		}
+	}
 }
 
 void CentiHeadPool::EndWave()

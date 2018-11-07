@@ -29,6 +29,7 @@
 #include <fstream>
 #include "Level2.h"
 #include "PlayerManager.h"
+#include "CentiHeadPool.h"
 
 //Level1::Level1()
 //	:currentLevelNum(1)
@@ -37,12 +38,15 @@
 //}
 
 void Level1::Initialize()
-{	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
+{	
+	WindowManager::SetBackgroundColor(sf::Color(0, 0, 0, 255)); //set background color black
 
-	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
+	//PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
 	WaveManager::SetupLevel(1);
 	MushroomManager::InitializeMushroomField(15);
-
+	CentiHeadPool::SetBS(false);
+	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1 ); //todo fix
+	
 	CollisionTestPair<Ship, Mushroom>();
 
 	CollisionTestPair<Bullet, Mushroom>();

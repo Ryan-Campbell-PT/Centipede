@@ -159,7 +159,7 @@ void Ship::InitializeShip(ShipMode * state)
 	//always spawn in the center
 	instance->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f,
 		WindowManager::MainWindow.getView().getSize().y * .9f);
-
+	
 	instance->RegisterInput();
 	instance->RegisterCollision<Ship>(*instance);
 }
