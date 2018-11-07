@@ -20,7 +20,10 @@ ScoreManager::ScoreManager()
 ScoreManager * ScoreManager::GetInstance()
 {
 	if (instance == nullptr)
+	{
 		instance = new ScoreManager;
+		instance->SetExternalManagement(Terminate);
+	}
 
 	return instance;
 }
@@ -164,4 +167,10 @@ int ScoreManager::GetCurrentScore()
 void ScoreManager::AttractorMode(bool b)
 {
 	GetInstance()->attractorMode = b;
+}
+
+void ScoreManager::Terminate(GameObject*)
+{
+	delete instance;
+	instance = nullptr;
 }
