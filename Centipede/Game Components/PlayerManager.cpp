@@ -73,6 +73,11 @@ void PlayerManager::SetPlayerMode(PlayerData::PlayerID player)
 	}
 }
 
+void PlayerManager::SetMushroomField(std::list<Mushroom*>* list)
+{
+	GetInstance()->currentPlayer.mushroomSetup = list;
+}
+
 void PlayerManager::Terminate()
 {
 	delete instance;

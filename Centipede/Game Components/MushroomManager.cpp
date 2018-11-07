@@ -3,6 +3,7 @@
 #include "GameGrid.h"
 #include "MushroomPool.h"
 #include "Mushroom.h"
+#include "PlayerManager.h"
 
 MushroomManager* MushroomManager::instance = nullptr;
 
@@ -29,6 +30,8 @@ void MushroomManager::InitializeMushroomField(const int numShrooms)
 
 		GetInstance()->SpawnMushroom(pos);
 	}
+
+	PlayerManager::SetMushroomField(MushroomFactory::GetCurrentLayout());
 }
 
 void MushroomManager::InitializeMushroomField(std::list<Mushroom*>* shroomField)

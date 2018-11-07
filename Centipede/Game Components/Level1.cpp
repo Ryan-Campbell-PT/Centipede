@@ -28,6 +28,7 @@
 #include <iostream>
 #include <fstream>
 #include "Level2.h"
+#include "PlayerManager.h"
 
 //Level1::Level1()
 //	:currentLevelNum(1)

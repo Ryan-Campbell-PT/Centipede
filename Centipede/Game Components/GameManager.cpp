@@ -17,7 +17,7 @@ void GameManager::SetAttractorMode()
 	HighScoreManager::WriteHighScoreList();
 	HighScoreManager::WriteHighScore();
 	ScoreManager::AttractorMode(true);
-	WaveManager::WriteWaveText();
+	//WaveManager::WriteWaveText();
 }
 
 void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
@@ -26,7 +26,7 @@ void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
 	PlayerManager::SetPlayerMode(playerMode);
 	HighScoreManager::WriteHighScore();
 	ScoreManager::AttractorMode(false);
-	WaveManager::WriteWaveText();
+	//WaveManager::WriteWaveText();
 	LivesManager::DisplayLives(LivesManager::GetStartingLives());
 }
 

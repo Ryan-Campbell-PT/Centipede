@@ -13,15 +13,13 @@
 #include "MushroomManager.h"
 #include "TextEditor.h"
 #include "GameGrid.h"
+#include "WaveWriter.h"
 
 WaveManager * WaveManager::instance = nullptr;
 
 WaveManager::WaveManager()
-	:numGlyphsForWave(2), currentLevel(0), writer(nullptr)
+	:currentLevel(0)
 {
-	waveTextPosition = sf::Vector2f(SPRITE_SIZE * 3, 0.f);
-	GameGrid::GetCenterGridPosition(waveTextPosition);
-	waveGlyphs = new Glyph[numGlyphsForWave];
 }
 
 WaveManager * WaveManager::GetInstance()
@@ -142,51 +140,13 @@ int WaveManager::GetCurrentWave()
 	return GetInstance()->currentLevel;
 }
 
-void WaveManager::WriteWaveText()
-{
-	auto wave = Tools::ToString(GetInstance()->currentLevel);
-	auto tmpStartingPos = instance->waveTextPosition;
-
-	if (wave.size() < instance->numGlyphsForWave)
-	{ //it is a wave that is < 10, so hard code the 0 on
-		//todo: dont hard code this
-		instance->waveGlyphs[1] = TextEditor::WriteText(wave.at(0), tmpStartingPos);
-		instance->waveGlyphs[0] = TextEditor::WriteText('0', sf::Vector2f(tmpStartingPos.x -= SPRITE_SIZE, tmpStartingPos.y));
-	}
-
-	else
-	{
-		for (unsigned int i = wave.size() - 1; i >= 0; i++)
-		{
-			instance->waveGlyphs[i] = TextEditor::WriteText(wave.at(i), tmpStartingPos);
-			tmpStartingPos.x -= SPRITE_SIZE;
-		}
-	}
-
-	//one time creation of the writer when its requested to write to the screen
-	if (instance->writer == nullptr)
-		instance->writer = new WaveInfoWriter;
-}
-
 void WaveManager::Terminate()
 {
 	if (instance)
 	{
-		delete[] instance->waveGlyphs;
-		instance->waveGlyphs = nullptr;
-		
-		//delete instance->writer;
-		//instance->writer = nullptr;
-		//todo: check that writer is destyored
-
 		delete instance;
 		instance = nullptr;
 	}
-}
-
-sf::Vector2f WaveManager::GetStartingPos()
-{
-	return GetInstance()->waveTextPosition;
 }
 
 void WaveManager::LoadLevelInfo(const char * filePath)
@@ -203,7 +163,7 @@ void WaveManager::SetupLevel(const int & levelNum)
 
 	GetInstance()->setCritterSettings(curWave);
 	instance->currentLevel = levelNum;
-	instance->WriteWaveText();
+	WaveWriter::WriteWave(levelNum);
 }
 
 void WaveManager::EndWave()
@@ -244,13 +204,4 @@ void WaveManager::setCritterSettings(const WaveManager::Wave wave)
 		SpiderManager::DeInitializeSpider();
 
 	this->currentLevel = wave.level;
-}
-
-void WaveManager::WaveInfoWriter::Draw()
-{
-	if (instance && instance->waveGlyphs)
-	{
-		for (unsigned int i = 0; i < instance->numGlyphsForWave; i++)
-			instance->waveGlyphs[i].Draw();
-	}
 }
