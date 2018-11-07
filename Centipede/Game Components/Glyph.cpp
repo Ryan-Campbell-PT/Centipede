@@ -36,3 +36,8 @@ void Glyph::Draw()
 
 	sprsheet->Draw(cellIndex, position);
 }
+
+void Glyph::Cleanup()
+{
+	GameGrid::SetGridStatus(this->position, GameGridEnum::Unoccupied);
+}

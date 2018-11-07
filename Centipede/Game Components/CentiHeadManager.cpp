@@ -38,7 +38,10 @@ void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f &
 
 void CentiHeadManager::RestartWave()
 {
-	GetInstance()->reinitializeCenti();
+	//todo: remove all the bodies and heads
+	//CentiHeadFactory::EndWave()
+	GetInstance()->InitializeCentipede(instance->numBodies, instance->centiSpeed,
+		instance->numSoloHeads, instance->soloHeadSpeed);
 }
 
 void CentiHeadManager::EndWave()

@@ -70,6 +70,15 @@ void HighScoreManager::Terminate(GameObject*)
 	instance = nullptr;
 }
 
+void HighScoreManager::Cleanup()
+{
+	for(auto f : GetInstance()->highScoreCharacters)
+	{
+		f.Cleanup(); //do whatever necessary to remove from screen
+		instance->highScoreCharacters.pop_back(); //remove from list
+	}
+}
+
 HighScoreManager * HighScoreManager::GetInstance()
 {
 	if (instance == nullptr)

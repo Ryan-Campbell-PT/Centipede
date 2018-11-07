@@ -54,7 +54,7 @@ void Ship::Destroy()
 	DeregisterInput();
 	DeregisterCollision<Ship>(*this);
 	PlayerManager::PlayerDeath();
-	this->SetAlarm(0, this->timeToSpawn); //so we spawn back later
+	//this->SetAlarm(0, this->timeToSpawn); //so we spawn back later
 }
 
 void Ship::Alarm0()

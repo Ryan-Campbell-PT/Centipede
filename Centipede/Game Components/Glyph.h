@@ -21,8 +21,7 @@ public:
 
 	Glyph( SpriteSheet* sheet, int cellInd, sf::Vector2f pos);
 	void Draw();
-
-
+	void Cleanup();
 };
 
 

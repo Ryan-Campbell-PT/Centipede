@@ -13,6 +13,7 @@ public:
 	static void SetPlayerMode(PlayerData::PlayerID playerMode);
 	static void RestartWave();
 	static void EndGame();
+	static void EndWave();
 
 private:
 	GameManager() = default;
