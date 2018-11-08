@@ -41,8 +41,9 @@ void CentiHeadManager::RestartWave()
 {
 	//todo: remove all the bodies and heads
 	CentiHeadPool::EndWave();
-	GetInstance()->InitializeCentipede(instance->numBodies, instance->centiSpeed,
-		instance->numSoloHeads, instance->soloHeadSpeed);
+	//GetInstance()->InitializeCentipede(instance->numBodies, instance->centiSpeed,
+		//instance->numSoloHeads, instance->soloHeadSpeed);
+	GetInstance()->reinitializeCenti();
 }
 
 void CentiHeadManager::EndWave()
@@ -74,6 +75,11 @@ void CentiHeadManager::SpawnSoloHeads()
 
 void CentiHeadManager::reinitializeCenti()
 {//todo
+	auto head = CentiHeadFactory::GetCentiHead();
+	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), numBodies, MoveSFM::downThenLeft);
+	head->SetAlarm(0, .5f);
+	instance->numActiveCenti++;
+
 }
 
 CentiHeadManager * CentiHeadManager::GetInstance()

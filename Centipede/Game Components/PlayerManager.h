@@ -21,6 +21,7 @@ public:
 	static void SetPlayerControls(PlayerInput *input);
 	static void SetPlayerMode(PlayerData::PlayerID player);
 	static void SetMushroomField(std::list<Mushroom*>* list);
+	static void ReinitializeShip();
 
 	static void Terminate();
 

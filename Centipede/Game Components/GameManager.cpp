@@ -24,7 +24,7 @@ void GameManager::SetAttractorMode()
 void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
 {//todo
 	SceneManager::ChangeScene(new Level1);
-	//PlayerManager::SetPlayerMode(playerMode);
+	PlayerManager::SetPlayerMode(playerMode);
 	HighScoreManager::Cleanup();
 	HighScoreManager::WriteHighScore();
 	ScoreManager::AttractorMode(false);

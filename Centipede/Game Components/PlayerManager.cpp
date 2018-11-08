@@ -78,6 +78,11 @@ void PlayerManager::SetMushroomField(std::list<Mushroom*>* list)
 	GetInstance()->currentPlayer.mushroomSetup = list;
 }
 
+void PlayerManager::ReinitializeShip()
+{
+	InitializePlayer(instance->currentPlayer.player);
+}
+
 void PlayerManager::Terminate()
 {
 	delete instance;
@@ -130,6 +135,8 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 
 	case PlayerData::PlayerID::Player1:
 		Ship::InitializeShip(new Ship_Player);
+		//TODO: ALL THIS NEEDS WORK
+		instance->currentPlayer.player = PlayerData::PlayerID::Player1;
 		SoundManager::SetSoundProfile(new SoundOn);
 		break;
 

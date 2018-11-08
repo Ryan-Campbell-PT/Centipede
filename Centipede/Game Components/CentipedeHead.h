@@ -37,6 +37,7 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 	virtual void Destroy() override;
+	virtual void Alarm0() override;
 
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
 

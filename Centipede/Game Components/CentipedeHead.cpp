@@ -116,6 +116,12 @@ void CentipedeHead::Destroy()
 	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
 }
 
+void CentipedeHead::Alarm0()
+{
+	Ship::ReinitializeShip();
+	PlayerManager::ReinitializeShip();
+}
+
 sf::Vector2f CentipedeHead::GetPosition()
 {
 	return this->position;
