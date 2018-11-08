@@ -114,12 +114,16 @@ void Ship::Collision(Mushroom* other)
 
 void Ship::Collision(CentipedeBody* body)
 {
-	MarkForDestroy();
+	//MarkForDestroy();
+	this->reinitializeShip();
+	PlayerManager::PlayerDeath();
 }
 
 void Ship::Collision(CentipedeHead * head)
 {
-	MarkForDestroy();
+	//MarkForDestroy();
+	this->reinitializeShip();
+	PlayerManager::PlayerDeath();
 }
 
 void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
@@ -128,6 +132,16 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 		GameManager::SetPlayerMode(PlayerData::PlayerID::Player1);
 	else if (k == sf::Keyboard::Num2)
 		GameManager::SetPlayerMode(PlayerData::PlayerID::Player2);
+}
+
+void Ship::reinitializeShip()
+{	
+	//always spawn in the center
+	instance->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f,
+		WindowManager::MainWindow.getView().getSize().y * .9f);
+	
+	instance->RegisterInput();
+	instance->RegisterCollision<Ship>(*instance);
 }
 
 sf::Vector2f Ship::GetPosition()

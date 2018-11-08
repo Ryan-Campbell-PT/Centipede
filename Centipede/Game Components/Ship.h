@@ -52,6 +52,8 @@ private:
 
 	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey) override;
 
+	void reinitializeShip();
+
 	static Ship *instance;
 
 	const float SPEED = 2.5f;

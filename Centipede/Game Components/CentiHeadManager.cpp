@@ -77,7 +77,7 @@ void CentiHeadManager::reinitializeCenti()
 {//todo
 	auto head = CentiHeadFactory::GetCentiHead();
 	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), numBodies, MoveSFM::downThenLeft);
-	head->SetAlarm(0, .5f);
+	//head->SetAlarm(0, .5f);
 	instance->numActiveCenti++;
 
 }

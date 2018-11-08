@@ -40,13 +40,20 @@ void GameManager::RestartWave()
 
 void GameManager::EndGame()
 {//todo
+	SceneManager::ChangeScene(new LevelAttractor);
+	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
+	HighScoreManager::Cleanup();
+	HighScoreManager::WriteHighScoreList();
+	HighScoreManager::WriteHighScore();
+	ScoreManager::AttractorMode(true);
+
 }
 
 void GameManager::EndWave()
 {
 	//depending on whether we are in attractor or player mode
 	//it will determine what happens when all the centi are gone
-	if(PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Ai)
+	if (PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Ai)
 		CentiHeadManager::RestartWave();
 	else
 		WaveManager::SetupLevel(WaveManager::GetCurrentWave() + 1);
