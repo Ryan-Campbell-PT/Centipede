@@ -17,6 +17,7 @@
 #include "ScoreManager.h"
 #include "ShipMode.h"
 #include "SoundCmd.h"
+#include "GameManager.h"
 
 Ship *Ship::instance = nullptr;
 
@@ -53,7 +54,7 @@ void Ship::Destroy()
 	DeregisterInput();
 	DeregisterCollision<Ship>(*this);
 	PlayerManager::PlayerDeath();
-	this->SetAlarm(0, this->timeToSpawn); //so we spawn back later
+	//this->SetAlarm(0, this->timeToSpawn); //so we spawn back later
 }
 
 void Ship::Alarm0()
@@ -119,24 +120,10 @@ void Ship::Collision(Mushroom* other)
 
 void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)
 {
-	//todo: this will have to be changed in the future, for now will keep
-	//if (k == sf::Keyboard::Key::C)
-		//ScorpionManager::SpawnScorpion();
-
-	//if (k == sf::Keyboard::Key::X)
-	//	SpiderManager::SpawnSpider();
-
-	if (k == sf::Keyboard::Key::Z) //just for testing purposes
-		if (PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Player1)
-			PlayerManager::InitializePlayer(PlayerData::PlayerID::Player2);
-
-		else
-			PlayerManager::InitializePlayer(PlayerData::PlayerID::Player1);
-
-	if (k == sf::Keyboard::Key::T)
-	{
-		ScoreManager::AddScore(-500); //just for testing purposes
-	}
+	if (k == sf::Keyboard::Num1) //just for testing purposes
+		GameManager::SetPlayerMode(PlayerData::PlayerID::Player1);
+	else if (k == sf::Keyboard::Num2)
+		GameManager::SetPlayerMode(PlayerData::PlayerID::Player2);
 }
 
 sf::Vector2f Ship::GetPosition()
@@ -155,11 +142,11 @@ void Ship::Terminate(GameObject *)
 	delete instance->fireSound;
 	delete instance->playerInput;
 	delete instance->shipMode;
-	
+
 	instance->fireSound = nullptr;
 	instance->playerInput = nullptr;
 	instance->shipMode = nullptr;
-	
+
 	delete instance;
 	instance = nullptr;
 }

@@ -44,7 +44,7 @@ void PlayerManager::PlayerDeath()
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
 {
-	delete GetInstance()->currentPlayer.playerInput;
+	//delete GetInstance()->currentPlayer.playerInput;
 
 	instance->currentPlayer.playerInput = input;
 }
@@ -71,6 +71,11 @@ void PlayerManager::SetPlayerMode(PlayerData::PlayerID player)
 	default:
 		break;
 	}
+}
+
+void PlayerManager::SetMushroomField(std::list<Mushroom*>* list)
+{
+	GetInstance()->currentPlayer.mushroomSetup = list;
 }
 
 void PlayerManager::Terminate()

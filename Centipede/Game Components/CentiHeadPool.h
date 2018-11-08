@@ -17,9 +17,11 @@ public:
 	static void EndWave();
 
 	static void Terminate();
+	static void SetBS(bool bs) {GetInstance()->bs = bs;}
 
 private:
-	CentiHeadPool() = default;
+	CentiHeadPool() 
+	:numActiveCenti(0), bs(false) {}
 	~CentiHeadPool() = default;
 
 
@@ -28,6 +30,7 @@ private:
 	static CentiHeadPool* instance;
 	std::list<CentipedeHead*> headList;
 	int numActiveCenti;
+	bool bs; //todo fix this
 };
 
 

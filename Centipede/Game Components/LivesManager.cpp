@@ -1,5 +1,6 @@
 #include "LivesManager.h"
 #include "WaveManager.h"
+#include "WaveWriter.h"
 
 LivesManager* LivesManager::instance = nullptr;
 
@@ -19,7 +20,8 @@ int LivesManager::GetStartingLives()
 LivesManager::LivesManager()
 	:maxNumLives(3),
 	currentNumLives(0),
-	startingPos_Lives(WaveManager::GetStartingPos()) //the lives are always next to the wave
+	startingPos_Lives(WaveWriter::GetStartingPos()) 
+	//the lives are always next to the wave. no need to center cuz already centered by WaveManager()
 {
 	this->liveSprites = new sf::Sprite[maxNumLives];
 	this->spriteToDisplay = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));

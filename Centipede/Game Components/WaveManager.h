@@ -2,8 +2,6 @@
 #define WAVEMANAGER_H
 #include <xstring>
 #include <list>
-#include "PlayerManager.h"
-#include <SFML/System/Vector2.hpp>
 #include "TEAL/GameObject.h"
 
 class Glyph;
@@ -17,14 +15,15 @@ class WaveManager //: public GameObject
 	 *GO as the scene is being created, so the resulting GO being created cannot be assigned to a scene
 	 *(because it hasnt been created yet) therefor crashing the game
 	 *This is a workaround for that to strictly write to the screen when i want it to
-	 */
+	 
 private:
 	class WaveInfoWriter : public GameObject
 	{
 	public:
+		static void setWriterToNull(GameObject*);
 		virtual void Draw() override;
 	};
-
+	*/
 public:
 	static void LoadLevelInfo(const char* filePath);
 	///will be used to initialize all the necessary info in the level specified
@@ -33,11 +32,7 @@ public:
 	static void EndWave();
 	static int GetCurrentWave();
 
-	static void WriteWaveText();
-
 	static void Terminate();
-
-	static sf::Vector2f GetStartingPos();
 
 private:
 	struct Wave
@@ -71,7 +66,6 @@ private:
 
 	WaveManager();
 	static WaveManager *GetInstance();
-	//virtual void Draw() override;
 
 	void loadLevelInfo(const char *filePath);
 	void setCritterSettings(const WaveManager::Wave wave);
@@ -82,17 +76,11 @@ private:
 	int getIntInfo(const std::string& line) const;
 
 	static WaveManager* instance;
-	WaveInfoWriter *writer;
-
-	sf::Vector2f waveTextPosition;
-	unsigned int numGlyphsForWave;
-	Glyph *waveGlyphs;
 
 	int currentLevel;
 	const size_t MAX_SIZE = 100;
 
 	std::list<WaveManager::Wave> levelList; //this will hold all the level info for quick access
-
 
 
 

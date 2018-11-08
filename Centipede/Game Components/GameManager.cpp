@@ -6,22 +6,29 @@
 #include "LivesManager.h"
 #include "Ship.h"
 #include "CentiHeadManager.h"
+#include "Level1.h"
+#include "LevelAttractor.h"
 
 void GameManager::SetAttractorMode()
 {
+	if (!SceneManager::GetCurrentScene())
+		SceneManager::ChangeScene(new LevelAttractor);
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
+	HighScoreManager::Cleanup();
 	HighScoreManager::WriteHighScoreList();
 	HighScoreManager::WriteHighScore();
 	ScoreManager::AttractorMode(true);
-	WaveManager::WriteWaveText();
+	//WaveManager::WriteWaveText();
 }
 
-void GameManager::SetPlayerMode()
+void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
 {//todo
-	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Player1);
+	SceneManager::ChangeScene(new Level1);
+	//PlayerManager::SetPlayerMode(playerMode);
+	HighScoreManager::Cleanup();
 	HighScoreManager::WriteHighScore();
 	ScoreManager::AttractorMode(false);
-	WaveManager::WriteWaveText();
+	//WaveManager::WriteWaveText();
 	LivesManager::DisplayLives(LivesManager::GetStartingLives());
 }
 
@@ -32,4 +39,14 @@ void GameManager::RestartWave()
 
 void GameManager::EndGame()
 {//todo
+}
+
+void GameManager::EndWave()
+{
+	//depending on whether we are in attractor or player mode
+	//it will determine what happens when all the centi are gone
+	if(PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Ai)
+		CentiHeadManager::RestartWave();
+	else
+		WaveManager::SetupLevel(WaveManager::GetCurrentWave() + 1);
 }

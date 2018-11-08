@@ -19,6 +19,7 @@ Glyph::~Glyph()
 	//todo: this is constanyl being called because we are always making new glyphs in the text writing
 	//will want to add a facotry
 	//delete sprsheet;
+	//sprsheet = nullptr;
 }
 
 Glyph::Glyph( SpriteSheet* sheet, int cellInd, sf::Vector2f pos )
@@ -34,4 +35,9 @@ void Glyph::Draw()
 	assert(sprsheet != nullptr);
 
 	sprsheet->Draw(cellIndex, position);
+}
+
+void Glyph::Cleanup()
+{
+	GameGrid::SetGridStatus(this->position, GameGridEnum::Unoccupied);
 }

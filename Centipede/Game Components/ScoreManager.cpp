@@ -9,9 +9,10 @@ ScoreManager * ScoreManager::instance = nullptr;
 
 ScoreManager::ScoreManager()
 	:scoreGlyph(nullptr), maxScoreSize(6),
-	startingPos_Score(WindowManager::MainWindow.getSize().x - SPRITE_SIZE * 3, 0),
 	currentScore(0)
 {
+	startingPos_Score = sf::Vector2f(WindowManager::MainWindow.getSize().x - SPRITE_SIZE * 3, 0);
+	GameGrid::GetCenterGridPosition(this->startingPos_Score);
 	this->scoreGlyph = new Glyph[maxScoreSize];
 	this->writeZero();
 }
@@ -19,7 +20,10 @@ ScoreManager::ScoreManager()
 ScoreManager * ScoreManager::GetInstance()
 {
 	if (instance == nullptr)
+	{
 		instance = new ScoreManager;
+		instance->SetExternalManagement(Terminate);
+	}
 
 	return instance;
 }
@@ -163,4 +167,10 @@ int ScoreManager::GetCurrentScore()
 void ScoreManager::AttractorMode(bool b)
 {
 	GetInstance()->attractorMode = b;
+}
+
+void ScoreManager::Terminate(GameObject*)
+{
+	delete instance;
+	instance = nullptr;
 }

@@ -6,11 +6,14 @@
 
 HighScoreManager* HighScoreManager::instance = nullptr;
 
-HighScoreManager::HighScoreManager()
-	:startingPos_HS(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0)),
-	startingPos_List(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, SPRITE_SIZE * 6)),
-	maxSizeScores(5)
+HighScoreManager::HighScoreManager()	
+	:maxSizeScores(5)
 {
+	startingPos_HS = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0);
+	startingPos_List = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, SPRITE_SIZE * 6);
+	GameGrid::GetCenterGridPosition(startingPos_HS);
+	GameGrid::GetCenterGridPosition(startingPos_List);
+	
 	for (unsigned int i = 0; i < maxSizeScores; ++i)
 		this->highScoreList.emplace_back(0, "doi");
 
@@ -28,7 +31,7 @@ int HighScoreManager::GetHighScore()
 	if (!GetInstance()->highScoreList.empty())
 		return GetInstance()->highScoreList[0].score;
 
-	return -1;
+	return 0;
 }
 
 std::vector<HighScoreManager::HighScore> HighScoreManager::GetHighScoreList()
@@ -61,10 +64,28 @@ void HighScoreManager::EndWave()
 	GetInstance()->endWave();
 }
 
+void HighScoreManager::Terminate(GameObject*)
+{
+	delete instance;
+	instance = nullptr;
+}
+
+void HighScoreManager::Cleanup()
+{
+	for(auto f : GetInstance()->highScoreCharacters)
+	{
+		f.Cleanup(); //do whatever necessary to remove from screen
+		instance->highScoreCharacters.pop_back(); //remove from list
+	}
+}
+
 HighScoreManager * HighScoreManager::GetInstance()
 {
 	if (instance == nullptr)
+	{
 		instance = new HighScoreManager;
+		instance->SetExternalManagement(Terminate);
+	}
 
 	return instance;
 }

@@ -29,6 +29,8 @@ public:
 	
 	static void AttractorMode(bool b);
 
+	static void Terminate(GameObject*);
+
 private:
 	//distance values
 	static const int spiderDistNearMultiplier = 1 / 3;
