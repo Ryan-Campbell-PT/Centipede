@@ -16,12 +16,12 @@ struct PlayerData
 	};
 
 	PlayerData()
-		: player(), playerScore(0), playerLives(3), waveLevel(1), playerInput(nullptr), mushroomSetup(nullptr)
+		: player(), playerScore(0), playerLives(1), waveLevel(1), playerInput(nullptr), mushroomSetup(nullptr)
 	{
 	}
 
 	explicit PlayerData(PlayerID player)
-		:player(player), playerScore(0), playerLives(3), waveLevel(1), playerInput(nullptr), mushroomSetup(nullptr) {}
+		:player(player), playerScore(0), playerLives(1), waveLevel(1), playerInput(nullptr), mushroomSetup(nullptr) {}
 
 	PlayerID player;
 	int playerScore;

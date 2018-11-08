@@ -8,6 +8,8 @@
 
 #define SHIP_BOUNDS 7.f
 
+class CentipedeBody;
+class CentipedeHead;
 // Forward declarations
 class PlayerInput;
 class Widget;
@@ -29,9 +31,9 @@ public:
 	//void DestroyShip();
 
 	virtual void Collision(GameObject *other) override {};
-	virtual void Collision(Widget *other);
 	virtual void Collision(Mushroom* other);
-
+	virtual void Collision(CentipedeBody *body);
+	virtual void Collision(CentipedeHead *head);
 	static void Terminate(GameObject *);
 
 	static void InitializeShip(ShipMode * state);

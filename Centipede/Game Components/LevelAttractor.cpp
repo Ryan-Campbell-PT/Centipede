@@ -39,5 +39,7 @@ void LevelAttractor::Initialize()
 
 	CollisionTestPair<CentipedeBody, Bullet>();
 	CollisionTestPair<CentipedeHead, Bullet>();
+	CollisionTestPair<CentipedeBody, Ship>();
+	CollisionTestPair<CentipedeHead, Ship>();
 
 }

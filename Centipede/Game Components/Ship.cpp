@@ -9,7 +9,7 @@
 #include "Asteroid.h"
 #include "BulletManager.h"
 #include "Mushroom.h"
-#include "ScorpionManager.h"
+#include "CentipedeHead.h"
 #include "SpiderManager.h"
 #include "KeyboardIncludes.h"
 #include "PlayerManager.h"
@@ -104,18 +104,22 @@ void Ship::Update()
 	sprite.setPosition(position);
 }
 
-void Ship::Collision(Widget *other)
-{
-	GameController::Instance().AddScore(other->GetValue());
-	other->MarkForDestroy();
-}
-
 void Ship::Collision(Mushroom* other)
 {
 	//let the state handle what happens when I collide
 	this->shipMode->MushroomCollision(this->playerInput, this->position, this->SPEED);
 
 	sprite.setPosition(position);
+}
+
+void Ship::Collision(CentipedeBody* body)
+{
+	MarkForDestroy();
+}
+
+void Ship::Collision(CentipedeHead * head)
+{
+	MarkForDestroy();
 }
 
 void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey)

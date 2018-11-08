@@ -64,4 +64,6 @@ void Level1::Initialize()
 
 	CollisionTestPair<CentipedeBody, Bullet>();
 	CollisionTestPair<CentipedeHead, Bullet>();
+	CollisionTestPair<CentipedeHead, Ship>();
+	CollisionTestPair<CentipedeBody, Ship>();
 }

@@ -12,6 +12,7 @@
 #define SPRITE_TURN_END 15
 #define DIRECTION_SIZE sizeof(CentiMovementDirectionEnum)
 
+class Ship;
 class CentipedeDirectionState;
 class CentipedeBody;
 enum class CentiMovementDirectionEnum;
@@ -50,7 +51,6 @@ public:
 
 	virtual void Collision(GameObject *go) override {};
 	virtual void Collision(Bullet * bullet);
-
 
 	sf::Vector2f GetPosition();
 	void SetSpeed(const int speed);

@@ -8,6 +8,7 @@
 #include "Bullet.h"
 #include "CentiHeadManager.h"
 #include "MushroomManager.h"
+#include "Ship.h"
 
 #include <list>
 #include "ScoreManager.h"
