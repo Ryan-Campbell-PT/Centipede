@@ -25,7 +25,8 @@ private:
 	static CentiBodyPool* GetInstance();
 
 	static CentiBodyPool* instance;
-	std::list<CentipedeBody*> bodyList;
+	std::list<CentipedeBody*> inactiveBodyList;
+	std::list<CentipedeBody*> activeBodyList;
 };
 
 

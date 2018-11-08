@@ -37,7 +37,8 @@ public:
 	static void Terminate(GameObject *);
 
 	static void InitializeShip(ShipMode * state);
-	
+	static void ReinitializeShip();
+
 private:
 	Ship(); //singleton instance
 	virtual ~Ship() = default;

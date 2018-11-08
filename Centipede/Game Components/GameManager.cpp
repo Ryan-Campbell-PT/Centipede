@@ -35,6 +35,7 @@ void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
 void GameManager::RestartWave()
 {//todo
 	CentiHeadManager::RestartWave();
+	//Ship::InitializeShip()
 }
 
 void GameManager::EndGame()

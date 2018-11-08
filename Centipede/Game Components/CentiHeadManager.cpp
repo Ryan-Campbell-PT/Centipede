@@ -6,6 +6,7 @@
 #include <random>
 #include "MushroomManager.h"
 #include "WaveManager.h"
+#include "CentiHeadPool.h"
 
 CentiHeadManager * CentiHeadManager::instance = nullptr;
 
@@ -39,7 +40,7 @@ void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f &
 void CentiHeadManager::RestartWave()
 {
 	//todo: remove all the bodies and heads
-	//CentiHeadFactory::EndWave()
+	CentiHeadPool::EndWave();
 	GetInstance()->InitializeCentipede(instance->numBodies, instance->centiSpeed,
 		instance->numSoloHeads, instance->soloHeadSpeed);
 }

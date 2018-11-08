@@ -168,6 +168,15 @@ void Ship::InitializeShip(ShipMode * state)
 	instance->RegisterCollision<Ship>(*instance);
 }
 
+void Ship::ReinitializeShip()
+{
+	GetInstance()->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f,
+		WindowManager::MainWindow.getView().getSize().y * .9f);
+
+	instance->RegisterInput();
+	instance->RegisterCollision<Ship>(*instance);
+}
+
 void Ship::Draw()
 {
 	WindowManager::MainWindow.draw(sprite);

@@ -28,7 +28,8 @@ private:
 	static CentiHeadPool* GetInstance();
 
 	static CentiHeadPool* instance;
-	std::list<CentipedeHead*> headList;
+	std::list<CentipedeHead*> inactiveHeadList;
+	std::list<CentipedeHead*> activeHeadList;
 	int numActiveCenti;
 	bool bs; //todo fix this
 };

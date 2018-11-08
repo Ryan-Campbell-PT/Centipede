@@ -7,7 +7,7 @@ CentipedeBody * CentiBodyPool::GetCentiBody()
 {
 	CentipedeBody* body;
 
-	if (GetInstance()->bodyList.empty())
+	if (GetInstance()->inactiveBodyList.empty())
 	{
 		body = new CentipedeBody;
 		body->SetExternalManagement(RecycleCentiBody);
@@ -15,8 +15,8 @@ CentipedeBody * CentiBodyPool::GetCentiBody()
 
 	else
 	{
-		body = GetInstance()->bodyList.front();
-		GetInstance()->bodyList.pop_front();
+		body = GetInstance()->inactiveBodyList.front();
+		GetInstance()->inactiveBodyList.pop_front();
 		body->RegisterToCurrentScene();
 	}
 
@@ -25,12 +25,12 @@ CentipedeBody * CentiBodyPool::GetCentiBody()
 
 void CentiBodyPool::RecycleCentiBody(GameObject * const body)
 {
-	GetInstance()->bodyList.push_front(static_cast<CentipedeBody*>(body));
+	GetInstance()->inactiveBodyList.push_front(static_cast<CentipedeBody*>(body));
 }
 
 void CentiBodyPool::Terminate()
 {	
-	//for(auto c : this->bodyList)
+	//for(auto c : this->inactiveBodyList)
 	//	delete c;
 
 	delete instance;
