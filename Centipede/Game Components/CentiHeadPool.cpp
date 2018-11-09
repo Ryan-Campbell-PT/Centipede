@@ -13,7 +13,7 @@ CentipedeHead * CentiHeadPool::GetCentiHead()
 	if (GetInstance()->inactiveHeadList.empty())
 	{
 		head = new CentipedeHead;
-		head->SetExternalManagement(RecycleCentiBody);
+		head->SetExternalManagement(RecycleCentiHead);
 	}
 
 	else
@@ -22,43 +22,45 @@ CentipedeHead * CentiHeadPool::GetCentiHead()
 		GetInstance()->inactiveHeadList.pop_front();
 		head->RegisterToCurrentScene();
 	}
-
+	
 	instance->activeHeadList.push_back(head);
 	instance->numActiveCenti++;
 	return head;
 }
 
-void CentiHeadPool::RecycleCentiBody(GameObject * const body)
+void CentiHeadPool::RecycleCentiHead(GameObject * const head)
 {
 	GetInstance()->numActiveCenti--;
-	instance->inactiveHeadList.push_front(static_cast<CentipedeHead*>(body));
-	instance->activeHeadList.remove(static_cast<CentipedeHead*>(body));
+	instance->inactiveHeadList.push_front(static_cast<CentipedeHead*>(head));
+	instance->activeHeadList.remove(static_cast<CentipedeHead*>(head));
 
-	if(instance->numActiveCenti <= 0)
+	if (instance->activeHeadList.empty())
 	{
-		if(!instance->bs)
-		{
+		/**
+		 * this check is a work around I did to confirm that this centipede was indeed shot
+		 * and not instead recycled by the Terminate() sequence. This was required because otherwise,
+		 * when the game is Terminate-ing(), this function gets called and EndWave() goes on forever
+		 */
+		if(static_cast<CentipedeHead*>(head)->GetConcent())
 			GameManager::EndWave();
-			instance->bs = true;
-		}
 	}
 }
 
 void CentiHeadPool::EndWave()
 {
-/*	for(auto c : GetInstance()->inactiveHeadList)
-	{
-		c->MarkForDestroy(); //this may not work due to it being deleted before destroyed
-		//delete c;
-	}
-*/
-	
+	/*	for(auto c : GetInstance()->inactiveHeadList)
+		{
+			c->MarkForDestroy(); //this may not work due to it being deleted before destroyed
+			//delete c;
+		}
+	*/
+
 	//todo: this works, this may want to be seperated tho
-	for(auto c : GetInstance()->activeHeadList)
+	for (auto c : GetInstance()->activeHeadList)
 	{
-		CentipedeBody *tmp, *past;
-		tmp = static_cast<CentipedeBody*>(c->GetWhosFollowingYou());
-		while(tmp)
+		CentipedeBody *tmp(static_cast<CentipedeBody*>(c->GetWhosFollowingYou())), *past(nullptr);
+
+		while (tmp)
 		{
 			past = static_cast<CentipedeBody*>(tmp->GetWhosFollowingYou());
 			tmp->MarkForDestroy();
@@ -70,8 +72,8 @@ void CentiHeadPool::EndWave()
 
 void CentiHeadPool::Terminate()
 {
-		//for(auto c : this->inactiveHeadList)
-		//delete c;
+	//for(auto c : this->inactiveHeadList)
+	//delete c;
 
 	delete instance;
 	instance = nullptr;

@@ -14,7 +14,7 @@
 #include "ScoreManager.h"
 
 CentipedeHead::CentipedeHead()
-	:currentDirectionState(nullptr), animationCounter(0), prevDirection(0), yCounter(0), speed(2)
+	:currentDirectionState(nullptr), animationCounter(0), prevDirection(0), yCounter(0), speed(2), concent(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
@@ -141,6 +141,7 @@ void CentipedeHead::Collision(Bullet * bullet)
 {
 	bullet->MarkForDestroy(); //remove the bullet
 
+	this->concent = true; //he concented to being shot
 	this->MarkForDestroy(); //remove the head from screen, and recycle
 
 	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)

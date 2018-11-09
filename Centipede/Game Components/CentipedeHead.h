@@ -55,6 +55,7 @@ public:
 
 	sf::Vector2f GetPosition();
 	void SetSpeed(const int speed);
+	bool GetConcent() const { return concent; }
 
 private:
 	///this function will apply the number of bodies connected to the head, at the creation of the head
@@ -76,6 +77,10 @@ private:
 
 	unsigned int yCounter;
 	ScoreCmd* pDeath;
+
+	///this variable is work around to allow the waves to progress
+	bool concent;
+
 };
 
 ///this enum will be used so there is no need to delete movements throuhgout the game loop

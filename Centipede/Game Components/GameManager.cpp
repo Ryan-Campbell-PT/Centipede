@@ -19,10 +19,11 @@ void GameManager::SetAttractorMode()
 	HighScoreManager::WriteHighScore();
 	ScoreManager::AttractorMode(true);
 	//WaveManager::WriteWaveText();
+	
 }
 
 void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
-{//todo
+{
 	SceneManager::ChangeScene(new Level1);
 	PlayerManager::SetPlayerMode(playerMode);
 	HighScoreManager::Cleanup();

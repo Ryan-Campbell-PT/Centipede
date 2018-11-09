@@ -24,6 +24,7 @@
 #include "../WaveManager.h"
 #include "../Ship.h"
 #include "../BulletManager.h"
+#include "../CentiHeadPool.h"
 
 
 using namespace std;
@@ -46,6 +47,7 @@ void Game::Run()
 
 	// Load resources
 	ResourceManager::LoadAllResources();
+	
 	while (WindowManager::MainWindow.isOpen() && ! sf::Keyboard::isKeyPressed( KILLGAMEKEY ) )
     {	
 		// Adjust game time clock
