@@ -9,7 +9,7 @@ ScoreManager * ScoreManager::instance = nullptr;
 
 ScoreManager::ScoreManager()
 	:scoreGlyph(nullptr), maxScoreSize(6),
-	currentScore(0)
+	currentScore(0), attractorMode(false)
 {
 	startingPos_Score = sf::Vector2f(WindowManager::MainWindow.getSize().x - SPRITE_SIZE * 3, 0);
 	GameGrid::GetCenterGridPosition(this->startingPos_Score);

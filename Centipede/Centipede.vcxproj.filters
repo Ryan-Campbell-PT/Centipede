@@ -923,6 +923,9 @@
     <ClInclude Include="Game Components\WaveWriter.h">
       <Filter>Source Files\Game Components</Filter>
     </ClInclude>
+    <ClInclude Include="HighScoreWriter.h">
+      <Filter>Source Files\Game Components\Score</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt">

@@ -349,6 +349,7 @@
     <ClInclude Include="Game Components\Widget.h" />
     <ClInclude Include="Game Components\WidgetGenerator.h" />
     <ClInclude Include="Game Components\Bullet.h" />
+    <ClInclude Include="HighScoreWriter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt" />
