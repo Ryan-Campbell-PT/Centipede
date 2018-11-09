@@ -66,6 +66,7 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 	
 	this->currentDirectionState = &direction;
 	yCounter = 0;
+	concent = false;
 }
 
 void CentipedeHead::Update()

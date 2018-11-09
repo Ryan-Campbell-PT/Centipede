@@ -69,6 +69,8 @@ void ScoreManager::writeScore()
 
 		tmpPos.x -= SPRITE_SIZE;
 	}
+
+	HighScoreManager::AddScore(this->currentScore);
 }
 
 void ScoreManager::writeZero()

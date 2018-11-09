@@ -12,6 +12,7 @@ public:
 	static void DrawHighScore(const int &score);
 	static void DrawHighScoreList(const std::vector<HighScoreManager::HighScore> &scoreList);
 
+	static void Cleanup();
 
 	static void Terminate(GameObject *);
 
@@ -30,8 +31,8 @@ private:
 	Glyph *highScore_Dynamic;
 	sf::Vector2f startingPos_DynamicHS;
 
-	int maxCharacters_Dynamic; //the maximum number of characters avaliable in a given score (never can get to 100k)
-	int currentScoreSize_Dynamic;
+	unsigned int maxCharacters_Dynamic; //the maximum number of characters avaliable in a given score (never can get to 100k)
+	unsigned int currentScoreSize_Dynamic;
 };
 
 #endif // HIGHSCOREWRITER_H

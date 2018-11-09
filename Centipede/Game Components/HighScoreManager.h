@@ -8,7 +8,7 @@
 #include "TEAL/GameObject.h"
 struct HighScore;
 
-class HighScoreManager// : public GameObject
+class HighScoreManager
 {
 public:
 	struct HighScore
@@ -35,7 +35,6 @@ public:
 
 	//todo: this will take the current score from the ScoreManager, and save it in the highScoreList
 	static void EndWave();
-	static void Terminate(GameObject *);
 	static void Cleanup();
 
 private:
@@ -46,7 +45,6 @@ private:
 	//virtual void Draw() override;
 
 	void setupScores();
-	void writeHighScoreList();
 	void endWave();
 	void setHighScore(const int &place, const int &score, const std::string& user = "");
 	///this function will pause the game and have the user type in their name for the high score
@@ -54,9 +52,6 @@ private:
 
 	static HighScoreManager *instance;
 	std::vector<HighScore> highScoreList; //the actual scores and "player names" associated 
-	sf::Vector2f startingPos_HS; //the top high score displayed throughout the entire game
-	std::vector<Glyph> highScoreCharacters; //all the characters on the screen at the time
-	sf::Vector2f startingPos_List; //the list viewed in attractor mode
 
 	unsigned int maxSizeScores; 
 	unsigned int currentHighScore;

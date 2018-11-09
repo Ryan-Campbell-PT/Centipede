@@ -11,12 +11,7 @@ HighScoreManager* HighScoreManager::instance = nullptr;
 
 HighScoreManager::HighScoreManager()	
 	:maxSizeScores(5)
-{
-	startingPos_HS = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0);
-	startingPos_List = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, SPRITE_SIZE * 6);
-	GameGrid::GetCenterGridPosition(startingPos_HS);
-	GameGrid::GetCenterGridPosition(startingPos_List);
-	
+{	
 	for (unsigned int i = 0; i < maxSizeScores; ++i)
 		this->highScoreList.emplace_back(0, "doi");
 
@@ -26,7 +21,10 @@ HighScoreManager::HighScoreManager()
 void HighScoreManager::AddScore(const unsigned int & score)
 {
 	if (GetInstance()->currentHighScore < score)
+	{
 		instance->currentHighScore = score;
+		HighScoreWriter::DrawHighScore(score);
+	}
 }
 
 int HighScoreManager::GetHighScore()
@@ -44,32 +42,12 @@ std::vector<HighScoreManager::HighScore> HighScoreManager::GetHighScoreList()
 
 void HighScoreManager::WriteHighScoreList()
 {
-#if !WRITER
-	GetInstance()->writeHighScoreList();
-#else
 	HighScoreWriter::DrawHighScoreList(GetInstance()->highScoreList);
-#endif
 }
 
 void HighScoreManager::WriteHighScore()
 {
-#if !WRITER
-	auto hs = Tools::ToString(GetInstance()->GetHighScore());
-	auto tmpStart = instance->startingPos_HS; //dont want to modify the real starting pos (for when we write again)
-
-	for (unsigned int i = 0; i < hs.size(); i++)
-	{
-		instance->highScoreCharacters.push_back(
-			TextEditor::WriteText(hs.at(hs.size() - i - 1), instance->startingPos_HS)
-		);
-		tmpStart.x += SPRITE_SIZE * i;
-		//instance->startingPos_HS.y
-	}
-#else
-
 	HighScoreWriter::DrawHighScore(GetInstance()->GetHighScore());
-
-#endif
 }
 
 void HighScoreManager::EndWave()
@@ -77,37 +55,18 @@ void HighScoreManager::EndWave()
 	GetInstance()->endWave();
 }
 
-void HighScoreManager::Terminate(GameObject*)
-{
-	delete instance;
-	instance = nullptr;
-}
-
 void HighScoreManager::Cleanup()
 {
-	for(auto f : GetInstance()->highScoreCharacters)
-	{
-		f.Cleanup(); //do whatever necessary to remove from screen
-		instance->highScoreCharacters.pop_back(); //remove from list
-	}
+	HighScoreWriter::Cleanup();
 }
 
 HighScoreManager * HighScoreManager::GetInstance()
 {
 	if (instance == nullptr)
-	{
 		instance = new HighScoreManager;
-		//instance->SetExternalManagement(Terminate);
-	}
 
 	return instance;
 }
-
-//void HighScoreManager::Draw()
-//{
-//	for (auto hs : this->highScoreCharacters)
-//		hs.Draw();
-//}
 
 void HighScoreManager::setupScores()
 {
@@ -120,38 +79,6 @@ void HighScoreManager::setupScores()
 
 		}
 		*/
-}
-
-void HighScoreManager::writeHighScoreList()
-{
-	//bring me the loops, bruder
-	for (auto hs : this->highScoreList)
-	{
-		std::string scoreText;
-		if (hs.score == 0)
-			for (unsigned int i = 0; i < this->maxSizeScores; i++)
-				scoreText += '0'; //add a bunch of 0's because just having score == 0 will only be one char
-		else
-			scoreText = Tools::ToString(hs.score);
-
-		for (unsigned int i = 0; i < scoreText.size(); i++)
-		{//write the score to the left of the starting position
-			auto g = TextEditor::WriteText(scoreText.at(scoreText.size() - 1 - i), sf::Vector2f(startingPos_List.x - (SPRITE_SIZE * i), startingPos_List.y));
-			//this->attractorGlyphs.push_back(myFont.GetGlyph(, );
-			this->highScoreCharacters.push_back(g);
-		}
-
-		//string
-		for (unsigned int j = 0; j < hs.text.size(); j++)
-		{//write the text associated with it to the right
-			auto g = TextEditor::WriteText(hs.text.at(j), sf::Vector2f(startingPos_List.x + SPRITE_SIZE * 2 + (SPRITE_SIZE * j), startingPos_List.y));
-
-			this->highScoreCharacters.push_back(g);
-		}
-
-		startingPos_List.y += SPRITE_SIZE;
-
-	}
 }
 
 void HighScoreManager::endWave()
