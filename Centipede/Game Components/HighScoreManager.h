@@ -8,7 +8,7 @@
 #include "TEAL/GameObject.h"
 struct HighScore;
 
-class HighScoreManager : public GameObject
+class HighScoreManager// : public GameObject
 {
 public:
 	struct HighScore
@@ -43,7 +43,7 @@ private:
 	HighScoreManager();
 	static HighScoreManager* GetInstance();
 
-	virtual void Draw() override;
+	//virtual void Draw() override;
 
 	void setupScores();
 	void writeHighScoreList();
@@ -58,7 +58,7 @@ private:
 	std::vector<Glyph> highScoreCharacters; //all the characters on the screen at the time
 	sf::Vector2f startingPos_List; //the list viewed in attractor mode
 
-	unsigned int maxSizeScores; //the maximum number of characters avaliable in a given score (never can get to 100k)
+	unsigned int maxSizeScores; 
 	unsigned int currentHighScore;
 };
 

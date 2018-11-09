@@ -127,6 +127,7 @@
     <ClCompile Include="Game Components\GameManager.cpp" />
     <ClCompile Include="Game Components\Glyph.cpp" />
     <ClCompile Include="Game Components\HighScoreManager.cpp" />
+    <ClCompile Include="Game Components\HighScoreWriter.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
     <ClCompile Include="Game Components\KeysFont.cpp" />
     <ClCompile Include="Game Components\LeftSpiderState.cpp" />
@@ -252,6 +253,7 @@
     <ClInclude Include="Game Components\GameManager.h" />
     <ClInclude Include="Game Components\Glyph.h" />
     <ClInclude Include="Game Components\HighScoreManager.h" />
+    <ClInclude Include="Game Components\HighScoreWriter.h" />
     <ClInclude Include="Game Components\HUD.h" />
     <ClInclude Include="Game Components\KeyboardCommand.h" />
     <ClInclude Include="Game Components\KeyboardIncludes.h" />
@@ -349,7 +351,6 @@
     <ClInclude Include="Game Components\Widget.h" />
     <ClInclude Include="Game Components\WidgetGenerator.h" />
     <ClInclude Include="Game Components\Bullet.h" />
-    <ClInclude Include="HighScoreWriter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Game Components\TEAL\_Version Information.txt" />

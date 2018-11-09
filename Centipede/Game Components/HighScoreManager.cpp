@@ -3,7 +3,10 @@
 #include "GameGrid.h"
 #include "TextEditor.h"
 #include "ScoreManager.h"
+#include "HighScoreWriter.h"
 
+
+#define WRITER true
 HighScoreManager* HighScoreManager::instance = nullptr;
 
 HighScoreManager::HighScoreManager()	
@@ -41,11 +44,16 @@ std::vector<HighScoreManager::HighScore> HighScoreManager::GetHighScoreList()
 
 void HighScoreManager::WriteHighScoreList()
 {
+#if !WRITER
 	GetInstance()->writeHighScoreList();
+#else
+	HighScoreWriter::DrawHighScoreList(GetInstance()->highScoreList);
+#endif
 }
 
 void HighScoreManager::WriteHighScore()
 {
+#if !WRITER
 	auto hs = Tools::ToString(GetInstance()->GetHighScore());
 	auto tmpStart = instance->startingPos_HS; //dont want to modify the real starting pos (for when we write again)
 
@@ -57,6 +65,11 @@ void HighScoreManager::WriteHighScore()
 		tmpStart.x += SPRITE_SIZE * i;
 		//instance->startingPos_HS.y
 	}
+#else
+
+	HighScoreWriter::DrawHighScore(GetInstance()->GetHighScore());
+
+#endif
 }
 
 void HighScoreManager::EndWave()
@@ -84,17 +97,17 @@ HighScoreManager * HighScoreManager::GetInstance()
 	if (instance == nullptr)
 	{
 		instance = new HighScoreManager;
-		instance->SetExternalManagement(Terminate);
+		//instance->SetExternalManagement(Terminate);
 	}
 
 	return instance;
 }
 
-void HighScoreManager::Draw()
-{
-	for (auto hs : this->highScoreCharacters)
-		hs.Draw();
-}
+//void HighScoreManager::Draw()
+//{
+//	for (auto hs : this->highScoreCharacters)
+//		hs.Draw();
+//}
 
 void HighScoreManager::setupScores()
 {

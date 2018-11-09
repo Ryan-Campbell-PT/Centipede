@@ -1,0 +1,97 @@
+#include "HighScoreWriter.h"
+#include "GameGrid.h"
+#include "TextEditor.h"
+
+HighScoreWriter * HighScoreWriter::instance = nullptr;
+
+HighScoreWriter::HighScoreWriter()
+	:maxCharacters_Dynamic(5), currentScoreSize_Dynamic(0)
+{
+	this->highScore_Dynamic = new Glyph[maxCharacters_Dynamic];
+	this->startingPosition_List = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2, WindowManager::MainWindow.getSize().y / 2);
+	this->startingPos_DynamicHS = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2, 0);
+}
+
+HighScoreWriter * HighScoreWriter::GetInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new HighScoreWriter;
+		instance->SetExternalManagement(Terminate);
+	}
+
+	return instance;
+}
+
+void HighScoreWriter::Draw()
+{
+	for (auto hs : this->highScoreList_Characters)
+		hs.Draw();
+
+	for (int i = 0; i < currentScoreSize_Dynamic; i++)
+		this->highScore_Dynamic[i].Draw();
+}
+
+void HighScoreWriter::drawHighScore(const int& score)
+{
+	auto hs = Tools::ToString(score);
+	this->currentScoreSize_Dynamic = hs.size() - 1;
+	auto tmpStart = this->startingPos_DynamicHS; //dont want to modify the real starting pos (for when we write again)
+
+	for (unsigned int i = 0; i < this->currentScoreSize_Dynamic; i++)
+	{
+		this->highScore_Dynamic[i] = TextEditor::WriteText(hs.at(this->currentScoreSize_Dynamic - i), startingPos_DynamicHS);
+
+		tmpStart.x += SPRITE_SIZE * i;
+	}
+}
+
+void HighScoreWriter::drawHighScoreList(const std::vector<HighScoreManager::HighScore>& scoreList)
+{
+	auto tmpPos = startingPosition_List; //dont want to modify current position
+
+	for (int i = 0; i < scoreList.size() - 1; i++)
+	{
+		std::string scoreText;
+		
+		if (scoreList[i].score == 0)
+			for (unsigned int i = 0; i < this->maxCharacters_Dynamic; i++)
+				scoreText += '0'; //add a bunch of 0's because just having score == 0 will only be one char
+		else
+			scoreText = Tools::ToString(scoreList[i].score);
+
+		for (unsigned int i = 0; i < scoreText.size(); i++)
+		{//write the score to the left of the starting position
+			auto g = TextEditor::WriteText(scoreText.at(scoreText.size() - 1 - i), sf::Vector2f(tmpPos.x - (SPRITE_SIZE * i), tmpPos.y));
+			//this->attractorGlyphs.push_back(myFont.GetGlyph(, );
+			this->highScoreList_Characters.push_back(g);
+		}
+
+		//string
+		for (unsigned int j = 0; j < scoreList[i].text.size(); j++)
+		{//write the text associated with it to the right
+			auto g = TextEditor::WriteText(scoreList[i].text.at(j), sf::Vector2f(tmpPos.x + SPRITE_SIZE * 2 + (SPRITE_SIZE * j), tmpPos.y));
+
+			this->highScoreList_Characters.push_back(g);
+		}
+
+		tmpPos.y += SPRITE_SIZE;
+
+	}
+}
+
+void HighScoreWriter::DrawHighScore(const int & score)
+{
+	GetInstance()->drawHighScore(score);
+}
+
+void HighScoreWriter::DrawHighScoreList(const std::vector<HighScoreManager::HighScore>& scoreList)
+{
+	GetInstance()->drawHighScoreList(scoreList);
+}
+
+void HighScoreWriter::Terminate(GameObject*)
+{
+	delete instance;
+	instance = nullptr;
+}
