@@ -30,8 +30,8 @@ void SpiderPool::RecycleSpider(GameObject *spider)
 
 void SpiderPool::Terminate()
 {
-	for(auto f : GetInstance()->recycledSpiders)
-		delete f;
+	//for(auto f : GetInstance()->recycledSpiders)
+	//	delete f;
 
 	delete instance;
 	instance = nullptr;

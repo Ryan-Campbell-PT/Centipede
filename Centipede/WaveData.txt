@@ -19,6 +19,7 @@ level 1
 
 centiBodyCount 4
 spiderActive yes
+spiderSpeed 2
 scorpionActive no
 
 _

@@ -22,7 +22,7 @@
 Ship *Ship::instance = nullptr;
 
 Ship::Ship()
-	:shipMode(nullptr), timeToSpawn(3.f)
+	:timeToSpawn(3.f), shipMode(nullptr)
 {
 	bitmap = ResourceManager::GetTextureBitmap("PlayerShip");
 	this->sprite = sf::Sprite(ResourceManager::GetTexture("PlayerShip"));
@@ -53,8 +53,6 @@ void Ship::Destroy()
 {
 	DeregisterInput();
 	DeregisterCollision<Ship>(*this);
-	PlayerManager::PlayerDeath();
-	//this->SetAlarm(0, this->timeToSpawn); //so we spawn back later
 }
 
 void Ship::Alarm0()

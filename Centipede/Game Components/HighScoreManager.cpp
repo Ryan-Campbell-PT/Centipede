@@ -80,38 +80,9 @@ void HighScoreManager::endWave()
 	if (curScore < this->highScoreList[this->maxSizeScores - 1].score)
 		return; //cant place anywhere in list, so dont do anything
 
-	else if (curScore > this->highScoreList[0].score)
-	{ //if the current score is greater than the current high score
-		for (unsigned int i = 0; i < this->maxSizeScores - 1; i++)
-		{ //move all the high scores down one place
-			this->highScoreList[i + 1] = this->highScoreList[i];
-		}
-		//todo: you will need to somehow take user input
-		this->setHighScore(0, curScore);
-	}
-
-	else
-	{ // the current score is somewhere inbetween
-		unsigned int i = 0;
-		while (i < this->maxSizeScores - 1)
-		{
-			if (this->highScoreList[i].score > curScore && this->highScoreList[i + 1].score < curScore)
-			{ //high score should be placed in between these two scores
-				this->setHighScore(i, curScore);
-
-				//now move everything down one, from the place we are at in the current loop
-				//(it looks like a nested for loop, but its not)
-				while(i < this->maxSizeScores - 1)
-				{//after this loop, above loop should end because i > maxSizeScore
-					this->highScoreList[i + 1] = this->highScoreList[i];
-					++i;
-				}
-					
-			}
-			++i;
-		}
-	}
-
+	//if we arent less than the lowest one, then set the high score at the lowest score,
+	//therefor pushing it off the score list all together
+	this->setHighScore(this->maxSizeScores - 1, curScore);
 }
 
 void HighScoreManager::setHighScore(const int& place, const int& score, const std::string& user)
@@ -124,6 +95,8 @@ void HighScoreManager::setHighScore(const int& place, const int& score, const st
 
 	else
 		this->highScoreList[place].text = user;
+
+	std::sort(this->highScoreList.begin(), this->highScoreList.end());
 }
 
 std::string HighScoreManager::requestUserName()

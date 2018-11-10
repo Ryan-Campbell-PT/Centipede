@@ -3,8 +3,6 @@
 
 #include "TEAL/CommonElements.h"
 
-#define DEFAULT_SPIDER_SPEED 1.5f
-
 class Spider;
 
 class SpiderManager : public GameObject
@@ -12,7 +10,7 @@ class SpiderManager : public GameObject
 public:
 	///we will assume that, per level, spiders only have one speed
 	///and that will be shared in the manager and passed to each spider
-	static void InitializeSpider(const float timeToSpawn, const float spiderSpeed = DEFAULT_SPIDER_SPEED);
+	static void InitializeSpider(const float timeToSpawn, const float spiderSpeed = 1.5f);
 	static void DeInitializeSpider();
 
 	static void RemoveSpider(Spider * const spider);
@@ -35,7 +33,7 @@ private:
 
 	static SpiderManager* instance;
 
-	float spiderSpeed;
+	float spiderSpeed = 1.5f; //default speed
 	float timeToSpawn;
 	bool active;
 };

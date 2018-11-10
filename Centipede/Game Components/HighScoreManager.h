@@ -16,8 +16,9 @@ public:
 		HighScore(const int &score, const std::string &str)
 			:score(score), text(str) {}
 
-		bool operator > (const HighScore &hs) const
+		bool operator < (const HighScore &hs) const
 		{
+			//returing > because we want to sort by largest
 			return this->score > hs.score;
 		}
 

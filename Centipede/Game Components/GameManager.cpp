@@ -23,6 +23,7 @@ void GameManager::SetAttractorMode()
 
 void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
 {
+	//todo: when changing scenes, that arent the beginning, this breaks a lot
 	SceneManager::ChangeScene(new Level1);
 	PlayerManager::SetPlayerMode(playerMode);
 	HighScoreManager::Cleanup();

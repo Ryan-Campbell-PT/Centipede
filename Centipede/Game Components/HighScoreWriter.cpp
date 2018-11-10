@@ -54,7 +54,7 @@ void HighScoreWriter::drawHighScoreList(const std::vector<HighScoreManager::High
 	auto tmpPos = startingPosition_List; //dont want to modify current position
 
 	//bring me the loops, bruder
-	for (unsigned int i = 0; i < scoreList.size() - 1; i++)
+	for (unsigned int i = 0; i < scoreList.size() ; i++)
 	{
 		std::string scoreText;
 		
@@ -64,9 +64,9 @@ void HighScoreWriter::drawHighScoreList(const std::vector<HighScoreManager::High
 		else
 			scoreText = Tools::ToString(scoreList[i].score);
 
-		for (unsigned int i = 0; i < scoreText.size(); i++)
+		for (unsigned int j = 0; j < scoreText.size(); j++)
 		{//write the score to the left of the starting position
-			auto g = TextEditor::WriteText(scoreText.at(scoreText.size() - 1 - i), sf::Vector2f(tmpPos.x - (SPRITE_SIZE * i), tmpPos.y));
+			auto g = TextEditor::WriteText(scoreText.at(scoreText.size() - j - 1), sf::Vector2f(tmpPos.x - (SPRITE_SIZE * j), tmpPos.y));
 			this->highScoreList_Characters.push_back(g);
 		}
 
