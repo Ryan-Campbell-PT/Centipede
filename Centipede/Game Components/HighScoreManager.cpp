@@ -60,6 +60,11 @@ void HighScoreManager::Cleanup()
 	HighScoreWriter::Cleanup();
 }
 
+void HighScoreManager::EndGame()
+{
+	GetInstance()->endWave();
+}
+
 HighScoreManager * HighScoreManager::GetInstance()
 {
 	if (instance == nullptr)
@@ -68,24 +73,11 @@ HighScoreManager * HighScoreManager::GetInstance()
 	return instance;
 }
 
-void HighScoreManager::setupScores()
-{
-	/*	//first start with displaying current high score
-		auto hs = Tools::ToString(this->highScoreList[0].score);
-		auto startingPos = sf::Vector2f(WindowManager::MainWindow.getSize().x / SPRITE_SIZE, SPRITE_SIZE);
-		//todo: look at ign and find how to place the text
-		for(auto i = 0; i < hs.size() - 1; ++i)
-		{
-
-		}
-		*/
-}
-
 void HighScoreManager::endWave()
 {
 	const auto curScore = ScoreManager::GetCurrentScore();
 
-	if (curScore < this->highScoreList[this->maxSizeScores].score)
+	if (curScore < this->highScoreList[this->maxSizeScores - 1].score)
 		return; //cant place anywhere in list, so dont do anything
 
 	else if (curScore > this->highScoreList[0].score)

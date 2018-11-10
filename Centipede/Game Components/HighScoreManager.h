@@ -37,14 +37,13 @@ public:
 	static void EndWave();
 	static void Cleanup();
 
+	static void EndGame();
+
 private:
 
 	HighScoreManager();
 	static HighScoreManager* GetInstance();
 
-	//virtual void Draw() override;
-
-	void setupScores();
 	void endWave();
 	void setHighScore(const int &place, const int &score, const std::string& user = "");
 	///this function will pause the game and have the user type in their name for the high score

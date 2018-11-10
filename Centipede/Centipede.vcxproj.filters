@@ -477,11 +477,11 @@
     <ClCompile Include="Game Components\WaveWriter.cpp">
       <Filter>Source Files\Game Components</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\LivesManager.cpp">
-      <Filter>Source Files\Game Components\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\HighScoreWriter.cpp">
       <Filter>Source Files\Game Components\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\LivesWriter.cpp">
+      <Filter>Source Files\Game Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -920,14 +920,14 @@
     <ClInclude Include="Game Components\BulletManager.h">
       <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\LivesManager.h">
-      <Filter>Source Files\Game Components\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\WaveWriter.h">
       <Filter>Source Files\Game Components</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\HighScoreWriter.h">
       <Filter>Source Files\Game Components\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\LivesWriter.h">
+      <Filter>Source Files\Game Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

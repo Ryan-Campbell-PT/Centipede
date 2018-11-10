@@ -13,9 +13,10 @@
 #include "SoundOn.h"
 #include "GameManager.h"
 #include "LivesManager.h"
+#include "LivesWriter.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
-
+//todo: THIS WHILE CLASS NEEDS WORK
 void PlayerManager::AddScore(const int score)
 {
 	GetInstance()->currentPlayer.playerScore += score;
@@ -39,7 +40,10 @@ void PlayerManager::PlayerDeath()
 
 	//if we are still alive, and are only a single player, restart the wave
 	else
+	{
 		GameManager::RestartWave();
+		LivesWriter::WriteLives(instance->currentPlayer.playerLives);
+	}
 }
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
@@ -148,6 +152,9 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 	default:
 		break;
 	}
+
+	if(GetInstance()->playerMode != PlayerMode::Attractor)
+		LivesWriter::WriteLives(instance->currentPlayer.playerLives);
 }
 
 void PlayerManager::SwapPlayer()
@@ -192,7 +199,7 @@ void PlayerManager::SwapPlayer()
 		WaveManager::SetupLevel(this->currentPlayer.waveLevel);
 		ScoreManager::SetCurrentScore(this->currentPlayer.playerScore);
 		MushroomManager::InitializeMushroomField(this->currentPlayer.mushroomSetup);
-		LivesManager::DisplayLives(this->currentPlayer.playerLives);
+		LivesWriter::WriteLives(instance->currentPlayer.playerLives);
 	}
 
 #endif

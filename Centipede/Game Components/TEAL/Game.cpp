@@ -58,7 +58,7 @@ void Game::Run()
 		//SoundManager::SendSoundCommand(gameInstance->beat);
 
 		ScoreManager::ProcessScores();
-		SoundManager::ProcessSounds();
+		//SoundManager::ProcessSounds();
 	}
 
 	Instance().TerminateGame();
