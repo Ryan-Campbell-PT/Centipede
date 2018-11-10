@@ -49,15 +49,9 @@ void Flea::Draw()
 	WindowManager::MainWindow.draw(this->sprite);
 }
 
-void Flea::Collision(Bullet * b)
+void Flea::Collision(Bullet *)
 {
 	this->state->TakeDamage(this);
-	b->MarkForDestroy();
-}
-
-void Flea::Collision(Ship * ship)
-{
-	ship->MarkForDestroy();
 }
 
 void Flea::Destroy()

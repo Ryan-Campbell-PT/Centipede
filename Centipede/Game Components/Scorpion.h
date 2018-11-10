@@ -27,13 +27,12 @@ public:
 	void SpawnScorpion(sf::Vector2f &pos);
 
 	virtual void Collision(GameObject *) override {};
-	virtual void Collision(Bullet *bullet);
-	virtual void Collision(Mushroom *shroom);
-	virtual void Collision(Ship *ship);
+	virtual void Collision(Bullet *);
+	virtual void Collision(Mushroom *);
 	virtual void Destroy() override;
 
 	///this method will be changed in teh future, but will suffice for now
-	void SetSpawnSide(bool b);
+	void SetSpawnSide(const bool &b);
 private:
 	//void RemoveScorpion();
 	int counter;

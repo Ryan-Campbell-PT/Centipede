@@ -3,6 +3,8 @@
 
 #include "TEAL/CommonElements.h"
 
+class Bullet;
+class Scorpion;
 class MushroomFactory;
 class ScoreCmd;
 
@@ -15,12 +17,15 @@ enum class MushroomState
 class Mushroom : public GameObject
 {
 public:
-	///using the float version means youre going to specify where its being placed pixel wise
 	explicit Mushroom(sf::Vector2f v);
 	Mushroom();
+	virtual ~Mushroom();
 
 	virtual void Draw() override;
 	virtual void Destroy() override;
+	virtual void Collision(GameObject*) override {}
+	virtual void Collision(Scorpion *);
+	virtual void Collision(Bullet*);
 
 	///this inititialize handles that the mushroom is currently being set somewhere it wasnt before
 	void InitializeMushroom(sf::Vector2f const & pos, MushroomState state = MushroomState::Healthy);
@@ -38,7 +43,6 @@ public:
 	Mushroom &operator=(const Mushroom &c) = delete;
 	Mushroom(const Mushroom &c) = delete;
 
-	virtual ~Mushroom();
 
 private:
 
@@ -49,11 +53,6 @@ private:
 	int health;
 	MushroomState state;
 	ScoreCmd *pDeath;
-
-#if TESTING
-	static int mushroomNum;
-	int thisMushroomNum;
-#endif
 };
 
 

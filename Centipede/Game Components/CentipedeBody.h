@@ -24,13 +24,13 @@ public:
 	virtual ~CentipedeBody();
 	CentipedeBody &operator=(const CentipedeBody &c) = delete;
 	CentipedeBody(const CentipedeBody &c) = delete;
-	
+
 	void UpdateBody(const float & x, const float & y);
 	void AddOffset(sf::Vector2f const &offset, CentiMovementDirectionEnum direction);
 	sf::Vector2f GetPosition();
 
-	virtual void Collision(GameObject *g) override {};
-	virtual void Collision(Bullet * bullet);
+	virtual void Collision(GameObject *) override {}
+	virtual void Collision(Bullet *);
 
 	//void SendDataBack();
 	void GetDataFromFront(OffsetArray offset);
@@ -39,7 +39,7 @@ private:
 	virtual void Draw() override;
 	virtual void Update() override;
 	virtual void Destroy() override;
-	
+
 	void ChangePos();
 	///this method will convert head directions into the simplified states the body's use
 	const CentiBodyDirection *GetDirectionState(CentiMovementDirectionEnum e);

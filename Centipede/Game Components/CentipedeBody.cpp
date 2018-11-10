@@ -63,17 +63,16 @@ void CentipedeBody::Update()
 
 	this->position.x += this->currentOffsetArray.coloffset * CENTI_SPEED;
 	this->position.y += this->currentOffsetArray.rowoffset * CENTI_SPEED;
-	
+
 	if (this->animationCounter % 3 == 0)
 		sprite.NextFrame();
 
 	this->sprite.setPosition(this->position);
 }
 
-void CentipedeBody::Collision(Bullet * const bullet)
+void CentipedeBody::Collision(Bullet *)
 {
 	MushroomManager::AttemptSpawnShroom(this->position);
-	bullet->MarkForDestroy();
 	CentiBodyManager::SetBehindBodyToHead(this);
 	ScoreManager::SendScoreCmd(this->pDeath);
 	this->MarkForDestroy();

@@ -17,6 +17,11 @@ Bullet::Bullet()
 	SetCollider(sprite, bitmap);
 }
 
+void Bullet::Collision(GameObject*)
+{
+	this->MarkForDestroy();
+}
+
 void Bullet::Update()
 {
 	position.y -= SPEED;
@@ -44,11 +49,4 @@ void Bullet::InitializeBullet(BulletManager* manager, sf::Vector2f pos)
 	this->manager = manager;
 	this->position = pos;
 	RegisterCollision<Bullet>(*this);
-}
-
-void Bullet::Collision( Mushroom *shroom )
-{
-	shroom->TakeDamage();
-	
-	this->MarkForDestroy();
 }

@@ -104,7 +104,7 @@ void Ship::Update()
 	sprite.setPosition(position);
 }
 
-void Ship::Collision(Mushroom* other)
+void Ship::Collision(Mushroom*)
 {
 	//let the state handle what happens when I collide
 	this->shipMode->MushroomCollision(this->playerInput, this->position, this->SPEED);
@@ -112,16 +112,32 @@ void Ship::Collision(Mushroom* other)
 	sprite.setPosition(position);
 }
 
-void Ship::Collision(CentipedeBody* body)
+void Ship::Collision(Spider *)
 {
-	//MarkForDestroy();
 	this->reinitializeShip();
 	PlayerManager::PlayerDeath();
 }
 
-void Ship::Collision(CentipedeHead * head)
+void Ship::Collision(Scorpion *)
 {
-	//MarkForDestroy();
+	this->reinitializeShip();
+	PlayerManager::PlayerDeath();
+}
+
+void Ship::Collision(Flea *)
+{
+	this->reinitializeShip();
+	PlayerManager::PlayerDeath();
+}
+
+void Ship::Collision(CentipedeBody*)
+{
+	this->reinitializeShip();
+	PlayerManager::PlayerDeath();
+}
+
+void Ship::Collision(CentipedeHead *)
+{
 	this->reinitializeShip();
 	PlayerManager::PlayerDeath();
 }
@@ -135,11 +151,11 @@ void Ship::KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shift
 }
 
 void Ship::reinitializeShip()
-{	
+{
 	//always spawn in the center
-	instance->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f,
+	GetInstance()->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f,
 		WindowManager::MainWindow.getView().getSize().y * .9f);
-	
+
 	instance->RegisterInput();
 	instance->RegisterCollision<Ship>(*instance);
 }
@@ -177,7 +193,7 @@ void Ship::InitializeShip(ShipMode * state)
 	//always spawn in the center
 	instance->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f,
 		WindowManager::MainWindow.getView().getSize().y * .9f);
-	
+
 	instance->RegisterInput();
 	instance->RegisterCollision<Ship>(*instance);
 }

@@ -14,7 +14,8 @@
 #include "ScoreManager.h"
 
 CentipedeHead::CentipedeHead()
-	:currentDirectionState(nullptr), animationCounter(0), prevDirection(0), yCounter(0), speed(2), concent(false)
+	:currentDirectionState(nullptr), prevDirection(nullptr), animationCounter(0),
+	speed(2), yCounter(0), concent(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
@@ -138,23 +139,13 @@ CentiMovementDirectionEnum CentipedeHead::GetDirectionEnum()
 	return CentiMovementDirectionEnum::Error;
 }
 
-void CentipedeHead::Collision(Bullet * bullet)
+void CentipedeHead::Collision(Bullet *)
 {
-	bullet->MarkForDestroy(); //remove the bullet
-
 	this->concent = true; //he concented to being shot
 	this->MarkForDestroy(); //remove the head from screen, and recycle
 
 	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)
 }
-
-/*void CentipedeHead::Collision(Bullet * bullet)
-{
-	bullet->RemoveBullet();
-	this->RemoveHead();
-	MushroomManager::AttemptSpawnShroom(this->GetPosition());
-	ScoreManager::SendScoreCmd(this->pDeath);
-}*/
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 {

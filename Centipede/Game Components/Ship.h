@@ -8,9 +8,12 @@
 
 #define SHIP_BOUNDS 7.f
 
+// Forward declarations
+class Flea;
+class Scorpion;
+class Spider;
 class CentipedeBody;
 class CentipedeHead;
-// Forward declarations
 class PlayerInput;
 class Widget;
 class Asteroid;
@@ -30,13 +33,19 @@ public:
 	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
 	//void DestroyShip();
 
-	virtual void Collision(GameObject *other) override {};
-	virtual void Collision(Mushroom* other);
-	virtual void Collision(CentipedeBody *body);
-	virtual void Collision(CentipedeHead *head);
+	virtual void Collision(GameObject *) override {};
+	virtual void Collision(Mushroom*);
+	virtual void Collision(Spider *);
+	virtual void Collision(Scorpion *);
+	virtual void Collision(Flea *);
+	virtual void Collision(CentipedeBody *);
+	virtual void Collision(CentipedeHead *);
 	static void Terminate(GameObject *);
 
 	static void InitializeShip(ShipMode * state);
+	///the purpose for using ReinitializeShip instead of MarkForDestroy is because when swapping
+	///scenes, it results in problems for destroyed GO, so i instaed just reinitialize it, or have the
+	///PlayerManager handle the destruction
 	static void ReinitializeShip();
 
 private:

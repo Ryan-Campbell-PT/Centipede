@@ -35,6 +35,17 @@ void Mushroom::Destroy()
 	DeregisterCollision<Mushroom>(*this);
 }
 
+void Mushroom::Collision(Scorpion*)
+{	
+	if (this->GetState() == MushroomState::Healthy)
+		this->SetState(MushroomState::Poison);
+}
+
+void Mushroom::Collision(Bullet*)
+{
+	this->TakeDamage();
+}
+
 void Mushroom::InitializeMushroom(sf::Vector2f const & pos, MushroomState state)
 {
 	this->sprite.setPosition(pos);

@@ -50,8 +50,8 @@ public:
 	const CentipedeDirectionState *GetDirection(); ///this simply get the current direction
 	CentiMovementDirectionEnum GetDirectionEnum(); ///this is the direction, but tranfered to enum
 
-	virtual void Collision(GameObject *go) override {};
-	virtual void Collision(Bullet * bullet);
+	virtual void Collision(GameObject *) override {}
+	virtual void Collision(Bullet *);
 
 	sf::Vector2f GetPosition();
 	void SetSpeed(const int speed);

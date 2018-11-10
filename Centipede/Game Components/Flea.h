@@ -23,9 +23,9 @@ public:
 
 	virtual void Update() override;
 	virtual void Draw() override;
-	virtual void Collision(GameObject* o) override{};
-	virtual void Collision(Bullet *b);
-	virtual void Collision(Ship *ship);
+	virtual void Collision(GameObject*) override{}
+	virtual void Collision(Bullet *);
+
 	virtual void Destroy() override;
 
 	void SpawnFlea(sf::Vector2f pos);

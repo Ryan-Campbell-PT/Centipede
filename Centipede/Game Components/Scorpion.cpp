@@ -73,11 +73,9 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 	RegisterCollision<Scorpion>(*this);
 }
 
-void Scorpion::Collision(Bullet * bullet)
+void Scorpion::Collision(Bullet *)
 {
-	bullet->MarkForDestroy();
 	ScoreManager::SendScoreCmd(this->pDeath);
-	//ScorpionManager::RemoveScorpion(this); //let the manager handle recyling
 	ScorpionManager::SetTimer(); //because it was destroyed by the bullet, we can spawn again
 	this->MarkForDestroy(); //remove from screen/teal
 }
@@ -88,11 +86,6 @@ void Scorpion::Collision(Mushroom * shroom)
 		shroom->SetState(MushroomState::Poison);
 }
 
-void Scorpion::Collision(Ship * ship)
-{
-	ship->MarkForDestroy();
-}
-
 void Scorpion::Destroy()
 {
 	//i dont want to handle setting the timer in the destroy method, because 
@@ -100,15 +93,7 @@ void Scorpion::Destroy()
 	this->DeregisterCollision<Scorpion>(*this);
 }
 
-void Scorpion::SetSpawnSide(bool b)
+void Scorpion::SetSpawnSide(const bool &b)
 {
 	spawnOnLeft = b;
 }
-
-/*void Scorpion::RemoveScorpion()
-{
-	this->active = false;
-	this->sprite.setScale(0.f, 0.f);
-
-}
-*/

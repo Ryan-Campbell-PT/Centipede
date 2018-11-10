@@ -24,9 +24,8 @@ public:
 	Spider(const Spider &c) = delete;
 
 	virtual void Collision(GameObject *) override{};
-	virtual void Collision(Bullet * bullet);
-	virtual void Collision(Mushroom * shroom);
-	virtual void Collision(Ship *ship);
+	virtual void Collision(Bullet *);
+	virtual void Collision(Mushroom *);
 	virtual void Update() override;
 	virtual void Draw() override;
 	virtual void Destroy() override;

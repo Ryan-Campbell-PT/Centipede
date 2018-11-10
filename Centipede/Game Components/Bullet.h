@@ -6,6 +6,9 @@
 
 #include "TEAL\CommonElements.h"
 
+class Scorpion;
+class Spider;
+class Flea;
 //Forward declarations
 class Mushroom;
 class BulletFactory;
@@ -16,8 +19,8 @@ class Bullet : public GameObject
 public:
 	Bullet();
 
-	virtual void Collision( GameObject *go) override{}
-	virtual void Collision( Mushroom *shroom );
+	///since nothing complicated happens on the bullet side, just have a GO collision
+	virtual void Collision( GameObject *) override;
 
 	///these both are not static because if someone if going to call them, they should have access to the object
 //	void RemoveBullet(); ///instead of destroying the bullet, we will just remove from scene

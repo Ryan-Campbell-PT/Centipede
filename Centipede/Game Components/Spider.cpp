@@ -43,14 +43,14 @@ void Spider::Update()
 	else if (this->position.y > this->boundsBottomY) //bounce back up if on the bottom
 		this->spiderState = this->spiderState->GetNextState();
 
-	if(++counterNum > RANDOM_CHANGE_NUM)
+	if (++counterNum > RANDOM_CHANGE_NUM)
 	{//this adds randomization, so we assign a random value and change from diagonal/vertical mode using GetExtraState()
-		
+
 		this->spiderState = this->spiderState->GetExtraState();
 		this->counterNum = rand() % RANDOM_CHANGE_NUM;
 	}
 
-	if(this->position.x > WindowManager::MainWindow.getSize().x || 
+	if (this->position.x > WindowManager::MainWindow.getSize().x ||
 		this->position.x < 0)
 	{
 		this->MarkForDestroy();
@@ -89,22 +89,14 @@ void Spider::SpawnSpider(const sf::Vector2f pos, const float spiderSpeed)
 	RegisterCollision<Spider>(*this);
 }
 
-void Spider::Collision(Bullet *bullet)
+void Spider::Collision(Bullet *)
 {
-	bullet->MarkForDestroy();
 	SpiderManager::RemoveSpider(this);
 	ScoreManager::SendScoreCmd(this->pDeath);
 	this->MarkForDestroy();
 }
 
-void Spider::Collision(Mushroom *shroom)
+void Spider::Collision(Mushroom *)
 {
 	this->spiderState = this->spiderState->GetNextState();
-
-	shroom->MarkForDestroy();
-}
-
-void Spider::Collision(Ship * ship)
-{
-	ship->MarkForDestroy();
 }
