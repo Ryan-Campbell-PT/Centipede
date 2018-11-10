@@ -4,7 +4,8 @@ centiBodyCount: 5
 centispeed 2
 scorpionActive no
 spiderActive yes
-spiderSpawn 4
+spiderSpawn 2
+spiderSpeed 2
 _
 
 level 2

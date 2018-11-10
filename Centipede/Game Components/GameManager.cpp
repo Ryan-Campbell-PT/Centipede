@@ -3,7 +3,6 @@
 #include "HighScoreManager.h"
 #include "WaveManager.h"
 #include "ScoreManager.h"
-#include "LivesManager.h"
 #include "Ship.h"
 #include "CentiHeadManager.h"
 #include "Level1.h"
@@ -38,7 +37,7 @@ void GameManager::RestartWave()
 }
 
 void GameManager::EndGame()
-{//todo
+{
 	SceneManager::ChangeScene(new LevelAttractor);
 	PlayerManager::SetPlayerMode(PlayerData::PlayerID::Ai);
 	HighScoreManager::Cleanup();
@@ -46,7 +45,6 @@ void GameManager::EndGame()
 	HighScoreManager::WriteHighScore();
 	HighScoreManager::EndGame();
 	ScoreManager::AttractorMode(true);
-
 }
 
 void GameManager::EndWave()

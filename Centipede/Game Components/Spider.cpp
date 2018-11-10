@@ -4,6 +4,7 @@
 #include "Ship.h"
 #include "SpiderManager.h"
 #include "SpiderStates.h"
+#include "SoundCmd.h"
 
 #include <random>
 #include "ScoreManager.h"
@@ -28,17 +29,18 @@ Spider::Spider()
 Spider::~Spider()
 {
 	delete pDeath;
+	delete spawnSound;
 }
 
 void Spider::Update()
 {
 	this->position.y += this->spiderState->GetOffsetArray().rowoffset * SPEED;
 	this->position.x += this->spiderState->GetOffsetArray().coloffset * SPEED;
-
-	if (this->position.y <= this->boundsTopY) //bounce down if too high
+	//todo: up then left is wrong for some reason
+	if (this->position.y < this->boundsTopY) //bounce down if too high
 		this->spiderState = this->spiderState->GetNextState();
 
-	else if (this->position.y >= this->boundsBottomY) //bounce back up if on the bottom
+	else if (this->position.y > this->boundsBottomY) //bounce back up if on the bottom
 		this->spiderState = this->spiderState->GetNextState();
 
 	if(++counterNum > RANDOM_CHANGE_NUM)

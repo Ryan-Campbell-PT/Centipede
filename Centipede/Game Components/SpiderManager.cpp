@@ -37,15 +37,12 @@ void SpiderManager::SpawnSpider()
 	const bool leftSide = rand() % 2; //either left or right side, determined by a random number
 
 	//for testing
-#if false
 	if (leftSide) //if its on the left side, then the x= 0
 		pos.x = 0;
 
 	else //otherwise its on the right, and it goes to the max x distance
 		pos.x = static_cast<float>(WindowManager::MainWindow.getSize().x);
-#elif true
-	pos.x = 0;
-#endif
+
 	pos.y = static_cast<float>(rand() % WindowManager::MainWindow.getSize().y); //anywhere on the y axis
 
 	auto spider = SpiderFactory::GetSpider();

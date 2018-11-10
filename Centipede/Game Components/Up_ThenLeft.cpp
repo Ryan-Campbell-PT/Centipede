@@ -3,7 +3,7 @@
 
 OffsetArray Up_ThenLeft::GetOffsetArray() const
 {
-	return Spider_MovementCollection::Down_ThenLeft;
+	return Spider_MovementCollection::Up_ThenLeft;
 }
 
 const ImprovedSpiderState* Up_ThenLeft::GetNextState() const

@@ -47,6 +47,7 @@ private:
 	ScoreCmd* pDeath;
 	SoundCmd *spawnSound;
 };
+
 enum class SpiderDirection
 {
 	Left,

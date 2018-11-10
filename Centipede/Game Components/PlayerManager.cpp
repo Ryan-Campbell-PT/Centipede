@@ -12,7 +12,6 @@
 #include "SoundOff.h"
 #include "SoundOn.h"
 #include "GameManager.h"
-#include "LivesManager.h"
 #include "LivesWriter.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
