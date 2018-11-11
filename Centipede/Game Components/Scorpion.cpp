@@ -67,7 +67,8 @@ void Scorpion::SpawnScorpion(sf::Vector2f & pos)
 	this->sprite.setPosition(pos);
 
 	this->spawnOnLeft = pos.x < SPRITE_SIZE;
-	//this->sprite.setScale(1.f, 1.f);
+	//if(this->spawnOnLeft)
+		//this->sprite.setScale(-1, -1); todo: flip sprite
 	SoundManager::SendSoundCommand(this->spawnSound);
 
 	RegisterCollision<Scorpion>(*this);
@@ -91,6 +92,8 @@ void Scorpion::Destroy()
 	//i dont want to handle setting the timer in the destroy method, because 
 	//not every time the scorp is destroyed (like end of level) do we want it spawning again
 	this->DeregisterCollision<Scorpion>(*this);
+	//this->sprite.setRotation(0);
+	//this->sprite.setScale(1,1);
 }
 
 void Scorpion::SetSpawnSide(const bool &b)

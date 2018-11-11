@@ -8,7 +8,8 @@ HighScoreWriter::HighScoreWriter()
 	:maxCharacters_Dynamic(5), currentScoreSize_Dynamic(0)
 {
 	this->highScore_Dynamic = new Glyph[maxCharacters_Dynamic];
-	this->startingPosition_List = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, WindowManager::MainWindow.getSize().y / 2.f);
+	this->startingPosition_List = sf::Vector2f(
+		WindowManager::MainWindow.getSize().x / 2.f - SPRITE_SIZE * 2, WindowManager::MainWindow.getSize().y / 3.f);
 	this->startingPos_DynamicHS = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f - SPRITE_SIZE, 0.f);
 
 	GameGrid::GetCenterGridPosition(this->startingPosition_List);

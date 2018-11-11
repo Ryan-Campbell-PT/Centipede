@@ -7,6 +7,7 @@
 #include "CentiHeadManager.h"
 #include "Level1.h"
 #include "LevelAttractor.h"
+#include "MushroomManager.h"
 
 void GameManager::SetAttractorMode()
 {
@@ -55,5 +56,8 @@ void GameManager::EndWave()
 	if (PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Ai)
 		CentiHeadManager::RestartWave();
 	else
+	{
+		MushroomManager::EndWave();
 		WaveManager::SetupLevel(WaveManager::GetCurrentWave() + 1);
+	}
 }
