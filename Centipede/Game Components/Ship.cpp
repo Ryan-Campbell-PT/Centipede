@@ -18,6 +18,7 @@
 #include "ShipMode.h"
 #include "SoundCmd.h"
 #include "GameManager.h"
+#include "ExplosionManager.h"
 
 Ship *Ship::instance = nullptr;
 
@@ -112,30 +113,35 @@ void Ship::Collision(Mushroom*)
 
 void Ship::Collision(Spider *)
 {
+	ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::PlayerDeath, this->position);
 	this->reinitializeShip();
 	PlayerManager::PlayerDeath();
 }
 
 void Ship::Collision(Scorpion *)
 {
+	ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::PlayerDeath, this->position);
 	this->reinitializeShip();
 	PlayerManager::PlayerDeath();
 }
 
 void Ship::Collision(Flea *)
 {
+	ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::PlayerDeath, this->position);
 	this->reinitializeShip();
 	PlayerManager::PlayerDeath();
 }
 
 void Ship::Collision(CentipedeBody*)
 {
+	ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::PlayerDeath, this->position);
 	this->reinitializeShip();
 	PlayerManager::PlayerDeath();
 }
 
 void Ship::Collision(CentipedeHead *)
 {
+	ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::PlayerDeath, this->position);
 	this->reinitializeShip();
 	PlayerManager::PlayerDeath();
 }

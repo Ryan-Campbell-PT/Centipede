@@ -117,6 +117,7 @@
     <ClCompile Include="Game Components\Down_ThenLeft.cpp" />
     <ClCompile Include="Game Components\Down_ThenRight.cpp" />
     <ClCompile Include="Game Components\Explosion.cpp" />
+    <ClCompile Include="Game Components\ExplosionManager.cpp" />
     <ClCompile Include="Game Components\FinalScore.cpp" />
     <ClCompile Include="Game Components\Flea.cpp" />
     <ClCompile Include="Game Components\FleaFactory.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="Game Components\Down_ThenLeft.h" />
     <ClInclude Include="Game Components\Down_ThenRight.h" />
     <ClInclude Include="Game Components\Explosion.h" />
+    <ClInclude Include="Game Components\ExplosionManager.h" />
     <ClInclude Include="Game Components\Factory.h" />
     <ClInclude Include="Game Components\FinalScore.h" />
     <ClInclude Include="Game Components\Flea.h" />

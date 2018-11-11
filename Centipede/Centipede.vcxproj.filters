@@ -483,6 +483,9 @@
     <ClCompile Include="Game Components\LivesWriter.cpp">
       <Filter>Source Files\Game Components</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\ExplosionManager.cpp">
+      <Filter>Source Files\Game Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -927,6 +930,9 @@
       <Filter>Source Files\Game Components\Score</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\LivesWriter.h">
+      <Filter>Source Files\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\ExplosionManager.h">
       <Filter>Source Files\Game Components</Filter>
     </ClInclude>
   </ItemGroup>
