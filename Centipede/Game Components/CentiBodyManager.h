@@ -17,10 +17,14 @@ public:
 	static CentipedeBody* GetCentiBody();
 	static CentipedeBody* GetInitializedCentiBody(sf::Vector2f const &pos, OffsetArray const &direction);
 
-	///in this one, we will assume we are given the body that has been removed, but not the head that will become body
-	///this one also assumes we have been shot
-	static void SetBehindBodyToHead(CentipedeBody *body);
-	///this one assumes whatever head is given to us, is the body that will become the head
+	
+	static void SetBodyToHead(CentipedeBody *body, const CentipedeDirectionState * direction);
+
+	/**
+	 * \brief this function differs than the one above because it assumes we dont know the direction
+	 * so it is used by bodies in the middle of the centipede
+	 * \param body 
+	 */
 	static void SetBodyToHead(CentipedeBody *body);
 
 	CentiBodyManager(const CentiBodyManager &s) = delete;
@@ -37,7 +41,7 @@ private:
 
 	///if a body is destroyed, but doesnt know what direction to do, we will search for the head
 	///then get that direction
-	const CentipedeDirectionState * GetBodysHeadDirection(CentipedeBody *body);
+	const CentipedeDirectionState * GetBodysHeadDirection(CentipedeBody *body) const;
 
 	static CentiBodyManager* GetInstance();
 

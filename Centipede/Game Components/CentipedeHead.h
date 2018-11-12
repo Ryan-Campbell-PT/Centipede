@@ -19,6 +19,7 @@ enum class CentiMovementDirectionEnum;
 class GameObject;
 class Bullet;
 
+
 class CentipedeHead : public GameObject, public CentipedePart
 {
 public:
@@ -42,7 +43,7 @@ public:
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
 
 	void CheckGridAhead(const sf::Vector2f &pos);
-	void SetDirection(const CentipedeDirectionState * direction);
+	void SetDirection(const CentipedeDirectionState * direction, bool change = true);
 	void SetSpriteRotation(const float &rotation);
 
 	const CentipedeDirectionState *GetDirection() const;
@@ -54,6 +55,7 @@ public:
 	void SetSpeed(const int speed);
 	float GetSpeed() const { return speed; }
 	bool GetConcent() const { return concent; }
+	float GetSpriteRot() { return this->sprite.getRotation(); }
 
 private:
 	///this function will apply the number of bodies connected to the head, at the creation of the head

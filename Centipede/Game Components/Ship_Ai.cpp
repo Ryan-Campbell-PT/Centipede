@@ -22,7 +22,7 @@ void Ship_Ai::MoveShip(const PlayerInput* const input, sf::Vector2f &pos, const 
 {//we dont care about the player in put for the AI version
 	
 	//the ship is constantly shooting, so that should be the first thing
-	//BulletManager::AttemptSpawnBullet(); todo: change back
+	//BulletManager::AttemptSpawnBullet();// todo: change back
 	
 	if(++stopCounter > randomNum)
 	{

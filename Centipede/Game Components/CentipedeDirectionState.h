@@ -30,6 +30,8 @@ public:
 	 * \param yCounter: used just for vert moving states, just to know when to turn back to horz
 	 */
 	virtual void CheckAhead(CentipedeHead *centi, unsigned int &counter, unsigned int &yCounter) const {}
+
+	virtual float TurningAngle(CentipedeHead *centi) const { return 0.0f; }
 };
 
 #endif //CENTI_DIRECTION_STATE_H

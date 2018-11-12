@@ -72,37 +72,10 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 
 void CentipedeHead::Update()
 {
-	//++animationCounter;
-
 	this->position.x += (this->currentDirectionState->GetOffsetArray()).coloffset * speed;
 	this->position.y += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
 
-	/*	if (this->currentDirectionState->GetOffsetArray().rowoffset != 0) //we are moving in the Y
-		{
-			yCounter += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
-
-			if (yCounter % SPRITE_SIZE == 0)
-			{
-				if (this->GetWhosFollowingYou())
-					static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
-
-				this->SetDirection(this->currentDirectionState->NextState(this));
-			}
-		}
-
-		else if (this->animationCounter % (SPRITE_SIZE / 2) == 0)
-		{
-			if (this->GetWhosFollowingYou())
-				static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
-
-			this->CheckGridAhead(sf::Vector2f(
-				this->position.x + this->currentDirectionState->GetOffsetArray().coloffset * SPRITE_SIZE,
-				this->position.y + this->currentDirectionState->GetOffsetArray().rowoffset * SPRITE_SIZE));
-		}
-	*/
-
 	this->currentDirectionState->CheckAhead(this, this->animationCounter, this->yCounter);
-
 
 	this->sprite.setPosition(this->position);
 
@@ -119,7 +92,7 @@ void CentipedeHead::Destroy()
 {
 	DeregisterCollision<CentipedeHead>(*this);
 
-	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
+	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()), this->currentDirectionState);
 }
 
 void CentipedeHead::Alarm0()
@@ -150,8 +123,7 @@ void CentipedeHead::CheckGridAhead(const sf::Vector2f &pos)
 		this->SetDirection(this->currentDirectionState->NextState(this));
 
 	else if (GameGrid::GetGridStatus(pos) == GameGridEnum::PoisonMushroom)
-	{
-	}//todo: bezerk
+		this->SetDirection(&MoveSFM::poisoned);
 
 	else if (pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
 		pos.x < 0.f)
@@ -172,12 +144,13 @@ void CentipedeHead::CheckGridAhead(const sf::Vector2f &pos)
 
 }
 
-void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)
+void CentipedeHead::SetDirection(const CentipedeDirectionState * direction, bool change)
 {
 	if (this->GetWhosFollowingYou())
 		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
 
-	this->currentDirectionState = direction;
+	if(change) //strictly for poison
+		this->currentDirectionState = direction;
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
@@ -208,13 +181,3 @@ void CentipedeHead::SetupBodies(OffsetArray direction, int numBodies)
 		}
 	}
 }
-
-/*void CentipedeHead::RemoveHead()
-{
-	//remove from screen
-	DeregisterCollision<CentipedeHead>(*this);
-
-	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
-
-	CentiHeadManager::RemoveCentiHead(this); //recycle
-}*/

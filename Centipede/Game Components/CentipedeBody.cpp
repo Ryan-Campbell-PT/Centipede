@@ -9,10 +9,10 @@
 #include "ScoreManager.h"
 
 CentipedeBody::CentipedeBody()
+	:animationCounter(0)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiBody");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiBody"), 8, 2);
-	this->sprite.SetAnimation(0, 4);
 	this->sprite.SetAnimation(SPRITE_BEGIN, SPRITE_END);
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
@@ -43,13 +43,10 @@ CentipedeBody::~CentipedeBody()
 
 void CentipedeBody::GetDataFromFront(OffsetArray offset)
 {
-	this->pastOffsetArray = this->currentOffsetArray;
-	this->currentOffsetArray = offset;
-
 	if (this->GetWhosFollowingYou())
-	{
-		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->pastOffsetArray);
-	}
+		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentOffsetArray);
+
+	this->currentOffsetArray = offset;
 }
 
 void CentipedeBody::Draw()
@@ -59,21 +56,19 @@ void CentipedeBody::Draw()
 
 void CentipedeBody::Update()
 {
-	++animationCounter;
-
 	this->position.x += this->currentOffsetArray.coloffset * CENTI_SPEED;
 	this->position.y += this->currentOffsetArray.rowoffset * CENTI_SPEED;
 
-	if (this->animationCounter % 3 == 0)
-		sprite.NextFrame();
-
 	this->sprite.setPosition(this->position);
+	
+	if (++animationCounter % 3 == 0)
+		sprite.NextFrame();
 }
 
 void CentipedeBody::Collision(Bullet *)
 {
 	MushroomManager::AttemptSpawnShroom(this->position);
-	CentiBodyManager::SetBehindBodyToHead(this);
+	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou())); //incase this body is in the middle of the centipede
 	ScoreManager::SendScoreCmd(this->pDeath);
 	this->MarkForDestroy();
 }
@@ -83,70 +78,7 @@ void CentipedeBody::Destroy()
 	DeregisterCollision <CentipedeBody>(*this);
 }
 
-sf::Vector2f CentipedeBody::GetPosition()
+sf::Vector2f CentipedeBody::GetPosition() const
 {
 	return this->position;
 }
-
-void CentipedeBody::ChangePos()
-{
-#if false
-	if (this->GetWhosFollowingYou()) //make sure it has a follower
-		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(this->aheadTurningInformation.turningPoint, this->aheadTurningInformation.direction);
-
-	this->offsetQueue.pop(); //pop the one youre currently using, off
-
-	this->bodyDirection = this->GetDirectionState(this->aheadTurningInformation.direction);
-
-	if (!this->offsetQueue.empty()) //but if the centi added more, continue onto that one
-		this->aheadTurningInformation = this->offsetQueue.front();
-#elif true
-
-#endif
-
-}
-
-const CentiBodyDirection * CentipedeBody::GetDirectionState(CentiMovementDirectionEnum e)
-{
-	const CentiBodyDirection *p = nullptr;
-
-	switch (e)
-	{
-	case CentiMovementDirectionEnum::Left:
-		p = &MoveSFM::bodyLeft;
-		break;
-
-	case CentiMovementDirectionEnum::Right:
-		p = &MoveSFM::bodyRight;
-		break;
-
-	case CentiMovementDirectionEnum::Up:
-		p = &MoveSFM::bodyUp;
-		break;
-
-	case CentiMovementDirectionEnum::Down:
-		p = &MoveSFM::bodyDown;
-		break;
-	}
-
-	return p;
-}
-
-void CentipedeBody::UpdateBody(const float & x, const float & y)
-{
-	this->position.x += x;
-	this->position.y += y;
-	this->sprite.setPosition(this->position);
-}
-
-void CentipedeBody::AddOffset(sf::Vector2f const & offset, CentiMovementDirectionEnum direction)
-{
-	const AheadInformation f(offset, direction);
-
-	//if (this->offsetQueue.empty())
-	if (this->offsetQueue.empty())
-		this->aheadTurningInformation = f;
-
-	this->offsetQueue.push(f);
-}
-
