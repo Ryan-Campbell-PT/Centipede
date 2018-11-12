@@ -24,3 +24,12 @@ CentiMovementDirectionEnum Centi_DownThenLeft::GetDirectionEnum() const
 {
 	return CentiMovementDirectionEnum::Down;
 }
+
+void Centi_DownThenLeft::CheckAhead(CentipedeHead* centi, unsigned int &counter, unsigned int &yCounter) const
+{
+	counter += static_cast<int>(centi->GetSpeed());
+	yCounter += static_cast<int>(centi->GetSpeed());
+
+	if(yCounter % SPRITE_SIZE == 0)
+		centi->SetDirection(this->NextState(centi));	
+}

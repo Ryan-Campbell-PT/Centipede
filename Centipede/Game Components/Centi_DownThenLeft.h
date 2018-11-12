@@ -13,6 +13,7 @@ public:
 	virtual void Initialize(CentipedeHead *centi) const override {};
 	virtual CentiMovementDirectionEnum GetDirectionEnum() const override;
 	virtual OffsetArray GetOffsetArray() const override { return MovementCollection::OffsetsTurnDownEndLeft; };
+	virtual void CheckAhead(CentipedeHead* centi, unsigned int &counter, unsigned int &yCounter) const override;
 
 private:
 };

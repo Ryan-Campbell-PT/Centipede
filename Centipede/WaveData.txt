@@ -1,15 +1,7 @@
 level 0
 
-centiBodyCount: 5
+centiBodyCount: 0
 centispeed 2
-scorpionActive no
-spiderActive yes
-spiderSpawn 2
-spiderSpeed 2
-scorpionActive yes
-scorpionSpawn 3
-fleaActive yes
-fleaSpawn 14
 
 _
 

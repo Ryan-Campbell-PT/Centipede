@@ -55,6 +55,7 @@ public:
 
 	sf::Vector2f GetPosition() { return this->position; }
 	void SetSpeed(const int speed);
+	float GetSpeed() { return speed; }
 	bool GetConcent() const { return concent; }
 
 private:

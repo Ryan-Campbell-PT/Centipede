@@ -29,3 +29,13 @@ CentiMovementDirectionEnum Centi_LeftThenDown::GetDirectionEnum() const
 {
 	return CentiMovementDirectionEnum::Left;
 }
+
+void Centi_LeftThenDown::CheckAhead(CentipedeHead* centi, unsigned int &counter, unsigned int &yCounter) const
+{
+	counter += centi->GetSpeed();
+
+	if (counter % SPRITE_SIZE == 0)
+		centi->CheckGridAhead(sf::Vector2f(
+			centi->GetPosition().x + this->GetOffsetArray().coloffset * SPRITE_SIZE,
+			centi->GetPosition().y + this->GetOffsetArray().rowoffset * SPRITE_SIZE));
+}

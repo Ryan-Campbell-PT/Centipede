@@ -72,12 +72,12 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 
 void CentipedeHead::Update()
 {
-	++animationCounter;
+	//++animationCounter;
 
 	this->position.x += (this->currentDirectionState->GetOffsetArray()).coloffset * speed;
 	this->position.y += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
 
-	if (this->currentDirectionState->GetOffsetArray().rowoffset != 0) //we are moving in the Y
+/*	if (this->currentDirectionState->GetOffsetArray().rowoffset != 0) //we are moving in the Y
 	{
 		yCounter += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
 
@@ -99,6 +99,10 @@ void CentipedeHead::Update()
 			this->position.x + this->currentDirectionState->GetOffsetArray().coloffset * SPRITE_SIZE,
 			this->position.y + this->currentDirectionState->GetOffsetArray().rowoffset * SPRITE_SIZE));
 	}
+*/
+
+	this->currentDirectionState->CheckAhead(this, this->animationCounter, this->yCounter);
+
 
 	this->sprite.setPosition(this->position);
 	
@@ -178,7 +182,7 @@ void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)
 	/*	if (this->GetWhosFollowingYou())
 			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(
 				this->position, this->currentDirectionState->GetDirectionEnum());*/
-	if (direction->GetOffsetArray().rowoffset != 0)
+//	if (direction->GetOffsetArray().rowoffset != 0)
 		if (this->GetWhosFollowingYou())
 		{//todo: work on how this information is passed down. Incorrect atm
 			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->prevDirection->GetOffsetArray());
