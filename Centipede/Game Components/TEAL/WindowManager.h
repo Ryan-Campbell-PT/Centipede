@@ -7,8 +7,6 @@
 #ifndef _WINDOWING_H
 #define _WINDOWING_H
 
-#define TESTING false
-
 #include "SFML\Graphics.hpp"
 
 class WindowManager                  

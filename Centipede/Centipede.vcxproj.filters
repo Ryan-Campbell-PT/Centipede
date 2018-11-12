@@ -22,14 +22,8 @@
     <Filter Include="Source Files\Game Components\Asteroid">
       <UniqueIdentifier>{6ea0394f-1623-4796-b7a5-865dbfd82cba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Components\Widget">
-      <UniqueIdentifier>{06f3298f-a7e6-4fc4-b891-acc67ced4dbe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Components\Ship">
       <UniqueIdentifier>{4aac3acc-e29f-4816-9045-73c35b3a1797}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Components\Splash">
-      <UniqueIdentifier>{6ac79bbe-3c8f-45bd-885e-e0098b109aec}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game Components\Factories">
       <UniqueIdentifier>{9bda28b6-dae2-4079-842b-06421ebd430d}</UniqueIdentifier>
@@ -136,6 +130,9 @@
     <Filter Include="Source Files\Game Components\Sound">
       <UniqueIdentifier>{e712d9dc-8910-480a-af2e-a0556d639da8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Components\Writers">
+      <UniqueIdentifier>{36a0e6dc-4cea-432f-96a6-808c34188288}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game Components\TEAL\LoadAllResources.cpp">
@@ -207,12 +204,6 @@
     <ClCompile Include="Game Components\AsteroidField.cpp">
       <Filter>Source Files\Game Components\Asteroid</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Widget.cpp">
-      <Filter>Source Files\Game Components\Widget</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\WidgetGenerator.cpp">
-      <Filter>Source Files\Game Components\Widget</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\Explosion.cpp">
       <Filter>Source Files\Game Components\Asteroid</Filter>
     </ClCompile>
@@ -227,12 +218,6 @@
     </ClCompile>
     <ClCompile Include="Game Components\Level1.cpp">
       <Filter>Source Files\Game Components\Levels\Level1</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\Splash.cpp">
-      <Filter>Source Files\Game Components\Splash</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\SplashController.cpp">
-      <Filter>Source Files\Game Components\Splash</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files\Game Components\_TEAL\Game and Scene Management</Filter>
@@ -423,9 +408,6 @@
     <ClCompile Include="Game Components\Spider_MoveFSM.cpp">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\PlayerManager.cpp">
-      <Filter>Source Files\Game Components</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\Ship_Ai.cpp">
       <Filter>Source Files\Game Components\Ship\Modes</Filter>
     </ClCompile>
@@ -434,9 +416,6 @@
     </ClCompile>
     <ClCompile Include="Game Components\ShipFSM.cpp">
       <Filter>Source Files\Game Components\Ship</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\WaveManager.cpp">
-      <Filter>Source Files\Game Components</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\Glyph.cpp">
       <Filter>Source Files\Game Components\TextWriting</Filter>
@@ -468,23 +447,29 @@
     <ClCompile Include="Game Components\SoundManager.cpp">
       <Filter>Source Files\Game Components\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\GameManager.cpp">
-      <Filter>Source Files\Game Components</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\BulletManager.cpp">
       <Filter>Source Files\Game Components\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\WaveWriter.cpp">
-      <Filter>Source Files\Game Components</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\HighScoreWriter.cpp">
       <Filter>Source Files\Game Components\Score</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\LivesWriter.cpp">
-      <Filter>Source Files\Game Components</Filter>
+    <ClCompile Include="Game Components\GameManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\ExplosionManager.cpp">
-      <Filter>Source Files\Game Components</Filter>
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\PlayerManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\WaveManager.cpp">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\LivesWriter.cpp">
+      <Filter>Source Files\Game Components\Writers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\WaveWriter.cpp">
+      <Filter>Source Files\Game Components\Writers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -578,12 +563,6 @@
     <ClInclude Include="Game Components\AsteroidField.h">
       <Filter>Source Files\Game Components\Asteroid</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Widget.h">
-      <Filter>Source Files\Game Components\Widget</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\WidgetGenerator.h">
-      <Filter>Source Files\Game Components\Widget</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\Explosion.h">
       <Filter>Source Files\Game Components\Asteroid</Filter>
     </ClInclude>
@@ -598,12 +577,6 @@
     </ClInclude>
     <ClInclude Include="Game Components\Level1.h">
       <Filter>Source Files\Game Components\Levels\Level1</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\Splash.h">
-      <Filter>Source Files\Game Components\Splash</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\SplashController.h">
-      <Filter>Source Files\Game Components\Splash</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\Bullet.h">
       <Filter>Source Files\Game Components\Ship</Filter>
@@ -854,9 +827,6 @@
     <ClInclude Include="Game Components\Up_ThenRight.h">
       <Filter>Source Files\Game Components\Critters\Spider\SpiderMovement\ImprovedMovement\Vertical</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\PlayerManager.h">
-      <Filter>Source Files\Game Components</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\ShipFSM.h">
       <Filter>Source Files\Game Components\Ship</Filter>
     </ClInclude>
@@ -868,12 +838,6 @@
     </ClInclude>
     <ClInclude Include="Game Components\Ship_Player.h">
       <Filter>Source Files\Game Components\Ship\Modes</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\WaveManager.h">
-      <Filter>Source Files\Game Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\GameManager.h">
-      <Filter>Source Files\Game Components</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\PlayerData.h">
       <Filter>Source Files\Game Components</Filter>
@@ -923,17 +887,26 @@
     <ClInclude Include="Game Components\BulletManager.h">
       <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\WaveWriter.h">
-      <Filter>Source Files\Game Components</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\HighScoreWriter.h">
       <Filter>Source Files\Game Components\Score</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\LivesWriter.h">
-      <Filter>Source Files\Game Components</Filter>
+    <ClInclude Include="Game Components\GameManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\ExplosionManager.h">
-      <Filter>Source Files\Game Components</Filter>
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\PlayerManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\WaveManager.h">
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\LivesWriter.h">
+      <Filter>Source Files\Game Components\Writers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\WaveWriter.h">
+      <Filter>Source Files\Game Components\Writers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

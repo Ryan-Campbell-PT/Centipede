@@ -16,7 +16,7 @@ private:
 	float yTopBounds, yBottomBounds;
 	float xLeftBounds, xRightBounds;
 	unsigned int stopCounter;
-	int randomNum;
+	unsigned int randomNum;
 };
 
 #endif // SHIP_AI_H

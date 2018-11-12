@@ -31,11 +31,11 @@ SpriteSheet::SpriteSheet( sf::Texture& tex, int CellCountHor, int CellCountVert 
 }
 
 int SpriteSheet::CellWidth(){ 
-	return cellWidth * SCALE; //may have to change this when doing collision
+	return cellWidth * static_cast<int>(SCALE); //may have to change this when doing collision
 }
 
 int SpriteSheet::CellHeight(){
-	return cellHeight * SCALE; //may have to change this when doing collision
+	return cellHeight * static_cast<int>(SCALE); //may have to change this when doing collision
 }
 
 Glyph SpriteSheet::GetGlyph( char c, sf::Vector2f pos )

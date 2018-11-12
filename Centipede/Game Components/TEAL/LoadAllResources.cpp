@@ -4,7 +4,6 @@
 // The user fills the method with all resources that need loading
 
 #include "ResourceManager.h"
-#include "../Splash.h"
 
 #include "../Ship.h"
 

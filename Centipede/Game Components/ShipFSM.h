@@ -4,8 +4,9 @@
 class Ship_Ai;
 class Ship_Player;
 
-struct ShipFSM
+class ShipFSM
 {
+public:
 	static const Ship_Ai		aiMode;
 	static const Ship_Player	playerMode;
 };

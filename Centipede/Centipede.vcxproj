@@ -166,8 +166,6 @@
     <ClCompile Include="Game Components\Spider_DiagonalUpLeft.cpp" />
     <ClCompile Include="Game Components\Spider_DiagonalUpRight.cpp" />
     <ClCompile Include="Game Components\Spider_MoveFSM.cpp" />
-    <ClCompile Include="Game Components\Splash.cpp" />
-    <ClCompile Include="Game Components\SplashController.cpp" />
     <ClCompile Include="Game Components\SpriteSheet.cpp" />
     <ClCompile Include="Game Components\TEAL\AlarmEventTimeline.cpp" />
     <ClCompile Include="Game Components\TEAL\AlarmManager.cpp" />
@@ -198,8 +196,6 @@
     <ClCompile Include="Game Components\Up_ThenRight.cpp" />
     <ClCompile Include="Game Components\WaveManager.cpp" />
     <ClCompile Include="Game Components\WaveWriter.cpp" />
-    <ClCompile Include="Game Components\Widget.cpp" />
-    <ClCompile Include="Game Components\WidgetGenerator.cpp" />
     <ClCompile Include="Game Components\Bullet.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -312,8 +308,6 @@
     <ClInclude Include="Game Components\Spider_DiagonalUpLeft.h" />
     <ClInclude Include="Game Components\Spider_DiagonalUpRight.h" />
     <ClInclude Include="Game Components\Spider_MoveFSM.h" />
-    <ClInclude Include="Game Components\Splash.h" />
-    <ClInclude Include="Game Components\SplashController.h" />
     <ClInclude Include="Game Components\SpriteSheet.h" />
     <ClInclude Include="Game Components\State.h" />
     <ClInclude Include="Game Components\TEAL\AlarmEventTimeline.h" />
@@ -350,8 +344,6 @@
     <ClInclude Include="Game Components\Up_ThenRight.h" />
     <ClInclude Include="Game Components\WaveManager.h" />
     <ClInclude Include="Game Components\WaveWriter.h" />
-    <ClInclude Include="Game Components\Widget.h" />
-    <ClInclude Include="Game Components\WidgetGenerator.h" />
     <ClInclude Include="Game Components\Bullet.h" />
   </ItemGroup>
   <ItemGroup>
