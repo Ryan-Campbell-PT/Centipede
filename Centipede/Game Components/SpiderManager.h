@@ -35,6 +35,6 @@ private:
 
 	float spiderSpeed = 1.5f; //default speed
 	float timeToSpawn;
-	bool active;
+	bool active = false;
 };
 #endif // !SPIDER_MANAGER

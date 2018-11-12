@@ -54,6 +54,7 @@ void Spider::Update()
 		this->position.x < 0)
 	{
 		this->MarkForDestroy();
+		SpiderManager::RemoveSpider(this);
 		SpiderManager::SetTimer();
 	}
 
@@ -68,6 +69,7 @@ void Spider::Draw()
 void Spider::Destroy()
 {
 	this->DeregisterCollision<Spider>(*this);
+	SpiderManager::RemoveSpider(this);
 }
 
 void Spider::SpawnSpider(const sf::Vector2f pos, const float spiderSpeed)
@@ -93,6 +95,7 @@ void Spider::Collision(Bullet *)
 {
 	SpiderManager::RemoveSpider(this);
 	ScoreManager::SendScoreCmd(this->pDeath);
+	SpiderManager::SetTimer();
 	this->MarkForDestroy();
 }
 

@@ -15,7 +15,7 @@
 #include "LivesWriter.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
-//todo: THIS WHILE CLASS NEEDS WORK
+//todo: THIS WHoLE CLASS NEEDS WORK
 void PlayerManager::AddScore(const int score)
 {
 	GetInstance()->currentPlayer.playerScore += score;
@@ -67,8 +67,8 @@ void PlayerManager::SetPlayerMode(PlayerData::PlayerID player)
 		break;
 
 	case PlayerData::PlayerID::Player2:
-		GetInstance()->playerMode = PlayerMode::TwoPlayer; //todo: change this to two player mode
-		InitializePlayer(PlayerData::PlayerID::Player2);
+		GetInstance()->playerMode = PlayerMode::TwoPlayer;
+		InitializePlayer(PlayerData::PlayerID::Player1); //start out on player 1 anyways, but will swap after death
 		break;
 
 	default:
@@ -103,22 +103,19 @@ PlayerManager::PlayerManager()
 
 void PlayerManager::saveCurrentPlayerData()
 {
-	if (indexOfCurrentPlayer == -1)
-	{//if we havent already modified the current player
-		for (unsigned int i = 0; i < this->listOfPlayers.size(); ++i)
-		{
-			if (this->listOfPlayers[i].player == this->currentPlayer.player)
-			{
-				this->listOfPlayers[i] = this->currentPlayer;
-				this->indexOfCurrentPlayer = i;
-				break;
-			}
-		}
+	//todo: will have to look at this, it seems the player is altering a lot of their data when they dont need to?
+	if (this->currentPlayer.player == PlayerData::PlayerID::Player1)
+	{
+		this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player1)] = this->currentPlayer;
+		this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player1)].mushroomSetup = MushroomManager::GetCurrentLayout();
+		this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player1)].waveLevel = WaveManager::GetCurrentWave();
 	}
 
-	else
-	{ //weve done this before
-		this->listOfPlayers[this->indexOfCurrentPlayer] = this->currentPlayer;
+	else if (this->currentPlayer.player == PlayerData::PlayerID::Player2)
+	{
+		this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player2)] = this->currentPlayer;
+		this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player2)].mushroomSetup = MushroomManager::GetCurrentLayout();
+		this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player2)].waveLevel = WaveManager::GetCurrentWave();
 	}
 }
 
@@ -129,8 +126,10 @@ PlayerData::PlayerID PlayerManager::GetCurrentPlayer()
 
 void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 {
+	//TODO: ALL THIS NEEDS WORK
 	switch (player)
 	{
+		//todo: thse new's can be just changed to local functions in the class itself
 	case PlayerData::PlayerID::Ai:
 		Ship::InitializeShip(new Ship_Ai);
 		SoundManager::SetSoundProfile(new SoundOff);
@@ -138,13 +137,13 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 
 	case PlayerData::PlayerID::Player1:
 		Ship::InitializeShip(new Ship_Player);
-		//TODO: ALL THIS NEEDS WORK
 		instance->currentPlayer.player = PlayerData::PlayerID::Player1;
 		SoundManager::SetSoundProfile(new SoundOn);
 		break;
 
 	case PlayerData::PlayerID::Player2:
-		Ship::InitializeShip(new Ship_Player); //todo: change this to two player mode
+		Ship::InitializeShip(new Ship_Player);
+		instance->currentPlayer.player = PlayerData::PlayerID::Player1;
 		SoundManager::SetSoundProfile(new SoundOn);
 		break;
 
@@ -152,7 +151,7 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 		break;
 	}
 
-	if(GetInstance()->playerMode != PlayerMode::Attractor)
+	if (GetInstance()->playerMode != PlayerMode::Attractor)
 		LivesWriter::WriteLives(instance->currentPlayer.playerLives);
 }
 
@@ -183,14 +182,14 @@ void PlayerManager::SwapPlayer()
 
 #elif true
 
-	if(this->currentPlayer.player == PlayerData::PlayerID::Player1)
+	if (this->currentPlayer.player == PlayerData::PlayerID::Player1)
 		this->currentPlayer = this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player2)];
 
-	else if(this->currentPlayer.player == PlayerData::PlayerID::Player2)
+	else if (this->currentPlayer.player == PlayerData::PlayerID::Player2)
 		this->currentPlayer = this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player1)];
 
 	//we can assume now we swapped players and now have all the information necessary
-	if(this->currentPlayer.playerLives <= 0)
+	if (this->currentPlayer.playerLives <= 0)
 		GameManager::EndGame(); //if we swapped players and this player has no lives, end the game
 
 	else
@@ -202,7 +201,7 @@ void PlayerManager::SwapPlayer()
 	}
 
 #endif
-}
+	}
 
 PlayerManager * PlayerManager::GetInstance()
 {

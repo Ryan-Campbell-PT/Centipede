@@ -32,6 +32,9 @@ void SpiderManager::DeInitializeSpider()
 
 void SpiderManager::SpawnSpider()
 {
+	if(GetInstance()->active)
+		return;
+
 	sf::Vector2f pos;
 
 	const bool leftSide = rand() % 2; //either left or right side, determined by a random number
@@ -47,12 +50,12 @@ void SpiderManager::SpawnSpider()
 
 	auto spider = SpiderFactory::GetSpider();
 	spider->SpawnSpider(pos, this->spiderSpeed);
-
+	GetInstance()->active = true;
 }
 
 void SpiderManager::RemoveSpider(Spider * const spider)
 {
-	SpiderFactory::RemoveSpider(spider);
+	GetInstance()->active = false;
 }
 
 void SpiderManager::SetTimer()

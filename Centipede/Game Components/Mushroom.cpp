@@ -58,7 +58,7 @@ void Mushroom::InitializeMushroom(sf::Vector2f const & pos, MushroomState state)
 
 void Mushroom::InitializeMushroom()
 {
-	RegisterToCurrentScene(); //todo may break things, also make sure this function works
+	//RegisterToCurrentScene(); //todo may break things, also make sure this function works
 	this->sprite.setPosition(this->position);
 	RegisterCollision<Mushroom>(*this);
 }

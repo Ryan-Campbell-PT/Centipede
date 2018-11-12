@@ -9,8 +9,8 @@ MushroomManager* MushroomManager::instance = nullptr;
 
 void MushroomManager::InitializeMushroomField(const int numShrooms)
 {
-	if(!MushroomPool::GetActiveMushroomList().empty())
-		return; //no need to make a mushroom field if there already is one
+	//if (!MushroomPool::GetActiveMushroomList().empty())
+		//return; //no need to make a mushroom field if there already is one
 
 	sf::Vector2f pos;
 
@@ -30,8 +30,8 @@ void MushroomManager::InitializeMushroomField(const int numShrooms)
 
 		GetInstance()->SpawnMushroom(pos);
 	}
-
-	PlayerManager::SetMushroomField(MushroomFactory::GetCurrentLayout());
+	//todo: may want to remove this
+	///PlayerManager::SetMushroomField(MushroomFactory::GetCurrentLayout());
 }
 
 void MushroomManager::InitializeMushroomField(std::list<Mushroom*>* shroomField)
@@ -95,9 +95,14 @@ void MushroomManager::SpawnMushroom(sf::Vector2f & pos) const
 
 void MushroomManager::initializeMushroomField(std::list<Mushroom*>* shroomField)
 {
-	for(auto shroom : *this->GetCurrentLayout())
+	//todo: doesnt reassign them with coming back. fix that
+	for (auto shroom : *this->GetCurrentLayout())
 		shroom->MarkForDestroy();
 
-	for(auto shroom : *shroomField)
-		shroom->InitializeMushroom();
+	if (shroomField == nullptr)
+		this->InitializeMushroomField(15);
+
+	else
+		for (auto shroom : *shroomField)
+			shroom->InitializeMushroom();
 }
