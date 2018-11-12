@@ -96,46 +96,42 @@ void ScoreManager::AddScore(int val)
 	GetInstance()->currentScore += val;
 }
 
-ScoreCmd * ScoreManager::GetScoreCommand(ScoreEvents ev)
+ScoreCmd * ScoreManager::GetScoreCommand(const ScoreEvents &ev)
 {
 	ScoreCmd* pCmd = nullptr;
-	printf("Score Manager: Constructing score command for ");
 
 	switch (ev)
 	{
 	case ScoreEvents::FleaKilled:
-		printf("FleaDeath\n");
 		pCmd = new ScoreValueCmd(FleaDeath);
 		break;
 
 	case ScoreEvents::ScorpionKilled:
-		printf("ScorpionDeath\n");
 		pCmd = new ScoreValueCmd(ScorpionDeath);
 		break;
 
 	case ScoreEvents::MushroomKilled:
-		printf("MushroomDeath\n");
 		pCmd = new ScoreValueCmd(MushroomDeath);
 		break;
 
 	case ScoreEvents::SpiderKilled:
-		printf("SpiderDeath\n");
 		pCmd = new ScoreByDistanceCmd(SpiderDistNear, SpiderDistMedium, SpiderDistFar,
 			SpiderDeathNear, SpiderDeathMedium, SpiderDeathFar);
 		break;
 
 	case ScoreEvents::MushroomPoisonKilled:
-		printf("MushroomPoisonDeath\n");
 		pCmd = new ScoreValueCmd(MushroomPoisonDeath);
 		break;
 
-	case ScoreEvents::CentiKilled:
-		printf("CentiDeath\n");
-		pCmd = new ScoreValueCmd(centiDeath);
+	case ScoreEvents::CentiHeadKilled:
+		pCmd = new ScoreValueCmd(CentiHeadDeath);
+		break;
+
+	case ScoreEvents::CentiBodyKilled:
+		pCmd = new ScoreValueCmd(CentiBodyDeath);
 		break;
 
 	default:
-		printf("<nothing>\n");
 		break;
 	}
 

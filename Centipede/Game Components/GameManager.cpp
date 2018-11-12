@@ -58,6 +58,7 @@ void GameManager::EndWave()
 	else
 	{
 		MushroomManager::EndWave();
+		CentiHeadManager::EndWave();
 		WaveManager::SetupLevel(WaveManager::GetCurrentWave() + 1);
 	}
 }

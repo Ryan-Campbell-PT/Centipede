@@ -15,11 +15,12 @@ class ScoreManager : public GameObject
 {
 public:
 	// events
-	enum class ScoreEvents { FleaKilled, ScorpionKilled, MushroomKilled, MushroomPoisonKilled, SpiderKilled, CentiKilled };
+	enum class ScoreEvents { FleaKilled, ScorpionKilled, MushroomKilled, 
+		MushroomPoisonKilled, SpiderKilled, CentiBodyKilled, CentiHeadKilled };
 
 	static void AddScore(int val);
 
-	static ScoreCmd* GetScoreCommand(ScoreEvents ev);
+	static ScoreCmd* GetScoreCommand(const ScoreEvents &ev);
 
 	static void SendScoreCmd(ScoreCmd* c);
 	static void ProcessScores();
@@ -42,7 +43,8 @@ private:
 	static const int ScorpionDeath = 200;
 	static const int MushroomDeath = 300;
 	static const int MushroomPoisonDeath = 400;
-	static const int centiDeath = 300;
+	static const int CentiHeadDeath = 100;
+	static const int CentiBodyDeath = 10;
 
 	///due to the way const works, Im unable to get the MainWindow.GetSize().x like I would otherwise
 	static const int SpiderDeathFar = 500;

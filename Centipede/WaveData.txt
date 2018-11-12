@@ -11,21 +11,36 @@ scorpionSpawn 3
 fleaActive yes
 fleaSpawn 14
 
-
-
 _
 
 level 1
 
-centiBodyCount 4
-spiderActive yes
+centiBodyCount 1
+spiderActive no
 spiderSpeed 2
 scorpionActive no
+fleaActive no
+
+_
+
+level 2
+
+centiBodyCount 13
+spiderActive no
+scorpionActive yes
+scorpionSpawn 4
+fleaActive no
 
 _
 
 level 3
 
-centiBodyCount 3
+centiBodyCount 6
 spiderActive yes
+spiderSpeed 2
 scorpionActive yes
+scorpionSpawn 4
+fleaActive yes
+fleaSpawn 14
+
+_

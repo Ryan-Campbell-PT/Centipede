@@ -22,7 +22,7 @@ CentipedeBody::CentipedeBody()
 
 	this->SetWhosFollowingYou(nullptr);
 	this->SetWhoYoureFollowing(nullptr);
-	pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::CentiKilled);
+	pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::CentiBodyKilled);
 }
 
 void CentipedeBody::InitializeBody(sf::Vector2f const & pos, OffsetArray direction)

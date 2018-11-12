@@ -7,23 +7,8 @@
 class Glyph;
 class WaveInfoWriter;
 
-class WaveManager //: public GameObject
+class WaveManager
 {
-	/***
-	 *The sole purpose of this class is to write the data from the WaveManager on the display
-	 *The reason this is needed is, having WaveManager a GameObject results in TEAL creating a 
-	 *GO as the scene is being created, so the resulting GO being created cannot be assigned to a scene
-	 *(because it hasnt been created yet) therefor crashing the game
-	 *This is a workaround for that to strictly write to the screen when i want it to
-	 
-private:
-	class WaveInfoWriter : public GameObject
-	{
-	public:
-		static void setWriterToNull(GameObject*);
-		virtual void Draw() override;
-	};
-	*/
 public:
 	static void LoadLevelInfo(const char* filePath);
 	///will be used to initialize all the necessary info in the level specified
@@ -70,6 +55,7 @@ private:
 	void loadLevelInfo(const char *filePath);
 	void setCritterSettings(const WaveManager::Wave wave);
 	void endWave() const;
+	void setupLevel(const int &levelNum);
 
 	float getFloatInfo(const std::string& line) const;
 	bool getBoolInfo(const std::string& line) const;
@@ -80,7 +66,7 @@ private:
 	int currentLevel;
 	const size_t MAX_SIZE = 100;
 
-	std::list<WaveManager::Wave> levelList; //this will hold all the level info for quick access
+	std::vector<WaveManager::Wave> levelList; //this will hold all the level info for quick access
 
 
 

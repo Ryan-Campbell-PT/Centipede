@@ -28,7 +28,7 @@ CentipedeHead::CentipedeHead()
 
 	this->SetWhosFollowingYou(nullptr);
 	this->SetWhoYoureFollowing(nullptr);
-	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::CentiKilled);
+	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::CentiHeadKilled);
 }
 
 CentipedeHead::~CentipedeHead()
@@ -124,11 +124,6 @@ void CentipedeHead::Alarm0()
 	PlayerManager::ReinitializeShip();
 }
 
-sf::Vector2f CentipedeHead::GetPosition()
-{
-	return this->position;
-}
-
 void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFrame)
 {
 	this->sprite.SetAnimation(startFrame, endFrame);
@@ -145,6 +140,7 @@ void CentipedeHead::Collision(Bullet *)
 	this->MarkForDestroy(); //remove the head from screen, and recycle
 
 	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)
+	ScoreManager::SendScoreCmd(this->pDeath);
 }
 
 void CentipedeHead::CheckGridAhead(sf::Vector2f pos)

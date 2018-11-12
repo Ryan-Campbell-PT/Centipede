@@ -30,14 +30,6 @@ WaveManager * WaveManager::GetInstance()
 	return instance;
 }
 
-/*void WaveManager::Draw()
-{
-	//now display the glyphs
-	for(int i =0 ; i < instance->numGlyphsForWave - 1; i++)
-		instance->waveGlyphs[i].Draw();
-
-}*/
-
 void WaveManager::loadLevelInfo(const char * filePath)
 {
 	std::ifstream myFile;
@@ -48,10 +40,13 @@ void WaveManager::loadLevelInfo(const char * filePath)
 
 	while (std::getline(myFile, line))
 	{
-		//transform to lower, for portability
+		if(line.empty())
+			continue; //save a couple computations
+
+		//transform to lower, for simplicity
 		std::transform(line.begin(), line.end(), line.begin(), ::tolower);
 
-		if (line.find("level") < MAX_SIZE) //found it (100 bc if false, returns huge number)
+		if (line.find("level") < MAX_SIZE) //MAX_SIZE bc if false, returns huge number
 		{//we are currently trying to find the level
 			wave.level = this->getIntInfo(line);
 		}
@@ -156,13 +151,20 @@ void WaveManager::LoadLevelInfo(const char * filePath)
 
 void WaveManager::SetupLevel(const int & levelNum)
 {
-	Wave curWave;
-	for (const auto level : GetInstance()->levelList)
-		if (level.level == levelNum)
-			curWave = level;
+	GetInstance()->setupLevel(levelNum);
+}
 
+void WaveManager::setupLevel(const int& levelNum)
+{
+	Wave curWave;
+	if(levelNum > static_cast<int>(this->levelList.size()))
+		curWave = this->levelList[0]; //if the designers didnt set upaa this level, just load attractor data
+
+	else
+		curWave = this->levelList[levelNum];
+	
 	GetInstance()->setCritterSettings(curWave);
-	instance->currentLevel = levelNum;
+	this->currentLevel = levelNum;
 	WaveWriter::WriteWave(levelNum);
 }
 

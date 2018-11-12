@@ -53,14 +53,14 @@ public:
 	virtual void Collision(GameObject *) override {}
 	virtual void Collision(Bullet *);
 
-	sf::Vector2f GetPosition();
+	sf::Vector2f GetPosition() { return this->position; }
 	void SetSpeed(const int speed);
 	bool GetConcent() const { return concent; }
 
 private:
 	///this function will apply the number of bodies connected to the head, at the creation of the head
 	void SetupBodies(OffsetArray direction, int numBodies);
-	
+
 	//void RemoveHead();
 
 	sf::Vector2f position;
