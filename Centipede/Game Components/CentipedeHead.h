@@ -45,33 +45,25 @@ public:
 	void SetDirection(const CentipedeDirectionState * direction);
 	void SetSpriteRotation(const float &rotation);
 
-	///this function translates from an enum to pointer
-	CentipedeDirectionState *GetDirection(CentiMovementDirectionEnum direction);
-	const CentipedeDirectionState *GetDirection(); ///this simply get the current direction
-	CentiMovementDirectionEnum GetDirectionEnum(); ///this is the direction, but tranfered to enum
+	const CentipedeDirectionState *GetDirection() const;
 
 	virtual void Collision(GameObject *) override {}
 	virtual void Collision(Bullet *);
 
-	sf::Vector2f GetPosition() { return this->position; }
+	sf::Vector2f GetPosition() const { return this->position; }
 	void SetSpeed(const int speed);
-	float GetSpeed() { return speed; }
+	float GetSpeed() const { return speed; }
 	bool GetConcent() const { return concent; }
 
 private:
 	///this function will apply the number of bodies connected to the head, at the creation of the head
 	void SetupBodies(OffsetArray direction, int numBodies);
 
-	//void RemoveHead();
-
 	sf::Vector2f position;
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
 	const CentipedeDirectionState *currentDirectionState;
-	const CentipedeDirectionState *prevDirection;
-
-	std::vector<CentipedeDirectionState*> directionArray;
 
 	unsigned int animationCounter;
 	float speed;
@@ -81,16 +73,6 @@ private:
 
 	///this variable is work around to allow the waves to progress
 	bool concent;
-
 };
 
-///this enum will be used so there is no need to delete movements throuhgout the game loop
-enum class CentiMovementDirectionEnum
-{
-	Error = -1,
-	Left = 0,
-	Right = 1,
-	Down = 2,
-	Up = 3
-};
 #endif //CENTIHEAD_H

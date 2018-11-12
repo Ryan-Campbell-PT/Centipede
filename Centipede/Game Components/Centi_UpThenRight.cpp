@@ -7,6 +7,11 @@ const CentipedeDirectionState * Centi_UpThenRight::NextState(CentipedeHead *cent
 	return &MoveSFM::rightThenUp;
 }
 
+const CentipedeDirectionState* Centi_UpThenRight::ExtraState(CentipedeHead* centi) const
+{
+	return &MoveSFM::rightThenDown;
+}
+
 void Centi_UpThenRight::CheckAhead(CentipedeHead* centi, unsigned& counter, unsigned& yCounter) const
 {
 	yCounter += static_cast<int>(centi->GetSpeed());

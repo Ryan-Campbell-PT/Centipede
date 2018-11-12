@@ -9,6 +9,7 @@ class Centi_DownThenRight : public CentipedeDirectionState
 {
 public:
 	virtual const CentipedeDirectionState* NextState(CentipedeHead *centi) const override;
+	virtual const CentipedeDirectionState* ExtraState(CentipedeHead *centi) const override;
 	virtual OffsetArray GetOffsetArray() const override { return MovementCollection::OffsetsTurnDownEndRight; }
 	virtual void CheckAhead(CentipedeHead* centi, unsigned int &counter, unsigned int &yCounter) const override;
 };

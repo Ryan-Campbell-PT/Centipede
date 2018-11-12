@@ -13,6 +13,14 @@ public:
 
 	virtual const CentipedeDirectionState* NextState(CentipedeHead * centi) const { return nullptr; }
 
+	/**
+	 * \brief the purpose of this function, as opposed to NextState, is to compensate for Y bounds
+	 * so it will only be implemented by vertical movement 
+	 * \param centi 
+	 * \return 
+	 */
+	virtual const CentipedeDirectionState* ExtraState(CentipedeHead *centi) const { return nullptr; }
+
 	virtual OffsetArray GetOffsetArray() const { return {0, 0}; }
 
 	/**

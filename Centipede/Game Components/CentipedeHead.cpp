@@ -14,7 +14,7 @@
 #include "ScoreManager.h"
 
 CentipedeHead::CentipedeHead()
-	:currentDirectionState(nullptr), prevDirection(nullptr), animationCounter(0),
+	:currentDirectionState(nullptr), animationCounter(0),
 	speed(2), yCounter(0), concent(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
@@ -64,7 +64,7 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 	this->sprite.setPosition(pos);
 
 	RegisterCollision<CentipedeHead>(*this);
-	
+
 	this->currentDirectionState = &direction;
 	yCounter = 0;
 	concent = false;
@@ -77,35 +77,35 @@ void CentipedeHead::Update()
 	this->position.x += (this->currentDirectionState->GetOffsetArray()).coloffset * speed;
 	this->position.y += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
 
-/*	if (this->currentDirectionState->GetOffsetArray().rowoffset != 0) //we are moving in the Y
-	{
-		yCounter += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
+	/*	if (this->currentDirectionState->GetOffsetArray().rowoffset != 0) //we are moving in the Y
+		{
+			yCounter += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
 
-		if (yCounter % SPRITE_SIZE == 0)
+			if (yCounter % SPRITE_SIZE == 0)
+			{
+				if (this->GetWhosFollowingYou())
+					static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
+
+				this->SetDirection(this->currentDirectionState->NextState(this));
+			}
+		}
+
+		else if (this->animationCounter % (SPRITE_SIZE / 2) == 0)
 		{
 			if (this->GetWhosFollowingYou())
 				static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
 
-			this->SetDirection(this->currentDirectionState->NextState(this));
+			this->CheckGridAhead(sf::Vector2f(
+				this->position.x + this->currentDirectionState->GetOffsetArray().coloffset * SPRITE_SIZE,
+				this->position.y + this->currentDirectionState->GetOffsetArray().rowoffset * SPRITE_SIZE));
 		}
-	}
-
-	else if (this->animationCounter % (SPRITE_SIZE / 2) == 0)
-	{
-		if (this->GetWhosFollowingYou())
-			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
-
-		this->CheckGridAhead(sf::Vector2f(
-			this->position.x + this->currentDirectionState->GetOffsetArray().coloffset * SPRITE_SIZE,
-			this->position.y + this->currentDirectionState->GetOffsetArray().rowoffset * SPRITE_SIZE));
-	}
-*/
+	*/
 
 	this->currentDirectionState->CheckAhead(this, this->animationCounter, this->yCounter);
 
 
 	this->sprite.setPosition(this->position);
-	
+
 	if (this->animationCounter % 3 == 0)
 		this->sprite.NextFrame();
 }
@@ -116,7 +116,7 @@ void CentipedeHead::Draw()
 }
 
 void CentipedeHead::Destroy()
-{	
+{
 	DeregisterCollision<CentipedeHead>(*this);
 
 	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou()));
@@ -131,11 +131,6 @@ void CentipedeHead::Alarm0()
 void CentipedeHead::SetAnimationFrames(const int & startFrame, const int & endFrame)
 {
 	this->sprite.SetAnimation(startFrame, endFrame);
-}
-
-CentiMovementDirectionEnum CentipedeHead::GetDirectionEnum()
-{
-	return CentiMovementDirectionEnum::Error;
 }
 
 void CentipedeHead::Collision(Bullet *)
@@ -154,8 +149,9 @@ void CentipedeHead::CheckGridAhead(const sf::Vector2f &pos)
 		GameGrid::GetGridStatus(pos) == GameGridEnum::Glyph)
 		this->SetDirection(this->currentDirectionState->NextState(this));
 
-	else if(GameGrid::GetGridStatus(pos) == GameGridEnum::PoisonMushroom)
-	{}//todo: bezerk
+	else if (GameGrid::GetGridStatus(pos) == GameGridEnum::PoisonMushroom)
+	{
+	}//todo: bezerk
 
 	else if (pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
 		pos.x < 0.f)
@@ -163,32 +159,25 @@ void CentipedeHead::CheckGridAhead(const sf::Vector2f &pos)
 
 	//if we are at the tops of the window, swap to up or down
 	else if (pos.y > static_cast<float>(WindowManager::MainWindow.getView().getSize().y))
-		this->SetDirection(&MoveSFM::upThenLeft);
+		this->SetDirection(this->currentDirectionState->ExtraState(this));
 
 	else if (pos.y < 0.f)
-		this->SetDirection(&MoveSFM::downThenLeft);
+		this->SetDirection(this->currentDirectionState->ExtraState(this));
 
 	else
 		//if all else fails, and you never have to change directions due to things ahead,
 		//still inform the body behind you whats going on
 		if (this->GetWhosFollowingYou())
 			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
-		
+
 }
 
 void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)
 {
-	this->prevDirection = this->currentDirectionState;
-	this->currentDirectionState = direction;
+	if (this->GetWhosFollowingYou())
+		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
 
-	/*	if (this->GetWhosFollowingYou())
-			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->AddOffset(
-				this->position, this->currentDirectionState->GetDirectionEnum());*/
-//	if (direction->GetOffsetArray().rowoffset != 0)
-		if (this->GetWhosFollowingYou())
-		{//todo: work on how this information is passed down. Incorrect atm
-			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->prevDirection->GetOffsetArray());
-		}
+	this->currentDirectionState = direction;
 }
 
 void CentipedeHead::SetSpriteRotation(const float & rotation)
@@ -196,15 +185,7 @@ void CentipedeHead::SetSpriteRotation(const float & rotation)
 	this->sprite.setRotation(rotation);
 }
 
-CentipedeDirectionState * CentipedeHead::GetDirection(CentiMovementDirectionEnum direction)
-{
-	if (static_cast<int>(direction) >= 0 && static_cast<int>(direction) < DIRECTION_SIZE)
-		return this->directionArray[static_cast<int>(direction)];
-
-	return nullptr;
-}
-
-const CentipedeDirectionState * CentipedeHead::GetDirection()
+const CentipedeDirectionState * CentipedeHead::GetDirection() const
 {
 	return this->currentDirectionState;
 }
