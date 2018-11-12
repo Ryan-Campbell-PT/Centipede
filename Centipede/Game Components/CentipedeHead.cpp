@@ -175,7 +175,6 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 
 void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)
 {
-	direction->Initialize(this);
 	this->prevDirection = this->currentDirectionState;
 	this->currentDirectionState = direction;
 

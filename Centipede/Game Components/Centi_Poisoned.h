@@ -8,7 +8,7 @@ class CentipedeHead;
 
 class Centi_Poisoned : public CentipedeDirectionState
 {
-	virtual void MoveDirection(CentipedeHead *centi, sf::Vector2f &pos) const override;
+//todo
 	virtual const CentipedeDirectionState* NextState(CentipedeHead * centi) const override;
 
 };

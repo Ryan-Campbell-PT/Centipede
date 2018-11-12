@@ -8,13 +8,9 @@ class CentipedeHead;
 class Centi_UpThenLeft : public CentipedeDirectionState
 {
 public:
-	virtual void MoveDirection(CentipedeHead *centi, sf::Vector2f &pos) const override;
 	virtual const CentipedeDirectionState* NextState(CentipedeHead *centi) const override;
-	virtual void Initialize(CentipedeHead *centi) const override {};
-	virtual CentiMovementDirectionEnum GetDirectionEnum() const override;
 	virtual OffsetArray GetOffsetArray() const override { return MovementCollection::OffsetsTurnUpEndLeft; }
-
-	private:
+	virtual void CheckAhead(CentipedeHead* centi, unsigned& counter, unsigned& yCounter) const override;
 };
 
 #endif // !CENTI_UP_THEN_LEFT

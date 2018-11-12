@@ -1,17 +1,6 @@
 #include "Centi_RightThenDown.h"
 #include "CentipedeHead.h"
 
-Centi_RightThenDown::Centi_RightThenDown()
-{
-}
-
-void Centi_RightThenDown::MoveDirection(CentipedeHead *centi, sf::Vector2f & pos) const
-{
-	pos.x += CENTI_SPEED;
-
-	if (static_cast<int>(pos.x) % (SPRITE_SIZE / 2) == 0)
-		centi->CheckGridAhead(sf::Vector2f(pos.x + SPRITE_SIZE, pos.y));
-}
 
 const CentipedeDirectionState * Centi_RightThenDown::NextState(CentipedeHead *centi) const
 {
@@ -19,12 +8,12 @@ const CentipedeDirectionState * Centi_RightThenDown::NextState(CentipedeHead *ce
 	return &MoveSFM::downThenLeft;
 }
 
-void Centi_RightThenDown::Initialize(CentipedeHead * centi) const
+void Centi_RightThenDown::CheckAhead(CentipedeHead* centi, unsigned& counter, unsigned& yCounter) const
 {
-	
-}
+	counter += static_cast<unsigned>(centi->GetSpeed());
 
-CentiMovementDirectionEnum Centi_RightThenDown::GetDirectionEnum() const
-{
-	return CentiMovementDirectionEnum::Right;
+	if (counter % SPRITE_SIZE == 0)
+		centi->CheckGridAhead(sf::Vector2f(
+			centi->GetPosition().x + this->GetOffsetArray().coloffset * SPRITE_SIZE,
+			centi->GetPosition().y + this->GetOffsetArray().rowoffset * SPRITE_SIZE));
 }
