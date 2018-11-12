@@ -147,7 +147,7 @@ void CentipedeHead::Collision(Bullet *)
 	ScoreManager::SendScoreCmd(this->pDeath);
 }
 
-void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
+void CentipedeHead::CheckGridAhead(const sf::Vector2f &pos)
 {
 	//if we are reaching the end of the window,or see a shroom, switch to next state
 	if (GameGrid::GetGridStatus(pos) == GameGridEnum::Mushroom ||
@@ -168,9 +168,12 @@ void CentipedeHead::CheckGridAhead(sf::Vector2f pos)
 	else if (pos.y < 0.f)
 		this->SetDirection(&MoveSFM::downThenLeft);
 
-	//	if(GetWhosFollowingYou() && this->prevDirection)
-	//		static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->TellBoiMyName(this->prevDirection->GetDirectionEnum());
-
+	else
+		//if all else fails, and you never have to change directions due to things ahead,
+		//still inform the body behind you whats going on
+		if (this->GetWhosFollowingYou())
+			static_cast<CentipedeBody*>(this->GetWhosFollowingYou())->GetDataFromFront(this->currentDirectionState->GetOffsetArray());
+		
 }
 
 void CentipedeHead::SetDirection(const CentipedeDirectionState * direction)

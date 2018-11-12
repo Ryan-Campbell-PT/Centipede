@@ -41,7 +41,7 @@ public:
 
 	void SetAnimationFrames(const int & startFrame, const int & endFrame);
 
-	void CheckGridAhead(sf::Vector2f pos);
+	void CheckGridAhead(const sf::Vector2f &pos);
 	void SetDirection(const CentipedeDirectionState * direction);
 	void SetSpriteRotation(const float &rotation);
 
