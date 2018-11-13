@@ -13,24 +13,30 @@ public:
 	enum class ExplosionType
 	{
 		PlayerDeath,
-		SpiderDeath
+		SpiderDeath,
+		CritterDeath
 	};
 
 	static void DisplayExplosion(ExplosionType type, sf::Vector2f pos);
 	static void Terminate(GameObject*);
 
 private:
+
 	ExplosionManager();
 	static ExplosionManager*instance;
 	static ExplosionManager *GetInstance();
 
 	void spiderDeath(sf::Vector2f pos);
 	void playerDeath(sf::Vector2f pos);
+	void critterDeath(sf::Vector2f pos);
 
 	virtual void Draw() override;
 
 	int counter;
+
+	std::vector<AnimatedSprite> explosions;
 	AnimatedSprite playerDeath_sprite; bool playerActive;
 	AnimatedSprite spiderDeath_sprite;
+	AnimatedSprite critterDeath_sprite;
 };
 #endif // EXPLOSIONMANAGER_H

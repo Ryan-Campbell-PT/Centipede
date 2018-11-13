@@ -21,7 +21,7 @@ void SpiderManager::InitializeSpider(const float timeToSpawn, const float spider
 	GetInstance()->spiderSpeed = spiderSpeed;
 
 	instance->timeToSpawn = timeToSpawn;
-	instance->SetAlarm(0, rand() % static_cast<int>(ceil(timeToSpawn)));
+	instance->SetTimer();
 }
 
 void SpiderManager::DeInitializeSpider()

@@ -25,6 +25,8 @@
 #include "../Ship.h"
 #include "../BulletManager.h"
 #include "../CentiHeadPool.h"
+#include "../Explosion.h"
+#include "../ExplosionManager.h"
 
 
 using namespace std;
@@ -47,7 +49,7 @@ void Game::Run()
 
 	// Load resources
 	ResourceManager::LoadAllResources();
-	
+	unsigned f = 0;
 	while (WindowManager::MainWindow.isOpen() && ! sf::Keyboard::isKeyPressed( KILLGAMEKEY ) )
     {	
 		// Adjust game time clock
@@ -59,6 +61,8 @@ void Game::Run()
 
 		ScoreManager::ProcessScores();
 		SoundManager::ProcessSounds();
+		//if(++f % 30 == 0)
+			//ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::CritterDeath, sf::Vector2f(300,300));
 	}
 
 	Instance().TerminateGame();

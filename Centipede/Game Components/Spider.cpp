@@ -18,7 +18,7 @@ Spider::Spider()
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	this->sprite.SetAnimation(0, 7);
-	this->sprite.setScale(1.4f, 1.4f);
+	this->sprite.setScale(2.2, 1.7);
 
 	SetCollider(sprite, bitmap, true);
 
@@ -53,7 +53,10 @@ void Spider::Update()
 	}
 
 	if(counterNum % timeToSendLoop == 0)
+	{
 		SoundManager::SendSoundCommand(this->loopSound);
+		this->sprite.NextFrame();
+	}
 
 	if (this->position.x > WindowManager::MainWindow.getSize().x ||
 		this->position.x < 0)

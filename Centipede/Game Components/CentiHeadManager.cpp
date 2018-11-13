@@ -13,7 +13,7 @@ CentiHeadManager * CentiHeadManager::instance = nullptr;
 void CentiHeadManager::InitializeCentipede(const int &numBodies, const float &centiSpeed,
 	const int &numSoloHeads, const float &soloHeadSpeed)
 {
-	GetInstance()->SetApi(numBodies, instance->checkSpeed(centiSpeed), numSoloHeads, soloHeadSpeed);
+	GetInstance()->SetApi(numBodies, instance->checkSpeed(centiSpeed), numSoloHeads, instance->checkSpeed(soloHeadSpeed));
 
 	instance->reinitializeCenti();
 }
@@ -34,7 +34,7 @@ int CentiHeadManager::checkSpeed(const float& speed) const
 	else if(speed >= static_cast<int>(CentiSpeeds::Four) && speed <= static_cast<int>(CentiSpeeds::Eight))
 		ret = static_cast<int>(CentiSpeeds::Eight);
 
-	else //anything after 8
+	else //anything greater than 8
 		ret = static_cast<int>(CentiSpeeds::Sixteen);
 
 	return ret;
@@ -71,7 +71,7 @@ void CentiHeadManager::Terminate()
 }
 
 void CentiHeadManager::SetApi(const int &numBodies, const int &centiSpeed,
-		const int &numSoloHeads, const float &soloHeadSpeed)
+		const int &numSoloHeads, const int &soloHeadSpeed)
 {
 	this->numBodies = numBodies;
 	this->centiSpeed = centiSpeed;
@@ -81,7 +81,24 @@ void CentiHeadManager::SetApi(const int &numBodies, const int &centiSpeed,
 
 void CentiHeadManager::SpawnSoloHeads()
 {
-	//if()
+	auto pos = sf::Vector2f(0.f, 0.f);
+	bool spawnOnLeft = false;
+	for(int i = 0 ; i < GetInstance()->numSoloHeads; ++i)
+	{
+		spawnOnLeft = rand() % 2;
+		if(spawnOnLeft)
+			pos.x = 0.f;
+		else
+			pos.x = static_cast<float>(WindowManager::MainWindow.getSize().x);
+
+		pos.y = static_cast<float>(rand() % static_cast<int>(WindowManager::MainWindow.getSize().y));
+
+		const auto head = CentiHeadFactory::GetCentiHead();
+		if(spawnOnLeft)
+			head->InitializeHead(pos, instance->soloHeadSpeed, MoveSFM::rightThenDown);
+		else			
+			head->InitializeHead(pos, instance->soloHeadSpeed, MoveSFM::leftThenDown);
+	}
 }
 
 void CentiHeadManager::reinitializeCenti() const

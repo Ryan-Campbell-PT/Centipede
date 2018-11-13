@@ -13,9 +13,9 @@ public:
 		const int &numSoloHeads, const float &soloHeadSpeed);
 
 	static CentipedeHead* GetCentiHead();
-	//static void RemoveCentiHead(CentipedeHead * const head);
 	///this is used to initialize a body to a head
 	static void InitializeHead(CentipedeHead* head, const sf::Vector2f& pos, const CentipedeDirectionState& direction);
+	static void SpawnSoloHeads();
 
 	CentiHeadManager(const CentiHeadManager &s) = delete;
 	CentiHeadManager operator = (const CentiHeadManager &) = delete;
@@ -29,9 +29,8 @@ private:
 	virtual ~CentiHeadManager() = default;
 
 	void SetApi(const int &numBodies, const int &centiSpeed,
-		const int &numSoloHeads, const float &soloHeadSpeed);
+		const int &numSoloHeads, const int &soloHeadSpeed);
 	int checkSpeed(const float &speed) const;
-	void SpawnSoloHeads();
 	void reinitializeCenti() const;
 
 	static CentiHeadManager* GetInstance();
@@ -42,7 +41,7 @@ private:
 	int numBodies;
 	int centiSpeed;
 	int numSoloHeads;
-	float soloHeadSpeed;
+	int soloHeadSpeed;
 
 	enum class CentiSpeeds
 	{

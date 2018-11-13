@@ -11,7 +11,7 @@ class Observer;
 ///this class will keep track of all mushrooms on screen and control whether they should be created
 
 ///the MushroomFactory handles whether a Mushroom can be placed in an area. The Mushroom itself handles actually setting the grid's data
-class MushroomFactory : public Observee
+class MushroomFactory
 {
 public:
 	///remove all mushrooms created by the factory, and then delete itself
@@ -32,11 +32,6 @@ public:
 private:
 	MushroomFactory() = default;
 	virtual ~MushroomFactory() = default;
-
-	virtual void UpdateObservees() override;
-
-	virtual void AddObservee(Observer *o) override;
-	virtual void RemoveObservee(Observer *o) override;
 
 	static MushroomFactory* instance;
 

@@ -7,6 +7,7 @@
 #include "CentiBodyFactory.h"
 #include "MushroomManager.h"
 #include "ScoreManager.h"
+#include "ExplosionManager.h"
 
 CentipedeBody::CentipedeBody()
 	:animationCounter(0)
@@ -71,6 +72,7 @@ void CentipedeBody::Collision(Bullet *)
 	MushroomManager::AttemptSpawnShroom(this->position);
 	CentiBodyManager::SetBodyToHead(static_cast<CentipedeBody*>(this->GetWhosFollowingYou())); //incase this body is in the middle of the centipede
 	ScoreManager::SendScoreCmd(this->pDeath);
+	ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::CritterDeath, this->position);
 	this->MarkForDestroy();
 }
 

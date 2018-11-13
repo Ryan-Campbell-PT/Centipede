@@ -3,7 +3,7 @@
 #include "GameGrid.h"
 #include "MushroomPool.h"
 #include "Mushroom.h"
-#include "PlayerManager.h"
+#include "Observer.h"
 
 MushroomManager* MushroomManager::instance = nullptr;
 
@@ -53,7 +53,7 @@ void MushroomManager::RemoveMushroom(Mushroom * const shroom)
 {
 	GameGrid::SetGridStatus(shroom->GetPosition(), GameGridEnum::Unoccupied);
 
-	MushroomFactory::RemoveMushroom(shroom);
+	GetInstance()->UpdateObservees();
 }
 
 void MushroomManager::EndWave()
@@ -64,6 +64,32 @@ void MushroomManager::EndWave()
 std::list<Mushroom*>* MushroomManager::GetCurrentLayout()
 {
 	return MushroomFactory::GetCurrentLayout();
+}
+
+void MushroomManager::AddObservee(Observer * o)
+{
+	GetInstance()->observerList.push_back(o);
+}
+
+void MushroomManager::RemoveObservee(Observer * o)
+{
+	GetInstance()->observerList.remove(o);
+}
+
+void MushroomManager::UpdateObservees()
+{
+	for (auto o : this->observerList)
+		o->ObserverUpdate(MushroomPool::GetNumActiveShrooms());
+}
+
+void MushroomManager::AddNewObserver(Observer* o)
+{
+	GetInstance()->AddObservee(o);
+}
+
+void MushroomManager::RemoveCurrentObserver(Observer * o)
+{
+	GetInstance()->RemoveObservee(o);
 }
 
 void MushroomManager::Terminate()

@@ -12,6 +12,7 @@
 
 #include <list>
 #include "ScoreManager.h"
+#include "ExplosionManager.h"
 
 CentipedeHead::CentipedeHead()
 	:currentDirectionState(nullptr), animationCounter(0),
@@ -34,20 +35,6 @@ CentipedeHead::CentipedeHead()
 CentipedeHead::~CentipedeHead()
 {
 	delete this->pDeath;
-	//todo: currently breaking at the Destroy(), look into
-#if false
-	auto tmp = this->GetWhosFollowingYou();
-	CentipedePart* prev = nullptr;
-
-	while (tmp)
-	{
-		prev = tmp;
-		tmp = tmp->GetWhosFollowingYou();
-		static_cast<CentipedeBody*>(prev)->Destroy();
-		//delete prev;
-		//tmp = tmp->GetWhosFollowingYou();
-	}
-#endif
 }
 
 void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, const int &speed, CentipedeDirectionState const & direction)
@@ -111,8 +98,9 @@ void CentipedeHead::Collision(Bullet *)
 	this->concent = true; //he concented to being shot
 	this->MarkForDestroy(); //remove the head from screen, and recycle
 
-	MushroomManager::AttemptSpawnShroom(this->position); //drop the mushroom where it died (if no mushroom is there)
-	ScoreManager::SendScoreCmd(this->pDeath);
+	MushroomManager::AttemptSpawnShroom(this->position);
+;	ScoreManager::SendScoreCmd(this->pDeath);
+	ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::CritterDeath, this->position);
 }
 
 void CentipedeHead::CheckGridAhead(const sf::Vector2f &pos)
@@ -131,7 +119,10 @@ void CentipedeHead::CheckGridAhead(const sf::Vector2f &pos)
 
 	//if we are at the tops of the window, swap to up or down
 	else if (pos.y > static_cast<float>(WindowManager::MainWindow.getView().getSize().y))
+	{
 		this->SetDirection(this->currentDirectionState->ExtraState(this));
+		CentiHeadManager::SpawnSoloHeads();
+	}
 
 	else if (pos.y < 0.f)
 		this->SetDirection(this->currentDirectionState->ExtraState(this));

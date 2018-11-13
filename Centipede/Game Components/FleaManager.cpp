@@ -4,7 +4,7 @@
 #include "TEAL/CommonElements.h"
 #include "GameGrid.h"
 #include "FleaFactory.h"
-#include "MushroomFactory.h"
+#include "MushroomManager.h"
 #include "Spider.h"
 #include "Flea.h"
 
@@ -25,17 +25,18 @@ void FleaManager::Terminate()
 FleaManager::FleaManager()
 	:numShroomsToSpawn(0), fleaActive(false)
 {
-	MushroomFactory::AddNewObserver(this);
+	//MushroomManager::AddNewObserver(this);
 }
 
 void FleaManager::InitializeFlea(const int numShroomsToSpawn)
 {
+	MushroomManager::AddNewObserver(GetInstance());
 	GetInstance()->numShroomsToSpawn = numShroomsToSpawn;
 }
 
 void FleaManager::DeInitializeFlea()
 {
-	MushroomFactory::RemoveCurrentObserver(GetInstance());
+	MushroomManager::RemoveCurrentObserver(GetInstance());
 }
 
 void FleaManager::SetNotActive()

@@ -31,7 +31,6 @@ void Mushroom::Draw()
 
 void Mushroom::Destroy()
 {
-	MushroomManager::RemoveMushroom(this);
 	DeregisterCollision<Mushroom>(*this);
 }
 
@@ -71,6 +70,7 @@ void Mushroom::TakeDamage()
 	if (health % 4 == 0) //modulous to compensate for poison or healthy
 	{
 		this->sprite.setScale(0.f, 0.f); //this is to avoid the 1 frame glitch
+		MushroomManager::RemoveMushroom(this);
 		ScoreManager::SendScoreCmd(this->pDeath); //only send score death when shot, not just destroyed
 		this->MarkForDestroy();
 	}

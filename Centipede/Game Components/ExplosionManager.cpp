@@ -14,6 +14,10 @@ void ExplosionManager::DisplayExplosion(ExplosionType type, sf::Vector2f pos)
 		GetInstance()->spiderDeath(pos);
 		break;
 
+	case ExplosionType::CritterDeath:
+		GetInstance()->critterDeath(pos);
+		break;
+
 	default:
 		break;
 	}
@@ -29,6 +33,7 @@ ExplosionManager::ExplosionManager()
 	:counter(0), playerActive(false)
 {
 	this->playerDeath_sprite = AnimatedSprite(ResourceManager::GetTexture("Death"), 8, 2, 60, 1, 20, true, false);
+	this->critterDeath_sprite = AnimatedSprite(ResourceManager::GetTexture("Spawn"), 2, 2, 60, 1, 20, true, false);
 }
 
 ExplosionManager * ExplosionManager::GetInstance()
@@ -44,34 +49,40 @@ ExplosionManager * ExplosionManager::GetInstance()
 
 void ExplosionManager::spiderDeath(sf::Vector2f pos)
 {
+
 }
 
 void ExplosionManager::playerDeath(sf::Vector2f pos)
 {
 	this->playerDeath_sprite.setPosition(pos);
 	this->playerActive = true;
+	this->explosions.push_back(this->playerDeath_sprite);
+}
+
+void ExplosionManager::critterDeath(sf::Vector2f pos)
+{
+	this->critterDeath_sprite.setPosition(pos);
+	this->critterDeath_sprite.Reset(); //restart the explosion
+	this->explosions.push_back(this->critterDeath_sprite);
 }
 
 void ExplosionManager::Draw()
 {
-	if (this->playerActive)
-	{
-		if (!this->playerDeath_sprite.IsLastAnimationFrame())
-		{
-			if (++counter % 2 == 0)  //so the animation doesnt go super fast
+	if (!this->explosions.empty())
+	{	
+		for (auto i = this->explosions.begin(); i != this->explosions.end(); ++i )
+		{ //need a while because vectors are sensative bitches
+			if ((*i).IsLastAnimationFrame())
 			{
-				WindowManager::MainWindow.draw(this->playerDeath_sprite);
-				this->playerDeath_sprite.NextFrame();
+				this->explosions.erase(i);
+				break;
 			}
-		}
-
-		else
-		{
-			this->playerDeath_sprite.Reset();
-			playerActive = false;
+			else
+			{
+				WindowManager::MainWindow.draw(*i);
+				(*i).NextFrame();
+			}
+			
 		}
 	}
-
-
-
 }

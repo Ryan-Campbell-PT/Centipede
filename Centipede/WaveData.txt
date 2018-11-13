@@ -8,11 +8,13 @@ _
 level 1
 
 centiBodyCount 1
+centispeed 4
 spiderActive yes
 spiderSpawn 3
 spiderSpeed 2
 scorpionActive no
-fleaActive no
+fleaActive yes
+fleaspawn 30
 
 _
 
@@ -29,6 +31,7 @@ _
 level 3
 
 centiBodyCount 6
+centispeed 4
 spiderActive yes
 spiderSpeed 2
 scorpionActive yes

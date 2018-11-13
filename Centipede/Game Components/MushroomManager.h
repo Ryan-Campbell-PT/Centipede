@@ -2,10 +2,12 @@
 #define MUSHROOM_MANAGER
 
 #include "TEAL/CommonElements.h"
+#include "Observee.h"
 
 class Mushroom;
+class Observer;
 
-class MushroomManager
+class MushroomManager : public Observee
 {
 public:
 	///this initialize will setup mushrooms assuming you havent before (fresh start)
@@ -23,7 +25,15 @@ public:
 	MushroomManager(const MushroomManager &s) = delete;
 	MushroomManager operator = (const MushroomManager &) = delete;
 
+	static void AddNewObserver(Observer *o);
+	static void RemoveCurrentObserver(Observer *o);
+
 	static void Terminate();
+
+protected:
+	virtual void UpdateObservees() override;
+	virtual void AddObservee(Observer* o) override;
+	virtual void RemoveObservee(Observer* o) override;
 
 private:
 	MushroomManager() = default;
@@ -33,6 +43,7 @@ private:
 	void SpawnMushroom(sf::Vector2f &pos) const;
 	void initializeMushroomField(std::list<Mushroom*> *shroomField);
 
+	std::list<Observer*> observerList;
 	static MushroomManager* instance;
 };
 

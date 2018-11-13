@@ -5,6 +5,7 @@
 #include "Ship.h"
 #include "ScorpionManager.h"
 #include "ScoreManager.h"
+#include "ExplosionManager.h"
 
 Scorpion::Scorpion()
 {
@@ -76,6 +77,7 @@ void Scorpion::Collision(Bullet *)
 {
 	ScoreManager::SendScoreCmd(this->pDeath);
 	ScorpionManager::SetTimer(); //because it was destroyed by the bullet, we can spawn again
+	ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::CritterDeath, this->position);
 	this->MarkForDestroy(); //remove from screen/teal
 }
 
