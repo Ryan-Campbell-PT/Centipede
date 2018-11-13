@@ -24,19 +24,21 @@ Spider::Spider()
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::SpiderKilled);
 	this->spawnSound = SoundManager::GetSound(SoundManager::SoundEvent::SpiderSpawn);
+	this->loopSound = SoundManager::GetSound(SoundManager::SoundEvent::SpiderLoop);
 }
 
 Spider::~Spider()
 {
 	delete pDeath;
 	delete spawnSound;
+	delete loopSound;
 }
 
 void Spider::Update()
 {
 	this->position.y += this->spiderState->GetOffsetArray().rowoffset * SPEED;
 	this->position.x += this->spiderState->GetOffsetArray().coloffset * SPEED;
-	//todo: up then left is wrong for some reason
+	
 	if (this->position.y < this->boundsTopY) //bounce down if too high
 		this->spiderState = this->spiderState->GetNextState();
 
@@ -49,6 +51,9 @@ void Spider::Update()
 		this->spiderState = this->spiderState->GetExtraState();
 		this->counterNum = rand() % RANDOM_CHANGE_NUM;
 	}
+
+	if(counterNum % timeToSendLoop == 0)
+		SoundManager::SendSoundCommand(this->loopSound);
 
 	if (this->position.x > WindowManager::MainWindow.getSize().x ||
 		this->position.x < 0)

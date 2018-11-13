@@ -7,7 +7,7 @@ class Ship_Player : public ShipMode
 {
 public:
 	~Ship_Player() = default;
-	virtual void MoveShip(const PlayerInput * input, sf::Vector2f &pos, const float &speed) override;
+	virtual bool MoveShip(const PlayerInput * input, sf::Vector2f &pos, const float &speed) override;
 	virtual void MushroomCollision(const PlayerInput * input, sf::Vector2f &pos, const float &speed) override;
 };
 

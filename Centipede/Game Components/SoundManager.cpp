@@ -28,6 +28,9 @@ SoundCmd * SoundManager::GetSound(SoundEvent even)
 	case SoundEvent::SpiderSpawn:
 		cmd = new SoundCmd(GetInstance()->spiderSpawn);
 		break;
+	case SoundEvent::SpiderLoop:
+		cmd = new SoundCmd(GetInstance()->spiderLoop);
+		break;
 	case SoundEvent::ShipFire:
 		cmd = new SoundCmd(GetInstance()->shipFire);
 		break;

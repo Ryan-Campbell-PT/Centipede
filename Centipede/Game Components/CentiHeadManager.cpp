@@ -70,7 +70,7 @@ void CentiHeadManager::Terminate()
 	CentiHeadFactory::Terminate();
 }
 
-void CentiHeadManager::SetApi(const int &numBodies, const float &centiSpeed,
+void CentiHeadManager::SetApi(const int &numBodies, const int &centiSpeed,
 		const int &numSoloHeads, const float &soloHeadSpeed)
 {
 	this->numBodies = numBodies;

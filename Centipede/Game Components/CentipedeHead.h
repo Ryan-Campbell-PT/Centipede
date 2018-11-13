@@ -53,7 +53,7 @@ public:
 
 	sf::Vector2f GetPosition() const { return this->position; }
 	void SetSpeed(const int speed);
-	float GetSpeed() const { return speed; }
+	int GetSpeed() const { return speed; }
 	bool GetConcent() const { return concent; }
 	float GetSpriteRot() const { return this->sprite.getRotation(); }
 

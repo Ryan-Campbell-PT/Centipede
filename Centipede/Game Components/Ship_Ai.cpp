@@ -18,18 +18,18 @@ Ship_Ai::Ship_Ai()
 {
 }
 
-void Ship_Ai::MoveShip(const PlayerInput* const input, sf::Vector2f &pos, const float &speed)
+bool Ship_Ai::MoveShip(const PlayerInput* const input, sf::Vector2f &pos, const float &speed)
 {//we dont care about the player in put for the AI version
 	
 	//the ship is constantly shooting, so that should be the first thing
-	//BulletManager::AttemptSpawnBullet();// todo: change back
+	BulletManager::AttemptSpawnBullet();
 	
 	if(++stopCounter > randomNum)
 	{
 		stop = true;
 		randomNum = rand() % 250;
 		stopCounter = 0;
-		return;
+		return false;
 	}
 
 	else if(stop)
@@ -41,7 +41,7 @@ void Ship_Ai::MoveShip(const PlayerInput* const input, sf::Vector2f &pos, const 
 			stop = false;
 		}
 		//this causes the ship to no longer move if we havent reached the counter
-		return;
+		return false;
 	}
 
 	if (up)
@@ -92,6 +92,7 @@ void Ship_Ai::MoveShip(const PlayerInput* const input, sf::Vector2f &pos, const 
 		}
 	}
 
+	return false;
 }
 
 void Ship_Ai::MushroomCollision(const PlayerInput * input, sf::Vector2f &pos, const float &speed)

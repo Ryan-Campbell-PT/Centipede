@@ -15,6 +15,7 @@ public:
 		ScorpionSpawn,
 		FleaSpawn,
 		SpiderSpawn,
+		SpiderLoop,
 		ShipFire,
 		Death,
 		Beat,
@@ -37,6 +38,7 @@ private:
 	const sf::Sound scorpSpawn = sf::Sound(ResourceManager::GetSound("Scorpion"));
 	const sf::Sound fleaSpawn = sf::Sound(ResourceManager::GetSound("Flea"));
 	const sf::Sound spiderSpawn = sf::Sound(ResourceManager::GetSound("Spider"));
+	const sf::Sound spiderLoop = sf::Sound(ResourceManager::GetSound("SpiderLoop"));
 	const sf::Sound shipFire = sf::Sound(ResourceManager::GetSound("Fire1"));
 	const sf::Sound death = sf::Sound(ResourceManager::GetSound("Death"));
 	const sf::Sound beat = sf::Sound(ResourceManager::GetSound("Beat"));

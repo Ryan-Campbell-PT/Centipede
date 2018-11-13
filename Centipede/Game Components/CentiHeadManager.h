@@ -28,7 +28,7 @@ private:
 	CentiHeadManager() = default;
 	virtual ~CentiHeadManager() = default;
 
-	void SetApi(const int &numBodies, const float &centiSpeed,
+	void SetApi(const int &numBodies, const int &centiSpeed,
 		const int &numSoloHeads, const float &soloHeadSpeed);
 	int checkSpeed(const float &speed) const;
 	void SpawnSoloHeads();
@@ -40,7 +40,7 @@ private:
 	//todo: solo heads spawning
 	///api stuff
 	int numBodies;
-	float centiSpeed;
+	int centiSpeed;
 	int numSoloHeads;
 	float soloHeadSpeed;
 

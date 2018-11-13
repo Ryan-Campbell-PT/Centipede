@@ -13,10 +13,8 @@ Scorpion::Scorpion()
 	this->sprite.SetAnimation(0, 3);
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 
-	//this->sprite.setScale(0.f, 0.f);
-
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::ScorpionKilled);
-	this->spawnSound = SoundManager::GetSound(SoundManager::SoundEvent::FleaSpawn);
+	this->spawnSound = SoundManager::GetSound(SoundManager::SoundEvent::ScorpionSpawn);
 
 	SetCollider(sprite, bitmap, true);
 }

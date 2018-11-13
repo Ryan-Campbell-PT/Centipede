@@ -51,28 +51,29 @@ void Ship::Destroy()
 
 void Ship::Alarm0()
 {
-	this->InitializeShip(this->shipMode);
+	InitializeShip(this->shipMode);
 }
 
 void Ship::Update()
 {
-	this->shipMode->MoveShip(this->playerInput, this->position, this->SPEED);
+	if(this->shipMode->MoveShip(this->playerInput, this->position, this->SPEED))
+		SoundManager::SendSoundCommand(this->fireSound);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		if (BulletManager::AttemptSpawnBullet())
-			SoundManager::SendSoundCommand(this->fireSound); //only play the sound if the bullet can be spawned
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		//if (BulletManager::AttemptSpawnBullet())
+			// //only play the sound if the bullet can be spawned
 
 	Tools::Clamp<float>(
 		position.x,
 		this->sprite.getTextureRect().width / 2.f,
 		WindowManager::MainWindow.getView().getSize().x - (this->sprite.getTextureRect().width / 2.f)
 		);
-#if !TESTING //for testing purposes
-	//Tools::Clamp<float>(
-	//	position.y,
-	//	WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height * SHIP_BOUNDS),
-	//	WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height / 2.f)
-	//	);
+#if false //for testing purposes
+	Tools::Clamp<float>(
+		position.y,
+		WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height * SHIP_BOUNDS),
+		WindowManager::MainWindow.getView().getSize().y - (this->sprite.getTextureRect().height / 2.f)
+		);
 #endif
 	sprite.setPosition(position);
 }

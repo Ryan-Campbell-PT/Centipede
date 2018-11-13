@@ -31,6 +31,7 @@ void ResourceManager::LoadAllResources()
 	AddSound("Fire1", "fire1.wav");
 	AddSound("Flea", "flea_new.wav");
 	AddSound("Spider", "spider_new.wav");
+	AddSound("SpiderLoop", "spiderloop.wav");
 	AddSound("Death", "death.wav");
 	AddSound("Scorpion", "scorpion_new.wav");
 	AddSound("Beat", "beat.wav");

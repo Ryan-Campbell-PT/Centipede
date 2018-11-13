@@ -38,6 +38,7 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	float SPEED = 1.5f;
+	const int timeToSendLoop = 30;
 	int boundsTopY, boundsBottomY;
 	int counterNum;
 
@@ -45,6 +46,7 @@ private:
 
 	ScoreCmd* pDeath;
 	SoundCmd *spawnSound;
+	SoundCmd *loopSound;
 };
 
 enum class SpiderDirection
