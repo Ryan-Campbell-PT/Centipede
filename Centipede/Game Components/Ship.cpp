@@ -185,6 +185,11 @@ void Ship::ReinitializeShip()
 	instance->RegisterCollision<Ship>(*instance);
 }
 
+void Ship::RemoveInput()
+{
+	GetInstance()->DeregisterInput();
+}
+
 void Ship::Draw()
 {
 	WindowManager::MainWindow.draw(sprite);

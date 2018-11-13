@@ -33,7 +33,7 @@ public:
 	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
 	//void DestroyShip();
 
-	virtual void Collision(GameObject *) override {};
+	virtual void Collision(GameObject *) override {}
 	virtual void Collision(Mushroom*);
 	virtual void Collision(Spider *);
 	virtual void Collision(Scorpion *);
@@ -47,6 +47,8 @@ public:
 	///scenes, it results in problems for destroyed GO, so i instaed just reinitialize it, or have the
 	///PlayerManager handle the destruction
 	static void ReinitializeShip();
+	
+	static void RemoveInput();;
 
 private:
 	Ship(); //singleton instance

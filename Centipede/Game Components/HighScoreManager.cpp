@@ -40,6 +40,16 @@ std::vector<HighScoreManager::HighScore> HighScoreManager::GetHighScoreList()
 	return GetInstance()->highScoreList;
 }
 
+void HighScoreManager::SetCurrentUserName(const std::string& username)
+{
+	GetInstance()->highScoreList[instance->highScoreList.size() - 1].text = username;
+}
+
+bool HighScoreManager::IsHighScore()
+{
+	return ScoreManager::GetCurrentScore() > GetInstance()->highScoreList[instance->maxSizeScores - 1].score;
+}
+
 void HighScoreManager::WriteHighScoreList()
 {
 	HighScoreWriter::DrawHighScoreList(GetInstance()->highScoreList);
@@ -82,19 +92,13 @@ void HighScoreManager::endWave()
 
 	//if we arent less than the lowest one, then set the high score at the lowest score,
 	//therefor pushing it off the score list all together
+	//todo;: you have to figure out a way to confirm the text entered in userinputmanager
 	this->setHighScore(this->maxSizeScores - 1, curScore);
 }
 
-void HighScoreManager::setHighScore(const int& place, const int& score, const std::string& user)
+void HighScoreManager::setHighScore(const int& place, const int& score)
 {
 	this->highScoreList[place].score = score;
-	if(user.empty())
-	{
-		this->highScoreList[place].text = this->requestUserName();
-	}
-
-	else
-		this->highScoreList[place].text = user;
 
 	std::sort(this->highScoreList.begin(), this->highScoreList.end());
 }

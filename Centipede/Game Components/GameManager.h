@@ -12,7 +12,9 @@ public:
 	static void SetAttractorMode();
 	static void SetPlayerMode(PlayerData::PlayerID playerMode);
 	static void RestartWave();
+	static void RequestUsername();
 	static void EndGame();
+	static void EndGame_CheckHighScore();
 	static void EndWave();
 
 private:

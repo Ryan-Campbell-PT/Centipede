@@ -8,6 +8,9 @@
 #include "Level1.h"
 #include "LevelAttractor.h"
 #include "MushroomManager.h"
+#include "SpiderManager.h"
+#include "ScorpionManager.h"
+#include "UserInputManager.h"
 
 void GameManager::SetAttractorMode()
 {
@@ -38,6 +41,15 @@ void GameManager::RestartWave()
 	//Ship::InitializeShip()
 }
 
+void GameManager::RequestUsername()
+{
+	Ship::RemoveInput(); //we dont want our typing to effect the ship
+	CentiHeadManager::EndWave(); //remove all centipedes from screen
+	SpiderManager::DeInitializeSpider();
+	ScorpionManager::DeInitializeScorpion(); //make sure these two cant spawn anymore
+	UserInputManager::RequestUsername();
+}
+
 void GameManager::EndGame()
 {
 	SceneManager::ChangeScene(new LevelAttractor);
@@ -47,6 +59,14 @@ void GameManager::EndGame()
 	HighScoreManager::WriteHighScore();
 	HighScoreManager::EndGame();
 	ScoreManager::AttractorMode(true);
+}
+
+void GameManager::EndGame_CheckHighScore()
+{
+	if(HighScoreManager::IsHighScore())
+		RequestUsername();
+	else
+		EndGame();
 }
 
 void GameManager::EndWave()

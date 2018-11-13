@@ -30,6 +30,8 @@ public:
 	static void AddScore(const unsigned int &score);
 	static int GetHighScore();
 	static std::vector<HighScore> GetHighScoreList();
+	static void SetCurrentUserName(const std::string& username);
+	static bool IsHighScore();
 
 	static void WriteHighScoreList(); //displays the attractor mode high score
 	static void WriteHighScore(); //displays the top high score
@@ -46,7 +48,7 @@ private:
 	static HighScoreManager* GetInstance();
 
 	void endWave();
-	void setHighScore(const int &place, const int &score, const std::string& user = "");
+	void setHighScore(const int &place, const int &score);
 	///this function will pause the game and have the user type in their name for the high score
 	std::string requestUserName();
 

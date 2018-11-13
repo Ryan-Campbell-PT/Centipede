@@ -471,6 +471,9 @@
     <ClCompile Include="Game Components\WaveWriter.cpp">
       <Filter>Source Files\Game Components\Writers</Filter>
     </ClCompile>
+    <ClCompile Include="Game Components\UserInputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h">
@@ -907,6 +910,9 @@
     </ClInclude>
     <ClInclude Include="Game Components\WaveWriter.h">
       <Filter>Source Files\Game Components\Writers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\UserInputManager.h">
+      <Filter>Source Files\Game Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -35,7 +35,7 @@ void ScorpionManager::SpawnScorpion() const
 
 void ScorpionManager::InitializeScorpion(const float timeToSpawnInSeconds)
 {
-	GetInstance()->SetAlarm(0, timeToSpawnInSeconds); //set a timer for when to spawn scorp
+	GetInstance()->SetAlarm(0, rand () % static_cast<int>(ceil(timeToSpawnInSeconds))); //set a timer for when to spawn scorp
 	instance->timeToSpawn = timeToSpawnInSeconds;
 	instance->active = true;
 }
@@ -56,7 +56,7 @@ void ScorpionManager::Terminate(GameObject *)
 
 void ScorpionManager::SetTimer()
 {
-	GetInstance()->SetAlarm(0, instance->timeToSpawn);
+	GetInstance()->SetAlarm(0, rand () % static_cast<int>(ceil(instance->timeToSpawn)));
 }
 
 void ScorpionManager::EndWave()

@@ -194,6 +194,7 @@
     <ClCompile Include="Game Components\BouncingSpiderStateRight.cpp" />
     <ClCompile Include="Game Components\Up_ThenLeft.cpp" />
     <ClCompile Include="Game Components\Up_ThenRight.cpp" />
+    <ClCompile Include="Game Components\UserInputManager.cpp" />
     <ClCompile Include="Game Components\WaveManager.cpp" />
     <ClCompile Include="Game Components\WaveWriter.cpp" />
     <ClCompile Include="Game Components\Bullet.cpp" />
@@ -342,6 +343,7 @@
     <ClInclude Include="Game Components\BouncingSpiderStateRight.h" />
     <ClInclude Include="Game Components\Up_ThenLeft.h" />
     <ClInclude Include="Game Components\Up_ThenRight.h" />
+    <ClInclude Include="Game Components\UserInputManager.h" />
     <ClInclude Include="Game Components\WaveManager.h" />
     <ClInclude Include="Game Components\WaveWriter.h" />
     <ClInclude Include="Game Components\Bullet.h" />

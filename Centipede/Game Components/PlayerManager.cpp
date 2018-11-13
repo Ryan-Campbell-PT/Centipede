@@ -35,7 +35,7 @@ void PlayerManager::PlayerDeath()
 
 	//if we no longer have any lives, end the game
 	else if (instance->currentPlayer.playerLives <= 0)
-		GameManager::EndGame();
+		GameManager::EndGame_CheckHighScore();
 
 	//if we are still alive, and are only a single player, restart the wave
 	else
@@ -47,8 +47,6 @@ void PlayerManager::PlayerDeath()
 
 void PlayerManager::SetPlayerControls(PlayerInput * input)
 {
-	//delete GetInstance()->currentPlayer.playerInput;
-
 	instance->currentPlayer.playerInput = input;
 }
 
@@ -156,32 +154,7 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 }
 
 void PlayerManager::SwapPlayer()
-{//todo
-#if false
-	this->currentPlayer.mushroomSetup = MushroomManager::GetCurrentLayout();
-	this->currentPlayer.playerScore = ScoreManager::GetCurrentScore();
-	this->currentPlayer.waveLevel = WaveManager::GetCurrentWave();
-
-	PlayerData tmp;
-	if (this->currentPlayer.player == PlayerData::PlayerID::Player1)
-		tmp.player = PlayerData::PlayerID::Player2;
-	else if (this->currentPlayer.player == PlayerData::PlayerID::Player2)
-		tmp.player = PlayerData::PlayerID::Player1;
-
-	for (size_t i = 0; i < this->listOfPlayers.size() - 1; ++i)
-	{
-		//change the data of the list to the current players information
-		if (this->listOfPlayers[i].player == this->currentPlayer.player)
-			this->listOfPlayers[i] = this->currentPlayer;
-		//look around for the player mode we are looking for
-		if (tmp.player == this->listOfPlayers[i].player)
-			tmp = this->listOfPlayers[i];
-	}
-
-	this->currentPlayer = tmp;
-
-#elif true
-
+{
 	if (this->currentPlayer.player == PlayerData::PlayerID::Player1)
 		this->currentPlayer = this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player2)];
 
@@ -190,7 +163,7 @@ void PlayerManager::SwapPlayer()
 
 	//we can assume now we swapped players and now have all the information necessary
 	if (this->currentPlayer.playerLives <= 0)
-		GameManager::EndGame(); //if we swapped players and this player has no lives, end the game
+		GameManager::EndGame_CheckHighScore(); //if we swapped players and this player has no lives, end the game
 
 	else
 	{ //now initialize all the data associated with this player
@@ -199,9 +172,7 @@ void PlayerManager::SwapPlayer()
 		MushroomManager::InitializeMushroomField(this->currentPlayer.mushroomSetup);
 		LivesWriter::WriteLives(instance->currentPlayer.playerLives);
 	}
-
-#endif
-	}
+}
 
 PlayerManager * PlayerManager::GetInstance()
 {
