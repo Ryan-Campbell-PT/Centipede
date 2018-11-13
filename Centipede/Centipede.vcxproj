@@ -86,8 +86,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game Components\Asteroid.cpp" />
-    <ClCompile Include="Game Components\AsteroidField.cpp" />
     <ClCompile Include="Game Components\AwesomeFont.cpp" />
     <ClCompile Include="Game Components\BulletFactory.cpp" />
     <ClCompile Include="Game Components\BulletManager.cpp" />
@@ -97,7 +95,6 @@
     <ClCompile Include="Game Components\CentiHeadFactory.cpp" />
     <ClCompile Include="Game Components\CentiHeadManager.cpp" />
     <ClCompile Include="Game Components\CentiHeadPool.cpp" />
-    <ClCompile Include="Game Components\CentiMovement.cpp" />
     <ClCompile Include="Game Components\CentipedeBody.cpp" />
     <ClCompile Include="Game Components\CentipedeHead.cpp" />
     <ClCompile Include="Game Components\Centi_DownThenLeft.cpp" />
@@ -112,7 +109,6 @@
     <ClCompile Include="Game Components\Centi_UpThenRight.cpp" />
     <ClCompile Include="Game Components\Down_ThenLeft.cpp" />
     <ClCompile Include="Game Components\Down_ThenRight.cpp" />
-    <ClCompile Include="Game Components\Explosion.cpp" />
     <ClCompile Include="Game Components\ExplosionManager.cpp" />
     <ClCompile Include="Game Components\FinalScore.cpp" />
     <ClCompile Include="Game Components\Flea.cpp" />
@@ -192,9 +188,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game Components\AheadInformation.h" />
-    <ClInclude Include="Game Components\Asteroid.h" />
-    <ClInclude Include="Game Components\AsteroidField.h" />
     <ClInclude Include="Game Components\AwesomeFont.h" />
     <ClInclude Include="Game Components\BulletFactory.h" />
     <ClInclude Include="Game Components\BulletManager.h" />
@@ -221,7 +214,6 @@
     <ClInclude Include="Game Components\Centi_UpThenRight.h" />
     <ClInclude Include="Game Components\Down_ThenLeft.h" />
     <ClInclude Include="Game Components\Down_ThenRight.h" />
-    <ClInclude Include="Game Components\Explosion.h" />
     <ClInclude Include="Game Components\ExplosionManager.h" />
     <ClInclude Include="Game Components\Factory.h" />
     <ClInclude Include="Game Components\FinalScore.h" />

@@ -7,6 +7,7 @@ class LevelAttractor : public Scene
 {
 public:
 	virtual void Initialize() override;
+	void Terminate() override;
 };
 
 #endif _Level_Attractor

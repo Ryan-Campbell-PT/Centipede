@@ -18,7 +18,7 @@ Spider::Spider()
 
 	this->sprite.setOrigin(sprite.getTextureRect().width / 2.0f, sprite.getTextureRect().height / 2.0f);
 	this->sprite.SetAnimation(0, 7);
-	this->sprite.setScale(2.2, 1.7);
+	this->sprite.setScale(2.2f, 1.7f);
 
 	SetCollider(sprite, bitmap, true);
 

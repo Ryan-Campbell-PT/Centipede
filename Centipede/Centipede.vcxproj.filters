@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Game Components\_ TEAL Resources">
       <UniqueIdentifier>{74cb38bc-e5a5-473b-9c38-1562da913636}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Components\Asteroid">
-      <UniqueIdentifier>{6ea0394f-1623-4796-b7a5-865dbfd82cba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Components\Ship">
       <UniqueIdentifier>{4aac3acc-e29f-4816-9045-73c35b3a1797}</UniqueIdentifier>
     </Filter>
@@ -192,15 +189,6 @@
     <ClCompile Include="Game Components\Ship.cpp">
       <Filter>Source Files\Game Components\Ship</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Asteroid.cpp">
-      <Filter>Source Files\Game Components\Asteroid</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\AsteroidField.cpp">
-      <Filter>Source Files\Game Components\Asteroid</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\Explosion.cpp">
-      <Filter>Source Files\Game Components\Asteroid</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\FinalScore.cpp">
       <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClCompile>
@@ -308,9 +296,6 @@
     </ClCompile>
     <ClCompile Include="Game Components\Centi_RightThenUp.cpp">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement\HorzMovement</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Components\CentiMovement.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\MoveFSM.cpp">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
@@ -527,15 +512,6 @@
     <ClInclude Include="Game Components\Ship.h">
       <Filter>Source Files\Game Components\Ship</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Asteroid.h">
-      <Filter>Source Files\Game Components\Asteroid</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\AsteroidField.h">
-      <Filter>Source Files\Game Components\Asteroid</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\Explosion.h">
-      <Filter>Source Files\Game Components\Asteroid</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\FinalScore.h">
       <Filter>Source Files\Game Components\Levels\Level1</Filter>
     </ClInclude>
@@ -691,9 +667,6 @@
     </ClInclude>
     <ClInclude Include="Game Components\MoveFSM.h">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\AheadInformation.h">
-      <Filter>Source Files\Game Components\Centipede</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\CentipedePart.h">
       <Filter>Source Files\Game Components\Centipede</Filter>

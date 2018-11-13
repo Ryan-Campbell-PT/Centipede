@@ -60,7 +60,7 @@ void SpiderManager::RemoveSpider(Spider * const spider)
 
 void SpiderManager::SetTimer()
 {
-	GetInstance()->SetAlarm(0, rand() % static_cast<int>(ceil(instance->timeToSpawn)));
+	GetInstance()->SetAlarm(0, static_cast<float>(rand() % static_cast<int>(ceil(instance->timeToSpawn))));
 }
 
 void SpiderManager::EndWave()

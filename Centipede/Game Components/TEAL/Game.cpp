@@ -25,7 +25,6 @@
 #include "../Ship.h"
 #include "../BulletManager.h"
 #include "../CentiHeadPool.h"
-#include "../Explosion.h"
 #include "../ExplosionManager.h"
 
 
@@ -77,8 +76,6 @@ void Game::TerminateGame()
 
 	MushroomManager::Terminate();
 	FleaManager::Terminate();
-	CentiHeadManager::Terminate();
-	CentiBodyManager::Terminate();
 	BulletManager::Terminate();
 
 	GameGrid::Terminate();

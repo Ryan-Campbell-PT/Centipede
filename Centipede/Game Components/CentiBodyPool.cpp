@@ -20,18 +20,30 @@ CentipedeBody * CentiBodyPool::GetCentiBody()
 		body->RegisterToCurrentScene();
 	}
 
+	instance->activeBodyList.push_front(body);
 	return body;
 }
 
 void CentiBodyPool::RecycleCentiBody(GameObject * const body)
 {
+	GetInstance()->activeBodyList.remove(static_cast<CentipedeBody*>(body));
 	GetInstance()->inactiveBodyList.push_front(static_cast<CentipedeBody*>(body));
 }
 
 void CentiBodyPool::Terminate()
 {	
-	//for(auto c : this->inactiveBodyList)
-	//	delete c;
+	for(auto c : GetInstance()->activeBodyList)
+	{
+		delete c;
+		c = nullptr;
+	}
+
+	for(auto c : GetInstance()->inactiveBodyList)
+	{
+		
+		delete c;
+		c = nullptr;
+	}
 
 	delete instance;
 	instance = nullptr;

@@ -12,6 +12,8 @@
 #include "TextEditor.h"
 #include "GameManager.h"
 #include "WaveManager.h"
+#include "CentiBodyManager.h"
+#include "CentiHeadManager.h"
 
 void LevelAttractor::Initialize()
 {
@@ -42,4 +44,10 @@ void LevelAttractor::Initialize()
 	CollisionTestPair<CentipedeBody, Ship>();
 	CollisionTestPair<CentipedeHead, Ship>();
 
+}
+
+void LevelAttractor::Terminate()
+{
+	CentiHeadManager::Terminate();
+	CentiBodyManager::Terminate();
 }

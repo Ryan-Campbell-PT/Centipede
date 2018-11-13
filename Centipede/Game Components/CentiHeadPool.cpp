@@ -48,14 +48,6 @@ void CentiHeadPool::RecycleCentiHead(GameObject * const head)
 
 void CentiHeadPool::EndWave()
 {
-	/*	for(auto c : GetInstance()->inactiveHeadList)
-		{
-			c->MarkForDestroy(); //this may not work due to it being deleted before destroyed
-			//delete c;
-		}
-	*/
-
-	//todo: this works, this may want to be seperated tho
 	for (auto c : GetInstance()->activeHeadList)
 	{
 		CentipedeBody *tmp(static_cast<CentipedeBody*>(c->GetWhosFollowingYou())), *past(nullptr);
@@ -72,8 +64,17 @@ void CentiHeadPool::EndWave()
 
 void CentiHeadPool::Terminate()
 {
-	//for(auto c : this->inactiveHeadList)
-	//delete c;
+	for(auto c : GetInstance()->activeHeadList)
+	{
+		delete c;
+		c = nullptr;
+	}
+
+	for(auto c : GetInstance()->inactiveHeadList)
+	{
+		delete c;
+		c = nullptr;
+	}
 
 	delete instance;
 	instance = nullptr;
