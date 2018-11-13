@@ -37,12 +37,12 @@ private:
 	AnimatedSprite sprite;
 	CollisionTools::TextureBitmap bitmap;
 
-	float SPEED = 1.5f;
+	float SPEED;
 	const int timeToSendLoop = 30;
 	int boundsTopY, boundsBottomY;
 	int counterNum;
 
-	const ImprovedSpiderState *spiderState = nullptr;
+	const ImprovedSpiderState *spiderState;
 
 	ScoreCmd* pDeath;
 	SoundCmd *spawnSound;

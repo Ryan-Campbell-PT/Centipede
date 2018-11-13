@@ -3,15 +3,15 @@
 #include "Mushroom.h"
 #include "Ship.h"
 #include "SpiderManager.h"
-#include "SpiderStates.h"
+#include "SpiderMovement.h"
 #include "SoundCmd.h"
 
 #include <random>
 #include "ScoreManager.h"
 #include "MovementCollection.h"
-//#include "SoundCmd.h"
 
 Spider::Spider()
+	:SPEED(1), boundsTopY(0), boundsBottomY(0), counterNum(0), spiderState(nullptr)
 {
 	bitmap = ResourceManager::GetTextureBitmap("Spider");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Spider"), 4, 2);

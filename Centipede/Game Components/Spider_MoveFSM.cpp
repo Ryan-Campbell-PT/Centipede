@@ -1,4 +1,4 @@
-#include "SpiderStates.h"
+#include "SpiderMovement.h"
 
 const Spider_DiagonalDownLeft	 Spider_MoveFSM::diagonalDownLeft;
 const Spider_DiagonalDownRight	 Spider_MoveFSM::diagonalDownRight;

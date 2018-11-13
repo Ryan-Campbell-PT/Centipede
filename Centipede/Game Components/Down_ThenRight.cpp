@@ -1,5 +1,4 @@
-﻿#include "SpiderStates.h"
-
+﻿#include "SpiderMovement.h"
 
 OffsetArray Down_ThenRight::GetOffsetArray() const
 {

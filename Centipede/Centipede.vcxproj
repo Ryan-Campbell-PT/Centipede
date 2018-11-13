@@ -110,7 +110,6 @@
     <ClCompile Include="Game Components\Centi_RightThenUp.cpp" />
     <ClCompile Include="Game Components\Centi_UpThenLeft.cpp" />
     <ClCompile Include="Game Components\Centi_UpThenRight.cpp" />
-    <ClCompile Include="Game Components\DownSpiderState.cpp" />
     <ClCompile Include="Game Components\Down_ThenLeft.cpp" />
     <ClCompile Include="Game Components\Down_ThenRight.cpp" />
     <ClCompile Include="Game Components\Explosion.cpp" />
@@ -128,7 +127,6 @@
     <ClCompile Include="Game Components\HighScoreWriter.cpp" />
     <ClCompile Include="Game Components\HUD.cpp" />
     <ClCompile Include="Game Components\KeysFont.cpp" />
-    <ClCompile Include="Game Components\LeftSpiderState.cpp" />
     <ClCompile Include="Game Components\Level2.cpp" />
     <ClCompile Include="Game Components\LevelAttractor.cpp" />
     <ClCompile Include="Game Components\LivesWriter.cpp" />
@@ -139,7 +137,6 @@
     <ClCompile Include="Game Components\MushroomManager.cpp" />
     <ClCompile Include="Game Components\MushroomPool.cpp" />
     <ClCompile Include="Game Components\PlayerManager.cpp" />
-    <ClCompile Include="Game Components\RightSpiderState.cpp" />
     <ClCompile Include="Game Components\ScoreByDistanceCmd.cpp" />
     <ClCompile Include="Game Components\ScoreManager.cpp" />
     <ClCompile Include="Game Components\Scorpion.cpp" />
@@ -186,8 +183,6 @@
     <ClCompile Include="Game Components\TEAL\Tools.cpp" />
     <ClCompile Include="Game Components\TEAL\WindowManager.cpp" />
     <ClCompile Include="Game Components\TextEditor.cpp" />
-    <ClCompile Include="Game Components\UpSpiderState.cpp" />
-    <ClCompile Include="Game Components\BouncingSpiderStateRight.cpp" />
     <ClCompile Include="Game Components\Up_ThenLeft.cpp" />
     <ClCompile Include="Game Components\Up_ThenRight.cpp" />
     <ClCompile Include="Game Components\UserInputManager.cpp" />
@@ -201,7 +196,6 @@
     <ClInclude Include="Game Components\Asteroid.h" />
     <ClInclude Include="Game Components\AsteroidField.h" />
     <ClInclude Include="Game Components\AwesomeFont.h" />
-    <ClInclude Include="Game Components\BouncingSpiderStateLeft.h" />
     <ClInclude Include="Game Components\BulletFactory.h" />
     <ClInclude Include="Game Components\BulletManager.h" />
     <ClInclude Include="Game Components\CentiBodyFactory.h" />
@@ -225,7 +219,6 @@
     <ClInclude Include="Game Components\Centi_RightThenUp.h" />
     <ClInclude Include="Game Components\Centi_UpThenLeft.h" />
     <ClInclude Include="Game Components\Centi_UpThenRight.h" />
-    <ClInclude Include="Game Components\DownSpiderState.h" />
     <ClInclude Include="Game Components\Down_ThenLeft.h" />
     <ClInclude Include="Game Components\Down_ThenRight.h" />
     <ClInclude Include="Game Components\Explosion.h" />
@@ -249,7 +242,6 @@
     <ClInclude Include="Game Components\KeyboardCommand.h" />
     <ClInclude Include="Game Components\KeyboardIncludes.h" />
     <ClInclude Include="Game Components\KeysFont.h" />
-    <ClInclude Include="Game Components\LeftSpiderState.h" />
     <ClInclude Include="Game Components\Level2.h" />
     <ClInclude Include="Game Components\LevelAttractor.h" />
     <ClInclude Include="Game Components\LivesWriter.h" />
@@ -264,7 +256,6 @@
     <ClInclude Include="Game Components\PlayerData.h" />
     <ClInclude Include="Game Components\PlayerInput.h" />
     <ClInclude Include="Game Components\PlayerManager.h" />
-    <ClInclude Include="Game Components\RightSpiderState.h" />
     <ClInclude Include="Game Components\ScoreByDistanceCmd.h" />
     <ClInclude Include="Game Components\ScoreCmd.h" />
     <ClInclude Include="Game Components\ScoreManager.h" />
@@ -292,9 +283,9 @@
     <ClInclude Include="Game Components\Spider.h" />
     <ClInclude Include="Game Components\SpiderFactory.h" />
     <ClInclude Include="Game Components\SpiderManager.h" />
+    <ClInclude Include="Game Components\SpiderMovement.h" />
     <ClInclude Include="Game Components\SpiderMovementState.h" />
     <ClInclude Include="Game Components\SpiderPool.h" />
-    <ClInclude Include="Game Components\SpiderStates.h" />
     <ClInclude Include="Game Components\Spider_DiagonalDownLeft.h" />
     <ClInclude Include="Game Components\Spider_DiagonalDownRight.h" />
     <ClInclude Include="Game Components\Spider_DiagonalUpLeft.h" />
@@ -330,8 +321,6 @@
     <ClInclude Include="Game Components\TEAL\Tools.h" />
     <ClInclude Include="Game Components\TEAL\WindowManager.h" />
     <ClInclude Include="Game Components\TextEditor.h" />
-    <ClInclude Include="Game Components\UpSpiderState.h" />
-    <ClInclude Include="Game Components\BouncingSpiderStateRight.h" />
     <ClInclude Include="Game Components\Up_ThenLeft.h" />
     <ClInclude Include="Game Components\Up_ThenRight.h" />
     <ClInclude Include="Game Components\UserInputManager.h" />

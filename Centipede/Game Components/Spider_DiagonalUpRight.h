@@ -1,7 +1,7 @@
 ﻿#ifndef SPIDER_DIAGONALUPRIGHT_H
 #define SPIDER_DIAGONALUPRIGHT_H
 
-#include "SpiderStates.h"
+#include "SpiderMovement.h"
 
 class Spider_DiagonalUpRight : public ImprovedSpiderState
 {

@@ -1,4 +1,4 @@
-﻿#include "SpiderStates.h"
+﻿#include "SpiderMovement.h"
 
 
 OffsetArray Spider_DiagonalUpLeft::GetOffsetArray() const
