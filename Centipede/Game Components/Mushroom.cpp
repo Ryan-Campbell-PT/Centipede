@@ -86,13 +86,17 @@ void Mushroom::SetState(MushroomState state)
 
 	if (state == MushroomState::Poison)
 	{
+		GameGrid::SetGridStatus(this->position, GameGridEnum::PoisonMushroom);
 		this->health += 4; //+= incase the mushroom is damaged
 		delete this->pDeath;
 		this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::MushroomPoisonKilled);
 	}
 
 	else if (state == MushroomState::Healthy) //will likely never be called, but just to be sure
+	{
 		this->health = 0; //-= incase the mushroom is damaged
+		GameGrid::SetGridStatus(this->position, GameGridEnum::Mushroom);
+	};
 
 	this->sprite.SetAnimation(health, health);
 }

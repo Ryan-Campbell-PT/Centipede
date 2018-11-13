@@ -14,11 +14,8 @@ class Centi_DownThenLeft;
 class Centi_LeftThenDown;
 class Centi_LeftThenUp;
 class Centi_Poisoned;
-
-class Body_Left;
-class Body_Right;
-class Body_Up;
-class Body_Down;
+class Centi_PoisonedThenLeft;
+class Centi_PoisonedThenRight;
 
 struct MoveSFM
 {

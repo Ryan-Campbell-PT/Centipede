@@ -123,7 +123,7 @@ void CentipedeHead::CheckGridAhead(const sf::Vector2f &pos)
 		this->SetDirection(this->currentDirectionState->NextState(this));
 
 	else if (GameGrid::GetGridStatus(pos) == GameGridEnum::PoisonMushroom)
-		this->SetDirection(&MoveSFM::poisoned);
+		this->SetDirection(this->currentDirectionState->ExtraState(this));
 
 	else if (pos.x > static_cast<float>(WindowManager::MainWindow.getView().getSize().x) ||
 		pos.x < 0.f)

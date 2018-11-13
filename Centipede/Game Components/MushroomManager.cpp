@@ -30,8 +30,6 @@ void MushroomManager::InitializeMushroomField(const int numShrooms)
 
 		GetInstance()->SpawnMushroom(pos);
 	}
-	//todo: may want to remove this
-	///PlayerManager::SetMushroomField(MushroomFactory::GetCurrentLayout());
 }
 
 void MushroomManager::InitializeMushroomField(std::list<Mushroom*>* shroomField)
@@ -86,7 +84,6 @@ MushroomManager * MushroomManager::GetInstance()
 
 void MushroomManager::SpawnMushroom(sf::Vector2f & pos) const
 {
-	GameGrid::SetGridStatus(pos, GameGridEnum::Mushroom);
 	GameGrid::GetCenterGridPosition(pos);
 
 	auto shroom = MushroomFactory::GetMushroom();
@@ -95,7 +92,6 @@ void MushroomManager::SpawnMushroom(sf::Vector2f & pos) const
 
 void MushroomManager::initializeMushroomField(std::list<Mushroom*>* shroomField)
 {
-	//todo: doesnt reassign them with coming back. fix that
 	for (auto shroom : *this->GetCurrentLayout())
 		shroom->MarkForDestroy();
 

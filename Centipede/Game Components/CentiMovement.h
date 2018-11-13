@@ -19,9 +19,4 @@
 #include "Centi_PoisonedThenLeft.h"
 #include "Centi_PoisonedThenRight.h"
 
-#include "Body_Left.h"
-#include "Body_Down.h"
-#include "Body_Right.h"
-#include "Body_Up.h"
-
 #endif // !CENTIMOVEMENT_H
