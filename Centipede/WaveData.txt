@@ -1,7 +1,7 @@
 level 0
 
 centiBodyCount: 6
-centispeed 2
+centispeed 16
 
 _
 

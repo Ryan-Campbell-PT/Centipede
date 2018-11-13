@@ -25,10 +25,11 @@ CentipedeBody::CentipedeBody()
 	pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::CentiBodyKilled);
 }
 
-void CentipedeBody::InitializeBody(sf::Vector2f const & pos, OffsetArray direction)
+void CentipedeBody::InitializeBody(sf::Vector2f const & pos, const int &speed, OffsetArray direction)
 {
 	this->position = pos;
 	this->animationCounter = 0;
+	this->speed = speed;
 
 	this->sprite.setPosition(this->position);
 	this->currentOffsetArray = direction;
@@ -56,8 +57,8 @@ void CentipedeBody::Draw()
 
 void CentipedeBody::Update()
 {
-	this->position.x += this->currentOffsetArray.coloffset * CENTI_SPEED;
-	this->position.y += this->currentOffsetArray.rowoffset * CENTI_SPEED;
+	this->position.x += this->currentOffsetArray.coloffset * this->speed;
+	this->position.y += this->currentOffsetArray.rowoffset * this->speed;
 
 	this->sprite.setPosition(this->position);
 	

@@ -29,11 +29,11 @@ public:
 	CentipedeHead(const CentipedeHead &c) = delete;
 
 	///this initialization will be used for completely new heads
-	void InitializeHead(sf::Vector2f & pos, const int &numBodies, CentipedeDirectionState const & direction);
+	void InitializeHead(sf::Vector2f & pos, const int &numBodies, const int &speed, CentipedeDirectionState const & direction);
 	///while this will be used when turning a body into a head
 	///all the links are already defined, we just need to get the right direction to go, and where to start
 	///the boolean is meant for whether the centipede itself should determine its direction, or if an outside source will handle that
-	void InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction);
+	void InitializeHead(const sf::Vector2f & pos, const int &speed, CentipedeDirectionState const & direction);
 	//todo: speed not currenly in the api
 	virtual void Update() override;
 	virtual void Draw() override;
@@ -68,7 +68,7 @@ private:
 	const CentipedeDirectionState *currentDirectionState;
 
 	unsigned int animationCounter;
-	float speed;
+	int speed;
 
 	unsigned int yCounter;
 	ScoreCmd* pDeath;

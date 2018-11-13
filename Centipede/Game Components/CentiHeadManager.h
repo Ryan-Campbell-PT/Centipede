@@ -9,8 +9,8 @@ class CentiHeadManager
 {
 public:
 	///this is used to initialize a full centipede
-	static void InitializeCentipede(const int numBodies, const float centiSpeed, 
-		const int numSoloHeads, const float soloHeadSpeed);
+	static void InitializeCentipede(const int &numBodies, const float &centiSpeed,
+		const int &numSoloHeads, const float &soloHeadSpeed);
 
 	static CentipedeHead* GetCentiHead();
 	//static void RemoveCentiHead(CentipedeHead * const head);
@@ -28,8 +28,9 @@ private:
 	CentiHeadManager() = default;
 	virtual ~CentiHeadManager() = default;
 
-	void SetApi(const int numBodies, const float centiSpeed,
-		const int numSoloHeads, const float soloHeadSpeed);
+	void SetApi(const int &numBodies, const float &centiSpeed,
+		const int &numSoloHeads, const float &soloHeadSpeed);
+	int checkSpeed(const float &speed) const;
 	void SpawnSoloHeads();
 	void reinitializeCenti() const;
 
@@ -43,7 +44,14 @@ private:
 	int numSoloHeads;
 	float soloHeadSpeed;
 
-	int numActiveCenti = 0;
+	enum class CentiSpeeds
+	{
+		One = 1,
+		Two = 2,
+		Four = 4,
+		Eight = 8,
+		Sixteen = 16
+	};
 };
 
 

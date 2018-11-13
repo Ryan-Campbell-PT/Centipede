@@ -15,7 +15,7 @@
 
 CentipedeHead::CentipedeHead()
 	:currentDirectionState(nullptr), animationCounter(0),
-	speed(8), yCounter(0), concent(false)
+	speed(1), yCounter(0), concent(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
@@ -50,22 +50,22 @@ CentipedeHead::~CentipedeHead()
 #endif
 }
 
-void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, CentipedeDirectionState const & direction)
+void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, const int &speed, CentipedeDirectionState const & direction)
 {
 	GameGrid::GetCenterGridPosition(pos);
-	this->InitializeHead(pos, direction);
+	this->InitializeHead(pos, speed, direction);
 	SetupBodies(direction.GetOffsetArray(), numBodies);
 }
 
-void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction)
+void CentipedeHead::InitializeHead(const sf::Vector2f & pos, const int &speed, CentipedeDirectionState const & direction)
 {
 	this->position = pos;
-
 	this->sprite.setPosition(pos);
+	this->speed = speed;
+	this->currentDirectionState = &direction;
 
 	RegisterCollision<CentipedeHead>(*this);
 
-	this->currentDirectionState = &direction;
 	yCounter = 0;
 	concent = false;
 }
@@ -74,8 +74,8 @@ void CentipedeHead::Update()
 {
 	this->currentDirectionState->CheckAhead(this, this->animationCounter, this->yCounter);
 	
-	this->position.x += this->currentDirectionState->GetOffsetArray().coloffset * speed;
-	this->position.y += this->currentDirectionState->GetOffsetArray().rowoffset * speed;
+	this->position.x += this->currentDirectionState->GetOffsetArray().coloffset * this->speed;
+	this->position.y += this->currentDirectionState->GetOffsetArray().rowoffset * this->speed;
 
 	this->sprite.setPosition(this->position);
 
@@ -173,7 +173,7 @@ void CentipedeHead::SetupBodies(OffsetArray direction, int numBodies)
 		for (int i = 0; i < numBodies; ++i)
 		{//create number of bodies needed, and connect all the links at the creation of them
 			pos.y = this->position.y - SPRITE_SIZE * (i + 1);
-			curr = CentiBodyManager::GetInitializedCentiBody(pos, direction);
+			curr = CentiBodyManager::GetInitializedCentiBody(pos, this->speed, direction);
 
 			curr->SetWhoYoureFollowing(prev);
 			prev->SetWhosFollowingYou(curr);

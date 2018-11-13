@@ -19,7 +19,7 @@ class CentipedeBody : public GameObject, public CentipedePart
 {
 public:
 	CentipedeBody();
-	void InitializeBody(sf::Vector2f const& pos, OffsetArray direction);
+	void InitializeBody(sf::Vector2f const& pos, const int &speed, OffsetArray direction);
 
 	virtual ~CentipedeBody();
 	CentipedeBody &operator=(const CentipedeBody &c) = delete;
@@ -42,6 +42,7 @@ private:
 	CollisionTools::TextureBitmap bitmap;
 
 	unsigned int animationCounter;
+	int speed;
 
 	ScoreCmd *pDeath;
 

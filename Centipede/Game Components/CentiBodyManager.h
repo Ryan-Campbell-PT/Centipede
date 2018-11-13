@@ -15,7 +15,7 @@ class CentiBodyManager
 {
 public:
 	static CentipedeBody* GetCentiBody();
-	static CentipedeBody* GetInitializedCentiBody(sf::Vector2f const &pos, OffsetArray const &direction);
+	static CentipedeBody* GetInitializedCentiBody(sf::Vector2f const &pos, const int &speed, OffsetArray const &direction);
 
 	
 	static void SetBodyToHead(CentipedeBody *body, const CentipedeDirectionState * direction);

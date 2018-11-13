@@ -13,22 +13,13 @@ CentipedeBody * CentiBodyManager::GetCentiBody()
 	return CentiBodyFactory::GetCentiBody();
 }
 
-CentipedeBody * CentiBodyManager::GetInitializedCentiBody(sf::Vector2f const & pos, OffsetArray const & direction)
+CentipedeBody * CentiBodyManager::GetInitializedCentiBody(sf::Vector2f const & pos, const int &speed, OffsetArray const & direction)
 {
 	auto body = CentiBodyFactory::GetCentiBody();
-	body->InitializeBody(pos, direction);
+	body->InitializeBody(pos, speed, direction);
 
 	return body;
 }
-
-//void CentiBodyManager::SetBehindBodyToHead(CentipedeBody * body)
-//{
-//	if (body != nullptr)
-//		if (body->GetWhoYoureFollowing()) //whoever you were following
-//			body->GetWhoYoureFollowing()->SetWhosFollowingYou(nullptr); //tell them nobody is following anymore
-//
-//	SetBodyToHead(static_cast<CentipedeBody*>(body->GetWhosFollowingYou()));
-//}
 
 void CentiBodyManager::SetBodyToHead(CentipedeBody * body, const CentipedeDirectionState *direction)
 {
