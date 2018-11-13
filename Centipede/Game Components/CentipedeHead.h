@@ -28,12 +28,12 @@ public:
 	CentipedeHead &operator=(const CentipedeHead &c) = delete;
 	CentipedeHead(const CentipedeHead &c) = delete;
 
-	///this initilization will be used for completely new heads
+	///this initialization will be used for completely new heads
 	void InitializeHead(sf::Vector2f & pos, const int &numBodies, CentipedeDirectionState const & direction);
 	///while this will be used when turning a body into a head
 	///all the links are already defined, we just need to get the right direction to go, and where to start
 	///the boolean is meant for whether the centipede itself should determine its direction, or if an outside source will handle that
-	void InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction, const bool &setDirection = true);
+	void InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction);
 	//todo: speed not currenly in the api
 	virtual void Update() override;
 	virtual void Draw() override;
@@ -55,7 +55,7 @@ public:
 	void SetSpeed(const int speed);
 	float GetSpeed() const { return speed; }
 	bool GetConcent() const { return concent; }
-	float GetSpriteRot() { return this->sprite.getRotation(); }
+	float GetSpriteRot() const { return this->sprite.getRotation(); }
 
 private:
 	///this function will apply the number of bodies connected to the head, at the creation of the head

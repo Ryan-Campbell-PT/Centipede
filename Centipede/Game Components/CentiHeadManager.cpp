@@ -10,26 +10,18 @@
 
 CentiHeadManager * CentiHeadManager::instance = nullptr;
 
-void CentiHeadManager::InitializeCentipede(const int numBodies, const float centiSpeed, 
-		const int numSoloHeads, const float soloHeadSpeed)
+void CentiHeadManager::InitializeCentipede(const int numBodies, const float centiSpeed,
+	const int numSoloHeads, const float soloHeadSpeed)
 {
 	GetInstance()->SetApi(numBodies, centiSpeed, numSoloHeads, soloHeadSpeed);
 
-	auto head = CentiHeadFactory::GetCentiHead();
-	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), numBodies, MoveSFM::downThenLeft);
-	instance->numActiveCenti++;
+	instance->reinitializeCenti();
 }
 
 CentipedeHead* CentiHeadManager::GetCentiHead()
 {
 	return CentiHeadFactory::GetCentiHead();
 }
-
-/*void CentiHeadManager::RemoveCentiHead(CentipedeHead * const head)
-{
-	if(--GetInstance()->numActiveCenti <= 0) 
-		WaveManager::EndWave(); //end round if there are no centipedes remaining
-}*/
 
 void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f & pos, const CentipedeDirectionState & direction)
 {
@@ -39,10 +31,7 @@ void CentiHeadManager::InitializeHead(CentipedeHead * head, const sf::Vector2f &
 
 void CentiHeadManager::RestartWave()
 {
-	//todo: remove all the bodies and heads
-	CentiHeadPool::EndWave();
-	//GetInstance()->InitializeCentipede(instance->numBodies, instance->centiSpeed,
-		//instance->numSoloHeads, instance->soloHeadSpeed);
+	CentiHeadFactory::EndWave();
 	GetInstance()->reinitializeCenti();
 }
 
@@ -73,13 +62,11 @@ void CentiHeadManager::SpawnSoloHeads()
 	//if()
 }
 
-void CentiHeadManager::reinitializeCenti()
-{//todo
+void CentiHeadManager::reinitializeCenti() const
+{
 	auto head = CentiHeadFactory::GetCentiHead();
 	head->InitializeHead(sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, 0.f), numBodies, MoveSFM::downThenLeft);
-	//head->SetAlarm(0, .5f);
 	instance->numActiveCenti++;
-
 }
 
 CentiHeadManager * CentiHeadManager::GetInstance()

@@ -31,7 +31,7 @@ private:
 	void SetApi(const int numBodies, const float centiSpeed,
 		const int numSoloHeads, const float soloHeadSpeed);
 	void SpawnSoloHeads();
-	void reinitializeCenti();
+	void reinitializeCenti() const;
 
 	static CentiHeadManager* GetInstance();
 

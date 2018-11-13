@@ -27,7 +27,6 @@ void GameManager::SetAttractorMode()
 
 void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
 {
-	//todo: when changing scenes, that arent the beginning, this breaks a lot
 	SceneManager::ChangeScene(new Level1);
 	PlayerManager::SetPlayerMode(playerMode);
 	HighScoreManager::Cleanup();
@@ -36,9 +35,8 @@ void GameManager::SetPlayerMode(const PlayerData::PlayerID playerMode)
 }
 
 void GameManager::RestartWave()
-{//todo
+{
 	CentiHeadManager::RestartWave();
-	//Ship::InitializeShip()
 }
 
 void GameManager::RequestUsername()
@@ -76,7 +74,7 @@ void GameManager::EndWave()
 	if (PlayerManager::GetCurrentPlayer() == PlayerData::PlayerID::Ai)
 		CentiHeadManager::RestartWave();
 	else
-	{
+	{ //move onto next level
 		MushroomManager::EndWave();
 		CentiHeadManager::EndWave();
 		WaveManager::SetupLevel(WaveManager::GetCurrentWave() + 1);

@@ -15,7 +15,7 @@
 
 CentipedeHead::CentipedeHead()
 	:currentDirectionState(nullptr), animationCounter(0),
-	speed(2), yCounter(0), concent(false)
+	speed(8), yCounter(0), concent(false)
 {
 	this->bitmap = ResourceManager::GetTextureBitmap("CentiHead");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("CentiHead"), 8, 2);
@@ -57,7 +57,7 @@ void CentipedeHead::InitializeHead(sf::Vector2f& pos, const int & numBodies, Cen
 	SetupBodies(direction.GetOffsetArray(), numBodies);
 }
 
-void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction, const bool &setDirection)
+void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionState const & direction)
 {
 	this->position = pos;
 
@@ -72,10 +72,10 @@ void CentipedeHead::InitializeHead(const sf::Vector2f & pos, CentipedeDirectionS
 
 void CentipedeHead::Update()
 {
-	this->position.x += (this->currentDirectionState->GetOffsetArray()).coloffset * speed;
-	this->position.y += (this->currentDirectionState->GetOffsetArray()).rowoffset * speed;
-
 	this->currentDirectionState->CheckAhead(this, this->animationCounter, this->yCounter);
+	
+	this->position.x += this->currentDirectionState->GetOffsetArray().coloffset * speed;
+	this->position.y += this->currentDirectionState->GetOffsetArray().rowoffset * speed;
 
 	this->sprite.setPosition(this->position);
 
@@ -168,11 +168,12 @@ void CentipedeHead::SetupBodies(OffsetArray direction, int numBodies)
 	if (numBodies > 0)
 	{
 		CentipedePart *prev(this), *curr(nullptr);
+		sf::Vector2f pos(this->position);
 
 		for (int i = 0; i < numBodies; ++i)
 		{//create number of bodies needed, and connect all the links at the creation of them
-			//todo: you could possibly dynamically create the bodies depending on the offset
-			curr = CentiBodyManager::GetInitializedCentiBody(sf::Vector2f(this->position.x, this->position.y - (SPRITE_SIZE * (i + 1))), direction);
+			pos.y = this->position.y - SPRITE_SIZE * (i + 1);
+			curr = CentiBodyManager::GetInitializedCentiBody(pos, direction);
 
 			curr->SetWhoYoureFollowing(prev);
 			prev->SetWhosFollowingYou(curr);

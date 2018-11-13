@@ -23,7 +23,7 @@
 #include "Body_Right.h"
 #include "Body_Up.h"
 
-#define CENTI_SPEED 2
+#define CENTI_SPEED 8
 #define WORKING false
 
 #endif // !CENTIMOVEMENT_H

@@ -20,16 +20,16 @@ void UserInputManager::Terminate(GameObject*)
 UserInputManager::UserInputManager()
 	:currentInput(""), maxGlyphs(3), curNumGlyphs(0)
 {
-	this->startingPos = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2, WindowManager::MainWindow.getSize().y / 2 + SPRITE_SIZE);
+	this->startingPos = sf::Vector2f(WindowManager::MainWindow.getSize().x / 2.f, WindowManager::MainWindow.getSize().y / 2.f + SPRITE_SIZE);
 	userGlyph = new Glyph[maxGlyphs];
 	this->RegisterInput();
 
 	
 	std::string youWon = "You won enter your name";
-	sf::Vector2f wonPos = sf::Vector2f(WindowManager::MainWindow.getSize().x / 7, WindowManager::MainWindow.getSize().y / 2);
-	for(int i = 0; i < youWon.size(); i++)
+	auto wonPos = sf::Vector2f(WindowManager::MainWindow.getSize().x / 7.f, WindowManager::MainWindow.getSize().y / 2.f);
+	for (auto i : youWon)
 	{
-		this->youWonList.push_back(TextEditor::WriteText(youWon.at(i), wonPos));
+		this->youWonList.push_back(TextEditor::WriteText(i, wonPos));
 		wonPos.x += SPRITE_SIZE;
 	}
 }
