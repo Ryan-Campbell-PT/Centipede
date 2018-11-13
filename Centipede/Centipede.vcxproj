@@ -108,7 +108,8 @@
     <ClCompile Include="Game Components\Centi_DownThenRight.cpp" />
     <ClCompile Include="Game Components\Centi_LeftThenDown.cpp" />
     <ClCompile Include="Game Components\Centi_LeftThenUp.cpp" />
-    <ClCompile Include="Game Components\Centi_Poisoned.cpp" />
+    <ClCompile Include="Game Components\Centi_PoisonedThenLeft.cpp" />
+    <ClCompile Include="Game Components\Centi_PoisonedThenRight.cpp" />
     <ClCompile Include="Game Components\Centi_RightThenDown.cpp" />
     <ClCompile Include="Game Components\Centi_RightThenUp.cpp" />
     <ClCompile Include="Game Components\Centi_UpThenLeft.cpp" />
@@ -228,7 +229,8 @@
     <ClInclude Include="Game Components\Centi_DownThenRight.h" />
     <ClInclude Include="Game Components\Centi_LeftThenDown.h" />
     <ClInclude Include="Game Components\Centi_LeftThenUp.h" />
-    <ClInclude Include="Game Components\Centi_Poisoned.h" />
+    <ClInclude Include="Game Components\Centi_PoisonedThenLeft.h" />
+    <ClInclude Include="Game Components\Centi_PoisonedThenRight.h" />
     <ClInclude Include="Game Components\Centi_RightThenDown.h" />
     <ClInclude Include="Game Components\Centi_RightThenUp.h" />
     <ClInclude Include="Game Components\Centi_UpThenLeft.h" />

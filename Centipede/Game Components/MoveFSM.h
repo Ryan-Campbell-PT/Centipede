@@ -22,21 +22,16 @@ class Body_Down;
 
 struct MoveSFM
 {
-	static const Centi_RightThenUp	 rightThenUp;
-	static const Centi_RightThenDown rightThenDown;
-	static const Centi_UpThenRight	 upThenRight;
-	static const Centi_UpThenLeft	 upThenLeft;
-	static const Centi_DownThenRight downThenRight;
-	static const Centi_DownThenLeft	 downThenLeft;
-	static const Centi_LeftThenDown	 leftThenDown;
-	static const Centi_LeftThenUp	 leftThenUp;
-	static const Centi_Poisoned		 poisoned;
-
-	static const Body_Down	bodyDown;
-	static const Body_Up	bodyUp;
-	static const Body_Left	bodyLeft;
-	static const Body_Right bodyRight;
-
+	static const Centi_RightThenUp			rightThenUp;
+	static const Centi_RightThenDown		rightThenDown;
+	static const Centi_UpThenRight			upThenRight;
+	static const Centi_UpThenLeft			upThenLeft;
+	static const Centi_DownThenRight		downThenRight;
+	static const Centi_DownThenLeft			downThenLeft;
+	static const Centi_LeftThenDown			leftThenDown;
+	static const Centi_LeftThenUp			leftThenUp;
+	static const Centi_PoisonedThenLeft		poisonedThenLeft;
+	static const Centi_PoisonedThenRight	poisonedThenRight;
 };
 
 #endif // !MOVE_FSM

@@ -16,14 +16,12 @@
 #include "Centi_LeftThenUp.h"
 #include "Centi_RightThenUp.h"
 #include "Centi_RightThenDown.h"
-#include "Centi_Poisoned.h"
+#include "Centi_PoisonedThenLeft.h"
+#include "Centi_PoisonedThenRight.h"
 
 #include "Body_Left.h"
 #include "Body_Down.h"
 #include "Body_Right.h"
 #include "Body_Up.h"
-
-#define CENTI_SPEED 8
-#define WORKING false
 
 #endif // !CENTIMOVEMENT_H

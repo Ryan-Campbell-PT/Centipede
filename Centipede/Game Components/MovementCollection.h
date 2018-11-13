@@ -18,6 +18,7 @@ public:
 	static const OffsetArray OffsetsStraightLeft;
 	static const OffsetArray OffsetsTurnUpEndLeft;
 	static const OffsetArray OffsetsTurnDownEndLeft;
+	static const OffsetArray OffsetsPoisoned;
 };
 
 struct Spider_MovementCollection

@@ -7,6 +7,12 @@ const CentipedeDirectionState * Centi_LeftThenUp::NextState(CentipedeHead *centi
 	return &MoveSFM::upThenRight;
 }
 
+const CentipedeDirectionState* Centi_LeftThenUp::ExtraState(CentipedeHead* centi) const
+{
+	centi->SetSpriteRotation(-90.f);
+	return &MoveSFM::poisonedThenRight;
+}
+
 void Centi_LeftThenUp::CheckAhead(CentipedeHead* centi, unsigned& counter, unsigned& yCounter) const
 {
 	counter += static_cast<unsigned>(centi->GetSpeed());

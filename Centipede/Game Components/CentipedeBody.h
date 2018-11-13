@@ -2,13 +2,9 @@
 #define CENTIPEDEBODY_H
 
 #include "TEAL/CommonElements.h"
-#include "AheadInformation.h"
 #include "CentipedePart.h"
 
-#include <queue>
 #include "CentipedeDirectionState.h"
-#include "CentiBodyDirection.h"
-using std::queue;
 
 class CentipedeHead;
 class Bullet;

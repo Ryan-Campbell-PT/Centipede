@@ -366,9 +366,6 @@
     <ClCompile Include="Game Components\Body_Up.cpp">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\Centi_Poisoned.cpp">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\MovementCollection.cpp">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClCompile>
@@ -472,7 +469,13 @@
       <Filter>Source Files\Game Components\Writers</Filter>
     </ClCompile>
     <ClCompile Include="Game Components\UserInputManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_PoisonedThenRight.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Components\Centi_PoisonedThenLeft.cpp">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -779,9 +782,6 @@
     <ClInclude Include="Game Components\Body_Up.h">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement\BodyMovement</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Centi_Poisoned.h">
-      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\MovementCollection.h">
       <Filter>Source Files\Game Components\Centipede\CentipedeMovement</Filter>
     </ClInclude>
@@ -912,7 +912,13 @@
       <Filter>Source Files\Game Components\Writers</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\UserInputManager.h">
-      <Filter>Source Files\Game Components</Filter>
+      <Filter>Source Files\Game Components\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_PoisonedThenRight.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Components\Centi_PoisonedThenLeft.h">
+      <Filter>Source Files\Game Components\Centipede\CentipedeMovement\VertMovement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
