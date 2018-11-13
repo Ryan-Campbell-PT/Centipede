@@ -11,8 +11,15 @@ public:
 	SoundOn() = default;
 
 private:
-	virtual void processSounds() override
-	{
+	virtual void processSounds() override;
+
+	virtual void sendSoundCommand(SoundCmd* cmd) override;
+
+	std::queue<SoundCmd*> soundQueue;
+};
+
+inline void SoundOn::processSounds()
+{	
 #if testing
 		SoundCmd *sound = nullptr;
 		while (!this->soundQueue.empty())
@@ -23,16 +30,13 @@ private:
 			sound->Execute();
 		}
 #endif
-	}
+}
 
-	virtual void sendSoundCommand(SoundCmd* cmd) override
-	{
+inline void SoundOn::sendSoundCommand(SoundCmd* cmd)
+{
 #if testing
 		this->soundQueue.push(cmd);
 #endif
-	}
+}
 
-private:
-	std::queue<SoundCmd*> soundQueue;
-};
 #endif // SOUNDON_H

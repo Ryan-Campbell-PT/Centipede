@@ -15,23 +15,28 @@ public:
 	FleaState1 &operator=(const FleaState1 &c) = delete;
 	FleaState1(const FleaState1 &c) = delete;
 
-	virtual void TakeDamage(Flea *flea) override
-	{
-		flea->SetSpeed(FLEASTATE2);
-		flea->SetState(new FleaState2);
-	}
+	virtual void TakeDamage(Flea *flea) override;
 
-	virtual void StateAction(Flea *flea) override
-	{
-		if (static_cast<int>(flea->GetPosition().y) % SPRITE_SIZE == 0)
-		{
-			//this spawning method is very ineffecient atm, will fix later
-			if (rand() % 3 == 0)
-				flea->AttemptSpawnMushroom();
-		}
-	}
+	virtual void StateAction(Flea *flea) override;
 
 private:
+	int shroomSpawn = 3;
 };
+
+inline void FleaState1::TakeDamage(Flea* flea)
+{
+	flea->SetSpeed(FLEASTATE2);
+	flea->SetState(Flea::FleaStateEnum::State2);
+}
+
+inline void FleaState1::StateAction(Flea* flea)
+{
+	if (static_cast<int>(flea->GetPosition().y) % SPRITE_SIZE == 0)
+	{
+		if (rand() % shroomSpawn == 0)
+			flea->AttemptSpawnMushroom();
+	}
+}
+
 
 #endif //FLEASTATE_1

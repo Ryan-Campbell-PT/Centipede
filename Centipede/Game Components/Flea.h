@@ -16,6 +16,9 @@ class SoundCmd;
 class Flea : public GameObject
 {
 public:
+	enum class FleaStateEnum
+	{ State1, State2 };
+
 	Flea();
 	virtual ~Flea();
 	Flea &operator=(const Flea &c) = delete;
@@ -31,7 +34,7 @@ public:
 	void SpawnFlea(sf::Vector2f pos);
 	void SetSpeed(const int &speed);
 	void RemoveFlea();
-	void SetState(FleaState *state);
+	void SetState(FleaStateEnum state);
 	///this method will simply take the flea's position and attempt to spawn a mushroom
 	void AttemptSpawnMushroom();
 	sf::Vector2f GetPosition() const;
@@ -45,7 +48,9 @@ private:
 
 	int speed;
 
-	FleaState *state;
+	FleaState *currentState;
+	FleaState *state1, *state2;
+
 	ScoreCmd *pDeath;
 	SoundCmd *spawnSound;
 	bool destroyed;

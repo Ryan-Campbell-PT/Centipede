@@ -17,6 +17,7 @@ public:
 
 	MushroomPool(const MushroomPool &pool) = delete;
 	MushroomPool operator = (const MushroomPool &pool) = delete;
+	static void ClearShrooms();
 	static std::list<Mushroom*>* GetCurrentLayout();
 
 	static void Terminate();

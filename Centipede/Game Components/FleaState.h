@@ -8,8 +8,8 @@ class Flea;
 class FleaState : public State
 {
 public:
-	FleaState() {};
-	virtual ~FleaState() {};
+	FleaState() = default;
+	virtual ~FleaState() = default;
 	FleaState &operator=(const FleaState &c) = delete;
 	FleaState(const FleaState &c) = delete;
 

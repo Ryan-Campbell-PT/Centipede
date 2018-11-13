@@ -12,16 +12,17 @@ public:
 	FleaState2 &operator=(const FleaState2 &c) = delete;
 	FleaState2(const FleaState2 &c) = delete;
 
-	virtual void TakeDamage(Flea *flea) override
-	{
-		flea->SetDestroyed();
-		flea->RemoveFlea();
-	}
+	virtual void TakeDamage(Flea *flea) override;
 
 	///b/c its in its second state, the flea doesnt do anyting but go fast
 	virtual void StateAction(Flea *flea) override {}
-
-private:
 };
+
+inline void FleaState2::TakeDamage(Flea* flea)
+{
+	flea->SetDestroyed();
+	flea->RemoveFlea();
+}
+
 
 #endif //FLEASTATE_2

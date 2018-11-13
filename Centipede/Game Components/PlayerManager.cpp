@@ -13,13 +13,13 @@
 #include "SoundOn.h"
 #include "GameManager.h"
 #include "LivesWriter.h"
+#include "CentiHeadManager.h"
 
 PlayerManager * PlayerManager::instance = nullptr;
-//todo: THIS WHoLE CLASS NEEDS WORK
+
 void PlayerManager::AddScore(const int score)
 {
 	GetInstance()->currentPlayer.playerScore += score;
-	//	TextEditor::CurrentScore(instance->currentPlayer.playerScore);
 }
 
 void PlayerManager::PlayerDeath()
@@ -29,6 +29,7 @@ void PlayerManager::PlayerDeath()
 	//if we are set to 2 player mode, swap to next player
 	if (instance->playerMode == PlayerMode::TwoPlayer)
 	{
+		CentiHeadManager::EndWave();
 		instance->saveCurrentPlayerData();
 		instance->SwapPlayer();
 	}
@@ -91,7 +92,7 @@ void PlayerManager::Terminate()
 }
 
 PlayerManager::PlayerManager()
-	:indexOfCurrentPlayer(-1)
+	:indexOfCurrentPlayer(0)
 {
 	//emplace back essentially just takes the constructor of an object instead of calling the constructor
 	this->listOfPlayers.emplace_back(PlayerData::PlayerID::Ai);
@@ -101,7 +102,6 @@ PlayerManager::PlayerManager()
 
 void PlayerManager::saveCurrentPlayerData()
 {
-	//todo: will have to look at this, it seems the player is altering a lot of their data when they dont need to?
 	if (this->currentPlayer.player == PlayerData::PlayerID::Player1)
 	{
 		this->listOfPlayers[static_cast<int>(PlayerData::PlayerID::Player1)] = this->currentPlayer;
@@ -124,23 +124,21 @@ PlayerData::PlayerID PlayerManager::GetCurrentPlayer()
 
 void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 {
-	//TODO: ALL THIS NEEDS WORK
 	switch (player)
 	{
-		//todo: thse new's can be just changed to local functions in the class itself
 	case PlayerData::PlayerID::Ai:
-		Ship::InitializeShip(new Ship_Ai);
+		Ship::InitializeShip(Ship::ShipModeEnum::Attractor);
 		SoundManager::SetSoundProfile(new SoundOff);
 		break;
 
 	case PlayerData::PlayerID::Player1:
-		Ship::InitializeShip(new Ship_Player);
+		Ship::InitializeShip(Ship::ShipModeEnum::Player);
 		instance->currentPlayer.player = PlayerData::PlayerID::Player1;
 		SoundManager::SetSoundProfile(new SoundOn);
 		break;
 
 	case PlayerData::PlayerID::Player2:
-		Ship::InitializeShip(new Ship_Player);
+		Ship::InitializeShip(Ship::ShipModeEnum::Player);
 		instance->currentPlayer.player = PlayerData::PlayerID::Player1;
 		SoundManager::SetSoundProfile(new SoundOn);
 		break;

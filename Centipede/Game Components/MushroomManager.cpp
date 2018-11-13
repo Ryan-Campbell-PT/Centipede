@@ -9,8 +9,8 @@ MushroomManager* MushroomManager::instance = nullptr;
 
 void MushroomManager::InitializeMushroomField(const int numShrooms)
 {
-	//if (!MushroomPool::GetActiveMushroomList().empty())
-		//return; //no need to make a mushroom field if there already is one
+	if (!MushroomPool::GetActiveMushroomList().empty())
+		MushroomPool::ClearShrooms();
 
 	sf::Vector2f pos;
 

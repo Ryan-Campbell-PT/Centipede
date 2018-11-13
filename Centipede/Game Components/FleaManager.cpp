@@ -25,7 +25,6 @@ void FleaManager::Terminate()
 FleaManager::FleaManager()
 	:numShroomsToSpawn(0), fleaActive(false)
 {
-	//MushroomManager::AddNewObserver(this);
 }
 
 void FleaManager::InitializeFlea(const int numShroomsToSpawn)

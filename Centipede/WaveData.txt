@@ -14,13 +14,14 @@ spiderSpawn 3
 spiderSpeed 2
 scorpionActive no
 fleaActive yes
-fleaspawn 30
+fleaspawn 6
 
 _
 
 level 2
 
 centiBodyCount 13
+centispeed 2
 spiderActive no
 scorpionActive yes
 scorpionSpawn 4

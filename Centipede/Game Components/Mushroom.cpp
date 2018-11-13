@@ -31,6 +31,7 @@ void Mushroom::Draw()
 
 void Mushroom::Destroy()
 {
+	GameGrid::SetGridStatus(this->position, GameGridEnum::Unoccupied);
 	DeregisterCollision<Mushroom>(*this);
 }
 
@@ -52,14 +53,18 @@ void Mushroom::InitializeMushroom(sf::Vector2f const & pos, MushroomState state)
 
 	this->health = 0; //setting the positions of a mushroom assumes its full health
 	this->SetState(state);
+	this->sprite.setScale(1.f, 1.f);
 	RegisterCollision<Mushroom>(*this);
 }
 
 void Mushroom::InitializeMushroom()
 {
-	//RegisterToCurrentScene(); //todo may break things, also make sure this function works
+	RegisterToCurrentScene();
 	this->sprite.setPosition(this->position);
+	this->sprite.setScale(1.f, 1.f);
+	SetState(MushroomState::Healthy);
 	RegisterCollision<Mushroom>(*this);
+	
 }
 
 void Mushroom::TakeDamage()

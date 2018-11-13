@@ -10,11 +10,11 @@
 #include "ScoreManager.h"
 #include "FleaManager.h"
 #include "ScoreCmd.h"
+#include "SoundCmd.h"
+#include "ExplosionManager.h"
 
-//TODO: there is a lot of deleting of state in this. figure out a way to modify tht
-//so there isnt much allocation and deletion
 Flea::Flea()
-	:state(nullptr), speed(FLEASTATE1), destroyed(false)
+	:currentState(nullptr), speed(FLEASTATE1), destroyed(false)
 {
 	bitmap = ResourceManager::GetTextureBitmap("Flea");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Flea"), 4, 2);
@@ -24,12 +24,22 @@ Flea::Flea()
 
 	this->pDeath = ScoreManager::GetScoreCommand(ScoreManager::ScoreEvents::FleaKilled);
 	this->spawnSound = SoundManager::GetSound(SoundManager::SoundEvent::FleaSpawn);
+
+	this->state1 = new FleaState1;
+	this->state2 = new FleaState2;
 }
 
 Flea::~Flea()
 {
 	delete pDeath;
-	delete state;
+	delete spawnSound;
+	delete state1;
+	delete state2;
+
+	pDeath = nullptr;
+	spawnSound = nullptr;
+	state1 = nullptr;
+	state2 = nullptr;
 }
 
 void Flea::Update()
@@ -41,7 +51,7 @@ void Flea::Update()
 		this->MarkForDestroy();
 
 	else
-		this->state->StateAction(this);
+		this->currentState->StateAction(this);
 }
 
 void Flea::Draw()
@@ -51,7 +61,7 @@ void Flea::Draw()
 
 void Flea::Collision(Bullet *)
 {
-	this->state->TakeDamage(this);
+	this->currentState->TakeDamage(this);
 }
 
 void Flea::Destroy()
@@ -67,7 +77,7 @@ void Flea::SpawnFlea(sf::Vector2f pos)
 
 	this->RegisterCollision<Flea>(*this);
 
-	this->state = new FleaState1;
+	this->SetState(FleaStateEnum::State1);
 	this->speed = FLEASTATE1;
 	SoundManager::SendSoundCommand(this->spawnSound);
 }
@@ -92,14 +102,15 @@ void Flea::RemoveFlea()
 	if(this->destroyed) //make sure the flea was actually shot, not just exceeded window size
 	{
 		ScoreManager::SendScoreCmd(this->pDeath);
+		ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::CritterDeath, this->position);
 		this->MarkForDestroy();
 	}
-
-	//delete this->state; //todo: this should be a fsm
 }
 
-void Flea::SetState(FleaState * state)
+void Flea::SetState(FleaStateEnum state)
 {
-	delete this->state;
-	this->state = state;
+	if(state == FleaStateEnum::State1)
+		this->currentState = state1;
+	else
+		this->currentState = state2;
 }

@@ -26,12 +26,13 @@ class SoundCmd;
 class Ship : public GameObject
 {
 public:
+	enum class ShipModeEnum
+	{
+		Attractor, Player
+	};
 
 	static sf::Vector2f GetPosition();
 	static void SetState(ShipMode *state);
-
-	///not static because you shouldnt just be able to always destroy the ship, you need the ship itself
-	//void DestroyShip();
 
 	virtual void Collision(GameObject *) override {}
 	virtual void Collision(Mushroom*);
@@ -42,7 +43,7 @@ public:
 	virtual void Collision(CentipedeHead *);
 	static void Terminate(GameObject *);
 
-	static void InitializeShip(ShipMode * state);
+	static void InitializeShip(ShipModeEnum state);
 	///the purpose for using ReinitializeShip instead of MarkForDestroy is because when swapping
 	///scenes, it results in problems for destroyed GO, so i instaed just reinitialize it, or have the
 	///PlayerManager handle the destruction
@@ -59,7 +60,6 @@ private:
 	virtual void Update() override;
 	virtual void Draw() override;
 	virtual void Destroy() override;
-	virtual void Alarm0() override;
 
 	virtual void KeyPressed(sf::Keyboard::Key k, bool altKey, bool ctrlKey, bool shiftKey, bool systemKey) override;
 
@@ -76,6 +76,8 @@ private:
 	float timeToSpawn;
 	PlayerInput *playerInput;
 	ShipMode *shipMode;
+
+	ShipMode * mode_player, *mode_attractor;
 };
 
 #endif _Ship

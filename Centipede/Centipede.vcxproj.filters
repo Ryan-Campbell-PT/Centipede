@@ -192,9 +192,6 @@
     <ClCompile Include="Game Components\Ship.cpp">
       <Filter>Source Files\Game Components\Ship</Filter>
     </ClCompile>
-    <ClCompile Include="Game Components\ShipExplosion.cpp">
-      <Filter>Source Files\Game Components\Ship</Filter>
-    </ClCompile>
     <ClCompile Include="Game Components\Asteroid.cpp">
       <Filter>Source Files\Game Components\Asteroid</Filter>
     </ClCompile>
@@ -543,9 +540,6 @@
       <Filter>Source Files\Game Components\_TEAL\Window and Event Management</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\Ship.h">
-      <Filter>Source Files\Game Components\Ship</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\ShipExplosion.h">
       <Filter>Source Files\Game Components\Ship</Filter>
     </ClInclude>
     <ClInclude Include="Game Components\Asteroid.h">

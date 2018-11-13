@@ -12,6 +12,8 @@
 #include "SoundCmd.h"
 #include "GameManager.h"
 #include "ExplosionManager.h"
+#include "Ship_Ai.h"
+#include "Ship_Player.h"
 
 Ship *Ship::instance = nullptr;
 
@@ -28,6 +30,9 @@ Ship::Ship()
 	playerInput = new PlayerInput;
 	PlayerManager::SetPlayerControls(this->playerInput);
 	RegisterInput(InputFlags::KeyPressed); // Recieve single-presses events
+
+	this->mode_player = new Ship_Player;
+	this->mode_attractor = new Ship_Ai;
 
 	this->fireSound = SoundManager::GetSound(SoundManager::SoundEvent::ShipFire);
 }
@@ -47,11 +52,6 @@ void Ship::Destroy()
 {
 	DeregisterInput();
 	DeregisterCollision<Ship>(*this);
-}
-
-void Ship::Alarm0()
-{
-	InitializeShip(this->shipMode);
 }
 
 void Ship::Update()
@@ -152,22 +152,26 @@ void Ship::SetState(ShipMode * state)
 
 void Ship::Terminate(GameObject *)
 {
+	delete instance->mode_player;
+	delete instance->mode_attractor;
 	delete instance->fireSound;
 	delete instance->playerInput;
-	delete instance->shipMode;
 
+	instance->mode_attractor = nullptr;
+	instance->mode_player = nullptr;
 	instance->fireSound = nullptr;
 	instance->playerInput = nullptr;
-	instance->shipMode = nullptr;
 
 	delete instance;
 	instance = nullptr;
 }
 
-void Ship::InitializeShip(ShipMode * state)
+void Ship::InitializeShip(ShipModeEnum state)
 {
-	delete GetInstance()->shipMode;
-	instance->shipMode = state;
+	if(state == ShipModeEnum::Player)
+		GetInstance()->shipMode = instance->mode_player;
+	else
+		GetInstance()->shipMode = instance->mode_attractor;
 
 	//always spawn in the center
 	instance->position = sf::Vector2f(WindowManager::MainWindow.getView().getSize().x / 2.f,

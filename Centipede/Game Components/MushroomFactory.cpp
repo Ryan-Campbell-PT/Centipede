@@ -25,7 +25,6 @@ Mushroom *MushroomFactory::GetMushroom()
 
 void MushroomFactory::Terminate()
 {
-	//todo: may want to make sure the observer list is deleted
 	delete instance;
 	instance = nullptr;
 
