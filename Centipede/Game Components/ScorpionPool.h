@@ -26,8 +26,8 @@ private:
 
 	static ScorpionPool *instance;
 
-	std::list<Scorpion*> recycledScorpions; ///this list will be used for purposes like healing broken mushrooms at new level
-
+	std::list<Scorpion*> recycledScorpions;
+	std::list<Scorpion*> activeScorpions;
 };
 
 #endif // !SPIDER_POOL

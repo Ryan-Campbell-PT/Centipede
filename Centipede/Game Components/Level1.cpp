@@ -30,6 +30,7 @@
 #include "Level2.h"
 #include "PlayerManager.h"
 #include "CentiHeadPool.h"
+#include "BulletManager.h"
 
 //Level1::Level1()
 //	:currentLevelNum(1)
@@ -66,4 +67,13 @@ void Level1::Initialize()
 	CollisionTestPair<CentipedeHead, Bullet>();
 	CollisionTestPair<CentipedeHead, Ship>();
 	CollisionTestPair<CentipedeBody, Ship>();
+}
+
+void Level1::Terminate()
+{	
+	CentiHeadManager::Terminate();
+	CentiBodyManager::Terminate();
+	FleaManager::Terminate();
+	MushroomManager::Terminate();
+	BulletManager::Terminate();
 }

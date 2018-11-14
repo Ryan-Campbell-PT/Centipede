@@ -5,12 +5,12 @@
 #include "AwesomeFont.h"
 #include "HighScoreManager.h"
 
-class TextEditor// : public GameObject
+class TextEditor
 {
 public:
 	static Glyph WriteText(const char &str, const sf::Vector2f &pos);
 
-	//static void Terminate(GameObject*);
+	static void Terminate();
 
 private:
 	TextEditor() = default;

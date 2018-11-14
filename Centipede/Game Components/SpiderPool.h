@@ -25,7 +25,7 @@ private:
 	static SpiderPool *instance;
 
 	std::list<Spider*> recycledSpiders;
-
+	std::list<Spider*> activeSpiders;
 };
 
 #endif // !SPIDER_POOL

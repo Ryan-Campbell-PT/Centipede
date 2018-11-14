@@ -63,6 +63,15 @@ void SoundManager::SetSoundProfile(SoundManager * profile)
 	instance->soundProfile = profile;
 }
 
+void SoundManager::Terminate()
+{
+	delete GetInstance()->soundProfile;
+	instance->soundProfile = nullptr;
+	delete instance;
+	instance = nullptr;
+
+}
+
 SoundManager * SoundManager::GetInstance()
 {
 	if (instance == nullptr)

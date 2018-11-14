@@ -215,7 +215,6 @@
     <ClInclude Include="Game Components\Down_ThenLeft.h" />
     <ClInclude Include="Game Components\Down_ThenRight.h" />
     <ClInclude Include="Game Components\ExplosionManager.h" />
-    <ClInclude Include="Game Components\Factory.h" />
     <ClInclude Include="Game Components\FinalScore.h" />
     <ClInclude Include="Game Components\Flea.h" />
     <ClInclude Include="Game Components\FleaFactory.h" />
@@ -284,7 +283,6 @@
     <ClInclude Include="Game Components\Spider_DiagonalUpRight.h" />
     <ClInclude Include="Game Components\Spider_MoveFSM.h" />
     <ClInclude Include="Game Components\SpriteSheet.h" />
-    <ClInclude Include="Game Components\State.h" />
     <ClInclude Include="Game Components\TEAL\AlarmEventTimeline.h" />
     <ClInclude Include="Game Components\TEAL\AlarmManager.h" />
     <ClInclude Include="Game Components\TEAL\AnimatedSprite.h" />

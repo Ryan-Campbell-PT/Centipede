@@ -61,6 +61,18 @@ std::list<Mushroom*>* MushroomPool::GetCurrentLayout()
 
 void MushroomPool::Terminate()
 {
+	for(auto m : GetInstance()->activeMushroomList)
+	{
+		delete m;
+		m = nullptr;
+	}
+
+	for(auto m : GetInstance()->inactiveMushroomList)
+	{
+		delete m;
+		m = nullptr;
+	}
+
 	delete instance;
 	instance = nullptr;
 }

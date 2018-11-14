@@ -14,7 +14,7 @@
 #include "ExplosionManager.h"
 
 Flea::Flea()
-	:currentState(nullptr), speed(FLEASTATE1), destroyed(false)
+	:speed(FLEASTATE1), currentState(nullptr), destroyed(false)
 {
 	bitmap = ResourceManager::GetTextureBitmap("Flea");
 	this->sprite = AnimatedSprite(ResourceManager::GetTexture("Flea"), 4, 2);

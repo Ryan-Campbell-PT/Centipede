@@ -10,9 +10,7 @@ ScorpionManager *ScorpionManager::instance = nullptr;
 void ScorpionManager::Alarm0()
 {
 	SpawnScorpion();
-	ConsoleMsg::WriteLine("alarm 0 reached");
 }
-
 
 void ScorpionManager::SpawnScorpion() const
 {
@@ -28,7 +26,6 @@ void ScorpionManager::SpawnScorpion() const
 	auto pos = sf::Vector2f(static_cast<float>(x), static_cast<float>(rand() % WindowManager::MainWindow.getSize().y));
 	GameGrid::GetCenterYPosition(pos);
 
-	//ScorpionFactory::SpawnScorpion(pos);
 	auto scorp = ScorpionFactory::GetScorpion();
 	scorp->SpawnScorpion(pos);
 }

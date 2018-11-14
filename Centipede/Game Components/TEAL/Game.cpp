@@ -26,6 +26,7 @@
 #include "../BulletManager.h"
 #include "../CentiHeadPool.h"
 #include "../ExplosionManager.h"
+#include "../TextEditor.h"
 
 
 using namespace std;
@@ -35,7 +36,6 @@ Game* Game::gameInstance = nullptr;
 
 Game::Game()
 {
-	this->beat = SoundManager::GetSound(SoundManager::SoundEvent::Beat);
 }
 
 void Game::Run()
@@ -48,7 +48,7 @@ void Game::Run()
 
 	// Load resources
 	ResourceManager::LoadAllResources();
-	unsigned f = 0;
+
 	while (WindowManager::MainWindow.isOpen() && ! sf::Keyboard::isKeyPressed( KILLGAMEKEY ) )
     {	
 		// Adjust game time clock
@@ -56,12 +56,9 @@ void Game::Run()
 
 		// Actual frame processing
 		SceneManager::ProcessOneFrame();
-		//SoundManager::SendSoundCommand(gameInstance->beat);
 
 		ScoreManager::ProcessScores();
 		SoundManager::ProcessSounds();
-		//if(++f % 30 == 0)
-			//ExplosionManager::DisplayExplosion(ExplosionManager::ExplosionType::CritterDeath, sf::Vector2f(300,300));
 	}
 
 	Instance().TerminateGame();
@@ -74,21 +71,13 @@ void Game::TerminateGame()
 	WindowManager::Terminate();
 	ResourceManager::UnloadAllResources();
 
-	MushroomManager::Terminate();
-	FleaManager::Terminate();
-	BulletManager::Terminate();
-
 	GameGrid::Terminate();
 	PlayerManager::Terminate();
 	WaveManager::Terminate();
+	TextEditor::Terminate();
+	SoundManager::Terminate();
 
 	// Clean up the game instance;
-	//todo: be sure to check beat
 	delete gameInstance;
-	//delete beat;
 	gameInstance = nullptr;
-	//beat = nullptr;
-
-	//_CrtDumpMemoryLeaks();  
-
 }

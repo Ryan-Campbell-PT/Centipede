@@ -12,9 +12,10 @@ centispeed 4
 spiderActive yes
 spiderSpawn 3
 spiderSpeed 2
-scorpionActive no
+scorpionActive yes
+scorpionSpawn 2
 fleaActive yes
-fleaspawn 6
+fleaspawn 30
 
 _
 

@@ -5,6 +5,7 @@ BulletFactory * BulletFactory::instance = nullptr;
 
 void BulletFactory::RecycleBullet(GameObject* bullet)
 {
+	instance->activeBullets.remove(static_cast<Bullet*>(bullet));
 	instance->recycledBullets.push_back(static_cast<Bullet*>(bullet));
 }
 
@@ -30,6 +31,18 @@ Bullet * BulletFactory::GetBullet()
 
 void BulletFactory::Terminate()
 {
+	for(auto b : GetInstance()->activeBullets)
+	{
+		delete b;
+		b = nullptr;
+	}
+	
+	for(auto b : GetInstance()->recycledBullets)
+	{
+		delete b;
+		b = nullptr;
+	}
+	
 	delete instance;
 	instance = nullptr;
 }

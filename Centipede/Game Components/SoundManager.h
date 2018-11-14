@@ -27,6 +27,7 @@ public:
 	static void SendSoundCommand(SoundCmd *cmd);
 	static void ProcessSounds();
 	static void SetSoundProfile(SoundManager *profile);
+	static void Terminate();
 
 protected:
 	SoundManager(); //protected to allow children to be created
@@ -44,8 +45,6 @@ private:
 	const sf::Sound beat = sf::Sound(ResourceManager::GetSound("Beat"));
 
 	static SoundManager* GetInstance();
-
-	//void processSounds();
 
 	static SoundManager* instance;
 	SoundManager* soundProfile;

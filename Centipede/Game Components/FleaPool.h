@@ -28,7 +28,8 @@ private:
 	static FleaPool * GetInstance();
 	
 	static FleaPool * instance;
-	std::list<Flea*> fleaList;
+	std::list<Flea*> inactiveFleaList;
+	std::list<Flea*> activeFleaList;
 };
 
 #endif //FLEA_POOL_H

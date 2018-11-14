@@ -36,8 +36,6 @@ private:
 
 public:
 	static const sf::Keyboard::Key KILLGAMEKEY;
-	///as the game plays, its constantly causing the beat
-	SoundCmd* beat;
 
 	static void Run();
 

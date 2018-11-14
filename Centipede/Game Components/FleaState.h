@@ -1,11 +1,9 @@
 #ifndef FLEA_STATE
 #define FLEA_STATE
 
-#include "State.h"
-
 class Flea;
 
-class FleaState : public State
+class FleaState
 {
 public:
 	FleaState() = default;

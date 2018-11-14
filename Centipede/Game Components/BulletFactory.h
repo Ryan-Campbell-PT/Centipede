@@ -1,14 +1,12 @@
 #ifndef BULLETFACTORY_H
 #define BULLETFACTORY_H
 
-
-//#include "Bullet.h"
 #include "TEAL\CommonElements.h"
 
 class Bullet;
 
 /***
- * Due to the simplicity of the bullet, I didnt want to make a seprate pool for the bullet
+ * Due to the simplicity of the bullet, I didnt want to make a separate pool for the bullet
  */
 class BulletFactory
 {
@@ -26,7 +24,8 @@ private:
 
 	static BulletFactory *instance;
 
-	std::vector<Bullet*> recycledBullets;
+	std::list<Bullet*> recycledBullets;
+	std::list<Bullet*> activeBullets;
 
 	BulletFactory() = default;
 	virtual ~BulletFactory() = default;

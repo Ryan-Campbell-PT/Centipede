@@ -22,8 +22,8 @@ public:
 
 	static void Terminate(GameObject *);
 private:
-	SpiderManager() = default;
-	//virtual ~SpiderManager() = default;
+	SpiderManager();
+	virtual ~SpiderManager() = default;
 	
 	virtual void Alarm0() override;
 
@@ -33,7 +33,7 @@ private:
 
 	static SpiderManager* instance;
 
-	float spiderSpeed = 1.5f; //default speed
+	float spiderSpeed; //default speed
 	float timeToSpawn;
 	bool active = false;
 };

@@ -14,6 +14,8 @@
 #include "WaveManager.h"
 #include "CentiBodyManager.h"
 #include "CentiHeadManager.h"
+#include "FleaManager.h"
+#include "BulletManager.h"
 
 void LevelAttractor::Initialize()
 {
@@ -50,4 +52,7 @@ void LevelAttractor::Terminate()
 {
 	CentiHeadManager::Terminate();
 	CentiBodyManager::Terminate();
+	FleaManager::Terminate();
+	MushroomManager::Terminate();
+	BulletManager::Terminate();
 }

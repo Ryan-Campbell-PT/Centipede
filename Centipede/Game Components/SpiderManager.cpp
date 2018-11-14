@@ -21,7 +21,7 @@ void SpiderManager::InitializeSpider(const float timeToSpawn, const float spider
 	GetInstance()->spiderSpeed = spiderSpeed;
 
 	instance->timeToSpawn = timeToSpawn;
-	instance->SetTimer();
+	SetTimer();
 }
 
 void SpiderManager::DeInitializeSpider()
@@ -72,8 +72,13 @@ void SpiderManager::Terminate(GameObject *)
 {
 	delete instance;
 	instance = nullptr;
-
+	
 	SpiderFactory::Terminate();
+}
+
+SpiderManager::SpiderManager()
+	:spiderSpeed(1.5f), timeToSpawn(4)
+{
 }
 
 void SpiderManager::Alarm0()

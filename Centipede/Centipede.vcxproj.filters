@@ -530,12 +530,6 @@
     <ClInclude Include="Game Components\TEAL\GameClock.h">
       <Filter>Source Files\Game Components\_TEAL\Time Management</Filter>
     </ClInclude>
-    <ClInclude Include="Game Components\Factory.h">
-      <Filter>Source Files\Game Components\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Components\State.h">
-      <Filter>Source Files\Game Components\States</Filter>
-    </ClInclude>
     <ClInclude Include="Game Components\MushroomFactory.h">
       <Filter>Source Files\Game Components\Factories</Filter>
     </ClInclude>

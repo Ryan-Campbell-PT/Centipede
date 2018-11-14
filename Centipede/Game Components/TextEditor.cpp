@@ -9,11 +9,11 @@ Glyph TextEditor::WriteText(const char & str, const sf::Vector2f & pos)
 	return GetInstance()->myFont.GetGlyph(str, pos);
 }
 
-//void TextEditor::Terminate(GameObject*)
-//{
-//	delete instance;
-//	instance = nullptr;
-//}
+void TextEditor::Terminate()
+{
+	delete instance;
+	instance = nullptr;
+}
 
 TextEditor * TextEditor::GetInstance()
 {

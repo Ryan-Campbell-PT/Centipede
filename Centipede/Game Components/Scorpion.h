@@ -12,7 +12,6 @@ class Ship;
 class ScoreCmd;
 class SoundCmd;
 
-//todo: fix sprite flipping and add a better animation system
 class Scorpion : public GameObject
 {
 public:

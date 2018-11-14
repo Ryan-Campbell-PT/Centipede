@@ -23,13 +23,11 @@ private:
 	ScorpionManager() = default;
 	virtual ~ScorpionManager() = default;
 	
-
 	virtual void Alarm0() override;
 
 	void SpawnScorpion() const;
 
 	static ScorpionManager * GetInstance();
-
 	static ScorpionManager* instance;
 
 	float timeToSpawn;
