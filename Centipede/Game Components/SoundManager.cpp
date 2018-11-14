@@ -1,10 +1,12 @@
 #include "SoundManager.h"
 #include "SoundCmd.h"
+#include "SoundOn.h"
+#include "SoundOff.h"
 
 SoundManager *SoundManager::instance = nullptr;
 
 SoundManager::SoundManager()
-	: soundProfile(nullptr)
+	: soundProfile(nullptr), soundOn(nullptr), soundOff(nullptr)
 {
 }
 
@@ -57,16 +59,28 @@ void SoundManager::ProcessSounds()
 	GetInstance()->soundProfile->processSounds();
 }
 
-void SoundManager::SetSoundProfile(SoundManager * profile)
+void SoundManager::SetSoundProfile(SoundStatus status)
 {
-	delete GetInstance()->soundProfile;
-	instance->soundProfile = profile;
+	if (status == SoundStatus::On)
+	{
+		if (GetInstance()->soundOn == nullptr)
+			instance->soundOn = new SoundOn;
+		instance->soundProfile = instance->soundOn;
+	}
+	else
+	{
+		if (GetInstance()->soundOff == nullptr)
+			instance->soundOff = new SoundOff;
+		GetInstance()->soundProfile = instance->soundOff;
+	}
 }
 
 void SoundManager::Terminate()
 {
-	delete GetInstance()->soundProfile;
-	instance->soundProfile = nullptr;
+	delete GetInstance()->soundOff;
+	delete instance->soundOn;
+	instance->soundOff = nullptr;
+	instance->soundOn = nullptr;
 	delete instance;
 	instance = nullptr;
 

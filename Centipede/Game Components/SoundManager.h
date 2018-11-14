@@ -10,6 +10,8 @@ class SoundCmd;
 class SoundManager
 {
 public:
+	enum class SoundStatus { Off, On };
+
 	enum class SoundEvent
 	{
 		ScorpionSpawn,
@@ -19,14 +21,13 @@ public:
 		ShipFire,
 		Death,
 		Beat,
-
 	};
 
 	static void PlaySound(sf::Sound &sound);
 	static SoundCmd *GetSound(SoundEvent even);
 	static void SendSoundCommand(SoundCmd *cmd);
 	static void ProcessSounds();
-	static void SetSoundProfile(SoundManager *profile);
+	static void SetSoundProfile(SoundStatus status);
 	static void Terminate();
 
 protected:
@@ -48,5 +49,6 @@ private:
 
 	static SoundManager* instance;
 	SoundManager* soundProfile;
+	SoundManager *soundOn, *soundOff;
 };
 #endif // SOUNDMANAGER_H

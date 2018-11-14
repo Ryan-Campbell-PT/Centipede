@@ -49,9 +49,7 @@ void ScoreManager::privProcessScore()
 		}
 
 		this->writeScore();
-		//todo: may want to send to HighScoreManager to make middle one dynamic
 	}
-
 }
 
 void ScoreManager::writeScore()

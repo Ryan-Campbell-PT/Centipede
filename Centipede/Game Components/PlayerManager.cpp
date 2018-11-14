@@ -128,19 +128,19 @@ void PlayerManager::InitializePlayer(PlayerData::PlayerID player)
 	{
 	case PlayerData::PlayerID::Ai:
 		Ship::InitializeShip(Ship::ShipModeEnum::Attractor);
-		SoundManager::SetSoundProfile(new SoundOff);
+		SoundManager::SetSoundProfile(SoundManager::SoundStatus::Off);
 		break;
 
 	case PlayerData::PlayerID::Player1:
 		Ship::InitializeShip(Ship::ShipModeEnum::Player);
 		instance->currentPlayer.player = PlayerData::PlayerID::Player1;
-		SoundManager::SetSoundProfile(new SoundOn);
+		SoundManager::SetSoundProfile(SoundManager::SoundStatus::On);
 		break;
 
 	case PlayerData::PlayerID::Player2:
 		Ship::InitializeShip(Ship::ShipModeEnum::Player);
 		instance->currentPlayer.player = PlayerData::PlayerID::Player1;
-		SoundManager::SetSoundProfile(new SoundOn);
+		SoundManager::SetSoundProfile(SoundManager::SoundStatus::On);
 		break;
 
 	default:
